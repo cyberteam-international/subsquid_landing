@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import "./CodeSlider.css"
 import 'swiper/css';
-import {Swiper, SwiperRef, SwiperSlide, SwiperClass} from 'swiper/react';
+import {Swiper, SwiperSlide, SwiperClass} from 'swiper/react';
 import {Pagination, Navigation, Autoplay} from "swiper/modules";
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import {vs, stackoverflowDark} from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import {vs} from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import classNames from "classnames";
 
 const ChevronSvg = <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -20,22 +20,32 @@ const ChevronRightSvg = <svg width="24" height="24" viewBox="0 0 24 24" fill="no
     <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>;
 
-export function CodeSlider(props: any) {
+
+export interface ISlide {
+    title: string,
+    code: string,
+    codeCollapse: string,
+    link: string
+    caption?: string
+}
+
+export function CodeSlider(props: { slides: ISlide[] }) {
     const [slides, setSlides] = useState(props.slides || []);
     const [isExpanded, setIsExpanded] = useState(false);
-    const [swiper, setSwiper] = useState<SwiperClass>(null);
+    const [swiper, setSwiper] = useState<SwiperClass | null>(null);
 
-    const codeRef = useRef<HTMLElement | null>(null)
-    const paginationRef = useRef<HTMLElement | null>(null)
-    const nextRef = useRef<HTMLElement | null>(null)
-    const prevRef = useRef<HTMLElement | null>(null)
-    const linkRef = useRef<HTMLElement | null>(null)
+    const codeRef = useRef<HTMLDivElement | null>(null)
+    const paginationRef = useRef<HTMLDivElement | null>(null)
+    const nextRef = useRef<HTMLButtonElement | null>(null)
+    const prevRef = useRef<HTMLButtonElement | null>(null)
+    const linkRef = useRef<HTMLAnchorElement | null>(null)
 
     const handleClickExpand = () => {
         setIsExpanded(!isExpanded)
 
         setTimeout(() => {
-            swiper.updateAutoHeight(200)
+            if (swiper)
+                swiper.updateAutoHeight(200)
         }, 100)
     }
 
@@ -53,9 +63,8 @@ export function CodeSlider(props: any) {
             <Swiper
                 modules={[Pagination, Navigation, Autoplay]}
                 onSlideChange={(s) => {
-                    if (linkRef.current) {
-                        linkRef.current?.setAttribute("href", s.slides[s.activeIndex].getAttribute('data-link') || "#")
-                    }
+                    const el = linkRef.current as HTMLElement
+                    el.setAttribute("href", s.slides[s.activeIndex].getAttribute('data-link') || "#")
                 }}
                 spaceBetween={20}
                 navigation={{

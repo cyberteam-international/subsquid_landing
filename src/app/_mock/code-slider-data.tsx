@@ -1,4 +1,5 @@
 import React from "react";
+import {ISlide} from "@/app/components/CodeSlider/CodeSlider";
 
 export default [
   {
@@ -216,4 +217,4 @@ export default [
       contract in the batch handler.</>,
     link: "https://github.com/subsquid-labs/showcase07-grab-all-nft-transfers"
   },
-]
+] as ISlide[]
