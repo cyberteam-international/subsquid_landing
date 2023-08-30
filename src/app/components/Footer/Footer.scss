@@ -1,0 +1,140 @@
+.footer {
+  margin-top: 60px;
+  background: #FDF1E4;
+  padding-top: 40px;
+  padding-bottom: 16px;
+
+  h2 {
+    text-align: left;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  &__items {
+    padding: 24px 0;
+    border-top: 1px solid #2B2B2B;
+    border-bottom: 1px solid #2B2B2B;
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 24px;
+    margin-top: 60px - 24px;
+  }
+
+  &__caption {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 150%;
+  }
+
+  &__logos {
+    display: flex;
+    align-items: center;
+    gap: 0 14px;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__item-powered {
+    width: 52px;
+    object-fit: contain;
+  }
+
+  &__item-polygon {
+    width: 46px;
+    object-fit: contain;
+  }
+
+  &__item-gcloud {
+    width: 72px;
+    object-fit: contain;
+  }
+
+  &__item-substrabe {
+    width: 52px;
+    object-fit: contain;
+  }
+}
+
+.footer-item {
+  $root: &;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 24px;
+    transition: color .2s;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0.32px;
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 24px;
+    margin-top: 0;
+    height: 0;
+    overflow: hidden;
+    transition: margin-top .2s, height .2s;
+
+    a {
+      height: 24px;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 100%;
+    }
+  }
+
+  svg {
+    transition: transform .2s;
+  }
+
+  &--active {
+    #{$root} {
+      &__items {
+        margin-top: 24px;
+      }
+
+      &__title {
+        color: var(--color-secondary);
+      }
+    }
+
+    svg {
+      transform: scaleY(-1);
+    }
+  }
+}
+
+.footer-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-auto-rows: 64px;
+  gap: 8px;
+
+  input {
+    border-radius: 4px;
+    border: 1px solid var(--color-secondary-button-stroke);
+    background: none;
+    padding: 8px 8px 8px 24px;
+    width: 100%;
+  }
+
+  button {
+    border-radius: 4px;
+    border: 1px solid var(--color-secondary-button-stroke);
+    padding: 14px 16px;
+  }
+}

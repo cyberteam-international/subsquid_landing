@@ -1,0 +1,77 @@
+.header {
+  position: fixed;
+  height: 52px;
+  padding: 12px 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: var(--color-white);
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.hamburger {
+  $root: &;
+
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 24px;
+  height: 24px;
+
+  span {
+    display: table;
+    background: var(--color-primary);
+    width: 18px;
+    height: 2px;
+    border-radius: 4px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: .2s;
+
+    &:nth-child(1) {
+      top: 5px;
+    }
+
+    &:nth-child(2) {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:nth-child(3) {
+      bottom: 5px;
+    }
+  }
+
+  &--active {
+    span {
+      &:nth-child(1) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &:nth-child(3) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+
+      &:nth-child(2) {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+  }
+}
