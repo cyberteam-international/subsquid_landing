@@ -1,0 +1,122 @@
+import React, {useEffect, useRef, useState} from 'react';
+import "./CodeSlider.css"
+import 'swiper/css';
+import {Swiper, SwiperRef, SwiperSlide, SwiperClass} from 'swiper/react';
+import {Pagination, Navigation, Autoplay} from "swiper/modules";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import {vs, stackoverflowDark} from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import classNames from "classnames";
+
+const ChevronSvg = <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path d="M3.5 6.25L7 9.75L10.5 6.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+          strokeLinejoin="round"/>
+</svg>;
+
+const ChevronLeftSvg = <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>;
+
+const ChevronRightSvg = <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>;
+
+export function CodeSlider(props: any) {
+    const [slides, setSlides] = useState(props.slides || []);
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [swiper, setSwiper] = useState<SwiperClass>(null);
+
+    const codeRef = useRef<HTMLElement | null>(null)
+    const paginationRef = useRef<HTMLElement | null>(null)
+    const nextRef = useRef<HTMLElement | null>(null)
+    const prevRef = useRef<HTMLElement | null>(null)
+    const linkRef = useRef<HTMLElement | null>(null)
+
+    const handleClickExpand = () => {
+        setIsExpanded(!isExpanded)
+
+        setTimeout(() => {
+            swiper.updateAutoHeight(200)
+        }, 100)
+    }
+
+    return <>
+        <div className={classNames({
+            'code-slider': true
+        })}>
+            <div className={classNames({
+                'code-slider__nav': true
+            })}>
+                <button className="code-slider__arrow" ref={prevRef}>{ChevronLeftSvg}</button>
+                <button className="code-slider__arrow" ref={nextRef}>{ChevronRightSvg}</button>
+            </div>
+
+            <Swiper
+                modules={[Pagination, Navigation, Autoplay]}
+                onSlideChange={(s) => {
+                    if (linkRef.current) {
+                        linkRef.current?.setAttribute("href", s.slides[s.activeIndex].getAttribute('data-link') || "#")
+                    }
+                }}
+                spaceBetween={20}
+                navigation={{
+                    enabled: true,
+                    nextEl: nextRef.current as HTMLElement,
+                    prevEl: prevRef.current as HTMLElement
+                }}
+                loop={true}
+                allowTouchMove={false}
+                autoplay={{delay: 5000, pauseOnMouseEnter: true, disableOnInteraction: true}}
+                pagination={{
+                    clickable: true,
+                    el: paginationRef.current as HTMLElement
+                }}
+                autoHeight={true} onSwiper={setSwiper}>
+                {slides.map((slide, index) => <SwiperSlide data-link={slide.link} key={index}>
+                    <h3 className={'body--m mb-4 code-slider__title\''}>{slide.title}</h3>
+
+                    <div ref={codeRef}
+                         className={classNames({
+                             'code-slider__pre': true,
+                             'code-slider__pre--over': !isExpanded
+                         })}>
+
+                        {isExpanded
+                            ? <SyntaxHighlighter language="typescript" style={vs} children={slide.code}/>
+                            : <SyntaxHighlighter language="typescript" style={vs} children={slide.codeCollapse}/>
+                        }
+                    </div>
+
+                    {slide.caption ?
+                        <div className={classNames({
+                            'code-slider__caption': true,
+                            'code-slider__caption--expand': isExpanded
+                        })}>
+                            <p>{slide.caption}</p></div> : undefined}
+                </SwiperSlide>)}
+            </Swiper>
+            <div className={''}>
+                <div className={''}>
+                    <div className="code-slider__pagination" ref={paginationRef}></div>
+                </div>
+
+                <div className={''}>
+                    <div className={classNames({
+                        'code-slider__stage': true,
+                        'code-slider__stage--visible': isExpanded
+                    })}>
+                        <a ref={linkRef} href={slides[0].link} target="_blank" className={''}>Full squid</a>
+                        <span className="code-slider__line"></span>
+                        <a href="#!" className={''}>Showcase</a>
+                        <span className="code-slider__line"></span>
+                    </div>
+
+                    <button onClick={handleClickExpand}
+                            className={classNames({
+                                'code-slider__collapse': true,
+                                'code-slider__collapse--expand': isExpanded
+                            })}>{isExpanded ? "Collapse" : "Expand"} {ChevronSvg}</button>
+                </div>
+            </div>
+        </div>
+    </>
+}

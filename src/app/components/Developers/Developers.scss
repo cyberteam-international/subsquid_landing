@@ -1,0 +1,260 @@
+.developers {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 24px;
+  overflow: hidden;
+
+  &__header {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .swiper {
+    padding: 0 4px;
+    width: calc(100% + 8px);
+  }
+
+  .swiper-grid .swiper-wrapper {
+    flex-direction: row !important;
+
+    .swiper-slide {
+      margin-top: 16px !important;
+      height: 100%;
+    }
+  }
+
+  .swiper-pagination {
+    display: none;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 24px;
+
+    img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      margin: 0 12px;
+    }
+  }
+}
+
+.DeveloperCard {
+  border-radius: 4px;
+  background: var(--white, #FFF);
+  display: grid;
+  padding: 24px;
+  gap: 24px;
+  min-height: 220px;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+  }
+}
+
+.DeveloperCardHeader {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: space-between;
+
+  &__avatar {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__social {
+    img {
+      height: 19px;
+      object-fit: contain;
+    }
+  }
+
+  &__info {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 38px 1fr;
+    gap: 8px;
+  }
+
+  &__data {
+    display: grid;
+    grid-template-columns: 1fr;
+    opacity: 0.8;
+  }
+
+  &__name {
+    color: var(--black, #1D1D1F);
+    leading-trim: both;
+    text-edge: cap;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+  }
+
+  &__slug {
+    color: var(--black-muted-70, rgba(29, 29, 30, 0.70));
+    leading-trim: both;
+    text-edge: cap;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 16.8px */
+    letter-spacing: 0.24px;
+  }
+}
+
+.DeveloperCardMain {
+  p {
+    opacity: 0.8;
+    color: var(--black, #1D1D1F);
+    leading-trim: both;
+    text-edge: cap;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 450;
+    line-height: 140%;
+
+    &:not(:last-child) {
+      margin-bottom: 1.5em;
+    }
+  }
+
+  a {
+    color: var(--buttons-button-default, #3880EC);
+  }
+}
+
+.DeveloperBullet {
+  position: relative;
+  z-index: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+
+  img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    filter: grayscale(100%);
+    border: 2px solid var(--background, #F6F8FB);
+    object-fit: cover;
+    transition: .2s;
+    outline: 2px solid transparent;
+  }
+
+  svg {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s;
+  }
+}
+
+
+.Thumbs {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin-top: 20px;
+
+  &__slider {
+    margin: 0 !important;
+    max-width: 260px;
+    display: inline-block !important;
+
+    @media (max-width: 340px) {max-width: 230px;}
+  }
+
+  .swiper {
+    padding: 10px 10px;
+    margin: 0 -10px;
+  }
+
+  .swiper-slide {
+    position: relative;
+    left: 20px;
+    opacity: 0;
+    transition: opacity .3s;
+    width: 48px;
+    height: 48px;
+
+    &.swiper-slide-visible, &.swiper-slide-prev, &.swiper-slide-next {
+      opacity: 1;
+    }
+
+    &.swiper-slide-next {
+      & + .swiper-slide,
+      & + .swiper-slide + .swiper-slide,
+      & + .swiper-slide + .swiper-slide + .swiper-slide,
+      & + .swiper-slide + .swiper-slide + .swiper-slide + .swiper-slide,
+      & + .swiper-slide + .swiper-slide + .swiper-slide + .swiper-slide + .swiper-slide
+      {
+        opacity: 1;
+      }
+    }
+
+    &.swiper-slide-thumb-active {
+      z-index: 9999 !important;
+
+      .DeveloperBullet {
+        border-color: var(--buttons-button-default, #3880EC);
+
+        img {
+          filter: none;
+        }
+
+        svg {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  &__arrow {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    align-items: center;
+    justify-content: space-between;
+    transition: opacity .3s;
+
+    &:hover {
+      background: none;
+      opacity: 0.5;
+    }
+  }
+
+  &__arrows {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
