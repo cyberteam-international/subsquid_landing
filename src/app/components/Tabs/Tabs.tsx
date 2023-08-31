@@ -7,7 +7,7 @@ import {useState} from "react";
 import _enterpriseMock from "@/app/_mock/enterprise.mock";
 import {CodeSlider} from "@/app/components/CodeSlider/CodeSlider";
 
-export default function Tabs(props) {
+export default function Tabs() {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [tabs, setTabs] = useState([
         {

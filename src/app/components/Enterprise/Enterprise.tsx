@@ -10,9 +10,9 @@ export default function Enterprise() {
     const [currentIndex, setCurrentIndex] = useState(0)
 
     useEffect(() => {
-        document.addEventListener('onTabChange', (e: CustomEvent) => {
+        document.addEventListener('onTabChange', ((e: CustomEvent<number>) => {
             setCurrentIndex(e.detail)
-        })
+        }) as EventListener)
     }, [])
 
     return (
