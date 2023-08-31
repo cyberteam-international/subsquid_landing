@@ -60,4 +60,18 @@
       }
     }
   }
+
+  &__item-wrap {
+    padding: 0 20px;
+    margin-top: 24px;
+
+    a {
+      color: var(--Link, #3880EC);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 100%;
+      letter-spacing: 0.28px;
+    }
+  }
 }

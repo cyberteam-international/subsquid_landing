@@ -18,7 +18,13 @@
 html, body {
   color: var(--color-primary);
   background: var(--color-body);
+  overflow-x: hidden;
   font-family: Inter, sans-serif;
+
+}
+
+body {
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -121,4 +127,5 @@ p, .paragraph {
 
 .main {
   margin-top: 76px;
+  overflow: hidden;
 }

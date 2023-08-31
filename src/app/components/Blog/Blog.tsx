@@ -5,40 +5,18 @@ import React, {useRef, useState} from "react";
 import {Swiper, SwiperSlide, SwiperClass} from 'swiper/react';
 import {Pagination} from "swiper/modules";
 
+export interface BlogProps {
+    slides: ISlideBlog[]
+}
+
 export interface ISlideBlog {
     title: string
     text: string
     caption: string
 }
 
-export default function Blog() {
-    const [slides, setSlides] = useState<ISlideBlog[]>([
-        {
-            title: "$SQD launches\n on Binance!",
-            text: "Subsquid Network Testnet is live on Arbitrum. Subsquid is solving the data issues faced by issues faced by developers.",
-            caption: "21.08.2023 I Announcement"
-        },
-        {
-            title: "$SQD launches\n on Binance!",
-            text: "Subsquid Network Testnet is live on Arbitrum. Subsquid is solving the data issues faced by issues faced by developers.",
-            caption: "21.08.2023 I Announcement"
-        },
-        {
-            title: "$SQD launches\n on Binance!",
-            text: "Subsquid Network Testnet is live on Arbitrum. Subsquid is solving the data issues faced by issues faced by developers.",
-            caption: "21.08.2023 I Announcement"
-        },
-        {
-            title: "$SQD launches\n on Binance!",
-            text: "Subsquid Network Testnet is live on Arbitrum. Subsquid is solving the data issues faced by issues faced by developers.",
-            caption: "21.08.2023 I Announcement"
-        },
-        {
-            title: "$SQD launches\n on Binance!",
-            text: "Subsquid Network Testnet is live on Arbitrum. Subsquid is solving the data issues faced by issues faced by developers.",
-            caption: "21.08.2023 I Announcement"
-        }
-    ])
+export default function Blog(props: BlogProps) {
+    const [slides, setSlides] = useState<ISlideBlog[]>(props.slides || [])
 
     const [swiper, setSwiper] = useState<SwiperClass | null>(null);
     const paginationRef = useRef<HTMLDivElement | null>(null)

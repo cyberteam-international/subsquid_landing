@@ -2,7 +2,31 @@
   display: grid;
   grid-template-columns: 100%;
   gap: 24px;
-  overflow: hidden;
+  position: relative;
+  z-index: 0;
+
+  &__wrapper {
+    overflow: hidden;
+  }
+
+  &__blob-1 {
+    position: absolute;
+    top: -207px;
+    left: -692px;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    mix-blend-mode: multiply;
+  }
+
+  &__blob-2 {
+    position: absolute;
+    bottom: -250px;
+    right: -1650px;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
 
   &__header {
     text-align: center;
