@@ -25,22 +25,24 @@ export interface DevepolerCardsProps {
 export function DeveloperCard(props: DevepolerCardProps) {
     return (
         <div className="DeveloperCard">
-            <a href={props.link} className="DeveloperCard__link" target="_blank"></a>
-            <div className="DeveloperCardHeader">
-                <div className="DeveloperCardHeader__info">
-                    <img className="DeveloperCardHeader__avatar" src={props.avatar} alt=""/>
-                    <div className="DeveloperCardHeader__data">
-                        <p className="DeveloperCardHeader__name">{props.name}</p>
-                        <p className="DeveloperCardHeader__slug">{props.slug}</p>
+            <div className="DeveloperCard__wrapper">
+                <a href={props.link} className="DeveloperCard__link" target="_blank"></a>
+                <div className="DeveloperCardHeader">
+                    <div className="DeveloperCardHeader__info">
+                        <img className="DeveloperCardHeader__avatar" src={props.avatar} alt=""/>
+                        <div className="DeveloperCardHeader__data">
+                            <p className="DeveloperCardHeader__name">{props.name}</p>
+                            <p className="DeveloperCardHeader__slug">{props.slug}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <a className="DeveloperCardHeader__social" href={props.social.link}><img
+                            src={props.social.image}
+                            alt=""/></a>
                     </div>
                 </div>
-                <div>
-                    <a className="DeveloperCardHeader__social" href={props.social.link}><img
-                        src={props.social.image}
-                        alt=""/></a>
-                </div>
+                <div className="DeveloperCardMain">{props.children}</div>
             </div>
-            <div className="DeveloperCardMain">{props.children}</div>
         </div>
     );
 }
@@ -70,8 +72,6 @@ export default function Developers(props: DevepolerCardsProps) {
         </SwiperSlide>
     })
 
-    const propsThumbs: any = swiper ? {swiper: swiper} : undefined // DEV
-
     return (
         <div className="developers">
             <div className="developers__header">
@@ -79,67 +79,68 @@ export default function Developers(props: DevepolerCardsProps) {
                 <p className='subtitle'>Subsquid is solving the data issues faced by developers.</p>
             </div>
 
-            <Swiper onSwiper={setMainSwiper} onInit={(s) => {
-                let maxValue = 0
-                s.slides.forEach(slide => {
-                    if (maxValue < (slide.scrollHeight + 24)) {
-                        maxValue = slide.scrollHeight + 24
-                    }
-                })
+            <div className="developers__main">
+                <Swiper autoHeight={true} className="developers__main" onSwiper={setMainSwiper} onInit={(s) => {
+                    let maxValue = 0
+                    s.slides.forEach(slide => {
+                        if (maxValue < (slide.scrollHeight)) {
+                            maxValue = slide.scrollHeight
+                        }
+                    })
 
-                setMaxHeight(maxValue)
-            }} thumbs={swiper ? {swiper: swiper} : {}} modules={[Grid, Pagination, Thumbs]} breakpoints={{
-                0: {
-                    pagination: false,
-                    autoHeight: true,
-                    loop: true,
-                    initialSlide: 1,
-                    loopedSlides: 2,
-                    loopPreventsSliding: true
-                },
-                768: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                    grid: {
-                        rows: 2,
-                        fill: "column"
-                    }
-                },
-                1024: {
-                    slidesPerView: 3,
-                    slidesPerGroup: 3,
-                    grid: {
-                        rows: 2,
-                        fill: "column"
+                    setMaxHeight(maxValue)
+                }} thumbs={swiper ? {swiper: swiper} : {}} modules={[Grid, Pagination, Thumbs]} breakpoints={{
+                    0: {
+                        pagination: false,
+                        autoHeight: true,
+                        loop: true,
+                        initialSlide: 1,
+                        loopedSlides: 2,
+                        loopPreventsSliding: true
                     },
-                }
-            }} slidesPerView={1} navigation={true} spaceBetween={16} pagination={{clickable: true}}>{items}</Swiper>
+                    768: {
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                        grid: {
+                            rows: 2,
+                            fill: "column"
+                        }
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                        grid: {
+                            rows: 2,
+                            fill: "column"
+                        },
+                    }
+                }} slidesPerView={1} navigation={true} spaceBetween={16} pagination={{clickable: true}}>{items}</Swiper>
 
+                <div className="Thumbs">
+                    <Swiper className="Thumbs__slider" watchSlidesProgress onSwiper={setSwiper} slidesPerView={1}
+                            width={400 / 8} modules={[Thumbs]} slidesPerGroup={1} loopedSlides={2}
+                            loopPreventsSliding={true} loop={true}>{itemsBullets}</Swiper>
 
-            <div className="Thumbs">
-                <Swiper className="Thumbs__slider" watchSlidesProgress onSwiper={setSwiper} slidesPerView={1}
-                        width={400 / 8} modules={[Thumbs]} slidesPerGroup={1} loopedSlides={2}
-                        loopPreventsSliding={true} loop={true}>{itemsBullets}</Swiper>
-
-                <div className="Thumbs__arrows">
-                    <button className="Thumbs__arrow" onClick={() => {
-                        if (mainSwiper)
-                            mainSwiper.slidePrev()
-                    }}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M15 6L9 12L15 18" stroke="#1D1D1F" strokeWidth="2" strokeLinecap="round"
-                                  strokeLinejoin="round"/>
-                        </svg>
-                    </button>
-                    <button className="Thumbs__arrow" onClick={() => {
-                        if (mainSwiper)
-                            mainSwiper.slideNext()
-                    }}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M9 18L15 12L9 6" stroke="#1D1D1F" strokeWidth="2" strokeLinecap="round"
-                                  strokeLinejoin="round"/>
-                        </svg>
-                    </button>
+                    <div className="Thumbs__arrows">
+                        <button className="Thumbs__arrow" onClick={() => {
+                            if (mainSwiper)
+                                mainSwiper.slidePrev()
+                        }}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M15 6L9 12L15 18" stroke="#1D1D1F" strokeWidth="2" strokeLinecap="round"
+                                      strokeLinejoin="round"/>
+                            </svg>
+                        </button>
+                        <button className="Thumbs__arrow" onClick={() => {
+                            if (mainSwiper)
+                                mainSwiper.slideNext()
+                        }}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18L15 12L9 6" stroke="#1D1D1F" strokeWidth="2" strokeLinecap="round"
+                                      strokeLinejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

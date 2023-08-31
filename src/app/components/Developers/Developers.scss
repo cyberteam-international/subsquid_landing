@@ -12,8 +12,11 @@
   }
 
   .swiper {
-    padding: 0 4px;
-    width: calc(100% + 8px);
+    width: 100%;
+  }
+
+  &__main {
+
   }
 
   .swiper-grid .swiper-wrapper {
@@ -46,16 +49,21 @@
 }
 
 .DeveloperCard {
-  border-radius: 4px;
-  background: var(--white, #FFF);
-  display: grid;
-  padding: 24px;
-  gap: 24px;
-  min-height: 220px;
-  grid-template-rows: auto 1fr;
+  padding: 4px;
   height: 100%;
-  position: relative;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+
+  &__wrapper {
+    border-radius: 12px;
+    background: var(--color-white);
+    display: grid;
+    padding: 32px;
+    gap: 20px;
+    height: 100%;
+    min-height: 200px;
+    grid-template-rows: auto 1fr;
+    position: relative;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  }
 
   &__link {
     position: absolute;
@@ -81,6 +89,7 @@
 
   &__social {
     img {
+      margin-top: 8px;
       height: 19px;
       object-fit: contain;
     }
@@ -96,37 +105,29 @@
   &__data {
     display: grid;
     grid-template-columns: 1fr;
-    opacity: 0.8;
   }
 
   &__name {
-    color: var(--black, #1D1D1F);
-    leading-trim: both;
-    text-edge: cap;
+    color: var(--color-primary);
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 140%;
+    line-height: 180%;
+    letter-spacing: 0.32px;
   }
 
   &__slug {
-    color: var(--black-muted-70, rgba(29, 29, 30, 0.70));
-    leading-trim: both;
-    text-edge: cap;
+    color: var(--color-secondary);
     font-size: 12px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 140%; /* 16.8px */
-    letter-spacing: 0.24px;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: 0.36px;
   }
 }
 
 .DeveloperCardMain {
   p {
-    opacity: 0.8;
-    color: var(--black, #1D1D1F);
-    leading-trim: both;
-    text-edge: cap;
+    color: var(--color-primary);
     font-size: 14px;
     font-style: normal;
     font-weight: 450;
@@ -185,7 +186,9 @@
     max-width: 260px;
     display: inline-block !important;
 
-    @media (max-width: 340px) {max-width: 230px;}
+    @media (max-width: 340px) {
+      max-width: 230px;
+    }
   }
 
   .swiper {
@@ -210,8 +213,7 @@
       & + .swiper-slide + .swiper-slide,
       & + .swiper-slide + .swiper-slide + .swiper-slide,
       & + .swiper-slide + .swiper-slide + .swiper-slide + .swiper-slide,
-      & + .swiper-slide + .swiper-slide + .swiper-slide + .swiper-slide + .swiper-slide
-      {
+      & + .swiper-slide + .swiper-slide + .swiper-slide + .swiper-slide + .swiper-slide {
         opacity: 1;
       }
     }

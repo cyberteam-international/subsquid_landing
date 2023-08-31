@@ -1,4 +1,6 @@
 import './globals.scss'
+import 'swiper/css';
+import 'swiper/css/grid';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from "react";

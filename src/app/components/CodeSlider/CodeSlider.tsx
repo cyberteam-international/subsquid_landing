@@ -1,6 +1,5 @@
 import React, {useRef, useState} from 'react';
-import "./CodeSlider.css"
-import 'swiper/css';
+import "./CodeSlider.scss"
 import {Swiper, SwiperSlide, SwiperClass} from 'swiper/react';
 import {Pagination, Navigation, Autoplay} from "swiper/modules";
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -81,7 +80,7 @@ export function CodeSlider(props: { slides: ISlide[] }) {
                 }}
                 autoHeight={true} onSwiper={setSwiper}>
                 {slides.map((slide, index) => <SwiperSlide data-link={slide.link} key={index}>
-                    <h3 className={'body--m mb-4 code-slider__title\''}>{slide.title}</h3>
+                    <p className={'code-slider__title'}>{slide.title}</p>
 
                     <div ref={codeRef}
                          className={classNames({
@@ -103,12 +102,12 @@ export function CodeSlider(props: { slides: ISlide[] }) {
                             <p>{slide.caption}</p></div> : undefined}
                 </SwiperSlide>)}
             </Swiper>
-            <div className={''}>
+            <div className={'code-slider__footer'}>
                 <div className={''}>
                     <div className="code-slider__pagination" ref={paginationRef}></div>
                 </div>
 
-                <div className={''}>
+                <div className={'code-slider__stages'}>
                     <div className={classNames({
                         'code-slider__stage': true,
                         'code-slider__stage--visible': isExpanded
