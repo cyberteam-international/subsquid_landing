@@ -1,3 +1,5 @@
+@import "../../assets/scss/main";
+
 .developers {
   display: grid;
   grid-template-columns: 100%;
@@ -33,14 +35,31 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
+    margin-bottom: 24px;
+
+    @include media-down(xl) {
+      margin-bottom: 28px;
+    }
+
+    @include media-down(lg) {
+      margin-bottom: 16px;
+    }
+
+    @include media-down(md) {
+      margin-bottom: 0;
+    }
+
+    @include media-down(sm) {
+      margin-bottom: 24px;
+    }
   }
 
   .swiper {
     width: 100%;
   }
 
-  &__main {
-
+  &__swiper{
+    padding: 4px;
   }
 
   .swiper-grid .swiper-wrapper {
@@ -49,6 +68,14 @@
     .swiper-slide {
       margin-top: 16px !important;
       height: 100%;
+
+      @include media-up(md) {
+        margin-top: 24px !important;
+      }
+
+      @include media-up(xl) {
+        margin-top: 32px !important;
+      }
     }
   }
 
@@ -203,7 +230,11 @@
 .Thumbs {
   display: grid;
   grid-template-columns: 1fr auto;
-  margin-top: 20px;
+  margin-top: 24px;
+
+  @include media-up(md) {
+    margin-top: 12px;
+  }
 
   &__slider {
     margin: 0 !important;
@@ -215,9 +246,37 @@
     }
   }
 
+  &__pagination {
+    display: none;
+
+    @include media-up(md) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      gap: 8px;
+
+      .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        display: table;
+        background-color: #ADADAD;
+        border-radius: 50%;
+
+        &.swiper-pagination-bullet-active {
+          background-color: #2B2B2B;
+        }
+      }
+    }
+  }
+
   .swiper {
     padding: 10px 10px;
     margin: 0 -10px;
+
+    @include media-up(md) {
+      display: none !important;
+    }
   }
 
   .swiper-slide {
@@ -282,5 +341,9 @@
     gap: 16px;
     align-items: center;
     justify-content: space-between;
+
+    @include media-up(md) {
+      display: none;
+    }
   }
 }

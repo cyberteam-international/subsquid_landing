@@ -1,3 +1,5 @@
+@import "../../assets/scss/main";
+
 .banner {
   display: grid;
   grid-template-columns: 1fr;
@@ -7,5 +9,25 @@
     display: inline-grid;
     grid-template-columns: repeat(2, max-content);
     gap: 16px;
+
+    @include media-up(md) {
+      justify-content: center;
+      margin-top: 12px;
+    }
+  }
+
+  &__title {
+
+  }
+
+  &__subtitle {
+    @include media-up(md) {
+      max-width: 586px;
+      margin: 0 auto;
+    }
+  }
+
+  @include media-up(md) {
+    text-align: center;
   }
 }

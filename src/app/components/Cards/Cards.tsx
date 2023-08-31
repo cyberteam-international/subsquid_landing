@@ -4,7 +4,7 @@ import './Cards.scss'
 
 export default function Cards() {
     const items = [
-        {title: '100+', text: 'upported networks'},
+        {title: '100+', text: 'supported networks'},
         {title: '30+ billion', text: 'data lake requests'},
         {title: '5000+', text: 'dApps powered'},
     ]

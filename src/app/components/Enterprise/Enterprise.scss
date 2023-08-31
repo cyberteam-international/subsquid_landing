@@ -1,8 +1,16 @@
+@import "../../assets/scss/main";
+
 .enterprise {
   text-align: center;
   display: grid;
   grid-template-columns: 100%;
   gap: 24px;
+
+  @include media-up(md) {
+    max-width: 468px;
+    margin: 0 auto;
+    gap: 32px;
+  }
 
   &__header {
     display: grid;
@@ -14,6 +22,10 @@
     display: grid;
     grid-template-columns: 100%;
     gap: 24px;
+
+    @include media-up(md) {
+      gap: 32px;
+    }
   }
 
   &__image {

@@ -14,11 +14,11 @@ export default function Tabs() {
             icon: "/cog.png",
             title: "Squid SDK",
             body: <ul>
-                <li>Open source SDK</li>
-                <li>Run locally or host with us</li>
-                <li>Reduce development & infrastructure cost by 90%</li>
-                <li>Use familiar tools like TypeScript & GraphQL</li>
-                <li>Built-in monitoring & team collaboration</li>
+                <li>100% open-source</li>
+                <li>Deploy locally with ease</li>
+                <li>Custom data sources & targets</li>
+                <li>TypeScript-based!</li>
+                <li>Automated tools: TypeGen & SquidGen</li>
             </ul>,
             active: true,
             component: <CodeSlider slides={_enterpriseMock}/>,

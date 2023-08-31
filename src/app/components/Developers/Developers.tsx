@@ -3,7 +3,7 @@
 import "./Developers.scss";
 import {Swiper, SwiperClass, SwiperSlide} from "swiper/react";
 import {Grid, Pagination, Thumbs} from "swiper/modules";
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 export interface DevepolerCardProps {
     idx: number,
@@ -51,6 +51,9 @@ export default function Developers(props: DevepolerCardsProps) {
     const [swiper, setSwiper] = useState<SwiperClass | null>(null)
     const [mainSwiper, setMainSwiper] = useState<SwiperClass | null>(null)
     const [maxHeight, setMaxHeight] = useState<number>(0)
+    const paginationRef = useRef<HTMLDivElement | null>(null)
+    const nextRef = useRef<HTMLButtonElement | null>(null)
+    const prevRef = useRef<HTMLButtonElement | null>(null)
 
     const items = props.items.map((item, index) => {
         return <SwiperSlide style={{height: maxHeight}} key={index}><DeveloperCard {...item} children={item.children}/></SwiperSlide>
@@ -107,15 +110,15 @@ export default function Developers(props: DevepolerCardsProps) {
             <div className="developers__wrapper">
                 <div className="developers__header">
                     <h2>Builders love it!</h2>
-                    <p className='subtitle'>Subsquid is solving the data issues faced by developers.</p>
+                    <p className='subtitle'>Thousands of developers are building the future of Web3 with Subsquid.</p>
                 </div>
 
                 <div className="developers__main">
-                    <Swiper autoHeight={true} className="developers__main" onSwiper={setMainSwiper} onInit={(s) => {
+                    <Swiper className="developers__swiper" onSwiper={setMainSwiper} onInit={(s) => {
                         let maxValue = 0
                         s.slides.forEach(slide => {
-                            if (maxValue < (slide.scrollHeight)) {
-                                maxValue = slide.scrollHeight
+                            if (maxValue < (slide.scrollHeight + 32)) {
+                                maxValue = slide.scrollHeight + 32
                             }
                         })
 
@@ -127,11 +130,13 @@ export default function Developers(props: DevepolerCardsProps) {
                             loop: true,
                             initialSlide: 1,
                             loopedSlides: 2,
-                            loopPreventsSliding: true
+                            loopPreventsSliding: true,
+                            spaceBetween: 16
                         },
                         768: {
                             slidesPerView: 2,
                             slidesPerGroup: 2,
+                            spaceBetween: 24,
                             grid: {
                                 rows: 2,
                                 fill: "column"
@@ -140,20 +145,37 @@ export default function Developers(props: DevepolerCardsProps) {
                         1024: {
                             slidesPerView: 3,
                             slidesPerGroup: 3,
+                            spaceBetween: 24,
                             grid: {
                                 rows: 2,
                                 fill: "column"
                             },
+                        },
+                        1280: {
+                            slidesPerView: 3,
+                            slidesPerGroup: 3,
+                            grid: {
+                                rows: 2,
+                                fill: "column"
+                            },
+                            spaceBetween: 32
                         }
-                    }} slidesPerView={1} navigation={true} spaceBetween={16} pagination={{clickable: true}}>{items}</Swiper>
+                    }} slidesPerView={1} navigation={{
+                        nextEl: nextRef.current as HTMLElement,
+                        prevEl: prevRef.current as HTMLElement
+                    }} pagination={{
+                        clickable: true,
+                        el: paginationRef.current as HTMLElement
+                    }}>{items}</Swiper>
 
                     <div className="Thumbs">
+                        <div ref={paginationRef} className="Thumbs__pagination"></div>
                         <Swiper className="Thumbs__slider" watchSlidesProgress onSwiper={setSwiper} slidesPerView={1}
                                 width={400 / 8} modules={[Thumbs]} slidesPerGroup={1} loopedSlides={2}
                                 loopPreventsSliding={true} loop={true}>{itemsBullets}</Swiper>
 
                         <div className="Thumbs__arrows">
-                            <button className="Thumbs__arrow" onClick={() => {
+                            <button ref={prevRef} className="Thumbs__arrow" onClick={() => {
                                 if (mainSwiper)
                                     mainSwiper.slidePrev()
                             }}>
@@ -162,7 +184,7 @@ export default function Developers(props: DevepolerCardsProps) {
                                           strokeLinejoin="round"/>
                                 </svg>
                             </button>
-                            <button className="Thumbs__arrow" onClick={() => {
+                            <button ref={nextRef} className="Thumbs__arrow" onClick={() => {
                                 if (mainSwiper)
                                     mainSwiper.slideNext()
                             }}>

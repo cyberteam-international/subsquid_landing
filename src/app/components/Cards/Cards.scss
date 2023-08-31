@@ -1,3 +1,5 @@
+@import "../../assets/scss/main";
+
 .cards {
   display: grid;
   grid-template-columns: 1fr;
@@ -8,10 +10,19 @@
   position: relative;
   overflow: hidden;
 
+  @include media-up(md) {
+    gap: 40px;
+    padding: 60px 24px;
+  }
+
   &__items {
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
+
+    @include media-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   &__blob-1 {

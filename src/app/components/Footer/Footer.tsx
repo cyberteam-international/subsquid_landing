@@ -51,14 +51,14 @@ export default function Footer() {
     function openDropdown(el: HTMLElement, nav: INav, index: number) {
         const itemsEl: HTMLElement | null = el.querySelector('.footer-item__items')
 
-        if(itemsEl) {
+        if (itemsEl) {
             setNavs((prevState) => (prevState.map((_nav, _index) => ({
                 title: _nav.title,
                 items: _nav.items,
                 active: (index === _index) ? !_nav.active : _nav.active
             }))))
 
-            if(nav.active) {
+            if (nav.active) {
                 itemsEl.style.height = 0 + "px"
             } else {
                 itemsEl.style.height = itemsEl.scrollHeight + "px"
@@ -68,6 +68,21 @@ export default function Footer() {
 
     return (
         <footer className={'footer'}>
+            <div className="footer__blops-1">
+                <svg width="2045" height="1251" viewBox="0 0 2045 1251" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_502_2926)">
+                        <path d="M777.727 890.922C704.068 1000.54 458.857 934.024 345.459 887.067C216.784 845.004 385.221 724.857 562.853 736.939C740.485 749.02 891.035 427.813 981.259 340.409C1071.48 253.006 1251.95 342.208 1647.14 313.286C2042.33 284.365 1112.25 745.548 1015.52 560.074C918.78 374.6 869.801 753.904 777.727 890.922Z" fill="#FBC688"/>
+                    </g>
+                    <defs>
+                        <filter id="filter0_f_502_2926" x="0.150391" y="0.901611" width="2044.28" height="1249.54" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                            <feGaussianBlur stdDeviation="150" result="effect1_foregroundBlur_502_2926"/>
+                        </filter>
+                    </defs>
+                </svg>
+            </div>
+
             <div className="container">
                 <div className="footer__wrapper">
                     <h2>Subscribe</h2>
@@ -94,12 +109,18 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="footer__logos">
-                    <div className="footer__logo">
-                        <img className="footer__item-powered" src="/powered.svg" alt=""/>
-                        <div><img className="footer__item-polygon" src="/Polygon.svg" alt=""/></div>
+                    <div className='footer__subsquid'>
+                        <img src="/logo.png" alt=""/>
+                        <p>SUBSQUID</p>
                     </div>
-                    <div><img className="footer__item-gcloud" src="/GCloud.svg" alt=""/></div>
-                    <div><img className="footer__item-substrabe" src="/Substrabe.svg" alt=""/></div>
+                    <div>
+                        <div className="footer__logo">
+                            <img className="footer__item-powered" src="/powered.svg" alt=""/>
+                            <div><img className="footer__item-polygon" src="/Polygon.svg" alt=""/></div>
+                        </div>
+                        <div><img className="footer__item-gcloud" src="/GCloud.svg" alt=""/></div>
+                        <div><img className="footer__item-substrabe" src="/Substrabe.svg" alt=""/></div>
+                    </div>
                 </div>
             </div>
         </footer>

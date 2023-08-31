@@ -19,7 +19,7 @@ export default function Enterprise() {
         <div className="enterprise">
             <div className="enterprise__header">
                 <h2>Enterprise-ready, dev-friendly</h2>
-                <p className="subtitle">Subsquid is solving the data issues faced by developers.</p>
+                <p className="subtitle">Open-source toolkit and one-line cloud deployment.</p>
             </div>
 
             <div className="enterprise__items">

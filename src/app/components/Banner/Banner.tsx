@@ -5,8 +5,8 @@ import './Banner.scss'
 export default function Banner() {
     return (
         <div className={'banner'}>
-            <h1>The Data Network<br/>for the Future of <i>Web3</i></h1>
-            <p className={'subtitle'}>Subsquid is solving the data issues faced by developers. Free and fast decentralized data access, without rate limits.</p>
+            <h1 className={'banner__title'}>The Data Network<br/>for the Future of <i>Web3</i></h1>
+            <p className={'subtitle banner__subtitle'}>Subsquid is a global network that provides free, fast and decentralized data access, without rate limits. Designed for billion-user dApps. </p>
             
             <div className={'banner__buttons'}>
                 <a href="#!" className="btn btn--outline">Docs</a>

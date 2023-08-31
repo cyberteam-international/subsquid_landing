@@ -26,7 +26,7 @@ export default function Blog(props: BlogProps) {
             <div className="blog__wrapper">
                 <div className="blog__header">
                     <h2>Squid blog</h2>
-                    <p className={'subtitle'}>Subsquid is solving the data issues faced by developers.</p>
+                    <p className={'subtitle'}>Get the latest updates about Subsquid. </p>
                 </div>
 
                 <div className="blog__main">
@@ -37,6 +37,16 @@ export default function Blog(props: BlogProps) {
                         pagination={{
                             clickable: true,
                             el: paginationRef.current as HTMLElement
+                        }}
+                        breakpoints={{
+                            768: {
+                                slidesPerView: 2,
+                                slidesPerGroup: 2
+                            },
+                            1024: {
+                                slidesPerView: 3,
+                                slidesPerGroup: 3
+                            }
                         }}
                         autoHeight={true} onSwiper={setSwiper}>
                         {slides.map((slide, index) => <SwiperSlide className="blog-item" key={index}>

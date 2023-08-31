@@ -9,13 +9,13 @@
   background: var(--grey-light, #F3F3F6);
 
   &__pre {
-    text-wrap: inherit;
     transition: height .3s linear, background-color .2s linear;
     height: auto;
     overflow: auto !important;
     border-radius: 4px;
     background: var(--color-white);
     padding: 16px;
+    text-wrap: nowrap;
 
     pre {
       text-wrap: inherit !important;
@@ -23,16 +23,16 @@
       background: none !important;
       height: 100%;
       overflow: visible !important;
-    }
 
-    code {
-      text-wrap: inherit !important;
-      font-size: 14px;
-      height: 100%;
-      overflow: visible !important;
-
-      span {
+      code {
+        text-wrap: inherit !important;
         font-size: 14px;
+        height: 100%;
+        overflow: visible !important;
+
+        span {
+          font-size: 14px;
+        }
       }
     }
 

@@ -1,3 +1,5 @@
+@import "../../assets/scss/main";
+
 .blog {
   display: grid;
   grid-template-columns: 100%;
@@ -11,12 +13,28 @@
     display: grid;
     grid-template-columns: 100%;
     gap: 12px;
+
+    @include media-down(lg) {
+      gap: 20px;
+    }
   }
 
   &__wrapper {
     display: grid;
     grid-template-columns: 100%;
     gap: 24px;
+
+    @include media-down(xl) {
+      gap: 60px;
+    }
+
+    @include media-down(lg) {
+      gap: 40px;
+    }
+
+    @include media-down(md) {
+      gap: 32px;
+    }
   }
 
   &__main {
