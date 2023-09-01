@@ -18,7 +18,7 @@ export default function Home() {
                         <Banner/>
                         <Cards/>
                         <Enterprise/>
-                        {/*<Developers items={_developersMock}/>*/}
+                        <Developers items={_developersMock}/>
                         <Blog slides={_blogMock}/>
                     </div>
                 </div>
