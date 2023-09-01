@@ -47,6 +47,9 @@
 
   &__component {
     grid-area: component;
+    display: block;
+    overflow: hidden;
+    width: 100%;
   }
 
   &__image {
