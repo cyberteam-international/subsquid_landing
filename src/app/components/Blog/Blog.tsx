@@ -13,6 +13,7 @@ export interface ISlideBlog {
     title: string
     text: string
     caption: string
+    link: "#!",
 }
 
 export default function Blog(props: BlogProps) {
@@ -33,7 +34,6 @@ export default function Blog(props: BlogProps) {
                     <Swiper
                         modules={[Pagination]}
                         spaceBetween={16}
-                        loop={true}
                         pagination={{
                             clickable: true,
                             el: paginationRef.current as HTMLElement
@@ -48,9 +48,10 @@ export default function Blog(props: BlogProps) {
                                 slidesPerGroup: 3
                             }
                         }}
-                        autoHeight={true} onSwiper={setSwiper}>
+                        autoHeight={true} onSwiper={setSwiper} watchSlidesProgress={true}>
                         {slides.map((slide, index) => <SwiperSlide className="blog-item" key={index}>
                             <div className="blog-item__wrapper">
+                                <a className="blog-item__link" href={slide.link}></a>
                                 <div className="blog-item__header">
                                     <h3>{slide.title}</h3>
                                 </div>

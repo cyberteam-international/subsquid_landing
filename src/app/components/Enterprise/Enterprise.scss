@@ -5,11 +5,16 @@
   display: grid;
   grid-template-columns: 100%;
   gap: 24px;
+  max-width: 468px;
+  margin: 0 auto;
 
   @include media-up(md) {
-    max-width: 468px;
-    margin: 0 auto;
     gap: 32px;
+  }
+
+  @include media-up(lg) {
+    width: 100%;
+    max-width: none;
   }
 
   &__header {
@@ -22,10 +27,26 @@
     display: grid;
     grid-template-columns: 100%;
     gap: 24px;
+    grid-template-areas: "tabs" "component" "buttons";
 
     @include media-up(md) {
       gap: 32px;
     }
+
+    @include media-up(lg) {
+      gap: 32px 24px;
+      grid-template-columns: calc(50% - 12px) calc(50% - 12px);
+      grid-template-rows: auto 1fr;
+      grid-template-areas: "tabs component" "buttons component";
+    }
+  }
+
+  &__tabs {
+    grid-area: tabs;
+  }
+
+  &__component {
+    grid-area: component;
   }
 
   &__image {
@@ -34,11 +55,18 @@
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04), 0 0 3px 0 rgba(0, 0, 0, 0.24);
   }
 
-  &__buttons{
+  &__buttons {
+    grid-area: buttons;
     display: grid;
     grid-template-columns: repeat(2, max-content);
     gap: 20px;
     align-items: center;
     justify-content: center;
+
+    @include media-up(lg) {
+      gap: 24px;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
   }
 }

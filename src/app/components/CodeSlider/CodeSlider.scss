@@ -37,7 +37,7 @@
     }
 
     &--over {
-      min-height: 142px;
+      min-height: 152px;
     }
   }
 
@@ -55,6 +55,20 @@
     display: flex;
     align-items: center;
     gap: 20px;
+  }
+
+  &__arrow {
+    transition: color .2s;
+    cursor: pointer;
+    color: var(--color-primary);
+
+    &:hover {
+      color: var(--color-secondary);
+    }
+
+    &:focus {
+      color: var(--color-primary);
+    }
   }
 
   &__title {
@@ -152,6 +166,12 @@
       display: table;
       background-color: #ADADAD;
       border-radius: 50%;
+      transition: background .2s;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--color-secondary);
+      }
 
       &.swiper-pagination-bullet-active {
         background-color: #2B2B2B;

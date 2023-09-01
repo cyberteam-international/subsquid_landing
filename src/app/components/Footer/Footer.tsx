@@ -49,19 +49,21 @@ export default function Footer() {
     ])
 
     function openDropdown(el: HTMLElement, nav: INav, index: number) {
-        const itemsEl: HTMLElement | null = el.querySelector('.footer-item__items')
+        if(window.innerWidth < 1024) {
+            const itemsEl: HTMLElement | null = el.querySelector('.footer-item__items')
 
-        if (itemsEl) {
-            setNavs((prevState) => (prevState.map((_nav, _index) => ({
-                title: _nav.title,
-                items: _nav.items,
-                active: (index === _index) ? !_nav.active : _nav.active
-            }))))
+            if (itemsEl) {
+                setNavs((prevState) => (prevState.map((_nav, _index) => ({
+                    title: _nav.title,
+                    items: _nav.items,
+                    active: (index === _index) ? !_nav.active : _nav.active
+                }))))
 
-            if (nav.active) {
-                itemsEl.style.height = 0 + "px"
-            } else {
-                itemsEl.style.height = itemsEl.scrollHeight + "px"
+                if (nav.active) {
+                    itemsEl.style.height = 0 + "px"
+                } else {
+                    itemsEl.style.height = itemsEl.scrollHeight + "px"
+                }
             }
         }
     }
@@ -91,20 +93,21 @@ export default function Footer() {
                         <button type="submit">Subscribe</button>
                     </form>
 
-                    <div className="footer__items">
-                        {navs.map((nav, index) => (
-                            <div className={classNames({
-                                'footer-item': true,
-                                'footer-item--active': nav.active
-                            })} key={index} onClick={(e) => openDropdown(e.currentTarget, nav, index)}>
-                                <div className="footer-item__title"><span>{nav.title}</span> {Chevron}</div>
-                                <div className="footer-item__items">
-                                    {nav.items.map((item, _index) => <a key={_index}
-                                                                        href={item.link}>{item.text}</a>) || []}
+                    <div className="footer__data">
+                        <div className="footer__items">
+                            {navs.map((nav, index) => (
+                                <div className={classNames({
+                                    'footer-item': true,
+                                    'footer-item--active': nav.active
+                                })} key={index} onClick={(e) => openDropdown(e.currentTarget, nav, index)}>
+                                    <div className="footer-item__title"><span>{nav.title}</span> {Chevron}</div>
+                                    <div className="footer-item__items">
+                                        {nav.items.map((item, _index) => <a key={_index}
+                                                                            href={item.link}>{item.text}</a>) || []}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-
+                            ))}
+                        </div>
                         <p className="footer__caption">Subsquid Labs GmbH / Zug, Switzerland</p>
                     </div>
                 </div>

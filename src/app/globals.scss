@@ -42,12 +42,12 @@ h1, h2, h3, h4, h5, h6, p {
   width: 100%;
   display: table;
 
-  @include media-down(xl) {
-    padding: 0 28px;
+  @include media-up(md) {
+    padding: 0 24px;
   }
 
-  @include media-down(md) {
-    padding: 0 24px;
+  @include media-up(xl) {
+    padding: 0 28px;
   }
 }
 
@@ -116,16 +116,35 @@ p, .paragraph {
   border: none;
   background: none;
   margin: 0;
+  transition: .2s;
 
   &--outline {
     border-radius: 4px;
     border: 1px solid var(--color-secondary-button-stroke);
+
+    &:hover {
+      border-color: var(--color-secondary);
+      color: #323232;
+    }
+
+    &:focus {
+      border-color: var(--color-primary);
+      color: #323232;
+    }
   }
 
   &--primary {
     border-radius: 4px;
     background: var(--color-primary);
     color: var(--color-white);
+
+    &:hover {
+      background: var(--color-secondary);
+    }
+
+    &:focus {
+      background: var(--color-primary);
+    }
   }
 }
 
@@ -140,8 +159,9 @@ p, .paragraph {
 }
 
 .main {
-  margin-top: 76px;
+  padding-top: 76px;
   overflow: hidden;
+  padding-bottom: 60px;
 
   @include media-up(md) {
     margin-top: 120px;

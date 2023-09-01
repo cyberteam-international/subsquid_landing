@@ -1,7 +1,6 @@
 @import "../../assets/scss/main";
 
 .footer {
-  margin-top: 60px;
   background: #FDF1E4;
   padding-top: 40px;
   padding-bottom: 16px;
@@ -32,14 +31,30 @@
     gap: 24px;
   }
 
-  &__items {
-    padding: 24px 0;
-    border-top: 1px solid #2B2B2B;
-    border-bottom: 1px solid #2B2B2B;
+  &__data {
     display: grid;
     grid-template-columns: 100%;
     gap: 24px;
+    border-top: 1px solid #2B2B2B;
+    border-bottom: 1px solid #2B2B2B;
     margin-top: 60px - 24px;
+    padding: 24px 0;
+
+    @include media-up(lg) {
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+    }
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 24px;
+
+    @include media-up(lg) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 140px;
+    }
   }
 
   &__caption {
@@ -165,6 +180,11 @@
     overflow: hidden;
     transition: margin-top .2s, height .2s;
 
+    @include media-up(lg) {
+      height: auto;
+      margin-top: 24px;
+    }
+
     a {
       height: 24px;
       font-size: 16px;
@@ -175,6 +195,10 @@
 
   svg {
     transition: transform .2s;
+
+    @include media-up(lg) {
+      display: none;
+    }
   }
 
   &--active {
@@ -210,9 +234,15 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 160%;
+    outline: none;
+    transition: border-color .2s;
 
     &::placeholder {
       color: var(--color-primary);
+    }
+
+    &:hover, &:focus {
+      border-color: var(--color-primary);
     }
   }
 
@@ -227,5 +257,16 @@
     font-weight: 500;
     line-height: 100%;
     letter-spacing: 0.32px;
+    transition: .2s;
+
+    &:hover {
+      border-color: var(--color-secondary);
+      color: #323232;
+    }
+
+    &:focus {
+      border-color: var(--color-primary);
+      color: #323232;
+    }
   }
 }

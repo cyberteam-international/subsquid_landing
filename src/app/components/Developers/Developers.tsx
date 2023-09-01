@@ -3,7 +3,7 @@
 import "./Developers.scss";
 import {Swiper, SwiperClass, SwiperSlide} from "swiper/react";
 import {Grid, Pagination, Thumbs} from "swiper/modules";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 export interface DevepolerCardProps {
     idx: number,
@@ -54,6 +54,13 @@ export default function Developers(props: DevepolerCardsProps) {
     const paginationRef = useRef<HTMLDivElement | null>(null)
     const nextRef = useRef<HTMLButtonElement | null>(null)
     const prevRef = useRef<HTMLButtonElement | null>(null)
+
+    useEffect(() => {
+        window.addEventListener('resize', (e) => {
+            if(mainSwiper !== null)
+                (mainSwiper as SwiperClass).update()
+        }, {once: true})
+    }, [mainSwiper])
 
     const items = props.items.map((item, index) => {
         return <SwiperSlide style={{height: maxHeight}} key={index}><DeveloperCard {...item} children={item.children}/></SwiperSlide>
@@ -123,6 +130,15 @@ export default function Developers(props: DevepolerCardsProps) {
                         })
 
                         setMaxHeight(maxValue)
+                    }}  onUpdate={(s) => {
+                        let maxValue = 0
+                        s.slides.forEach(slide => {
+                            if (maxValue < (slide.scrollHeight + 32)) {
+                                maxValue = slide.scrollHeight + 32
+                            }
+                        })
+
+                        setMaxHeight(maxValue)
                     }} thumbs={swiper ? {swiper: swiper} : {}} modules={[Grid, Pagination, Thumbs]} breakpoints={{
                         0: {
                             pagination: false,
@@ -153,14 +169,14 @@ export default function Developers(props: DevepolerCardsProps) {
                         },
                         1280: {
                             slidesPerView: 3,
-                            slidesPerGroup: 3,
+                            slidesPerGroup: 6,
                             grid: {
                                 rows: 2,
                                 fill: "column"
                             },
                             spaceBetween: 32
                         }
-                    }} slidesPerView={1} navigation={{
+                    }} watchSlidesProgress={true} slidesPerView={1} navigation={{
                         nextEl: nextRef.current as HTMLElement,
                         prevEl: prevRef.current as HTMLElement
                     }} pagination={{
@@ -180,7 +196,7 @@ export default function Developers(props: DevepolerCardsProps) {
                                     mainSwiper.slidePrev()
                             }}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M15 6L9 12L15 18" stroke="#1D1D1F" strokeWidth="2" strokeLinecap="round"
+                                    <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                                           strokeLinejoin="round"/>
                                 </svg>
                             </button>
@@ -189,7 +205,7 @@ export default function Developers(props: DevepolerCardsProps) {
                                     mainSwiper.slideNext()
                             }}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M9 18L15 12L9 6" stroke="#1D1D1F" strokeWidth="2" strokeLinecap="round"
+                                    <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                                           strokeLinejoin="round"/>
                                 </svg>
                             </button>
