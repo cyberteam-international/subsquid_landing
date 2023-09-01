@@ -28,7 +28,7 @@ export default function Enterprise() {
                 </div>
 
                 <div className="enterprise__component">
-                    {currentIndex === 0 ? <CodeSlider slides={_enterpriseMock}/> : <picture>
+                    {currentIndex === 0 ? <p>Test</p> : <picture>
                         <source media="(max-width: 1280px)" srcSet="/enterprise-1024.png"/>
                         <source media="(max-width: 1024px)" srcSet="/enterprise-768.png"/>
                         <source media="(max-width: 768px)" srcSet="/enterprise-350.png"/>
