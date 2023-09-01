@@ -15,12 +15,21 @@
   @include media-up(lg) {
     width: 100%;
     max-width: none;
+    gap: 40px;
+  }
+
+  @include media-up(xl) {
+    gap: 60px;
   }
 
   &__header {
     display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
+
+    @include media-up(lg) {
+      gap: 20px;
+    }
   }
 
   &__items {
@@ -34,8 +43,8 @@
     }
 
     @include media-up(lg) {
-      gap: 32px 24px;
-      grid-template-columns: calc(50% - 12px) calc(50% - 12px);
+      gap: 32px;
+      grid-template-columns: calc(50% - 16px) calc(50% - 16px);
       grid-template-rows: auto 1fr;
       grid-template-areas: "tabs component" "buttons component";
     }

@@ -25,6 +25,14 @@
       max-width: 586px;
       margin: 0 auto;
     }
+
+    @include media-up(lg) {
+      max-width: 850px;
+    }
+
+    @include media-up(xxl) {
+      max-width: 1020px;
+    }
   }
 
   @include media-up(md) {

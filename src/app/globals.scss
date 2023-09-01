@@ -56,6 +56,14 @@ h1, .h1 {
   font-weight: 700;
   line-height: 110%;
   letter-spacing: -0.48px;
+
+  @include media-up(lg) {
+    font-size: 80px;
+  }
+
+  @include media-up(xxl) {
+    font-size: 100px;
+  }
 }
 
 h1 i, .h1 i {
@@ -68,6 +76,14 @@ h2, .h2 {
   line-height: 120%;
   letter-spacing: -0.28px;
   text-align: center;
+
+  @include media-up(lg) {
+    font-size: 44px;
+  }
+
+  @include media-up(xxl) {
+    font-size: 56px;
+  }
 }
 
 h3, .h3 {
@@ -75,6 +91,11 @@ h3, .h3 {
   font-weight: 500;
   line-height: 100%;
   letter-spacing: -0.36px;
+
+  @include media-up(lg) {
+    font-size: 36px;
+    line-height: 100%;
+  }
 }
 
 .subtitle {
@@ -83,6 +104,11 @@ h3, .h3 {
   font-weight: 400;
   line-height: 140%;
   letter-spacing: 0.32px;
+
+  @include media-up(lg) {
+    font-size: 24px;
+    line-height: 160%;
+  }
 }
 
 p, .paragraph {
@@ -90,14 +116,6 @@ p, .paragraph {
   font-weight: 400;
   line-height: 160%;
   letter-spacing: 0.32px;
-}
-
-.testimonial {
-  leading-trim: both;
-  text-edge: cap;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 140%;
 }
 
 .btn {
@@ -156,6 +174,18 @@ p, .paragraph {
   @include media-up(md) {
     gap: 100px;
   }
+
+  @include media-up(lg) {
+    gap: 140px;
+  }
+
+  @include media-up(xl) {
+    gap: 160px;
+  }
+
+  @include media-up(xxl) {
+    gap: 180px;
+  }
 }
 
 .main {
@@ -165,5 +195,20 @@ p, .paragraph {
 
   @include media-up(md) {
     margin-top: 120px;
+    padding-bottom: 100px;
+  }
+
+  @include media-up(lg) {
+    margin-top: 232px;
+    padding-bottom: 140px;
+  }
+
+  @include media-up(xl) {
+    padding-bottom: 160px;
+  }
+
+  @include media-up(xxl) {
+    margin-top: 272px;
+    padding-bottom: 180px;
   }
 }

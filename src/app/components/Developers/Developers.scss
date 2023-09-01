@@ -68,6 +68,10 @@
     @include media-down(sm) {
       margin-bottom: 24px;
     }
+
+    @include media-up(lg) {
+      gap: 20px;
+    }
   }
 
   .swiper {

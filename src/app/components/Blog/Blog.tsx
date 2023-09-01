@@ -33,7 +33,7 @@ export default function Blog(props: BlogProps) {
                 <div className="blog__main">
                     <Swiper
                         modules={[Pagination]}
-                        spaceBetween={16}
+                        spaceBetween={32}
                         pagination={{
                             clickable: true,
                             el: paginationRef.current as HTMLElement
@@ -41,11 +41,18 @@ export default function Blog(props: BlogProps) {
                         breakpoints={{
                             768: {
                                 slidesPerView: 2,
-                                slidesPerGroup: 2
+                                slidesPerGroup: 2,
+                                spaceBetween: 32
                             },
                             1024: {
                                 slidesPerView: 3,
-                                slidesPerGroup: 3
+                                slidesPerGroup: 3,
+                                spaceBetween: 24
+                            },
+                            1280: {
+                                slidesPerView: 3,
+                                slidesPerGroup: 3,
+                                spaceBetween: 32
                             }
                         }}
                         autoHeight={true} onSwiper={setSwiper} watchSlidesProgress={true}>

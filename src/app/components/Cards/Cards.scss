@@ -15,6 +15,26 @@
     padding: 60px 24px;
   }
 
+  @include media-up(lg) {
+    padding: 60px 36px;
+  }
+
+  @include media-up(xl) {
+    padding: 80px 64px;
+  }
+
+
+  &__title {
+    @include media-up(lg) {
+      max-width: 570px;
+      margin: 0 auto;
+    }
+
+    @include media-up(xxl) {
+      max-width: 725px;
+    }
+  }
+
   &__items {
     display: grid;
     grid-template-columns: 1fr;
@@ -22,6 +42,10 @@
 
     @include media-up(md) {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-up(xl) {
+      gap: 32px;
     }
   }
 
@@ -55,9 +79,19 @@
   border-radius: 12px;
   border: 3px solid var(--color-gray-dark);
 
+  @include media-up(lg) {
+    height: 194px;
+  }
+
   p {
     position: relative;
     z-index: 3;
+  }
+
+  &__text {
+    @include media-up(lg) {
+      font-size: 20px;
+    }
   }
 
   &__title {
@@ -67,5 +101,9 @@
     line-height: 120%;
     letter-spacing: -0.24px;
     margin-bottom: 8px;
+
+    @include media-up(lg) {
+      font-size: 32px;
+    }
   }
 }

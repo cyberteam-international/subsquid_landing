@@ -112,17 +112,16 @@ export function CodeSlider(props: { slides: ISlide[] }) {
                         'code-slider__stage': true,
                         'code-slider__stage--visible': isExpanded
                     })}>
-                        <a ref={linkRef} href={slides[0].link} target="_blank" className={''}>Full squid</a>
+                        <a ref={linkRef} href={slides[0].link} target="_blank" className={'code-slider__link'}>Full squid</a>
                         <span className="code-slider__line"></span>
-                        <a href="#!" className={''}>Showcase</a>
+                        <a href="#!" className={'code-slider__link'}>Showcase</a>
                         <span className="code-slider__line"></span>
+                        <button onClick={handleClickExpand}
+                                className={classNames({
+                                    'code-slider__collapse': true,
+                                    'code-slider__collapse--expand': isExpanded
+                                })}>{isExpanded ? "Collapse" : "Expand"} {ChevronSvg}</button>
                     </div>
-
-                    <button onClick={handleClickExpand}
-                            className={classNames({
-                                'code-slider__collapse': true,
-                                'code-slider__collapse--expand': isExpanded
-                            })}>{isExpanded ? "Collapse" : "Expand"} {ChevronSvg}</button>
                 </div>
             </div>
         </div>

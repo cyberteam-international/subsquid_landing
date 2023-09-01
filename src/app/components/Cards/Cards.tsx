@@ -40,13 +40,13 @@ export default function Cards() {
                 </svg>
             </div>
 
-            <h2>Web3’s largest decentralized data lake</h2>
+            <h2 className="cards__title">Web3’s largest decentralized data lake</h2>
 
             <div className={'cards__items'}>
                 {items.map((item, index) => (
                     <div className={'cards-item'} key={index}>
                         <p className={'cards-item__title'}>{item.title}</p>
-                        <p>{item.text}</p>
+                        <p className={'cards-item__text'}>{item.text}</p>
                     </div>
                 ))}
             </div>
