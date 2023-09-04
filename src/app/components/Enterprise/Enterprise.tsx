@@ -37,8 +37,8 @@ export default function Enterprise() {
                 </div>
 
                 <div className="enterprise__buttons">
-                    <a href="#!" className="btn btn--outline">Docs</a>
-                    <a href="#!" className="btn btn--primary">Lauch app</a>
+                    <a href="https://docs.subsquid.io/" className="btn btn--outline" target="_blank">Docs</a>
+                    <a href="https://www.subsquid.io/launch-app" className="btn btn--primary" target="_blank">Lauch app</a>
                 </div>
             </div>
         </div>

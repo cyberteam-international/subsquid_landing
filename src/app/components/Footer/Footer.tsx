@@ -26,7 +26,7 @@ export default function Footer() {
         {
             title: "Resources",
             items: [
-                {link: "#!", text: "Documentation"},
+                {link: "https://docs.subsquid.io/", text: "Documentation"},
                 {link: "#!", text: "Blog"},
                 {link: "#!", text: "Press kit"},
             ]
@@ -34,10 +34,10 @@ export default function Footer() {
         {
             title: "Follow us",
             items: [
-                {link: "#!", text: "Twitter"},
-                {link: "#!", text: "Discord"},
+                {link: "https://twitter.com/subsquid", text: "Twitter"},
+                {link: "https://discord.com/invite/subsquid", text: "Discord"},
                 {link: "#!", text: "YouTube"},
-                {link: "#!", text: "GitHub"},
+                {link: "https://github.com/subsquid", text: "GitHub"},
             ]
         },
         {
@@ -117,7 +117,7 @@ export default function Footer() {
                                     <div className="footer-item__title"><span>{nav.title}</span> {Chevron}</div>
                                     <div className="footer-item__items">
                                         {nav.items.map((item, _index) => <a key={_index}
-                                                                            href={item.link}>{item.text}</a>) || []}
+                                                                            href={item.link} target="_blank">{item.text}</a>) || []}
                                     </div>
                                 </div>
                             ))}

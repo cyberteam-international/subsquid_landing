@@ -9,7 +9,7 @@ export default function Banner() {
             <p className={'subtitle banner__subtitle'}>Subsquid is a global network that provides free, fast and decentralized data access, without rate limits. Designed for billion-user dApps. </p>
             
             <div className={'banner__buttons'}>
-                <a href="#!" className="btn btn--outline">Docs</a>
+                <a href="https://docs.subsquid.io/" className="btn btn--outline" target="_blank">Docs</a>
                 <a href="#!" className="btn btn--primary">Testnet</a>
             </div>
         </div>

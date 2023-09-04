@@ -40,12 +40,12 @@ export default function Header() {
                                 'nav--active': isOpen
                             })}>
                                 <div className="nav__section">
-                                    <a href="#" className="nav__item">Docs</a>
+                                    <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
                                     <a href="#" className="nav__item">Blog</a>
                                 </div>
                                 <div className="nav__section">
                                     <GitHub username="subsquid" reponame="squid-sdk"/>
-                                    <a href="#" className="btn btn--primary">Launch app</a>
+                                    <a href="https://www.subsquid.io/launch-app" className="btn btn--primary" target="_blank">Launch app</a>
                                 </div>
                             </div>
                         </div>
