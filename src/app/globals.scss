@@ -204,6 +204,7 @@ p, .paragraph {
   }
 
   @include media-up(xl) {
+    margin-top: 180px;
     padding-bottom: 160px;
   }
 

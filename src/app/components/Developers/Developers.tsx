@@ -95,35 +95,35 @@ export default function Developers(props: DevepolerCardsProps) {
 
     return (
         <div className="developers">
-            <div className="developers__blob-1">
-                <svg width="873" height="1650" viewBox="0 0 873 1650" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g opacity="0.3" filter="url(#filter0_f_82_12138)">
-                        <path d="M716.557 570.124C825.977 492.066 709.846 259.476 638.104 152.938C569.19 31.3382 464.303 201.587 508.231 372.358C552.159 543.128 220.32 708.811 138.475 801.462C56.629 894.113 186.917 1062.74 222.514 1446.2C258.11 1829.65 612.075 902.355 388.951 820.66C165.827 738.966 579.783 667.697 716.557 570.124Z" fill="#68BEFC"/>
-                    </g>
-                    <defs>
-                        <filter id="filter0_f_82_12138" x="0.932617" y="0.780579" width="871.505" height="1648.93" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                            <feGaussianBlur stdDeviation="55.5" result="effect1_foregroundBlur_82_12138"/>
-                        </filter>
-                    </defs>
-                </svg>
-            </div>
+            {/*<div className="developers__blob-1">*/}
+            {/*    <svg width="873" height="1650" viewBox="0 0 873 1650" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+            {/*        <g opacity="0.3" filter="url(#filter0_f_82_12138)">*/}
+            {/*            <path d="M716.557 570.124C825.977 492.066 709.846 259.476 638.104 152.938C569.19 31.3382 464.303 201.587 508.231 372.358C552.159 543.128 220.32 708.811 138.475 801.462C56.629 894.113 186.917 1062.74 222.514 1446.2C258.11 1829.65 612.075 902.355 388.951 820.66C165.827 738.966 579.783 667.697 716.557 570.124Z" fill="#68BEFC"/>*/}
+            {/*        </g>*/}
+            {/*        <defs>*/}
+            {/*            <filter id="filter0_f_82_12138" x="0.932617" y="0.780579" width="871.505" height="1648.93" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">*/}
+            {/*                <feFlood floodOpacity="0" result="BackgroundImageFix"/>*/}
+            {/*                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>*/}
+            {/*                <feGaussianBlur stdDeviation="55.5" result="effect1_foregroundBlur_82_12138"/>*/}
+            {/*            </filter>*/}
+            {/*        </defs>*/}
+            {/*    </svg>*/}
+            {/*</div>*/}
 
-            <div className="developers__blob-2">
-                <svg width="2045" height="1251" viewBox="0 0 2045 1251" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_f_82_12139)">
-                        <path d="M777.727 890.921C704.068 1000.54 458.857 934.024 345.459 887.067C216.784 845.004 385.221 724.857 562.853 736.939C740.485 749.02 891.035 427.813 981.259 340.409C1071.48 253.006 1251.95 342.208 1647.14 313.286C2042.33 284.364 1112.25 745.548 1015.52 560.074C918.78 374.599 869.801 753.904 777.727 890.921Z" fill="#FBC688"/>
-                    </g>
-                    <defs>
-                        <filter id="filter0_f_82_12139" x="0.150391" y="0.901367" width="2044.28" height="1249.54" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                            <feGaussianBlur stdDeviation="150" result="effect1_foregroundBlur_82_12139"/>
-                        </filter>
-                    </defs>
-                </svg>
-            </div>
+            {/*<div className="developers__blob-2">*/}
+            {/*    <svg width="2045" height="1251" viewBox="0 0 2045 1251" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+            {/*        <g filter="url(#filter0_f_82_12139)">*/}
+            {/*            <path d="M777.727 890.921C704.068 1000.54 458.857 934.024 345.459 887.067C216.784 845.004 385.221 724.857 562.853 736.939C740.485 749.02 891.035 427.813 981.259 340.409C1071.48 253.006 1251.95 342.208 1647.14 313.286C2042.33 284.364 1112.25 745.548 1015.52 560.074C918.78 374.599 869.801 753.904 777.727 890.921Z" fill="#FBC688"/>*/}
+            {/*        </g>*/}
+            {/*        <defs>*/}
+            {/*            <filter id="filter0_f_82_12139" x="0.150391" y="0.901367" width="2044.28" height="1249.54" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">*/}
+            {/*                <feFlood floodOpacity="0" result="BackgroundImageFix"/>*/}
+            {/*                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>*/}
+            {/*                <feGaussianBlur stdDeviation="150" result="effect1_foregroundBlur_82_12139"/>*/}
+            {/*            </filter>*/}
+            {/*        </defs>*/}
+            {/*    </svg>*/}
+            {/*</div>*/}
 
             <div className="developers__wrapper">
                 <div className="developers__header">

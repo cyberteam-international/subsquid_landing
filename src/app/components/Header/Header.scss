@@ -160,6 +160,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    gap: 24px;
 
     @include media-down(xs) {
       flex-direction: column;
@@ -205,6 +206,7 @@
     line-height: 100%;
     letter-spacing: 0.32px;
     position: relative;
+    transition: color .2s;
 
     &:not(:last-child) {
       @include media-up(sm) {
@@ -226,6 +228,10 @@
         height: 1px;
         background: rgba(29, 29, 30, 0.10);
       }
+    }
+
+    &:hover {
+      color: var(--color-secondary);
     }
   }
 
