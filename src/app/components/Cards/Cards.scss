@@ -52,32 +52,33 @@
   &__blob-1 {
     position: absolute;
     left: -620px;
-    top: -40px;
+    top: -570px;
     z-index: 0;
     pointer-events: none;
     user-select: none;
-    transform: rotate(50deg);
 
     @include media-up(md) {
-      top: -240px;
-      left: -943px;
-      transform: rotate(13deg);
+      top: -300px;
+      left: -640px;
     }
 
     @include media-up(lg) {
-      top: -140px;
-      left: -743px;
+      top: -800px;
+      right: 450px;
+      left: auto;
+      transform: rotate(-30deg);
     }
 
 
     img {
-      width: 1190.528px;
-      height: 433.622px;
+      mix-blend-mode: multiply;
+      min-width: 1190.528px;
+      min-height: 433.622px;
       max-width: none;
 
       @include media-up(md) {
-        width: 1694px;
-        height: 617px;
+        min-width: 1694px;
+        min-height: 617px;
       }
     }
   }
