@@ -199,17 +199,17 @@ p, .paragraph {
   }
 
   @include media-up(lg) {
-    margin-top: 232px;
+    margin-top: 212px;
     padding-bottom: 140px;
   }
 
   @include media-up(xl) {
-    margin-top: 180px;
+    margin-top: 160px;
     padding-bottom: 160px;
   }
 
   @include media-up(xxl) {
-    margin-top: 272px;
+    margin-top: 252px;
     padding-bottom: 180px;
   }
 }
