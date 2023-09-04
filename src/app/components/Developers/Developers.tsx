@@ -36,7 +36,7 @@ export function DeveloperCard(props: DevepolerCardProps) {
                         </div>
                     </div>
                     <div>
-                        <a className="DeveloperCardHeader__social" href={props.social.link}><img
+                        <a className="DeveloperCardHeader__social" target="_blank" href={props.social.link}><img
                             src={props.social.image}
                             alt=""/></a>
                     </div>
