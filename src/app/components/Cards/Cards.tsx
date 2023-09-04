@@ -11,7 +11,7 @@ export default function Cards() {
 
     return (
         <div className={'cards'}>
-            <div className={'cards__blob-1'}>
+            <div className="cards__blob-1">
                 <img src="/blub-1.png" alt=""/>
             </div>
             <div className={'cards__blob-2'}>

@@ -36,7 +36,7 @@ export default function Footer() {
             items: [
                 {link: "https://twitter.com/subsquid", text: "Twitter"},
                 {link: "https://discord.com/invite/subsquid", text: "Discord"},
-                {link: "#!", text: "YouTube"},
+                {link: "https://www.youtube.com/@subsquid", text: "YouTube"},
                 {link: "https://github.com/subsquid", text: "GitHub"},
             ]
         },

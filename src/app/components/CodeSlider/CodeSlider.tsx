@@ -114,7 +114,7 @@ export function CodeSlider(props: { slides: ISlide[] }) {
                     })}>
                         <a ref={linkRef} href={slides[0].link} target="_blank" className={'code-slider__link'}>Full squid</a>
                         <span className="code-slider__line"></span>
-                        <a href="#!" className={'code-slider__link'}>Showcase</a>
+                        <a href="https://docs.subsquid.io/evm-indexing/configuration/showcase/" target="_blank" className={'code-slider__link'}>Showcase</a>
                         <span className="code-slider__line"></span>
                         <button onClick={handleClickExpand}
                                 className={classNames({
