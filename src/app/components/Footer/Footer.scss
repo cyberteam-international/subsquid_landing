@@ -7,6 +7,14 @@
   position: relative;
   overflow: hidden;
 
+  @include media-up(lg) {
+    padding-top: 80px;
+  }
+
+  @include media-up(xl) {
+    padding-top: 100px;
+  }
+
   &__blops-1 {
     position: absolute;
     top: 88px;

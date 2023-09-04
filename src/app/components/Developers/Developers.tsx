@@ -66,6 +66,17 @@ export default function Developers(props: DevepolerCardsProps) {
         return <SwiperSlide style={{height: maxHeight}} key={index}><DeveloperCard {...item} children={item.children}/></SwiperSlide>
     })
 
+    function setHeightSlides(s: SwiperClass) {
+        let maxValue = 0
+        s.slides.forEach(slide => {
+            if (maxValue < (slide.scrollHeight + 16)) {
+                maxValue = slide.scrollHeight + 16
+            }
+        })
+
+        setMaxHeight(maxValue)
+    }
+
     const itemsBullets = props.items.map((item, index) => {
         const indexRevert = (items.length - 1) - index
         return <SwiperSlide key={index} style={{zIndex: indexRevert}}>
@@ -121,25 +132,7 @@ export default function Developers(props: DevepolerCardsProps) {
                 </div>
 
                 <div className="developers__main">
-                    <Swiper className="developers__swiper" onSwiper={setMainSwiper} onInit={(s) => {
-                        let maxValue = 0
-                        s.slides.forEach(slide => {
-                            if (maxValue < (slide.scrollHeight + 32)) {
-                                maxValue = slide.scrollHeight + 32
-                            }
-                        })
-
-                        setMaxHeight(maxValue)
-                    }}  onUpdate={(s) => {
-                        let maxValue = 0
-                        s.slides.forEach(slide => {
-                            if (maxValue < (slide.scrollHeight + 32)) {
-                                maxValue = slide.scrollHeight + 32
-                            }
-                        })
-
-                        setMaxHeight(maxValue)
-                    }} thumbs={swiper ? {swiper: swiper} : {}} modules={[Grid, Pagination, Thumbs]} breakpoints={{
+                    <Swiper className="developers__swiper" onSwiper={setMainSwiper} onInit={setHeightSlides} onUpdate={setHeightSlides} thumbs={swiper ? {swiper: swiper} : {}} modules={[Grid, Pagination, Thumbs]} breakpoints={{
                         0: {
                             pagination: false,
                             autoHeight: true,
@@ -169,7 +162,7 @@ export default function Developers(props: DevepolerCardsProps) {
                         },
                         1280: {
                             slidesPerView: 3,
-                            slidesPerGroup: 6,
+                            slidesPerGroup: 3,
                             grid: {
                                 rows: 2,
                                 fill: "column"
