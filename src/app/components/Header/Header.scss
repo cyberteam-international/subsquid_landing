@@ -34,21 +34,23 @@
 }
 
 .header {
+  $root: &;
+
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 999;
 
-
   &__inner {
-    background: rgba(255, 255, 255, 0.40);
+    background-color: rgba(255, 255, 255, 0.40);
     backdrop-filter: blur(25px);
     height: 52px;
     padding: 0;
     width: 100%;
     display: flex;
     align-items: center;
+    transition: background-color .2s;
   }
 
   &__wrapper {
@@ -74,6 +76,14 @@
     height: 32px;
     position: relative;
     z-index: 999;
+  }
+
+  &--open {
+    #{$root} {
+      &__inner {
+        background-color: rgba(255, 255, 255, 1);
+      }
+    }
   }
 }
 

@@ -10,7 +10,10 @@ export default function Header() {
     const [isVisibleTopBar, setIsVisibleTopBar] = useState(true)
 
     return (
-        <header className={'header'}>
+        <header className={classNames({
+            'header': true,
+            'header--open': isOpen
+        })}>
             { isVisibleTopBar ? <div className="header-top">
                 <img src="/star.png" alt=""/>
                 <p>We've got a new look!</p>
