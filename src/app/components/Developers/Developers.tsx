@@ -97,11 +97,11 @@ export default function Developers(props: DevepolerCardsProps) {
     return (
         <div className="developers">
             <div className="developers__blob-1">
-                <img src="/public/blub-3.png" alt=""/>
+                <img src="/blub-3.png" alt=""/>
             </div>
 
             <div className="developers__blob-2">
-                <img src="/public/blub-4.png" alt=""/>
+                <img src="/blub-4.png" alt=""/>
             </div>
 
             <div className="developers__wrapper">

@@ -5,8 +5,11 @@
   grid-template-columns: 100%;
   gap: 12px;
   overflow: hidden;
-  padding: 100px;
-  margin: -100px;
+
+  @include media-down(md) {
+    padding: 100px;
+    margin: -100px;
+  }
 
   &__header {
     text-align: center;

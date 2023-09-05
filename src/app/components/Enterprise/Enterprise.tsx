@@ -52,7 +52,7 @@ export default function Enterprise() {
                                             <source media="(max-width: 1280px)" srcSet="/enterprise-1024.png"/>
                                             <source media="(max-width: 1024px)" srcSet="/enterprise-768.png"/>
                                             <source media="(max-width: 768px)" srcSet="/enterprise-350.png"/>
-                                            <img src="/public/enterprise-1280.png" alt="" className="enterprise__image"/>
+                                            <img src="/enterprise-1280.png" alt="" className="enterprise__image"/>
                                         </picture>}
                                 </div>
                             </CSSTransition>

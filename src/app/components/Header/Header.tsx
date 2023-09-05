@@ -26,7 +26,7 @@ export default function Header() {
                 <div className="container">
                     <div className="header__wrapper">
                         <div>
-                            <img src="/logo.png" alt="" className="header__logo"/>
+                            <a href="/"><img src="/logo.png" alt="" className="header__logo"/></a>
                         </div>
                         <div>
                             <button className={classNames({

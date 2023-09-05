@@ -43,7 +43,7 @@ export default function Footer() {
         {
             title: "Legal",
             items: [
-                {link: "#!", text: "Imprint & Privacy"},
+                {link: "/imprint", text: "Imprint & Privacy"},
             ]
         },
     ])
@@ -71,10 +71,10 @@ export default function Footer() {
     return (
         <footer className={'footer'}>
             <div className="footer__blops-1">
-                <img src="/public/blub-5.png" alt=""/>
+                <img src="/blub-5.png" alt=""/>
             </div>
             <div className="footer__blops-2">
-                <img src="/public/blub-6.png" alt=""/>
+                <img src="/blub-6.png" alt=""/>
             </div>
 
             <div className="container">
@@ -105,16 +105,16 @@ export default function Footer() {
                 </div>
                 <div className="footer__logos">
                     <div className='footer__subsquid'>
-                        <img src="/public/logo.png" alt=""/>
+                        <img src="/logo.png" alt=""/>
                         <p>SUBSQUID</p>
                     </div>
                     <div>
                         <div className="footer__logo">
-                            <img className="footer__item-powered" src="/public/powered.svg" alt=""/>
-                            <div><img className="footer__item-polygon" src="/public/Polygon.svg" alt=""/></div>
+                            <img className="footer__item-powered" src="/powered.svg" alt=""/>
+                            <div><img className="footer__item-polygon" src="/Polygon.svg" alt=""/></div>
                         </div>
-                        <div><img className="footer__item-gcloud" src="/public/GCloud.svg" alt=""/></div>
-                        <div><img className="footer__item-substrabe" src="/public/Substrabe.svg" alt=""/></div>
+                        <div><img className="footer__item-gcloud" src="/GCloud.svg" alt=""/></div>
+                        <div><img className="footer__item-substrabe" src="/Substrabe.svg" alt=""/></div>
                     </div>
                 </div>
             </div>
