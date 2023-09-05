@@ -14,7 +14,9 @@
   --color-gray-light: #F2F2F2;
   --color-secondary-button-stroke: #ADADAD;
   --color-white: #fff;
-  --color-grey-light-2: #F3F3F6
+  --color-grey-light-2: #F3F3F6;
+  --color-link-menu-hover: #858FA4;
+  --color-secondary-button-hover: #C7C7C7;
 }
 
 html, body {
@@ -138,16 +140,15 @@ p, .paragraph {
 
   &--outline {
     border-radius: 4px;
-    border: 1px solid var(--color-secondary-button-stroke);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
 
     &:hover {
-      border-color: var(--color-secondary);
-      color: #323232;
+      border-color: var(--color-secondary-button-hover);
     }
 
     &:focus {
       border-color: var(--color-primary);
-      color: #323232;
     }
   }
 

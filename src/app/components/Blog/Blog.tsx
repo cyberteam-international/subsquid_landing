@@ -58,12 +58,12 @@ export default function Blog(props: BlogProps) {
                         autoHeight={true} onSwiper={setSwiper} watchSlidesProgress={true}>
                         {slides.map((slide, index) => <SwiperSlide className="blog-item" key={index}>
                             <div className="blog-item__wrapper">
-                                <a className="blog-item__link" href={slide.link}></a>
+                                <a className="blog-item__link" href={slide.link} target="_blank"></a>
                                 <div className="blog-item__header">
                                     <h3>{slide.title}</h3>
                                 </div>
                                 <div className="blog-item__main">
-                                    <p>{slide.text}</p>
+                                    <p className="blog-item__text">{slide.text}</p>
                                     <p>{slide.caption}</p>
                                 </div>
                             </div>
