@@ -61,7 +61,7 @@ export default function Enterprise() {
 
                     <SlideInLeft className="enterprise__buttons" delay={400}>
                         <div className="enterprise__buttons-wrap">
-                            <a href="@/pages/components/Enterprise/Enterprise" className="btn btn--outline" target="_blank">Docs</a>
+                            <a href="https://docs.subsquid.io/" className="btn btn--outline" target="_blank">Docs</a>
                             <a href="https://www.subsquid.io/launch-app" className="btn btn--primary" target="_blank">Lauch
                                 app</a>
                         </div>
