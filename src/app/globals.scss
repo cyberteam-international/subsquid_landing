@@ -185,7 +185,7 @@ p, .paragraph {
   }
 
   @include media-up(xxl) {
-    gap: 180px;
+    gap: 250px;
   }
 }
 
@@ -210,7 +210,29 @@ p, .paragraph {
   }
 
   @include media-up(xxl) {
-    margin-top: 252px;
-    padding-bottom: 180px;
+    margin-top: 250px;
+    padding-bottom: 250px;
   }
+}
+
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-enter-active {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 300ms linear;
 }

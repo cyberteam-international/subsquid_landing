@@ -1,29 +1,31 @@
 @import "../../assets/scss/main";
 
 .enterprise {
-  text-align: center;
-  display: grid;
-  grid-template-columns: 100%;
-  gap: 24px;
-  max-width: 468px;
-  margin: 0 auto;
+  &__wrapper {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 24px;
+    max-width: 468px;
+    margin: 0 auto;
 
-  &>div{
+    @include media-up(md) {
+      gap: 32px;
+    }
+
+    @include media-up(lg) {
+      width: 100%;
+      max-width: none;
+      gap: 40px;
+    }
+
+    @include media-up(xl) {
+      gap: 60px;
+    }
+  }
+
+  & > div {
     overflow: hidden;
-  }
-
-  @include media-up(md) {
-    gap: 32px;
-  }
-
-  @include media-up(lg) {
-    width: 100%;
-    max-width: none;
-    gap: 40px;
-  }
-
-  @include media-up(xl) {
-    gap: 60px;
   }
 
   &__header {
@@ -64,7 +66,6 @@
     overflow: hidden;
     width: 100%;
   }
-
   &__image {
     object-fit: cover;
     border-radius: 4px;
@@ -73,6 +74,9 @@
 
   &__buttons {
     grid-area: buttons;
+  }
+
+  &__buttons-wrap {
     display: grid;
     grid-template-columns: repeat(2, max-content);
     gap: 20px;

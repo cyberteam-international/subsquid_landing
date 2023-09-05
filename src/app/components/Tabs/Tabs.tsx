@@ -6,6 +6,7 @@ import classNames from "classnames";
 import {useState} from "react";
 import _enterpriseMock from "@/app/_mock/enterprise.mock";
 import {CodeSlider} from "@/app/components/CodeSlider/CodeSlider";
+import {FadeIn} from "@/app/components/Animation";
 
 export default function Tabs() {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -21,7 +22,6 @@ export default function Tabs() {
                 <li>Automated tools: TypeGen & SquidGen</li>
             </ul>,
             active: true,
-            component: <CodeSlider slides={_enterpriseMock}/>,
         },
         {
             icon: "/chart.png",
@@ -72,7 +72,9 @@ export default function Tabs() {
 
             <div className="tabs__items">
                 <div className="tabs__item">
-                    {tabs[currentIndex].body}
+                    <FadeIn duration={1200}>
+                        {tabs[currentIndex].body}
+                    </FadeIn>
                 </div>
             </div>
         </div>

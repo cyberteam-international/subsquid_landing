@@ -33,34 +33,34 @@ export default function Blog(props: BlogProps) {
                     </div>
                 </FadeInUp>
 
-                <div className="blog__main">
-                    <Swiper
-                        modules={[Pagination]}
-                        spaceBetween={32}
-                        pagination={{
-                            clickable: true,
-                            el: paginationRef.current as HTMLElement
-                        }}
-                        breakpoints={{
-                            768: {
-                                slidesPerView: 2,
-                                slidesPerGroup: 2,
-                                spaceBetween: 32
-                            },
-                            1024: {
-                                slidesPerView: 3,
-                                slidesPerGroup: 3,
-                                spaceBetween: 24
-                            },
-                            1280: {
-                                slidesPerView: 3,
-                                slidesPerGroup: 3,
-                                spaceBetween: 32
-                            }
-                        }}
-                        autoHeight={true} onSwiper={setSwiper} watchSlidesProgress={true}>
-                        {slides.map((slide, index) => <SwiperSlide className="blog-item" key={index}>
-                            <FadeInUp delay={100}>
+                <FadeInUp delay={100}>
+                    <div className="blog__main">
+                        <Swiper
+                            modules={[Pagination]}
+                            spaceBetween={32}
+                            pagination={{
+                                clickable: true,
+                                el: paginationRef.current as HTMLElement
+                            }}
+                            breakpoints={{
+                                768: {
+                                    slidesPerView: 2,
+                                    slidesPerGroup: 2,
+                                    spaceBetween: 32
+                                },
+                                1024: {
+                                    slidesPerView: 3,
+                                    slidesPerGroup: 3,
+                                    spaceBetween: 24
+                                },
+                                1280: {
+                                    slidesPerView: 3,
+                                    slidesPerGroup: 3,
+                                    spaceBetween: 32
+                                }
+                            }}
+                            autoHeight={true} onSwiper={setSwiper} watchSlidesProgress={true}>
+                            {slides.map((slide, index) => <SwiperSlide className="blog-item" key={index}>
                                 <div className="blog-item__wrapper">
                                     <a className="blog-item__link" href={slide.link} target="_blank"></a>
                                     <div className="blog-item__header">
@@ -71,10 +71,10 @@ export default function Blog(props: BlogProps) {
                                         <p>{slide.caption}</p>
                                     </div>
                                 </div>
-                            </FadeInUp>
-                        </SwiperSlide>)}
-                    </Swiper>
-                </div>
+                            </SwiperSlide>)}
+                        </Swiper>
+                    </div>
+                </FadeInUp>
             </div>
 
             <div className="blog__pagination" ref={paginationRef}></div>

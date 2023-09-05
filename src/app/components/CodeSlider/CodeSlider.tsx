@@ -1,10 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {CSSProperties, useRef, useState} from 'react';
 import "./CodeSlider.scss"
 import {Swiper, SwiperSlide, SwiperClass} from 'swiper/react';
 import {Pagination, Navigation, Autoplay} from "swiper/modules";
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import {vs} from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import classNames from "classnames";
+import CodeStyle from "@/app/components/CodeStyle";
 
 const ChevronSvg = <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
     <path d="M3.5 6.25L7 9.75L10.5 6.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
@@ -28,7 +28,7 @@ export interface ISlide {
     caption?: string
 }
 
-export function CodeSlider(props: { slides: ISlide[] }) {
+export function CodeSlider(props: { slides: ISlide[], style?: CSSProperties }) {
     const [slides, setSlides] = useState(props.slides || []);
     const [isExpanded, setIsExpanded] = useState(false);
     const [swiper, setSwiper] = useState<SwiperClass | null>(null);
@@ -49,7 +49,7 @@ export function CodeSlider(props: { slides: ISlide[] }) {
     }
 
     return <>
-        <div className={classNames({
+        <div style={props.style} className={classNames({
             'code-slider': true
         })}>
             <div className={classNames({
@@ -89,8 +89,8 @@ export function CodeSlider(props: { slides: ISlide[] }) {
                          })}>
 
                         {isExpanded
-                            ? <SyntaxHighlighter language="typescript" style={vs} children={slide.code}/>
-                            : <SyntaxHighlighter language="typescript" style={vs} children={slide.codeCollapse}/>
+                            ? <SyntaxHighlighter language="typescript" style={CodeStyle} children={slide.code}/>
+                            : <SyntaxHighlighter language="typescript" style={CodeStyle} children={slide.codeCollapse}/>
                         }
                     </div>
 
@@ -112,9 +112,11 @@ export function CodeSlider(props: { slides: ISlide[] }) {
                         'code-slider__stage': true,
                         'code-slider__stage--visible': isExpanded
                     })}>
-                        <a ref={linkRef} href={slides[0].link} target="_blank" className={'code-slider__link'}>Full squid</a>
+                        <a ref={linkRef} href={slides[0].link} target="_blank" className={'code-slider__link'}>Full
+                            squid</a>
                         <span className="code-slider__line"></span>
-                        <a href="https://docs.subsquid.io/evm-indexing/configuration/showcase/" target="_blank" className={'code-slider__link'}>Showcase</a>
+                        <a href="https://docs.subsquid.io/evm-indexing/configuration/showcase/" target="_blank"
+                           className={'code-slider__link'}>Showcase</a>
                         <span className="code-slider__line"></span>
                         <button onClick={handleClickExpand}
                                 className={classNames({

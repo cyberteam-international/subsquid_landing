@@ -52,6 +52,10 @@
     height: 44px;
     gap: 8px;
 
+    &.swiper-pagination-lock {
+      visibility: hidden;
+    }
+
     .swiper-pagination-bullet {
       width: 8px;
       height: 8px;
