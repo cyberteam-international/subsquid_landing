@@ -242,7 +242,18 @@ p, .paragraph {
   padding-bottom: 64px;
 
   @include media-up(lg) {
-    padding-top: 180px;
+    margin-top: 212px;
+    padding-bottom: 140px;
+  }
+
+  @include media-up(xl) {
+    margin-top: 130px;
+    padding-bottom: 160px;
+  }
+
+  @include media-up(xxl) {
+    margin-top: 250px;
+    padding-bottom: 250px;
   }
 
   h1, h2, h3, h4, h5, h6 {
