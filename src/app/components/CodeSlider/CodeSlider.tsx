@@ -89,8 +89,8 @@ export function CodeSlider(props: { slides: ISlide[], style?: CSSProperties }) {
                          })}>
 
                         {isExpanded
-                            ? <SyntaxHighlighter language="typescript" style={CodeStyle} children={slide.code}/>
-                            : <SyntaxHighlighter language="typescript" style={CodeStyle} children={slide.codeCollapse}/>
+                            ? <SyntaxHighlighter language="typescript" style={CodeStyle as any} children={slide.code}/>
+                            : <SyntaxHighlighter language="typescript" style={CodeStyle as any} children={slide.codeCollapse}/>
                         }
                     </div>
 
