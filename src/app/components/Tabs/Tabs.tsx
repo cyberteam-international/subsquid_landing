@@ -35,7 +35,7 @@ export default function Tabs() {
                     <li>Team collaboration tools</li>
                 </ul>
                 <div className="tabs__item-wrap">
-                    <a href="@/pages/components/Tabs/Tabs#">View pricing</a>
+                    <a href="https://docs.subsquid.io/deploy-squid/pricing/" target="_blank">View pricing</a>
                 </div>
             </>,
             active: false,

@@ -72,6 +72,8 @@
   &__logo {
     width: 32px;
     height: 32px;
+    position: relative;
+    z-index: 999;
   }
 }
 
@@ -243,7 +245,7 @@
       top: 52px;
       visibility: visible;
       opacity: 1;
-      z-index: 9999;
+      z-index: 99;
       user-select: inherit;
       pointer-events: inherit;
     }
