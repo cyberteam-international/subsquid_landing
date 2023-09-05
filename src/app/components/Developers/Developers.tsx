@@ -4,6 +4,7 @@ import "./Developers.scss";
 import {Swiper, SwiperClass, SwiperSlide} from "swiper/react";
 import {Grid, Pagination, Thumbs} from "swiper/modules";
 import {useEffect, useRef, useState} from "react";
+import {FadeInUp} from "@/app/components/Animation";
 
 export interface DevepolerCardProps {
     idx: number,
@@ -57,13 +58,13 @@ export default function Developers(props: DevepolerCardsProps) {
 
     useEffect(() => {
         window.addEventListener('resize', (e) => {
-            if(mainSwiper !== null)
+            if (mainSwiper !== null)
                 (mainSwiper as SwiperClass).update()
         }, {once: true})
     }, [mainSwiper])
 
     const items = props.items.map((item, index) => {
-        return <SwiperSlide style={{height: maxHeight}} key={index}><DeveloperCard {...item} children={item.children}/></SwiperSlide>
+        return <SwiperSlide style={{height: maxHeight}} key={index}><FadeInUp><DeveloperCard {...item} children={item.children}/></FadeInUp></SwiperSlide>
     })
 
     function setHeightSlides(s: SwiperClass) {
@@ -104,13 +105,18 @@ export default function Developers(props: DevepolerCardsProps) {
             </div>
 
             <div className="developers__wrapper">
-                <div className="developers__header">
-                    <h2>Builders love it!</h2>
-                    <p className='subtitle'>Thousands of developers are building the future of Web3 with Subsquid.</p>
-                </div>
+                <FadeInUp>
+                    <div className="developers__header">
+                        <h2>Builders love it!</h2>
+                        <p className='subtitle'>Thousands of developers are building the future of Web3 with
+                            Subsquid.</p>
+                    </div>
+                </FadeInUp>
 
                 <div className="developers__main">
-                    <Swiper className="developers__swiper" onSwiper={setMainSwiper} onInit={setHeightSlides} onUpdate={setHeightSlides} thumbs={swiper ? {swiper: swiper} : {}} modules={[Grid, Pagination, Thumbs]} breakpoints={{
+                    <Swiper className="developers__swiper" onSwiper={setMainSwiper} onInit={setHeightSlides}
+                            onUpdate={setHeightSlides} thumbs={swiper ? {swiper: swiper} : {}}
+                            modules={[Grid, Pagination, Thumbs]} breakpoints={{
                         0: {
                             pagination: false,
                             autoHeight: true,
@@ -155,33 +161,38 @@ export default function Developers(props: DevepolerCardsProps) {
                         el: paginationRef.current as HTMLElement
                     }}>{items}</Swiper>
 
-                    <div className="Thumbs">
-                        <div ref={paginationRef} className="Thumbs__pagination"></div>
-                        <Swiper className="Thumbs__slider" watchSlidesProgress onSwiper={setSwiper} slidesPerView={1}
-                                width={400 / 8} modules={[Thumbs]} slidesPerGroup={1} loopedSlides={2}
-                                loopPreventsSliding={true} loop={true}>{itemsBullets}</Swiper>
+                    <FadeInUp delay={200}>
+                        <div className="Thumbs">
+                            <div ref={paginationRef} className="Thumbs__pagination"></div>
+                            <Swiper className="Thumbs__slider" watchSlidesProgress onSwiper={setSwiper}
+                                    slidesPerView={1}
+                                    width={400 / 8} modules={[Thumbs]} slidesPerGroup={1} loopedSlides={2}
+                                    loopPreventsSliding={true} loop={true}>{itemsBullets}</Swiper>
 
-                        <div className="Thumbs__arrows">
-                            <button ref={prevRef} className="Thumbs__arrow" onClick={() => {
-                                if (mainSwiper)
-                                    mainSwiper.slidePrev()
-                            }}>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                          strokeLinejoin="round"/>
-                                </svg>
-                            </button>
-                            <button ref={nextRef} className="Thumbs__arrow" onClick={() => {
-                                if (mainSwiper)
-                                    mainSwiper.slideNext()
-                            }}>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                          strokeLinejoin="round"/>
-                                </svg>
-                            </button>
+                            <div className="Thumbs__arrows">
+                                <button ref={prevRef} className="Thumbs__arrow" onClick={() => {
+                                    if (mainSwiper)
+                                        mainSwiper.slidePrev()
+                                }}>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2"
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button ref={nextRef} className="Thumbs__arrow" onClick={() => {
+                                    if (mainSwiper)
+                                        mainSwiper.slideNext()
+                                }}>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2"
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </FadeInUp>
                 </div>
             </div>
         </div>

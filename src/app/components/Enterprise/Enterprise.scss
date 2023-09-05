@@ -8,6 +8,10 @@
   max-width: 468px;
   margin: 0 auto;
 
+  &>div{
+    overflow: hidden;
+  }
+
   @include media-up(md) {
     gap: 32px;
   }
