@@ -16,8 +16,8 @@ export default function Banner() {
 
             <FadeInUpFast delay={500}>
                 <div className={'banner__buttons'}>
-                    <a href="https://docs.subsquid.io/" className="btn btn--outline" target="_blank">Docs</a>
-                    <a href="#!" className="btn btn--primary">Testnet</a>
+                    <a href="@/pages/components/Banner/Banner" className="btn btn--outline" target="_blank">Docs</a>
+                    <a href="@/pages/components/Banner/Banner#!" className="btn btn--primary">Testnet</a>
                 </div>
             </FadeInUpFast>
         </div>

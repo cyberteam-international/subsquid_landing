@@ -52,7 +52,7 @@ export default function Enterprise() {
                                             <source media="(max-width: 1280px)" srcSet="/enterprise-1024.png"/>
                                             <source media="(max-width: 1024px)" srcSet="/enterprise-768.png"/>
                                             <source media="(max-width: 768px)" srcSet="/enterprise-350.png"/>
-                                            <img src="/enterprise-1280.png" alt="" className="enterprise__image"/>
+                                            <img src="/public/enterprise-1280.png" alt="" className="enterprise__image"/>
                                         </picture>}
                                 </div>
                             </CSSTransition>
@@ -61,7 +61,7 @@ export default function Enterprise() {
 
                     <SlideInLeft className="enterprise__buttons" delay={400}>
                         <div className="enterprise__buttons-wrap">
-                            <a href="https://docs.subsquid.io/" className="btn btn--outline" target="_blank">Docs</a>
+                            <a href="@/pages/components/Enterprise/Enterprise" className="btn btn--outline" target="_blank">Docs</a>
                             <a href="https://www.subsquid.io/launch-app" className="btn btn--primary" target="_blank">Lauch
                                 app</a>
                         </div>

@@ -40,8 +40,8 @@ export default function Header() {
                                 'nav--active': isOpen
                             })}>
                                 <div className="nav__section">
-                                    <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
-                                    <a href="#" className="nav__item">Blog</a>
+                                    <a href="@/pages/components/Header/Header" className="nav__item" target="_blank">Docs</a>
+                                    <a href="@/pages/components/Header/Header#" className="nav__item">Blog</a>
                                 </div>
                                 <div className="nav__section">
                                     <GitHub username="subsquid" reponame="squid-sdk"/>

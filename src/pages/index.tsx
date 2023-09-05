@@ -5,12 +5,13 @@ import Developers from "@/app/components/Developers/Developers";
 import Blog from "@/app/components/Blog/Blog";
 import Footer from "@/app/components/Footer/Footer";
 import Header from "@/app/components/Header/Header";
-import _developersMock from "./_mock/developers.mock"
-import _blogMock from "./_mock/blog.mock"
+import _developersMock from "../app/_mock/developers.mock"
+import _blogMock from "../app/_mock/blog.mock"
+import RootLayout from "@/app/components/layout";
 
 export default function Home() {
     return (
-        <>
+        <RootLayout>
             <Header/>
             <main className="main">
                 <div className={'container'}>
@@ -24,6 +25,6 @@ export default function Home() {
                 </div>
             </main>
             <Footer/>
-        </>
+        </RootLayout>
     )
 }
