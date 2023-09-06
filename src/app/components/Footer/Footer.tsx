@@ -23,6 +23,7 @@ export interface INav {
 
 export default function Footer() {
     const emailRef = useRef(null)
+    const [status, setStatus] = useState(0)
 
     const [navs, setNavs] = useState<INav[]>([
         {
@@ -51,7 +52,7 @@ export default function Footer() {
     ])
 
     function openDropdown(el: HTMLElement, nav: INav, index: number) {
-        if(window.innerWidth < 1024) {
+        if (window.innerWidth < 1024) {
             const itemsEl: HTMLElement | null = el.querySelector('.footer-item__items')
 
             if (itemsEl) {
@@ -74,12 +75,22 @@ export default function Footer() {
         e.preventDefault()
 
         fetch('https://subsquid.us6.list-manage.com/subscribe/post?u=55f0a830c64142a7be6f40485&amp;id=c323dcc22d&amp;f_id=00b82fe3f0', {
-            body:  new FormData(e.currentTarget),
+            body: new FormData(e.currentTarget),
             method: 'POST'
         }).then(response => {
             console.log(response)
+            setStatus(1)
+
+            setTimeout(() => {
+                setStatus(0)
+            }, 3000)
         }).catch((e) => {
             console.warn(e)
+            setStatus(2)
+
+            setTimeout(() => {
+                setStatus(0)
+            }, 3000)
         })
 
         console.log(new FormData(e.currentTarget))
@@ -100,6 +111,11 @@ export default function Footer() {
                     <form className="footer-form" onSubmit={sumbitHandle}>
                         <input type="email" name="EMAIL" required placeholder="Your email" ref={emailRef}/>
                         <button type="submit">Submit</button>
+                        {status !== 0 ? <span className={classNames({
+                            'footer-form__alert': true,
+                            'footer-form__alert--error': status === 2,
+                            'footer-form__alert--success': status === 1,
+                        })}>{status === 2 ? 'Oops... Something went wrong, try again later' : 'You have successfully subscribed'}</span> : undefined}
                     </form>
 
                     <div className="footer__data">
@@ -112,7 +128,8 @@ export default function Footer() {
                                     <div className="footer-item__title"><span>{nav.title}</span> {Chevron}</div>
                                     <div className="footer-item__items">
                                         {nav.items.map((item, _index) => <a key={_index}
-                                                                            href={item.link} target="_blank">{item.text}</a>) || []}
+                                                                            href={item.link}
+                                                                            target="_blank">{item.text}</a>) || []}
                                     </div>
                                 </div>
                             ))}
