@@ -83,14 +83,14 @@ export default function Footer() {
 
             setTimeout(() => {
                 setStatus(0)
-            }, 3000)
+            }, 5000)
         }).catch((e) => {
             console.error(e)
             setStatus(2)
 
             setTimeout(() => {
                 setStatus(0)
-            }, 3000)
+            }, 5000)
         })
 
         console.log(new FormData(e.currentTarget))
