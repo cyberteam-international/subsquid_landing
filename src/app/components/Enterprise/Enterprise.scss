@@ -58,6 +58,8 @@
 
   &__tabs {
     grid-area: tabs;
+    padding: 20px;
+    margin: -20px;
   }
 
   &__component {
@@ -65,11 +67,17 @@
     display: block;
     overflow: hidden;
     width: 100%;
+    padding: 6px;
+    margin: -6px;
+    border-radius: 8px;
   }
+
   &__image {
     object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04), 0 0 3px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 8px;
+    outline: 6px solid #EFF1F4;
+    background: #F6F8FB;
+    max-height: 304px;
   }
 
   &__buttons {

@@ -109,7 +109,7 @@ export default function Developers(props: DevepolerCardsProps) {
                     <div className="developers__header">
                         <h2>Builders love it!</h2>
                         <p className='subtitle'>Thousands of developers are building the future of Web3 with
-                            Subsquid.</p>
+                            Subsquid</p>
                     </div>
                 </FadeInUp>
 

@@ -1,7 +1,7 @@
 "use client"
 
 import './Footer.scss'
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import classNames from "classnames";
 
 const Chevron = <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -22,6 +22,8 @@ export interface INav {
 }
 
 export default function Footer() {
+    const emailRef = useRef(null)
+
     const [navs, setNavs] = useState<INav[]>([
         {
             title: "Resources",
@@ -68,6 +70,21 @@ export default function Footer() {
         }
     }
 
+    async function sumbitHandle(e) {
+        e.preventDefault()
+
+        fetch('https://subsquid.us6.list-manage.com/subscribe/post?u=55f0a830c64142a7be6f40485&amp;id=c323dcc22d&amp;f_id=00b82fe3f0', {
+            body:  new FormData(e.currentTarget),
+            method: 'POST'
+        }).then(response => {
+            console.log(response)
+        }).catch((e) => {
+            console.warn(e)
+        })
+
+        console.log(new FormData(e.currentTarget))
+    }
+
     return (
         <footer className={'footer'}>
             <div className="footer__blops-1">
@@ -79,10 +96,10 @@ export default function Footer() {
 
             <div className="container">
                 <div className="footer__wrapper">
-                    <h2>Subscribe</h2>
-                    <form action="@/pages/components/Footer/Footer" className="footer-form">
-                        <input type="email" required placeholder="Your email"/>
-                        <button type="submit">Subscribe</button>
+                    <h2>Get updates</h2>
+                    <form className="footer-form" onSubmit={sumbitHandle}>
+                        <input type="email" name="EMAIL" required placeholder="Your email" ref={emailRef}/>
+                        <button type="submit">Submit</button>
                     </form>
 
                     <div className="footer__data">

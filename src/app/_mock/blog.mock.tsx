@@ -17,7 +17,7 @@ export default [
     {
         title: "Subsquid Network Roadmap",
         text: "We are glad to announce the official release of the Subsquid Network roadmap. You can find the regularly updated document in the Subsquid Network Wiki, which also includes important information for network participants.",
-        caption: "08.08.2023 I Public release",
+        caption: "08.08.2023 I Announcement",
         link: "https://blog.subsquid.io/subsquid-network-roadmap-official-public-release-964a26cccb5a",
     }
 ] as ISlideBlog[]
