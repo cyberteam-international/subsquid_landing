@@ -79,14 +79,13 @@ export default function Footer() {
             body: new FormData(e.currentTarget),
             method: 'POST'
         }).then(response => {
-            console.log(response)
             setStatus(1)
 
             setTimeout(() => {
                 setStatus(0)
             }, 3000)
         }).catch((e) => {
-            console.warn(e)
+            console.error(e)
             setStatus(2)
 
             setTimeout(() => {
