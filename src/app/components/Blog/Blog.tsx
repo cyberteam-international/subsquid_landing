@@ -42,11 +42,15 @@ export default function Blog(props: BlogProps) {
                 <FadeInUp delay={100}>
                     <div className="blog__main">
                         <Swiper
+                            onInit={(s) => {
+                                s.update()
+                            }}
                             modules={[Pagination]}
                             spaceBetween={32}
                             pagination={{
                                 clickable: true,
-                                el: paginationRef.current as HTMLElement
+                                el: paginationRef.current as HTMLElement,
+                                dynamicBullets: true
                             }}
                             breakpoints={{
                                 768: {
