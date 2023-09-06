@@ -71,7 +71,7 @@ export default function Footer() {
         }
     }
 
-    async function sumbitHandle(e) {
+    async function sumbitHandle(e: any) {
         e.preventDefault()
 
         fetch('https://subsquid.us6.list-manage.com/subscribe/post?u=55f0a830c64142a7be6f40485&amp;id=c323dcc22d&amp;f_id=00b82fe3f0', {
