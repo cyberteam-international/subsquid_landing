@@ -30,8 +30,8 @@ export default function Footer() {
             title: "Resources",
             items: [
                 {link: "https://docs.subsquid.io/", text: "Documentation"},
-                {link: "#!", text: "Blog"},
-                {link: "#!", text: "Press kit"},
+                {link: "https://blog.subsquid.io/", text: "Blog"},
+                // {link: "#!", text: "Press kit"},
             ]
         },
         {

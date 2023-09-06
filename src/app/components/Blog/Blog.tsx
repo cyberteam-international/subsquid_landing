@@ -1,7 +1,7 @@
 "use client"
 
 import './Blog.scss'
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Swiper, SwiperSlide, SwiperClass} from 'swiper/react';
 import {Pagination} from "swiper/modules";
 import {FadeInUp} from "@/app/components/Animation";
@@ -13,12 +13,18 @@ export interface BlogProps {
 export interface ISlideBlog {
     title: string
     text: string
+    shortText: string
     caption: string
     link: string,
 }
 
 export default function Blog(props: BlogProps) {
     const [slides, setSlides] = useState<ISlideBlog[]>(props.slides || [])
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+
+    useEffect(() => {
+        if(window.innerWidth < 768) setIsMobile(true)
+    }, [])
 
     const [swiper, setSwiper] = useState<SwiperClass | null>(null);
     const paginationRef = useRef<HTMLDivElement | null>(null)
@@ -67,7 +73,7 @@ export default function Blog(props: BlogProps) {
                                         <h3>{slide.title}</h3>
                                     </div>
                                     <div className="blog-item__main">
-                                        <p className="blog-item__text">{slide.text}</p>
+                                        <p className="blog-item__text">{isMobile ? slide.shortText : slide.text}</p>
                                         <p>{slide.caption}</p>
                                     </div>
                                 </div>
