@@ -43,14 +43,18 @@ export default function Blog(props: BlogProps) {
                     <div className="blog__main">
                         <Swiper
                             onInit={(s) => {
-                                s.update()
+                                setTimeout(() => { //Fix dots margin
+                                    s.update()
+                                    s.updateSize()
+                                    s.updateProgress()
+                                    s.updateAutoHeight()
+                                }, 300)
                             }}
                             modules={[Pagination]}
                             spaceBetween={32}
                             pagination={{
                                 clickable: true,
-                                el: paginationRef.current as HTMLElement,
-                                dynamicBullets: true
+                                el: paginationRef.current as HTMLElement
                             }}
                             breakpoints={{
                                 768: {
@@ -69,7 +73,7 @@ export default function Blog(props: BlogProps) {
                                     spaceBetween: 32
                                 }
                             }}
-                            autoHeight={true} onSwiper={setSwiper} watchSlidesProgress={true}>
+                            onSwiper={setSwiper} watchSlidesProgress={true}>
                             {slides.map((slide, index) => <SwiperSlide className="blog-item" key={index}>
                                 <div className="blog-item__wrapper">
                                     <a className="blog-item__link" href={slide.link} target="_blank"></a>
