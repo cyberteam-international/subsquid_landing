@@ -75,6 +75,7 @@ export default function Footer() {
         e.preventDefault()
 
         fetch('https://subsquid.us6.list-manage.com/subscribe/post?u=55f0a830c64142a7be6f40485&amp;id=c323dcc22d&amp;f_id=00b82fe3f0', {
+            mode: 'no-cors',
             body: new FormData(e.currentTarget),
             method: 'POST'
         }).then(response => {
