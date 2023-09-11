@@ -1,5 +1,5 @@
 import React from "react";
-import {DevepolerCardProps} from "@/app/components/Developers/Developers";
+import {DevepolerCardProps} from "@/components/Developers/Developers";
 
 export default [
     {

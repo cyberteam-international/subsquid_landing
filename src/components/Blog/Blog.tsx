@@ -4,7 +4,7 @@ import './Blog.scss'
 import React, {useEffect, useRef, useState} from "react";
 import {Swiper, SwiperSlide, SwiperClass} from 'swiper/react';
 import {Pagination} from "swiper/modules";
-import {FadeInUp} from "@/app/components/Animation";
+import {FadeInUp} from "@/components/Animation";
 
 export interface BlogProps {
     slides: ISlideBlog[]
