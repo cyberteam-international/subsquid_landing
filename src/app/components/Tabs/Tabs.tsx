@@ -5,8 +5,8 @@ import Image from "next/image";
 import classNames from "classnames";
 import {useState} from "react";
 import _enterpriseMock from "@/app/_mock/enterprise.mock";
-import {CodeSlider} from "@/components/CodeSlider/CodeSlider";
-import {FadeIn} from "@/components/Animation";
+import {CodeSlider} from "@/app/components/CodeSlider/CodeSlider";
+import {FadeIn} from "@/app/components/Animation";
 
 export default function Tabs() {
     const [currentIndex, setCurrentIndex] = useState(0)

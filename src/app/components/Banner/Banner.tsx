@@ -1,7 +1,7 @@
 "use client"
 
 import './Banner.scss'
-import {FadeInUp, FadeInUpFast} from "@/components/Animation";
+import {FadeInUp, FadeInUpFast} from "@/app/components/Animation";
 
 export default function Banner() {
     return (
