@@ -1,0 +1,22 @@
+@import "@/assets/scss/main";
+
+.calculator{
+    display: block;
+    &__header{
+        h1{
+            @include media-up(lg) {
+                letter-spacing: -2.4px;
+            }
+            @include media-up(xxl) {
+                letter-spacing: -3px;
+            }
+        }
+        &__subtitle{
+            color: var(--color-secondary);
+            margin-top: 16px;
+            // @include media-up(xl) {
+            //     margin-top: 20px;
+            // }
+        }
+    }
+}
