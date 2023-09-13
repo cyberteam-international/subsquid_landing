@@ -1,5 +1,7 @@
-import { Dispatch, Fragment, SetStateAction, useState, useEffect } from 'react'
+import { Fragment, useState, useEffect, useContext } from 'react'
 import ReactSlider from 'react-slider'
+
+import { SelectValuesContext, ActiveTabContext, HelperContext } from '@/app/calculator/layout'
 
 import {
     AllowedFieldsNames,
@@ -8,27 +10,19 @@ import {
     IApiCostsRange,
     IApiCostsState,
 } from '@/_mock/apiCosts.mock'
-import { ISelectValues } from './ApiCosts'
 
 import style from './ApiCosts.module.scss'
 
 type Props = {
     field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio,
-    state: [
-        selectValues: ISelectValues,
-        setSelectValues: Dispatch<SetStateAction<ISelectValues>>,
-    ],
-    tabState: string,
-    helperState: [
-        helperOpen: boolean,
-        setHelperOpen: ()=>void,
-    ],
+    listIndex: number
 }
 
-export default function ApiCostsField({ field, state, tabState, helperState }: Props) {
+export default function ApiCostsField({ field, listIndex }: Props) {
 
-    const [selectValues, setSelectValues] = state
-    const [helperOpen, setHelperOpen] = helperState
+    const [selectValues, setSelectValues] = useContext(SelectValuesContext)
+    const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
+    const [helper, setHelper] = useContext(HelperContext)
 
 
     const [activeitem, setActiveItem] = useState<number>()
@@ -139,7 +133,7 @@ export default function ApiCostsField({ field, state, tabState, helperState }: P
     useEffect(() => {
         setActiveItem(-1)
         setIsActive(true)
-    }, [tabState])
+    }, [activeTab])
 
     return (
         <div className={
@@ -161,8 +155,8 @@ export default function ApiCostsField({ field, state, tabState, helperState }: P
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
                 {field.helper && (
                     <div className={style["api-costs__list-item__header__helper"]}>
-                        <span onClick={()=> setHelperOpen()}>?</span>
-                        {helperOpen && (
+                        <span onClick={()=> setHelper(helper === listIndex? -1 : listIndex)}>?</span>
+                        {helper && (
                             <div className={style["api-costs__list-item__header__helper__block"]}>
                                 <p>{field.helper.description}</p>
                             </div>

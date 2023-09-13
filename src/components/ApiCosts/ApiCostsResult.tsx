@@ -1,33 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { TotalSumContext, SelectValuesContext } from "@/app/calculator/layout";
 
 import { AllowedFieldsNames, IApiCostsState } from "@/_mock/apiCosts.mock";
-import { ISelectValues } from "./ApiCosts";
 
 import style from './ApiCosts.module.scss'
 
-type Props = {
-    selectValues: ISelectValues
-};
+export default function ApiCostsResult() {
 
-export default function ApiCostsResult({ selectValues }: Props) {
+    const [totalSum, _setTotalSum] = useContext(TotalSumContext);
+    const [selectValues, _setSelectValues] = useContext(SelectValuesContext);
 
     const [isOpen, setIsOpen] = useState(false);
-
-
-    const setTotalPrice = () => {
-        let total = 0
-        for (let [_key, value] of Object.entries(selectValues) as unknown as [key: AllowedFieldsNames, value: IApiCostsState][]) {
-            if (value) {
-                if (Number(value?.select)) {
-                    total += Number(value?.select) * value.price
-                }
-                else {
-                    total += value.price
-                }
-            }
-        }
-        return total
-    }
 
     const setDetailInfo = () => {
         const entries = Object.entries(selectValues) as [key: AllowedFieldsNames, value: IApiCostsState][]
@@ -56,7 +40,7 @@ export default function ApiCostsResult({ selectValues }: Props) {
                     : style["api-costs__result"]
             }
         >
-            <p className={style["api-costs__result__total"]}>${setTotalPrice()}/mo</p>
+            <p className={style["api-costs__result__total"]}>${totalSum}/mo</p>
             <button
                 className={style["api-costs__result__more"]}
                 onClick={() => setIsOpen(!isOpen)}
