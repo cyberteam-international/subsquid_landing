@@ -4,7 +4,7 @@ import './Tabs.scss'
 import Image from "next/image";
 import classNames from "classnames";
 import {useState} from "react";
-import _enterpriseMock from "@/app/_mock/enterprise.mock";
+import _enterpriseMock from "@/_mock/enterprise.mock";
 import {CodeSlider} from "@/components/CodeSlider/CodeSlider";
 import {FadeIn} from "@/components/Animation";
 

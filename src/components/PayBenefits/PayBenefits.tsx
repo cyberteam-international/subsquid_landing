@@ -6,7 +6,8 @@ import style from './PayBenefits.module.scss'
 
 export interface IPayBenefit{
     title: string,
-    subtitle: string,
+    subtitle?: string,
+    description: string,
     items: string[]
     buttonText: string
 }
@@ -15,9 +16,7 @@ export default function PayBenefits() {
 
     const setItems = () => {
         return _payBenefitsMock.map((item, index)=> {
-            return (
-                <PayBenefitsItem key={index} {...item} />
-            )
+            return <PayBenefitsItem key={index} {...item} />
         })
     }
 

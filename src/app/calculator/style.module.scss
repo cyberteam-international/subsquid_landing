@@ -4,6 +4,9 @@
     display: block;
     &__header{
         h1{
+            @include media-up(sm) {
+                text-align: center;
+            }
             @include media-up(lg) {
                 letter-spacing: -2.4px;
             }
@@ -14,9 +17,9 @@
         &__subtitle{
             color: var(--color-secondary);
             margin-top: 16px;
-            // @include media-up(xl) {
-            //     margin-top: 20px;
-            // }
+            @include media-up(sm) {
+                text-align: center;
+            }
         }
     }
 }

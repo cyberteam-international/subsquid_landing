@@ -3,8 +3,9 @@ import { IPayBenefit } from "@/components/PayBenefits/PayBenefits";
 
 export default [
     {
-        title: 'Free',
-        subtitle: 'For development purposes.',
+        title: 'Playground',
+        subtitle: 'Free',
+        description: 'For development purposes.',
         items: [
             'One collocated squid (API + processor + Postgres)',
             '10GB of database storage',
@@ -14,8 +15,9 @@ export default [
         buttonText: 'Get started',
     },
     {
-        title: 'Pay-as-you-go',
-        subtitle: 'Flexible billing: pay only for what you really use.',
+        title: 'Premium',
+        subtitle: 'Pay-as-you-go',
+        description: 'Flexible billing: pay only for what you really use.',
         items: [
             'Unlimited number of pay-as-you-go dedicated squids',
             'Unlimited number of pay-as-you-go collocated squids',
@@ -26,7 +28,7 @@ export default [
     },
     {
         title: 'Enterprise',
-        subtitle: 'Flexible billing: pay only for what you really use.',
+        description: 'Flexible billing: pay only for what you really use.',
         items: [
             'Everything in Premium',
             'Individual SLAs and discounts',

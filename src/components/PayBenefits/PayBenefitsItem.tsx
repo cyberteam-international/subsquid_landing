@@ -2,7 +2,7 @@ import { IPayBenefit } from "./PayBenefits";
 
 import style from './PayBenefits.module.scss'
 
-export default function PayBenefitsItem({ title, subtitle, items, buttonText }: IPayBenefit) {
+export default function PayBenefitsItem({ title, subtitle, items, buttonText, description }: IPayBenefit) {
 
     const setItems = () => {
         return items.map((item, index) => {
@@ -28,7 +28,10 @@ export default function PayBenefitsItem({ title, subtitle, items, buttonText }: 
     return (
         <div className={style["pay-benefits__item"]}>
             <h3 className="title">{title}</h3>
-            <p className={style["pay-benefits__item__subtitle"]}>{subtitle}</p>
+            {subtitle && (
+                <p className={style["pay-benefits__item__subtitle"]}>{subtitle}</p>
+            )}
+            <p className={style["pay-benefits__item__description"]}>{description}</p>
             <ul className={style["pay-benefits__item__list"]}>
                 {setItems()}
             </ul>
