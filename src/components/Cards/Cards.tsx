@@ -1,7 +1,7 @@
 "use client"
 
 import './Cards.scss'
-import {FadeInUp} from "@/app/components/Animation";
+import {FadeInUp} from "@/components/Animation";
 
 export default function Cards() {
     const items = [

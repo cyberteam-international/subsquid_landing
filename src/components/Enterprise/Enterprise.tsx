@@ -1,11 +1,11 @@
 "use client"
 
 import './Enterprise.scss'
-import Tabs from "@/app/components/Tabs/Tabs";
-import {CodeSlider} from "@/app/components/CodeSlider/CodeSlider";
+import Tabs from "@/components/Tabs/Tabs";
+import {CodeSlider} from "@/components/CodeSlider/CodeSlider";
 import _enterpriseMock from "../../_mock/enterprise.mock";
 import {useEffect, useRef, useState} from "react";
-import {FadeIn, FadeInUp, SlideInLeft, SlideInRight} from "@/app/components/Animation";
+import {FadeIn, FadeInUp, SlideInLeft, SlideInRight} from "@/components/Animation";
 import {SwitchTransition, CSSTransition} from "react-transition-group";
 
 export default function Enterprise() {
