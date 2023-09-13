@@ -3,7 +3,7 @@
 import './Header.scss'
 import React, {useState} from "react";
 import classNames from "classnames";
-import GitHub from "@/components/GitHub/GitHub";
+import GitHub from "@/app/components/GitHub/GitHub";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false)

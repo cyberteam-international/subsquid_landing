@@ -1,5 +1,5 @@
 import React from "react";
-import {ISlideBlog} from "@/components/Blog/Blog";
+import {ISlideBlog} from "@/app/components/Blog/Blog";
 
 export default [
     {

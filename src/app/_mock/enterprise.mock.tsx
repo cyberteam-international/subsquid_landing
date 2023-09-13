@@ -1,5 +1,5 @@
 import React from "react";
-import {ISlide} from "@/components/CodeSlider/CodeSlider";
+import {ISlide} from "@/app/components/CodeSlider/CodeSlider";
 
 export default [
   {

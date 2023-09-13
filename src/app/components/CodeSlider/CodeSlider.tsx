@@ -4,7 +4,7 @@ import {Swiper, SwiperSlide, SwiperClass} from 'swiper/react';
 import {Pagination, Navigation, Autoplay} from "swiper/modules";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import classNames from "classnames";
-import CodeStyle from "@/components/CodeStyle";
+import CodeStyle from "@/app/components/CodeStyle";
 
 const ChevronSvg = <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
     <path d="M3.5 6.25L7 9.75L10.5 6.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"

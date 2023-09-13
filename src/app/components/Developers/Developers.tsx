@@ -4,7 +4,7 @@ import "./Developers.scss";
 import {Swiper, SwiperClass, SwiperSlide} from "swiper/react";
 import {Grid, Pagination, Thumbs} from "swiper/modules";
 import {useEffect, useRef, useState} from "react";
-import {FadeInUp} from "@/components/Animation";
+import {FadeInUp} from "@/app/components/Animation";
 
 export interface DevepolerCardProps {
     idx: number,
