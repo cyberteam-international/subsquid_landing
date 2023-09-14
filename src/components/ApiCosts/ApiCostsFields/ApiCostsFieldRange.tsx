@@ -3,7 +3,7 @@ import ReactSlider from 'react-slider'
 
 import { SelectValuesContext } from '@/app/calculator/layout';
 
-import { AllowedFieldsNames, IApiCostsRange, IApiCostsState } from "@/_mock/apiCosts.mock";
+import { IApiCostsRange, IApiCostsState } from "@/_mock/apiCosts.mock";
 
 import style from '../ApiCosts.module.scss'
 

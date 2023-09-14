@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from 'react'
 import { SelectValuesContext, ActiveTabContext, HelperContext, WindowWidthContext } from '@/app/calculator/layout'
 
 import {
-    AllowedFieldsNames,
     IApiCostsRadio,
     IApiCostsRadioInput,
     IApiCostsRadioReplicas,
@@ -85,7 +84,7 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                         type: selectValues[listIndex].price.type,
                         value: 0
                     },
-                    select: ''
+                    select: null
                 },
                 -1
             )

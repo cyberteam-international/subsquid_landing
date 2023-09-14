@@ -1,4 +1,4 @@
-import { AllowedFieldsNames, IApiCostsRadio, IApiCostsState, IApiCostsValueObject } from "@/_mock/apiCosts.mock";
+import { IApiCostsRadio, IApiCostsState, IApiCostsValueObject } from "@/_mock/apiCosts.mock";
 
 type Props = {
     updateState: ( item: IApiCostsState, index: number)=>void,

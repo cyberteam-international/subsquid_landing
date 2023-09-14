@@ -1,4 +1,4 @@
-import { AllowedFieldsNames, IApiCostsRadioInput, IApiCostsState } from "@/_mock/apiCosts.mock";
+import { IApiCostsRadioInput, IApiCostsState } from "@/_mock/apiCosts.mock";
 
 import style from '../ApiCosts.module.scss'
 

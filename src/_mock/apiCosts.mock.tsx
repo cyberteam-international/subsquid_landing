@@ -1,7 +1,6 @@
 export interface IApiCostsState {
-    // fieldName: AllowedFieldsNames;
     fieldName: string;
-    select: string;
+    select: string | null;
     price: IApiCostsPrice;
 }
 
@@ -17,7 +16,7 @@ export interface IApiCostsValueObject {
 
 interface IApiCostSample {
     title: string,
-    name: AllowedFieldsNames,
+    name: string,
     canActive: boolean,
     helper: {
         title: string,
@@ -59,20 +58,6 @@ export interface IApiCostsTabs {
 
 export type IApiCosts = {
     [key: string]: IApiCostsTabs;
-}
-
-//fieldName
-export enum AllowedFieldsNames {
-    'squidProfile' = 'squidProfile',
-    'networks' = 'networks',
-    'dataIndex' = 'dataIndex',
-    'apiRequests' = 'apiRequests',
-    'queryComplexity' = 'queryComplexity',
-    'processorProfile' = 'processorProfile',
-    'apiService' = 'apiService',
-    'dataBase' = 'dataBase',
-    'rpsRequests' = 'rpsRequests',
-    'databaseSize' = 'databaseSize'
 }
 
 export default {

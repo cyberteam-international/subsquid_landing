@@ -1,8 +1,6 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useContext } from "react";
 
 import { TotalSumContext, SelectValuesContext, ScrollElementContext } from "@/app/calculator/layout";
-
-import { AllowedFieldsNames, IApiCostsState } from "@/_mock/apiCosts.mock";
 
 import style from './ApiCosts.module.scss'
 
@@ -16,18 +14,17 @@ export default function ApiCostsResult() {
     const [isOpen, setIsOpen] = useState(false);
 
     const setDetailInfo = () => {
-        const entries = Object.entries(selectValues) as [key: AllowedFieldsNames, value: IApiCostsState][]
-        return entries.map((item, index) => {
-            if (item[1]) {
+        return selectValues.map((item, index) => {
+            if (item.select) {
                 return (
                     <div className={style["api-costs__result__list-item"]} key={index}>
                         <div className={style["api-costs__result__list-item__wrapper"]}>
-                            <p>{item[1]?.fieldName}</p>
+                            <p>{item.fieldName}</p>
                             <p>
-                                ${Number(item[1]?.select) ? Number(item[1].select) * item[1].price.value : item[1]?.price.value}
+                                ${Number(item.select) ? Number(item.select) * item.price.value : item?.price.value}
                             </p>
                         </div>
-                        <p className={style["api-costs__result__list-item__select"]}>{item[1]?.select}</p>
+                        <p className={style["api-costs__result__list-item__select"]}>{item.select}</p>
                     </div>
                 )
             }

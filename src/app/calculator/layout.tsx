@@ -14,7 +14,7 @@ import { useWindowWidth } from '@react-hook/window-size';
 
 import EstimateCost from '@/components/EstimateCost/EstimateCost';
 
-import _apiCostsMock, { AllowedFieldsNames, IApiCostsState } from '@/_mock/apiCosts.mock'
+import _apiCostsMock, { IApiCostsState } from '@/_mock/apiCosts.mock'
 
 type Props = {
     children: ReactNode
@@ -53,11 +53,7 @@ const setInitial = (tab: string): IApiCostsState[] => {
                 break;
 
             default:
-                return {
-                    fieldName: '',
-                    select: '',
-                    price: { type: "hr", value: 0 }
-                }
+                throw new Error('Uncorrected field type. Update setInitial() or add field current type.')
         }
     })
 }
@@ -86,16 +82,16 @@ export default function layout({ children }: Props) {
 
     const setTotalPrice = () => {
         let total = 0
-        for (let [_key, value] of Object.entries(selectValues) as unknown as [key: AllowedFieldsNames, value: IApiCostsState][]) {
-            if (value) {
-                // if (Number(value?.select)) {
-                //     total += Number(value?.select) * value.price
-                // }
-                // else {
-                //     total += value.price
-                // }
-            }
-        }
+        // for (let [_key, value] of Object.entries(selectValues) as unknown as [key: st, value: IApiCostsState][]) {
+        //     if (value) {
+        //         // if (Number(value?.select)) {
+        //         //     total += Number(value?.select) * value.price
+        //         // }
+        //         // else {
+        //         //     total += value.price
+        //         // }
+        //     }
+        // }
         return setTotalSum(total)
     }
 
