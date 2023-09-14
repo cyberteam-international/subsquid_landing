@@ -1,12 +1,17 @@
 export interface IApiCostsState {
     fieldName: AllowedFieldsNames;
     select: string;
-    price: number;
+    price: IApiCostsPrice;
+}
+
+interface IApiCostsPrice {
+    type: 'hr',
+    value: number
 }
 
 export interface IApiCostsValueObject {
     value: string;
-    price: number;
+    price: IApiCostsPrice;
 }
 
 interface IApiCostSample {
@@ -24,7 +29,7 @@ interface IApiCostSample {
 export interface IApiCostsRange extends IApiCostSample {
     type: 'range',
     label: string,
-    price: number,
+    price: IApiCostsPrice,
     prefix: string,
     range: number[]
 }
@@ -32,7 +37,12 @@ export interface IApiCostsRange extends IApiCostSample {
 export interface IApiCostsRadioInput extends IApiCostSample {
     type: 'radio-input',
     values: number[],
-    price: number,
+    price: IApiCostsPrice,
+}
+
+export interface IApiCostsRadioReplicas extends IApiCostSample {
+    type: 'radio-replicas',
+    values: IApiCostsValueObject[],
 }
 
 export interface IApiCostsRadio extends IApiCostSample {
@@ -42,7 +52,7 @@ export interface IApiCostsRadio extends IApiCostSample {
 
 export interface IApiCostsTabs {
     title: string;
-    fields: IApiCostsRange[] | IApiCostsRadioInput[] | IApiCostsRadio[];
+    fields: IApiCostsRange[] | IApiCostsRadioInput[] | IApiCostsRadio[] | IApiCostsRadioReplicas[];
 }
 
 export type IApiCosts = {
@@ -76,11 +86,17 @@ export default {
                 values: [
                     {
                         value: 'Collocated',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: 'Dedicated',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0
+                        },
                     },
                 ],
             },
@@ -89,7 +105,10 @@ export default {
                 name: 'networks',
                 type: 'radio-input',
                 canActive: false,
-                price: 1,
+                price: {
+                    type: "hr",
+                    value: 0 
+                },
                 values: [1, 2, 3, 4],
                 helper: {
                     title: '',
@@ -104,19 +123,31 @@ export default {
                 values: [
                     {
                         value: 'Low',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: 'Mid',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: 'High',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: 'Not sure',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                 ],
                 helper: {
@@ -132,19 +163,31 @@ export default {
                 values: [
                     {
                         value: '0-5',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: '5-100',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: '100-1000',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: '100-1000',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                 ],
                 helper: {
@@ -160,19 +203,31 @@ export default {
                 values: [
                     {
                         value: 'Simple',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: 'Mid',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: 'Complex',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: 'Not sure',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                 ],
                 helper: {
@@ -194,11 +249,17 @@ export default {
                 values: [
                     {
                         value: 'Collocated',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                     {
                         value: 'Dedicated',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                 ],
             },
@@ -210,7 +271,10 @@ export default {
                 values: [
                     {
                         value: 'Default',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     }
                 ],
                 helper: {
@@ -221,12 +285,15 @@ export default {
             {
                 title: 'API service',
                 name: 'apiService',
-                type: 'radio',
+                type: 'radio-replicas',
                 canActive: true,
                 values: [
                     {
                         value: 'Default',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                 ],
                 helper: {
@@ -243,7 +310,10 @@ export default {
                 values: [
                     {
                         value: 'Default',
-                        price: 1,
+                        price: {
+                            type: "hr",
+                            value: 0 
+                        },
                     },
                 ],
                 helper: {
@@ -258,7 +328,10 @@ export default {
                 canActive: true,
                 label: 'RPC requests, M',
                 prefix: 'M',
-                price: 1,
+                price: {
+                    type: "hr",
+                    value: 0 
+                },
                 range: [0.5, 10],
                 helper: {
                     title: '',
@@ -272,7 +345,10 @@ export default {
                 canActive: true,
                 label: 'Storage, Gb',
                 prefix: 'GB',
-                price: 1,
+                price: {
+                    type: "hr",
+                    value: 0 
+                },
                 range: [5, 30],
                 helper: {
                     title: '',

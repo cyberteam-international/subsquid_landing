@@ -24,7 +24,7 @@ export default function ApiCostsResult() {
                         <div className={style["api-costs__result__list-item__wrapper"]}>
                             <p>{item[1]?.fieldName}</p>
                             <p>
-                                ${Number(item[1]?.select) ? Number(item[1].select) * item[1].price : item[1]?.price}
+                                ${Number(item[1]?.select) ? Number(item[1].select) * item[1].price.value : item[1]?.price.value}
                             </p>
                         </div>
                         <p className={style["api-costs__result__list-item__select"]}>{item[1]?.select}</p>

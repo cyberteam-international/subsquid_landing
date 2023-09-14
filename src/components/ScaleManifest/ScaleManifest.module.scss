@@ -4,11 +4,13 @@
     border-radius: 20px;
     background: var(--color-grey-light-2);
     padding: 16px;
+    margin-top: 32px;
     @include media-up(sm) {
         padding: 24px;
     }
     @include media-up(lg) {
         padding: 40px;
+        margin-top: 40px;
     }
     @include media-up(xl) {
         padding: 60px;

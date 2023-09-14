@@ -1,3 +1,4 @@
+'use client'
 
 import style from './ScaleManifest.module.scss'
 
@@ -8,7 +9,7 @@ export default function ScaleManifest({ }: Props) {
     const codeText = `scale:       addons:          postgres:                storage: 100G                profile: medium       processor:          profile: medium       api:          profile: large          replicas: 3       dedicated: true`
 
     return (
-        <div className={style["manifest"]}>
+        <section className={style["manifest"]}>
             <div className={style["manifest__wrapper"]}>
                 <p>“Scale” for your manifest</p>
                 <span>?</span>
@@ -35,6 +36,6 @@ export default function ScaleManifest({ }: Props) {
                     </svg>
                 </button>
             </div>
-        </div>
+        </section>
     )
 }

@@ -72,18 +72,17 @@ export default function layout({ children }: Props) {
         let total = 0
         for (let [_key, value] of Object.entries(selectValues) as unknown as [key: AllowedFieldsNames, value: IApiCostsState][]) {
             if (value) {
-                if (Number(value?.select)) {
-                    total += Number(value?.select) * value.price
-                }
-                else {
-                    total += value.price
-                }
+                // if (Number(value?.select)) {
+                //     total += Number(value?.select) * value.price
+                // }
+                // else {
+                //     total += value.price
+                // }
             }
         }
         return setTotalSum(total)
     }
 
-    useEffect(() => { console.log(windowWidth) }, [windowWidth])
     useEffect(() => {
         setSelectValues({ ...initialValue })
         setHelper(-1)

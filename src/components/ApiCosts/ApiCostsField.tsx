@@ -1,5 +1,4 @@
 import { Fragment, useState, useEffect, useContext } from 'react'
-import ReactSlider from 'react-slider'
 
 import { SelectValuesContext, ActiveTabContext, HelperContext, WindowWidthContext } from '@/app/calculator/layout'
 
@@ -7,14 +6,18 @@ import {
     AllowedFieldsNames,
     IApiCostsRadio,
     IApiCostsRadioInput,
+    IApiCostsRadioReplicas,
     IApiCostsRange,
     IApiCostsState,
 } from '@/_mock/apiCosts.mock'
 
 import style from './ApiCosts.module.scss'
+import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
+import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
+import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
 
 type Props = {
-    field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio,
+    field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio | IApiCostsRadioReplicas,
     listIndex: number
 }
 
@@ -52,73 +55,21 @@ export default function ApiCostsField({ field, listIndex }: Props) {
             case 'radio':
                 return field.values.map((item, index) => {
                     return (
-                        <button
-                            key={index}
-                            className={setClassName(index)}
-                            onClick={() => updateState(field.name, { fieldName: field.name, select: item.value, price: item.price }, index)}
-                        >
-                            {item.value}
-                        </button>
-
-                    );
+                        <ApiCostsFieldRadio
+                            field={field}
+                            item={item} 
+                            index={index}
+                            setClassName={setClassName}
+                            updateState={updateState}
+                        />
+                    )
                 });
                 break;
             case 'radio-input':
-                const returnArray = field.values.map((item, index) => {
-                    return (
-                        <button
-                            key={index}
-                            className={setClassName(index)}
-                            onClick={() => updateState(field.name, { price: field.price, fieldName: field.name, select: item.toString() }, index)}
-                        >
-                            {item}
-                        </button>
-
-                    );
-                });
-                return (
-                    <Fragment>
-                        <div className={style["api-costs__list-item__fields-wrapper"]}>
-                            {returnArray}
-                        </div>
-                        <input
-                            type="number"
-                            min={1}
-                            placeholder='Your value'
-                            onChange={(e) => updateState(field.name, { price: field.price, fieldName: field.name, select: e.target.value }, -1)}
-                        />
-                    </Fragment>
-                )
+                return <ApiCostsFieldRadioInput field={field} updateState={updateState} setClassName={setClassName}/>
                 break;
             case 'range':
-                return (
-                    <Fragment>
-                        <p className={style["api-costs__list-item__fields-item__label"]}>
-                            {field.label}
-                        </p>
-                        <p className={style["api-costs__list-item__fields-item__prefix"]}>
-                            {selectValues[field.name]?.select} {field.prefix}
-                        </p>
-                        <ReactSlider
-                            className={style["api-costs__list-item__fields-item-range"]}
-                            marks
-                            disabled={!isActive}
-                            markClassName={style["api-costs__list-item__fields-item-range-mark"]}
-                            min={field.range[0]}
-                            max={field.range[1]}
-                            thumbClassName={style["api-costs__list-item__fields-item-range-thumb"]}
-                            trackClassName={style["api-costs__list-item__fields-item-range-track"]}
-                            renderThumb={(props, state) =>
-                                <div {...props}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <circle cx="8" cy="8" r="6" fill="white" stroke="#68BEFC" strokeWidth="4" />
-                                    </svg>
-                                </div>
-                            }
-                            onChange={(value) => updateState(field.name, { price: field.price, fieldName: field.name, select: value.toString() }, -1)}
-                        />
-                    </Fragment>
-                )
+                return <ApiCostsFieldRange field={field} isActive={isActive} updateState={updateState} />
                 break;
             default:
                 break;

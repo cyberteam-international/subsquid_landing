@@ -1,5 +1,6 @@
 import PayBenefits from '@/components/PayBenefits/PayBenefits';
 import ApiCosts from '@/components/ApiCosts/ApiCosts';
+import ScaleManifest from '@/components/ScaleManifest/ScaleManifest';
 
 import style from './style.module.scss'
 
@@ -16,6 +17,7 @@ export default function CalculatorPage() {
 				</section>
 				<PayBenefits />
 				<ApiCosts />
+				<ScaleManifest />
 			</div>
 		</main>
 	)
