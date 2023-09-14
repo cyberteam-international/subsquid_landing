@@ -2,6 +2,7 @@ export interface IApiCostsState {
     fieldName: string;
     select: string | null;
     price: IApiCostsPrice;
+    replicas?: number | null;
 }
 
 interface IApiCostsPrice {
@@ -24,6 +25,7 @@ interface IApiCostSample {
     },
     warning?: string,
     subtitle?: string,
+    replicas?: boolean
 }
 
 export interface IApiCostsRange extends IApiCostSample {
@@ -74,14 +76,14 @@ export default {
                     {
                         value: 'Collocated',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: 'Dedicated',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0
                         },
                     },
@@ -93,7 +95,7 @@ export default {
                 type: 'radio-input',
                 canActive: false,
                 price: {
-                    type: "hr",
+                    type: "h",
                     value: 0 
                 },
                 values: [1, 2, 3, 4],
@@ -111,28 +113,28 @@ export default {
                     {
                         value: 'Low',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: 'Mid',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: 'High',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: 'Not sure',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
@@ -151,28 +153,28 @@ export default {
                     {
                         value: '0-5',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: '5-100',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: '100-1000',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
-                        value: '100-1000',
+                        value: '1000+',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
@@ -191,28 +193,28 @@ export default {
                     {
                         value: 'Simple',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: 'Mid',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: 'Complex',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: 'Not sure',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
@@ -237,14 +239,14 @@ export default {
                     {
                         value: 'Collocated',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
                     {
                         value: 'Dedicated',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0 
                         },
                     },
@@ -259,21 +261,21 @@ export default {
                     {
                         value: 'Small',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.04 
                         },
                     },
                     {
                         value: 'Medium',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.08 
                         },
                     },
                     {
                         value: 'Large',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.15 
                         },
                     }
@@ -286,27 +288,28 @@ export default {
             {
                 title: 'API service',
                 name: 'apiService',
-                type: 'radio-replicas',
+                type: 'radio',
                 canActive: true,
+                replicas: true,
                 values: [
                     {
                         value: 'Small',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.04 
                         },
                     },
                     {
                         value: 'Medium',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.08 
                         },
                     },
                     {
                         value: 'Large',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.15 
                         },
                     }
@@ -326,21 +329,21 @@ export default {
                     {
                         value: 'Small',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.08 
                         },
                     },
                     {
                         value: 'Medium',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.16 
                         },
                     },
                     {
                         value: 'Large',
                         price: {
-                            type: "hr",
+                            type: "h",
                             value: 0.33 
                         },
                     }
@@ -358,11 +361,11 @@ export default {
                 label: 'RPC requests, M',
                 prefix: 'M',
                 price: {
-                    type: "hr",
+                    type: "h",
                     value: 0 
                 },
-                range: [0.5, 10],
-                step: 0.5,
+                range: [2, 500],
+                step: 1,
                 helper: {
                     title: '',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
@@ -376,11 +379,11 @@ export default {
                 label: 'Storage, Gb',
                 prefix: 'GB',
                 price: {
-                    type: "hr",
+                    type: "h",
                     value: 0.0007 
                 },
-                range: [5, 30],
-                step: 1,
+                range: [10, 5000],
+                step: 10,
                 helper: {
                     title: '',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'

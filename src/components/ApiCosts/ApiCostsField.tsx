@@ -31,11 +31,10 @@ export default function ApiCostsField({ field, listIndex }: Props) {
     const [activeitem, setActiveItem] = useState<number>()
     const [isActive, setIsActive] = useState<boolean>(true)
 
-    const updateState = (item: IApiCostsState, index: number) => {
+    const updateState = (item: IApiCostsState) => {
         const updateObj = [...selectValues]
         updateObj[listIndex] = item
         setSelectValues([...updateObj])
-        setActiveItem(isActive ? index : -1)
     }
 
     const setClassName = (key: number,) => {
@@ -55,9 +54,9 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                 return field.values.map((item, index) => {
                     return (
                         <ApiCostsFieldRadio
+                            key={index}
                             field={field}
                             item={item}
-                            index={index}
                             className={setClassName(index)}
                             updateState={updateState}
                         />
@@ -84,9 +83,9 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                         type: selectValues[listIndex].price.type,
                         value: 0
                     },
-                    select: null
+                    select: null,
+                    replicas: 1,
                 },
-                -1
             )
         }
     }, [isActive])
@@ -147,6 +146,28 @@ export default function ApiCostsField({ field, listIndex }: Props) {
             >
                 {setFields()}
             </div>
+            {field.replicas && (
+                <div className={style["api-costs__list-item__replicas"]}>
+                    <p className={style["api-costs__list-item__replicas__title"]}>Replicas</p>
+                    <input
+                        type="number"
+                        min={1}
+                        value={
+                            typeof selectValues[listIndex].replicas === 'number'? 
+                            Number(selectValues[listIndex].replicas)
+                            : ''
+                        }
+                        onChange={(e) => {
+                            const updateObj = [...selectValues];
+                            updateObj[listIndex] = { 
+                                ...updateObj[listIndex], 
+                                replicas: e.target.value !== '' ? Number(e.target.value) : null 
+                            };
+                            setSelectValues([...updateObj]);
+                        }}
+                    />
+                </div>
+            )}
             {field.warning && (
                 <div className={style["api-costs__list-item__warning"]}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
