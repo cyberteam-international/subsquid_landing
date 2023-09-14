@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect, useContext } from 'react'
 import ReactSlider from 'react-slider'
 
-import { SelectValuesContext, ActiveTabContext, HelperContext } from '@/app/calculator/layout'
+import { SelectValuesContext, ActiveTabContext, HelperContext, WindowWidthContext } from '@/app/calculator/layout'
 
 import {
     AllowedFieldsNames,
@@ -23,6 +23,7 @@ export default function ApiCostsField({ field, listIndex }: Props) {
     const [selectValues, setSelectValues] = useContext(SelectValuesContext)
     const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
     const [helper, setHelper] = useContext(HelperContext)
+    const windowWidth = useContext(WindowWidthContext)
 
 
     const [activeitem, setActiveItem] = useState<number>()
@@ -30,20 +31,20 @@ export default function ApiCostsField({ field, listIndex }: Props) {
 
     const updateState = (fieldName: AllowedFieldsNames, item: IApiCostsState | null, index: number) => {
         const updateObj = { ...selectValues }
-        updateObj[fieldName] = isActive? item : null;
+        updateObj[fieldName] = isActive ? item : null;
         setSelectValues({ ...updateObj })
-        setActiveItem(isActive? index : -1)
+        setActiveItem(isActive ? index : -1)
     }
 
     const setClassName = (key: number,) => {
         if (field.type === 'radio-input') {
-            return selectValues[field.name]?.select === field.values[key].toString()  ?
+            return selectValues[field.name]?.select === field.values[key].toString() ?
                 `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_active"]} ${style["api-costs__list-item__fields-item_number"]}`
-                :`${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_number"]}`
+                : `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_number"]}`
         }
         else return activeitem === key ?
             `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_active"]}`
-            :`${style["api-costs__list-item__fields-item"]}`
+            : `${style["api-costs__list-item__fields-item"]}`
     }
 
     const setFields = () => {
@@ -54,7 +55,7 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                         <button
                             key={index}
                             className={setClassName(index)}
-                            onClick={() => updateState(field.name, {fieldName: field.name, select: item.value, price: item.price}, index)}
+                            onClick={() => updateState(field.name, { fieldName: field.name, select: item.value, price: item.price }, index)}
                         >
                             {item.value}
                         </button>
@@ -155,8 +156,8 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
                 {field.helper && (
                     <div className={style["api-costs__list-item__header__helper"]}>
-                        <span onClick={()=> setHelper(helper === listIndex? -1 : listIndex)}>?</span>
-                        {helper && (
+                        <span onClick={() => setHelper(helper === listIndex ? -1 : listIndex)}>?</span>
+                        {(helper === listIndex && windowWidth > 768) && (
                             <div className={style["api-costs__list-item__header__helper__block"]}>
                                 <p>{field.helper.description}</p>
                             </div>

@@ -1,6 +1,18 @@
 'use client'
 
-import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from 'react';
+import { 
+    Dispatch, 
+    ReactNode, 
+    SetStateAction, 
+    createContext, 
+    useEffect, 
+    useState, 
+    useRef, 
+    MutableRefObject,
+} from 'react';
+import { useWindowWidth } from '@react-hook/window-size';
+
+import EstimateCost from '@/components/EstimateCost/EstimateCost';
 
 import _apiCostsMock, { AllowedFieldsNames, IApiCostsState } from '@/_mock/apiCosts.mock'
 
@@ -39,17 +51,22 @@ type SelectValues = [ISelectValues, Dispatch<SetStateAction<ISelectValues>>]
 type SumState = [number | null, Dispatch<SetStateAction<number | null>>]
 type HelperState = [number, Dispatch<SetStateAction<number>>]
 
-export const SelectValuesContext = createContext<SelectValues>([initialValue, () => { }]);
 export const ActiveTabContext = createContext<ActiveTab>(['', () => { }]);
+export const SelectValuesContext = createContext<SelectValues>([initialValue, () => { }]);
 export const TotalSumContext = createContext<SumState>([null, () => { }]);
 export const HelperContext = createContext<HelperState>([-1, () => { }]);
+export const WindowWidthContext = createContext<number>(0);
+export const ScrollElementContext = createContext<MutableRefObject<HTMLDivElement | null> | null>(null);
 
 export default function layout({ children }: Props) {
 
     const [selectValues, setSelectValues] = useState(initialValue) as SelectValues;
     const [activeTab, setActiveTab] = useState(Object.keys(_apiCostsMock)[0]) as ActiveTab;
     const [totalSum, setTotalSum] = useState(null) as SumState;
-    const [helper, setHelper] = useState(-1) as HelperState
+    const [helper, setHelper] = useState(-1) as HelperState;
+
+    const windowWidth = useWindowWidth()
+    const totalBlockRef = useRef<HTMLDivElement | null>(null)
 
     const setTotalPrice = () => {
         let total = 0
@@ -66,8 +83,12 @@ export default function layout({ children }: Props) {
         return setTotalSum(total)
     }
 
-    useEffect(()=>{setSelectValues({...initialValue})}, [activeTab])
-    useEffect(()=>{
+    useEffect(() => { console.log(windowWidth) }, [windowWidth])
+    useEffect(() => {
+        setSelectValues({ ...initialValue })
+        setHelper(-1)
+    }, [activeTab])
+    useEffect(() => {
         console.log(selectValues)
         setTotalPrice()
     }, [selectValues])
@@ -77,7 +98,14 @@ export default function layout({ children }: Props) {
             <ActiveTabContext.Provider value={[activeTab, setActiveTab]}>
                 <TotalSumContext.Provider value={[totalSum, setTotalSum]}>
                     <HelperContext.Provider value={[helper, setHelper]}>
-                        {children}
+                        <WindowWidthContext.Provider value={windowWidth}>
+                            <ScrollElementContext.Provider value={totalBlockRef}>
+                            {children}
+                            {(windowWidth < 768 && totalSum) && (
+                                <EstimateCost/>
+                            )}
+                            </ScrollElementContext.Provider>
+                        </WindowWidthContext.Provider>
                     </HelperContext.Provider>
                 </TotalSumContext.Provider>
             </ActiveTabContext.Provider>

@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 
-import { TotalSumContext, SelectValuesContext } from "@/app/calculator/layout";
+import { TotalSumContext, SelectValuesContext, ScrollElementContext } from "@/app/calculator/layout";
 
 import { AllowedFieldsNames, IApiCostsState } from "@/_mock/apiCosts.mock";
 
@@ -10,6 +10,8 @@ export default function ApiCostsResult() {
 
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
     const [selectValues, _setSelectValues] = useContext(SelectValuesContext);
+
+    const totalBlockRef = useContext(ScrollElementContext)
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -39,6 +41,7 @@ export default function ApiCostsResult() {
                     `${style["api-costs__result"]} ${style["api-costs__result_active"]}`
                     : style["api-costs__result"]
             }
+            ref={totalBlockRef}
         >
             <p className={style["api-costs__result__total"]}>${totalSum}/mo</p>
             <button

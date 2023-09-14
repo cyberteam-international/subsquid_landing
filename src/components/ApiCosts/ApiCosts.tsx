@@ -4,6 +4,7 @@ import { useContext } from 'react';
 
 import ApiCostsField from './ApiCostsField';
 import ApiCostsResult from './ApiCostsResult';
+import ScaleManifest from '../ScaleManifest/ScaleManifest';
 
 import { ActiveTabContext } from '@/app/calculator/layout';
 
@@ -52,6 +53,7 @@ export default function ApiCosts() {
                 {setTabFields()}
                 <ApiCostsResult />
             </div>
+            <ScaleManifest />
         </section>
     )
 }
