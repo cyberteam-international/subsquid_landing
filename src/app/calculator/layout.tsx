@@ -1,13 +1,13 @@
 'use client'
 
-import { 
-    Dispatch, 
-    ReactNode, 
-    SetStateAction, 
-    createContext, 
-    useEffect, 
-    useState, 
-    useRef, 
+import {
+    Dispatch,
+    ReactNode,
+    SetStateAction,
+    createContext,
+    useEffect,
+    useState,
+    useRef,
     MutableRefObject,
 } from 'react';
 import { useWindowWidth } from '@react-hook/window-size';
@@ -33,17 +33,59 @@ export interface ISelectValues {
     networks: null | IApiCostsState;
 }
 
+const setInitial = (fieldName: AllowedFieldsNames) => {
+    // const x = Object.entries(_apiCostsMock).map((item, index) => {
+    const x = Object.entries(_apiCostsMock).map((item, index) => {
+        const currentField = item[1].fields.filter((item) => item.name === fieldName)[0]
+        if (!currentField) return;
+        switch (currentField.type) {
+            case 'radio':
+                return {
+                    fieldName: fieldName,
+                    select: currentField.values[0].value,
+                    price: { type: currentField.values[0].price.type, value: currentField.values[0].price.value }
+                }
+                break;
+            case 'radio-input':
+                return {
+                    fieldName: fieldName,
+                    select: currentField.values[0].toString(),
+                    price: { type: currentField.price.type, value: currentField.price.value }
+                }
+                break;
+            case 'range':
+                return {
+                    fieldName: fieldName,
+                    select: currentField.range[0].toString(),
+                    price: { type: currentField.price.type, value: currentField.price.value }
+                }
+                break;
+            case 'radio-replicas':
+                return {
+                    fieldName: fieldName,
+                    select: currentField.values[0].value,
+                    price: { type: currentField.values[0].price.type, value: currentField.values[0].price.value }
+                }
+                break;
+
+            default:
+                return null
+        }
+    })
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxx', x)
+}
+
 const initialValue: ISelectValues = {
-    squidProfile: null,
-    processorProfile: null,
-    apiService: null,
-    dataBase: null,
-    rpsRequests: null,
-    databaseSize: null,
-    dataIndex: null,
-    apiRequests: null,
-    queryComplexity: null,
-    networks: null,
+    processorProfile: setInitial(AllowedFieldsNames.processorProfile),
+    squidProfile: setInitial(AllowedFieldsNames.squidProfile),
+    apiService: setInitial(AllowedFieldsNames.apiService),
+    dataBase: setInitial(AllowedFieldsNames.dataBase),
+    rpsRequests: setInitial(AllowedFieldsNames.rpsRequests),
+    databaseSize: setInitial(AllowedFieldsNames.databaseSize),
+    dataIndex: setInitial(AllowedFieldsNames.dataIndex),
+    apiRequests: setInitial(AllowedFieldsNames.apiRequests),
+    queryComplexity: setInitial(AllowedFieldsNames.queryComplexity),
+    networks: setInitial(AllowedFieldsNames.networks),
 }
 
 type ActiveTab = [string, Dispatch<SetStateAction<string>>]
@@ -99,10 +141,10 @@ export default function layout({ children }: Props) {
                     <HelperContext.Provider value={[helper, setHelper]}>
                         <WindowWidthContext.Provider value={windowWidth}>
                             <ScrollElementContext.Provider value={totalBlockRef}>
-                            {children}
-                            {(windowWidth < 768 && totalSum) && (
-                                <EstimateCost/>
-                            )}
+                                {children}
+                                {(windowWidth < 768 && totalSum) && (
+                                    <EstimateCost />
+                                )}
                             </ScrollElementContext.Provider>
                         </WindowWidthContext.Provider>
                     </HelperContext.Provider>

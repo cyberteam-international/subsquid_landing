@@ -5,7 +5,7 @@ export interface IApiCostsState {
 }
 
 interface IApiCostsPrice {
-    type: 'hr',
+    type: string,
     value: number
 }
 
@@ -31,7 +31,8 @@ export interface IApiCostsRange extends IApiCostSample {
     label: string,
     price: IApiCostsPrice,
     prefix: string,
-    range: number[]
+    range: number[],
+    step: number
 }
 
 export interface IApiCostsRadioInput extends IApiCostSample {
@@ -270,10 +271,24 @@ export default {
                 canActive: true,
                 values: [
                     {
-                        value: 'Default',
+                        value: 'Small',
                         price: {
                             type: "hr",
-                            value: 0 
+                            value: 0.04 
+                        },
+                    },
+                    {
+                        value: 'Medium',
+                        price: {
+                            type: "hr",
+                            value: 0.08 
+                        },
+                    },
+                    {
+                        value: 'Large',
+                        price: {
+                            type: "hr",
+                            value: 0.15 
                         },
                     }
                 ],
@@ -289,12 +304,26 @@ export default {
                 canActive: true,
                 values: [
                     {
-                        value: 'Default',
+                        value: 'Small',
                         price: {
                             type: "hr",
-                            value: 0 
+                            value: 0.04 
                         },
                     },
+                    {
+                        value: 'Medium',
+                        price: {
+                            type: "hr",
+                            value: 0.08 
+                        },
+                    },
+                    {
+                        value: 'Large',
+                        price: {
+                            type: "hr",
+                            value: 0.15 
+                        },
+                    }
                 ],
                 helper: {
                     title: '',
@@ -309,12 +338,26 @@ export default {
                 canActive: true,
                 values: [
                     {
-                        value: 'Default',
+                        value: 'Small',
                         price: {
                             type: "hr",
-                            value: 0 
+                            value: 0.08 
                         },
                     },
+                    {
+                        value: 'Medium',
+                        price: {
+                            type: "hr",
+                            value: 0.16 
+                        },
+                    },
+                    {
+                        value: 'Large',
+                        price: {
+                            type: "hr",
+                            value: 0.33 
+                        },
+                    }
                 ],
                 helper: {
                     title: '',
@@ -322,7 +365,7 @@ export default {
                 }
             },
             {
-                title: 'RPC requests',
+                title: 'RPC requests (2M included)',
                 name: 'rpsRequests',
                 type: 'range',
                 canActive: true,
@@ -333,6 +376,7 @@ export default {
                     value: 0 
                 },
                 range: [0.5, 10],
+                step: 0.5,
                 helper: {
                     title: '',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
@@ -347,9 +391,10 @@ export default {
                 prefix: 'GB',
                 price: {
                     type: "hr",
-                    value: 0 
+                    value: 0.0007 
                 },
                 range: [5, 30],
+                step: 1,
                 helper: {
                     title: '',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'

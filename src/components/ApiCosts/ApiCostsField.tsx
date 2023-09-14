@@ -82,6 +82,17 @@ export default function ApiCostsField({ field, listIndex }: Props) {
         }
     }, [isActive])
 
+    // useEffect(()=>{
+    //     if (selectValues[field.name]?.fieldName === field.name) {
+    //         if (selectValues[field.name]?.select && selectValues[field.name]?.price) {
+    //             const curentIndex = () => {
+    //                 field.
+    //             }
+    //             setActiveItem()
+    //         }
+    //     }
+    // }, [selectValues])
+
     useEffect(() => {
         setActiveItem(-1)
         setIsActive(true)

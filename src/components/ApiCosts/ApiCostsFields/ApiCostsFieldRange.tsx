@@ -32,6 +32,8 @@ export default function ApiCostsFieldRange({ field, updateState, isActive }: Pro
                 markClassName={style["api-costs__list-item__fields-item-range-mark"]}
                 min={field.range[0]}
                 max={field.range[1]}
+                step={field.step}
+                // value={selectValues[field.name]?.select}
                 thumbClassName={style["api-costs__list-item__fields-item-range-thumb"]}
                 trackClassName={style["api-costs__list-item__fields-item-range-track"]}
                 renderThumb={(props, _state) =>
