@@ -1,5 +1,6 @@
 export interface IApiCostsState {
-    fieldName: AllowedFieldsNames;
+    // fieldName: AllowedFieldsNames;
+    fieldName: string;
     select: string;
     price: IApiCostsPrice;
 }

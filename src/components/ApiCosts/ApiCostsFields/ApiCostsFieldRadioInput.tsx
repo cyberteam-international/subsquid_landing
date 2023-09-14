@@ -3,7 +3,7 @@ import { AllowedFieldsNames, IApiCostsRadioInput, IApiCostsState } from "@/_mock
 import style from '../ApiCosts.module.scss'
 
 type Props = {
-    updateState: (fieldName: AllowedFieldsNames, item: IApiCostsState | null, index: number)=>void,
+    updateState: ( item: IApiCostsState, index: number)=>void,
     field: IApiCostsRadioInput,
     setClassName: (key: number) => string
 };
@@ -27,7 +27,7 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
             <button
                 key={index}
                 className={setClassName(index)}
-                onClick={() => updateState(field.name, updateObj(item), index)}
+                onClick={() => updateState(updateObj(item), index)}
             >
                 {item}
             </button>
@@ -44,7 +44,7 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
                 type="number"
                 min={1}
                 placeholder='Your value'
-                onChange={(e) => updateState(field.name, updateObj(e.target.value), -1)}
+                onChange={(e) => updateState(updateObj(e.target.value), -1)}
             />
         </>
     )

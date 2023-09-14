@@ -9,11 +9,12 @@ import style from '../ApiCosts.module.scss'
 
 type Props = {
     field: IApiCostsRange,
-    updateState: (fieldName: AllowedFieldsNames, item: IApiCostsState | null, index: number)=>void,
+    updateState: (item: IApiCostsState, index: number)=>void,
     isActive: boolean,
+    listIndex: number,
 };
 
-export default function ApiCostsFieldRange({ field, updateState, isActive }: Props) {
+export default function ApiCostsFieldRange({ field, updateState, isActive, listIndex }: Props) {
 
     const [selectValues, _setSelectValues] = useContext(SelectValuesContext)
 
@@ -23,7 +24,7 @@ export default function ApiCostsFieldRange({ field, updateState, isActive }: Pro
                 {field.label}
             </p>
             <p className={style["api-costs__list-item__fields-item__prefix"]}>
-                {selectValues[field.name]?.select} {field.prefix}
+                {selectValues[listIndex]?.select} {field.prefix}
             </p>
             <ReactSlider
                 className={style["api-costs__list-item__fields-item-range"]}
@@ -43,7 +44,7 @@ export default function ApiCostsFieldRange({ field, updateState, isActive }: Pro
                         </svg>
                     </div>
                 }
-                onChange={(value) => updateState(field.name, { price: field.price, fieldName: field.name, select: value.toString() }, -1)}
+                onChange={(value) => updateState({ price: field.price, fieldName: field.name, select: value.toString() }, -1)}
             />
         </>
     )

@@ -20,81 +20,55 @@ type Props = {
     children: ReactNode
 };
 
-export interface ISelectValues {
-    squidProfile: null | IApiCostsState;
-    processorProfile: null | IApiCostsState;
-    apiService: null | IApiCostsState;
-    dataBase: null | IApiCostsState;
-    rpsRequests: null | IApiCostsState;
-    databaseSize: null | IApiCostsState;
-    dataIndex: null | IApiCostsState;
-    apiRequests: null | IApiCostsState;
-    queryComplexity: null | IApiCostsState;
-    networks: null | IApiCostsState;
-}
-
-const setInitial = (fieldName: AllowedFieldsNames) => {
-    // const x = Object.entries(_apiCostsMock).map((item, index) => {
-    const x = Object.entries(_apiCostsMock).map((item, index) => {
-        const currentField = item[1].fields.filter((item) => item.name === fieldName)[0]
-        if (!currentField) return;
-        switch (currentField.type) {
+const setInitial = (tab: string): IApiCostsState[] => {
+    return _apiCostsMock[tab].fields.map((item, _index) => {
+        switch (item.type) {
             case 'radio':
                 return {
-                    fieldName: fieldName,
-                    select: currentField.values[0].value,
-                    price: { type: currentField.values[0].price.type, value: currentField.values[0].price.value }
+                    fieldName: item.name,
+                    select: item.values[0].value,
+                    price: { type: item.values[0].price.type, value: item.values[0].price.value }
                 }
                 break;
             case 'radio-input':
                 return {
-                    fieldName: fieldName,
-                    select: currentField.values[0].toString(),
-                    price: { type: currentField.price.type, value: currentField.price.value }
+                    fieldName: item.name,
+                    select: item.values[0].toString(),
+                    price: { type: item.price.type, value: item.price.value }
                 }
                 break;
             case 'range':
                 return {
-                    fieldName: fieldName,
-                    select: currentField.range[0].toString(),
-                    price: { type: currentField.price.type, value: currentField.price.value }
+                    fieldName: item.name,
+                    select: item.range[0].toString(),
+                    price: { type: item.price.type, value: item.price.value }
                 }
                 break;
             case 'radio-replicas':
                 return {
-                    fieldName: fieldName,
-                    select: currentField.values[0].value,
-                    price: { type: currentField.values[0].price.type, value: currentField.values[0].price.value }
+                    fieldName: item.name,
+                    select: item.values[0].value,
+                    price: { type: item.values[0].price.type, value: item.values[0].price.value }
                 }
                 break;
 
             default:
-                return null
+                return {
+                    fieldName: '',
+                    select: '',
+                    price: { type: "hr", value: 0 }
+                }
         }
     })
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxx', x)
-}
-
-const initialValue: ISelectValues = {
-    processorProfile: setInitial(AllowedFieldsNames.processorProfile),
-    squidProfile: setInitial(AllowedFieldsNames.squidProfile),
-    apiService: setInitial(AllowedFieldsNames.apiService),
-    dataBase: setInitial(AllowedFieldsNames.dataBase),
-    rpsRequests: setInitial(AllowedFieldsNames.rpsRequests),
-    databaseSize: setInitial(AllowedFieldsNames.databaseSize),
-    dataIndex: setInitial(AllowedFieldsNames.dataIndex),
-    apiRequests: setInitial(AllowedFieldsNames.apiRequests),
-    queryComplexity: setInitial(AllowedFieldsNames.queryComplexity),
-    networks: setInitial(AllowedFieldsNames.networks),
 }
 
 type ActiveTab = [string, Dispatch<SetStateAction<string>>]
-type SelectValues = [ISelectValues, Dispatch<SetStateAction<ISelectValues>>]
+type SelectValues = [IApiCostsState[], Dispatch<SetStateAction<IApiCostsState[]>>]
 type SumState = [number | null, Dispatch<SetStateAction<number | null>>]
 type HelperState = [number, Dispatch<SetStateAction<number>>]
 
 export const ActiveTabContext = createContext<ActiveTab>(['', () => { }]);
-export const SelectValuesContext = createContext<SelectValues>([initialValue, () => { }]);
+export const SelectValuesContext = createContext<SelectValues>([setInitial(Object.keys(_apiCostsMock)[0]), () => { }]);
 export const TotalSumContext = createContext<SumState>([null, () => { }]);
 export const HelperContext = createContext<HelperState>([-1, () => { }]);
 export const WindowWidthContext = createContext<number>(0);
@@ -102,7 +76,7 @@ export const ScrollElementContext = createContext<MutableRefObject<HTMLDivElemen
 
 export default function layout({ children }: Props) {
 
-    const [selectValues, setSelectValues] = useState(initialValue) as SelectValues;
+    const [selectValues, setSelectValues] = useState(setInitial(Object.keys(_apiCostsMock)[0])) as SelectValues;
     const [activeTab, setActiveTab] = useState(Object.keys(_apiCostsMock)[0]) as ActiveTab;
     const [totalSum, setTotalSum] = useState(null) as SumState;
     const [helper, setHelper] = useState(-1) as HelperState;
@@ -126,7 +100,7 @@ export default function layout({ children }: Props) {
     }
 
     useEffect(() => {
-        setSelectValues({ ...initialValue })
+        setSelectValues(setInitial(activeTab))
         setHelper(-1)
     }, [activeTab])
     useEffect(() => {

@@ -1,20 +1,20 @@
 import { AllowedFieldsNames, IApiCostsRadio, IApiCostsState, IApiCostsValueObject } from "@/_mock/apiCosts.mock";
 
 type Props = {
-    updateState: (fieldName: AllowedFieldsNames, item: IApiCostsState | null, index: number)=>void,
+    updateState: ( item: IApiCostsState, index: number)=>void,
     field: IApiCostsRadio,
-    setClassName: (key: number) => string
+    className: string
     item: IApiCostsValueObject,
     index: number
 };
 
-export default function ApiCostsFieldRadio({item, index, updateState, field, setClassName }: Props) {
+export default function ApiCostsFieldRadio({item, index, updateState, field, className }: Props) {
     
     return(
         <button
             key={index}
-            className={setClassName(index)}
-            onClick={() => updateState(field.name, { fieldName: field.name, select: item.value, price: item.price }, index)}
+            className={className}
+            onClick={() => updateState({ fieldName: field.name, select: item.value, price: item.price }, index)}
         >
             {item.value}
         </button>

@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
 import { SelectValuesContext, ActiveTabContext, HelperContext, WindowWidthContext } from '@/app/calculator/layout'
 
@@ -32,16 +32,16 @@ export default function ApiCostsField({ field, listIndex }: Props) {
     const [activeitem, setActiveItem] = useState<number>()
     const [isActive, setIsActive] = useState<boolean>(true)
 
-    const updateState = (fieldName: AllowedFieldsNames, item: IApiCostsState | null, index: number) => {
-        const updateObj = { ...selectValues }
-        updateObj[fieldName] = isActive ? item : null;
-        setSelectValues({ ...updateObj })
+    const updateState = (item: IApiCostsState, index: number) => {
+        const updateObj = [...selectValues]
+        updateObj[listIndex] = item
+        setSelectValues([...updateObj])
         setActiveItem(isActive ? index : -1)
     }
 
     const setClassName = (key: number,) => {
         if (field.type === 'radio-input') {
-            return selectValues[field.name]?.select === field.values[key].toString() ?
+            return selectValues[listIndex]?.select === field.values[key].toString() ?
                 `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_active"]} ${style["api-costs__list-item__fields-item_number"]}`
                 : `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_number"]}`
         }
@@ -57,19 +57,19 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                     return (
                         <ApiCostsFieldRadio
                             field={field}
-                            item={item} 
+                            item={item}
                             index={index}
-                            setClassName={setClassName}
+                            className={setClassName(index)}
                             updateState={updateState}
                         />
                     )
                 });
                 break;
             case 'radio-input':
-                return <ApiCostsFieldRadioInput field={field} updateState={updateState} setClassName={setClassName}/>
+                return <ApiCostsFieldRadioInput field={field} updateState={updateState} setClassName={setClassName} />
                 break;
             case 'range':
-                return <ApiCostsFieldRange field={field} isActive={isActive} updateState={updateState} />
+                return <ApiCostsFieldRange field={field} listIndex={listIndex} isActive={isActive} updateState={updateState} />
                 break;
             default:
                 break;
@@ -78,20 +78,32 @@ export default function ApiCostsField({ field, listIndex }: Props) {
 
     useEffect(() => {
         if (!isActive) {
-            updateState(field.name, null, -1)
+            updateState(
+                {
+                    fieldName: selectValues[listIndex].fieldName,
+                    price: {
+                        type: selectValues[listIndex].price.type,
+                        value: 0
+                    },
+                    select: ''
+                },
+                -1
+            )
         }
     }, [isActive])
 
-    // useEffect(()=>{
-    //     if (selectValues[field.name]?.fieldName === field.name) {
-    //         if (selectValues[field.name]?.select && selectValues[field.name]?.price) {
-    //             const curentIndex = () => {
-    //                 field.
-    //             }
-    //             setActiveItem()
-    //         }
-    //     }
-    // }, [selectValues])
+    useEffect(() => {
+        if (field.type !== 'range') {
+            const currentIndex: number = field.values.findIndex((item) => {
+                if (typeof item === 'number') {
+                    return item.toString() === selectValues[listIndex].select;
+                } else {
+                    return item.value === selectValues[listIndex].select;
+                }
+            });
+            setActiveItem(currentIndex);
+        }
+    }, [selectValues]);
 
     useEffect(() => {
         setActiveItem(-1)
