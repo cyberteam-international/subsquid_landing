@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 
-import { SelectValuesContext, ActiveTabContext, HelperContext, WindowWidthContext } from '@/app/calculator/layout'
+import { SelectValuesContext, ActiveTabContext } from '@/app/calculator/layout'
 
 import {
     IApiCostsRadio,
@@ -14,6 +14,7 @@ import style from './ApiCosts.module.scss'
 import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
 import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
 import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
+import GlobalHelper from '../GlobalHelper/GlobalHelper'
 
 type Props = {
     field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio | IApiCostsRadioReplicas,
@@ -24,9 +25,6 @@ export default function ApiCostsField({ field, listIndex }: Props) {
 
     const [selectValues, setSelectValues] = useContext(SelectValuesContext)
     const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
-    const [helper, setHelper] = useContext(HelperContext)
-    const windowWidth = useContext(WindowWidthContext)
-
 
     const [activeitem, setActiveItem] = useState<number>()
     const [isActive, setIsActive] = useState<boolean>(true)
@@ -126,16 +124,7 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                     </button>
                 }
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
-                {field.helper && (
-                    <div className={style["api-costs__list-item__header__helper"]}>
-                        <span onClick={() => setHelper(helper === listIndex ? -1 : listIndex)}>?</span>
-                        {(helper === listIndex && windowWidth > 768) && (
-                            <div className={style["api-costs__list-item__header__helper__block"]}>
-                                <p>{field.helper.description}</p>
-                            </div>
-                        )}
-                    </div>
-                )}
+                <GlobalHelper helperObj={field.helper} listIndex={listIndex}/>
             </div>
             <div
                 className={

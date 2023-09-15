@@ -1,4 +1,5 @@
 'use client'; 
+import GlobalHelper from '../GlobalHelper/GlobalHelper';
 import style from './ScaleManifest.module.scss'; 
 import React from 'react'; 
  
@@ -18,11 +19,16 @@ export default function ScaleManifest({ }: Props) {
             replicas: 3 
         dedicated: true `;
 
+    const helperText = {
+        title: '“Scale” for your manifest',
+        description: 'Paste scale settings into your manifest to use selected configuration.'
+    }
+
     return ( 
         <section className={style['manifest']}> 
             <div className={style['manifest__wrapper']}> 
                 <p>“Scale” for your manifest</p> 
-                <span>?</span> 
+                <GlobalHelper listIndex={'manifest'} helperObj={helperText} />
             </div> 
             <p className={style['manifest__subtitle']}>Paste scale settings into your manifest to use selected configuration.</p> 
             <div className={style['manifest__code']}> 

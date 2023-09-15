@@ -100,7 +100,7 @@ export default {
                 },
                 values: [1, 2, 3, 4],
                 helper: {
-                    title: '',
+                    title: 'How many networks to index',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },
@@ -140,7 +140,7 @@ export default {
                     },
                 ],
                 helper: {
-                    title: '',
+                    title: 'How much data to index',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },
@@ -180,7 +180,7 @@ export default {
                     },
                 ],
                 helper: {
-                    title: '',
+                    title: 'API requests',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },
@@ -220,7 +220,7 @@ export default {
                     },
                 ],
                 helper: {
-                    title: '',
+                    title: 'Query Complexity',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },
@@ -281,7 +281,7 @@ export default {
                     }
                 ],
                 helper: {
-                    title: '',
+                    title: 'Processor profile',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },
@@ -315,7 +315,7 @@ export default {
                     }
                 ],
                 helper: {
-                    title: '',
+                    title: 'API service',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },
@@ -349,7 +349,7 @@ export default {
                     }
                 ],
                 helper: {
-                    title: '',
+                    title: 'Database',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },
@@ -367,7 +367,7 @@ export default {
                 range: [2, 500],
                 step: 1,
                 helper: {
-                    title: '',
+                    title: 'RPC requests',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },
@@ -385,7 +385,7 @@ export default {
                 range: [10, 5000],
                 step: 10,
                 helper: {
-                    title: '',
+                    title: 'Database size',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                 }
             },

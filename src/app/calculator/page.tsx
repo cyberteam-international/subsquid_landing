@@ -32,9 +32,9 @@ export default function CalculatorPage() {
 				{(windowWidth < 768 && totalSum > 0) && (
 					<EstimateCost />
 				)}
-				{(windowWidth < 768 && helper > 0) && (
+				{/* {(windowWidth < 768 && helper.index === 'global') && (
 					<EstimateCost />
-				)}
+				)} */}
 			</div>
 		</main>
 	)

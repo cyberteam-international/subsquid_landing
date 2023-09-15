@@ -18,6 +18,14 @@ type Props = {
     children: ReactNode
 };
 
+export type Helper = {
+    index: number | 'manifest',
+    value?: {
+        title: string,
+        description: string,
+    }
+}
+
 const setInitial = (tab: string): IApiCostsState[] => {
     return _apiCostsMock[tab].fields.map((item, _index) => {
         switch (item.type) {
@@ -26,7 +34,7 @@ const setInitial = (tab: string): IApiCostsState[] => {
                     fieldName: item.name,
                     select: item.values[0].value,
                     price: { type: item.values[0].price.type, value: item.values[0].price.value },
-                    replicas: item.replicas? 1 : null
+                    replicas: item.replicas ? 1 : null
                 }
                 break;
             case 'radio-input':
@@ -34,7 +42,7 @@ const setInitial = (tab: string): IApiCostsState[] => {
                     fieldName: item.name,
                     select: item.values[0].toString(),
                     price: { type: item.price.type, value: item.price.value },
-                    replicas: item.replicas? 1 : null
+                    replicas: item.replicas ? 1 : null
                 }
                 break;
             case 'range':
@@ -42,7 +50,7 @@ const setInitial = (tab: string): IApiCostsState[] => {
                     fieldName: item.name,
                     select: item.range[0].toString(),
                     price: { type: item.price.type, value: item.price.value },
-                    replicas: item.replicas? 1 : null
+                    replicas: item.replicas ? 1 : null
                 }
                 break;
             default:
@@ -54,12 +62,13 @@ const setInitial = (tab: string): IApiCostsState[] => {
 type ActiveTab = [string, Dispatch<SetStateAction<string>>]
 type SelectValues = [IApiCostsState[], Dispatch<SetStateAction<IApiCostsState[]>>]
 type SumState = [number, Dispatch<SetStateAction<number>>]
-type HelperState = [number, Dispatch<SetStateAction<number>>]
+type HelperState = [Helper, Dispatch<SetStateAction<Helper>>
+]
 
 export const ActiveTabContext = createContext<ActiveTab>(['', () => { }]);
 export const SelectValuesContext = createContext<SelectValues>([setInitial(Object.keys(_apiCostsMock)[0]), () => { }]);
 export const TotalSumContext = createContext<SumState>([0, () => { }]);
-export const HelperContext = createContext<HelperState>([-1, () => { }]);
+export const HelperContext = createContext<HelperState>([{index:-1}, () => { }]);
 export const WindowWidthContext = createContext<number>(0);
 export const ScrollElementContext = createContext<MutableRefObject<HTMLDivElement | null> | null>(null);
 
@@ -68,7 +77,7 @@ export default function layout({ children }: Props) {
     const [selectValues, setSelectValues] = useState(setInitial(Object.keys(_apiCostsMock)[0])) as SelectValues;
     const [activeTab, setActiveTab] = useState(Object.keys(_apiCostsMock)[0]) as ActiveTab;
     const [totalSum, setTotalSum] = useState(0) as SumState;
-    const [helper, setHelper] = useState(-1) as HelperState;
+    const [helper, setHelper] = useState({index:-1}) as HelperState;
 
     const windowWidth = useWindowWidth()
     const totalBlockRef = useRef<HTMLDivElement | null>(null)
@@ -90,7 +99,7 @@ export default function layout({ children }: Props) {
 
     useEffect(() => {
         setSelectValues(setInitial(activeTab))
-        setHelper(-1)
+        setHelper({index:-1})
     }, [activeTab])
     useEffect(() => {
         console.log(selectValues)
