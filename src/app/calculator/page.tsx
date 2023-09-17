@@ -17,6 +17,7 @@ import EstimateCost from '@/components/EstimateCost/EstimateCost';
 import _apiCostsMock, { IApiCostsState } from '@/_mock/apiCosts.mock'
 
 import style from './style.module.scss'
+import {useResourseCalculator} from '@/app/calculator/hooks/useResourseCalculator';
 
 const setInitial = (tab: string): IApiCostsState[] => {
     return _apiCostsMock[tab].fields.map((item, _index) => {
@@ -78,6 +79,13 @@ export default function CalculatorPage() {
         console.log(selectValues)
         setTotalPrice()
     }, [selectValues])
+
+    useResourseCalculator(
+        {
+            selectState: [selectValues, setSelectValues],
+            activeTab: activeTab,
+        }
+    )
 
     return (
         <SelectValuesContext.Provider value={[selectValues, setSelectValues]}>

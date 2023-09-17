@@ -10,7 +10,6 @@ import { SelectValuesContext, ActiveTabContext } from '@/app/calculator/context'
 import {
     IApiCostsRadio,
     IApiCostsRadioInput,
-    IApiCostsRadioReplicas,
     IApiCostsRange,
     IApiCostsState,
 } from '@/_mock/apiCosts.mock'
@@ -18,7 +17,7 @@ import {
 import style from './ApiCosts.module.scss'
 
 type Props = {
-    field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio | IApiCostsRadioReplicas,
+    field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio
     listIndex: number
 }
 

@@ -43,10 +43,10 @@ export interface IApiCostsRadioInput extends IApiCostSample {
     price: IApiCostsPrice,
 }
 
-export interface IApiCostsRadioReplicas extends IApiCostSample {
-    type: 'radio-replicas',
-    values: IApiCostsValueObject[],
-}
+// export interface IApiCostsRadioReplicas extends IApiCostSample {
+//     type: 'radio-replicas',
+//     values: IApiCostsValueObject[],
+// }
 
 export interface IApiCostsRadio extends IApiCostSample {
     type: 'radio',
@@ -55,7 +55,7 @@ export interface IApiCostsRadio extends IApiCostSample {
 
 export interface IApiCostsTabs {
     title: string;
-    fields: IApiCostsRange[] | IApiCostsRadioInput[] | IApiCostsRadio[] | IApiCostsRadioReplicas[];
+    fields: IApiCostsRange[] | IApiCostsRadioInput[] | IApiCostsRadio[],
 }
 
 export type IApiCosts = {
