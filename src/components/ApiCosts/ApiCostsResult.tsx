@@ -1,13 +1,22 @@
 import { useState, useContext } from "react";
 
-import { TotalSumContext, SelectValuesContext, ScrollElementContext } from "@/app/calculator/context";
+import {
+    TotalSumContext,
+    ScrollElementContext,
+    ActiveTabContext,
+    SelectValuesResourcesContext,
+    SelectValuesUseCaseContext
+} from "@/app/calculator/context";
 
 import style from './ApiCosts.module.scss'
 
 export default function ApiCostsResult() {
 
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
-    const [selectValues, _setSelectValues] = useContext(SelectValuesContext);
+    const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
+    const [selectValues, _setSelectValues] = useContext(
+        activeTab === 'byUseCase' ? SelectValuesUseCaseContext : SelectValuesResourcesContext
+    )
 
     const totalBlockRef = useContext(ScrollElementContext)
 

@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import ApiCostsField from './ApiCostsField';
 import ApiCostsResult from './ApiCostsResult';
 
-import { ActiveTabContext } from '@/app/calculator/context';
+import { ActiveTabContext, SelectValuesUseCaseContext, SelectValuesResourcesContext } from '@/app/calculator/context';
 
 import _apiCostsMock from '@/_mock/apiCosts.mock'
 
@@ -14,6 +14,10 @@ import style from './ApiCosts.module.scss'
 export default function ApiCosts() {
 
     const [activeTab, setActiveTab] = useContext(ActiveTabContext);
+
+    const [selectValues, setSelectValues] = useContext(
+        activeTab === 'byUseCase'? SelectValuesUseCaseContext : SelectValuesResourcesContext
+    )
 
     const setTabNames = () => {
         const objKeys = Object.keys(_apiCostsMock)
@@ -37,7 +41,12 @@ export default function ApiCosts() {
     const setTabFields = () => {
         return _apiCostsMock[activeTab].fields.map((item, index) => {
             return (
-                <ApiCostsField key={index} field={item} listIndex={index} />
+                <ApiCostsField 
+                    key={index} 
+                    field={item} 
+                    listIndex={index} 
+                    selectValuesState={[selectValues, setSelectValues]} 
+                />
             )
         })
     }

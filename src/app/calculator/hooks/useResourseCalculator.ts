@@ -126,9 +126,10 @@
 
 import { Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import _apiCostsMock, { IApiCostsState } from '@/_mock/apiCosts.mock';
+import { SelectValues } from '../context';
 
 type Props = {
-    selectState: [IApiCostsState[], Dispatch<SetStateAction<IApiCostsState[]>>],
+    selectState: SelectValues,
     activeTab: string,
 }
 
@@ -137,7 +138,7 @@ export const useResourseCalculator = ({selectState, activeTab}: Props) => {
     const [selectValues, setSelectValues] = selectState
 
     useEffect(() => {
-        // Функция, которая будет выполняться при изменении selectValues
+
         const updateState = (item: IApiCostsState, listIndex: number) => {
             const updateObj = [...selectValues];
             updateObj[listIndex] = updateObj[listIndex].replicas ? { ...item, replicas: updateObj[listIndex].replicas } : item;
@@ -202,10 +203,8 @@ export const useResourseCalculator = ({selectState, activeTab}: Props) => {
             }
         };
 
-        // Вызов функции apiProfile_x при изменении selectValues
         apiProfile_x();
     }, [selectValues]);
 
-    // Возвращаем пустой массив, так как хук useEffect не требует очистки
     return [];
 };

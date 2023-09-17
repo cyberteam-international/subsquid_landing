@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react'
 
 import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
 import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
 import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
 import GlobalHelper from '../GlobalHelper/GlobalHelper'
 
-import { SelectValuesContext, ActiveTabContext } from '@/app/calculator/context'
+import { ActiveTabContext, SelectValues } from '@/app/calculator/context'
 
 import {
     IApiCostsRadio,
@@ -18,12 +18,13 @@ import style from './ApiCosts.module.scss'
 
 type Props = {
     field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio
-    listIndex: number
+    listIndex: number,
+    selectValuesState: SelectValues,
 }
 
-export default function ApiCostsField({ field, listIndex }: Props) {
+export default function ApiCostsField({ field, listIndex, selectValuesState }: Props) {
 
-    const [selectValues, setSelectValues] = useContext(SelectValuesContext)
+    const [selectValues, setSelectValues] = selectValuesState
     const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
 
     const [activeitem, setActiveItem] = useState<number>()
@@ -65,7 +66,7 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                 return <ApiCostsFieldRadioInput field={field} updateState={updateState} setClassName={setClassName} />
                 break;
             case 'range':
-                return <ApiCostsFieldRange field={field} listIndex={listIndex} isActive={isActive} updateState={updateState} />
+                return <ApiCostsFieldRange selectValuesState={selectValuesState} field={field} listIndex={listIndex} isActive={isActive} updateState={updateState} />
                 break;
             default:
                 break;
@@ -99,10 +100,9 @@ export default function ApiCostsField({ field, listIndex }: Props) {
             });
             setActiveItem(currentIndex);
         }
-    }, [selectValues]);
+    }, [selectValues, activeTab]);
 
     useEffect(() => {
-        setActiveItem(-1)
         setIsActive(true)
     }, [activeTab])
 

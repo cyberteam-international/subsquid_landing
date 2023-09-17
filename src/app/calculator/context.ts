@@ -27,7 +27,8 @@ const initialSelectValues: IApiCostsState[] = [
 ]
 
 export const ActiveTabContext = createContext<ActiveTab>(['', () => { }]);
-export const SelectValuesContext = createContext<SelectValues>([initialSelectValues, () => { }]);
+export const SelectValuesUseCaseContext = createContext<SelectValues>([initialSelectValues, () => { }]);
+export const SelectValuesResourcesContext = createContext<SelectValues>([initialSelectValues, () => { }]);
 export const TotalSumContext = createContext<SumState>([0, () => { }]);
 export const HelperContext = createContext<HelperState>([{index:-1}, () => { }]);
 export const ScrollElementContext = createContext<MutableRefObject<HTMLDivElement | null> | null>(null);

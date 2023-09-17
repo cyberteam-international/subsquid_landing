@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import ReactSlider from 'react-slider'
 
-import { SelectValuesContext } from '@/app/calculator/context';
+import { SelectValues} from '@/app/calculator/context';
 
 import { IApiCostsRange, IApiCostsState } from "@/_mock/apiCosts.mock";
 
@@ -12,11 +12,12 @@ type Props = {
     updateState: (item: IApiCostsState)=>void,
     isActive: boolean,
     listIndex: number,
+    selectValuesState: SelectValues,
 };
 
-export default function ApiCostsFieldRange({ field, updateState, isActive, listIndex }: Props) {
+export default function ApiCostsFieldRange({ field, updateState, isActive, listIndex, selectValuesState }: Props) {
 
-    const [selectValues, _setSelectValues] = useContext(SelectValuesContext)
+    const [selectValues, _setSelectValues] = selectValuesState
 
     return (
         <>
@@ -32,6 +33,7 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, listI
                 markClassName={style["api-costs__list-item__fields-item-range-mark"]}
                 min={field.range[0]}
                 max={field.range[1]}
+                value={Number(selectValues[listIndex].select)}
                 step={field.step}
                 thumbClassName={style["api-costs__list-item__fields-item-range-thumb"]}
                 trackClassName={style["api-costs__list-item__fields-item-range-track"]}
