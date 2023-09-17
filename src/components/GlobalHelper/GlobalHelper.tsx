@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
+import { useWindowWidth } from "@react-hook/window-size";
 
-import { HelperContext, Helper, WindowWidthContext } from "@/app/calculator/layout";
+import { HelperContext, Helper } from "@/app/calculator/context";
 
 import style from './GlobalHelper.module.scss'
 
@@ -15,7 +16,7 @@ type Props = {
 export default function GlobalHelper({ helperObj, listIndex }: Props) {
 
     const [helper, setHelper] = useContext(HelperContext)
-    const windowWidth = useContext(WindowWidthContext)
+    const windowWidth = useWindowWidth()
 
     const updateHelper = () => {
         const updateObj : Helper = {

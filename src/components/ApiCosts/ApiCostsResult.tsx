@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 
-import { TotalSumContext, SelectValuesContext, ScrollElementContext } from "@/app/calculator/layout";
+import { TotalSumContext, SelectValuesContext, ScrollElementContext } from "@/app/calculator/context";
 
 import style from './ApiCosts.module.scss'
 
@@ -14,7 +14,7 @@ export default function ApiCostsResult() {
     const [isOpen, setIsOpen] = useState(false);
 
     const setDetailInfo = () => {
-        return selectValues.map((item, index) => {
+        return selectValues?.map((item, index) => {
             if (item.select) {
                 return (
                     <div className={style["api-costs__result__list-item"]} key={index}>

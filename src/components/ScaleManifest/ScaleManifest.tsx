@@ -1,11 +1,10 @@
 'use client'; 
+
 import GlobalHelper from '../GlobalHelper/GlobalHelper';
+
 import style from './ScaleManifest.module.scss'; 
-import React from 'react'; 
  
-type Props = {}; 
- 
-export default function ScaleManifest({ }: Props) { 
+export default function ScaleManifest() { 
     const codeText =  
     `scale: 
         addons: 

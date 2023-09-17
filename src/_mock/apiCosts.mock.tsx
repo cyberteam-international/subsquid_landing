@@ -287,7 +287,7 @@ export default {
             },
             {
                 title: 'API service',
-                name: 'apiService',
+                name: 'apiProfile',
                 type: 'radio',
                 canActive: true,
                 replicas: true,
@@ -321,7 +321,7 @@ export default {
             },
             {
                 title: 'Database',
-                name: 'dataBase',
+                name: 'postgresProfile',
                 subtitle: 'Postgres profile',
                 type: 'radio',
                 canActive: true,

@@ -1,6 +1,11 @@
 import { useState, useEffect, useContext } from 'react'
 
-import { SelectValuesContext, ActiveTabContext } from '@/app/calculator/layout'
+import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
+import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
+import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
+import GlobalHelper from '../GlobalHelper/GlobalHelper'
+
+import { SelectValuesContext, ActiveTabContext } from '@/app/calculator/context'
 
 import {
     IApiCostsRadio,
@@ -11,10 +16,6 @@ import {
 } from '@/_mock/apiCosts.mock'
 
 import style from './ApiCosts.module.scss'
-import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
-import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
-import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
-import GlobalHelper from '../GlobalHelper/GlobalHelper'
 
 type Props = {
     field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio | IApiCostsRadioReplicas,
@@ -31,7 +32,7 @@ export default function ApiCostsField({ field, listIndex }: Props) {
 
     const updateState = (item: IApiCostsState) => {
         const updateObj = [...selectValues]
-        updateObj[listIndex] = item
+        updateObj[listIndex] = updateObj[listIndex].replicas? {...item, replicas: updateObj[listIndex].replicas} : item
         setSelectValues([...updateObj])
     }
 
@@ -126,6 +127,9 @@ export default function ApiCostsField({ field, listIndex }: Props) {
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
                 <GlobalHelper helperObj={field.helper} listIndex={listIndex}/>
             </div>
+            {field.subtitle && (
+                <p className={style["api-costs__list-item__subtitle"]}>{field.subtitle}</p>
+            )}
             <div
                 className={
                     field.type !== 'range' ?

@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import ReactSlider from 'react-slider'
 
-import { SelectValuesContext } from '@/app/calculator/layout';
+import { SelectValuesContext } from '@/app/calculator/context';
 
 import { IApiCostsRange, IApiCostsState } from "@/_mock/apiCosts.mock";
 
