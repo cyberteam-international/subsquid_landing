@@ -78,20 +78,15 @@ export default function CalculatorPage() {
     }, [selectValuesUseCase])
 
     useEffect(() => {
-        console.log('selectValuesUseCase', selectValuesUseCase)
-        console.log('selectValuesResources', selectValuesResources)
-    }, [selectValuesUseCase, selectValuesResources])
-
-    useEffect(() => {
-        setHelper({ index: -1 })
+        if (helper.index !== 'manifest') {
+            setHelper({ index: -1 })
+        }
     }, [activeTab])
 
-    // useResourseCalculator(
-    //     {
-    //         selectState: [selectValues, setSelectValues],
-    //         activeTab: activeTab,
-    //     }
-    // )
+    useResourseCalculator({
+        selectUseCaseState: [selectValuesUseCase, setSelectValuesUseCase],
+        selectResourcesState: [selectValuesResources, setSelectValuesResources],
+    })
 
     return (
         <SelectValuesUseCaseContext.Provider value={[selectValuesUseCase, setSelectValuesUseCase]}>

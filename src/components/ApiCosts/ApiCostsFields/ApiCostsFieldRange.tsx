@@ -12,12 +12,10 @@ type Props = {
     updateState: (item: IApiCostsState)=>void,
     isActive: boolean,
     listIndex: number,
-    selectValuesState: SelectValues,
+    value: string
 };
 
-export default function ApiCostsFieldRange({ field, updateState, isActive, listIndex, selectValuesState }: Props) {
-
-    const [selectValues, _setSelectValues] = selectValuesState
+export default function ApiCostsFieldRange({ field, updateState, isActive, listIndex, value }: Props) {
 
     return (
         <>
@@ -25,7 +23,7 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, listI
                 {field.label}
             </p>
             <p className={style["api-costs__list-item__fields-item__prefix"]}>
-                {selectValues[listIndex]?.select} {field.prefix}
+                {value} {field.prefix}
             </p>
             <ReactSlider
                 className={style["api-costs__list-item__fields-item-range"]}
@@ -33,7 +31,7 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, listI
                 markClassName={style["api-costs__list-item__fields-item-range-mark"]}
                 min={field.range[0]}
                 max={field.range[1]}
-                value={Number(selectValues[listIndex].select)}
+                value={Number(value)}
                 step={field.step}
                 thumbClassName={style["api-costs__list-item__fields-item-range-thumb"]}
                 trackClassName={style["api-costs__list-item__fields-item-range-track"]}

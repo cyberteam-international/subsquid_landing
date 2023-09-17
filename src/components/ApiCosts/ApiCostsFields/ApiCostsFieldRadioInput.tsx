@@ -5,10 +5,11 @@ import style from '../ApiCosts.module.scss'
 type Props = {
     updateState: ( item: IApiCostsState)=>void,
     field: IApiCostsRadioInput,
-    setClassName: (key: number) => string
+    setClassName: (key: number) => string,
+    value: string
 };
 
-export default function ApiCostsFieldRadioInput({updateState, field, setClassName }: Props) {
+export default function ApiCostsFieldRadioInput({updateState, field, setClassName, value }: Props) {
 
     const updateObj = (item: number | string): IApiCostsState => {
         return {
@@ -44,6 +45,7 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
                 type="number"
                 min={1}
                 placeholder='Your value'
+                value={value}
                 onChange={(e) => updateState(updateObj(e.target.value))}
             />
         </>

@@ -1,210 +1,202 @@
-// import { useContext } from 'react'
-// import { ActiveTabContext, SelectValuesContext } from "@/app/calculator/context";
-// import _apiCostsMock, { IApiCostsState } from '@/_mock/apiCosts.mock';
-
-// const [selectValues, setSelectValues] = useContext(SelectValuesContext)
-// const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
-
-// const updateState = (item: IApiCostsState, listIndex: number) => {
-//     const updateObj = [...selectValues]
-//     updateObj[listIndex] = updateObj[listIndex].replicas ? { ...item, replicas: updateObj[listIndex].replicas } : item
-//     setSelectValues([...updateObj])
-// }
-
-// // const processorProfile_x = (networksCount, dataSize) => {
-// //     if ((networksCount === 1 && dataSize === 'LOW') || (networksCount >= 2 && dataSize === 'MEDIUM')) {
-// //         return 'SMALL';
-// //     } else if ((networksCount === 1 && dataSize === 'MEDIUM') || (networksCount >= 2 && dataSize === 'LARGE')) {
-// //         return 'MEDIUM';
-// //     } else if (networksCount === 1 && dataSize === 'LARGE') {
-// //         return 'LARGE';
-// //     }
-// // };
-
-// // const apiProfile_x = (queryComplexity) => {
-// //     if (queryComplexity === 'SIMPLE' || queryComplexity === 'NOT_SURE') {
-// //         return 'SMALL';
-// //     } else if (queryComplexity === 'MID') {
-// //         return 'MEDIUM';
-// //     } else if (queryComplexity === 'COMPLEX') {
-// //         return 'LARGE';
-// //     }
-// // };
-
-// const currentInfo = (fieldName: string, selectValue: string, listIndex: number): IApiCostsState => {
-//     const mockField = _apiCostsMock[`${activeTab}`].fields.find((el) => el.name === fieldName)
-//     if (!mockField) {
-//         throw new Error('fieldName in _apiCostsMock not found. Add fieldName in _apiCostsMock or use corrrect fieldName')
-//     }
-//     const price = (): IApiCostsState["price"] => {
-//         return mockField?.type === 'radio'
-//             ? {
-//                 type: mockField.values.find((el) => el.value === selectValue)?.price.type ?? '',
-//                 value: mockField.values.find((el) => el.value === selectValue)?.price.value ?? 0
-//             }
-//             : {
-//                 type: mockField.price.type ?? '',
-//                 value: mockField.price.value ?? 0
-//             };
-//     }
-//     return {
-//         ...selectValues[listIndex],
-//         select: selectValue,
-//         price: price(),
-//         replicas: selectValues[listIndex].replicas?? null
-//     }
-
-// }
-
-// export const apiProfile_x = () => {
-//     const listIndex = (fieldName: string):number => selectValues.findIndex((el)=>el.fieldName == 'queryComplexity')
-//     if (selectValues[listIndex('queryComplexity')].select === 'Simple' || selectValues[listIndex('queryComplexity')].select === 'Small') {
-//         updateState(
-//             currentInfo('queryComplexity', selectValues[listIndex('queryComplexity')].select === 'Simple' ? 'Simple' : 'Small', listIndex('queryComplexity')), 
-//             listIndex('queryComplexity')
-//         )
-//         updateState(
-//             currentInfo('apiProfile', 'Small', listIndex('apiProfile')),
-//             listIndex('apiProfile')
-//         )
-//     } else if (selectValues[listIndex('queryComplexity')].select === 'Mid') {
-//         updateState(
-//             currentInfo('queryComplexity', 'Mid', listIndex('queryComplexity')), 
-//             listIndex('queryComplexity')
-//         )
-//         updateState(
-//             currentInfo('apiProfile', 'Medium', listIndex('apiProfile')),
-//             listIndex('apiProfile')
-//         )
-//     } else if (selectValues[listIndex('queryComplexity')].select === 'Complex') {
-//         updateState(
-//             currentInfo('queryComplexity', 'Complex', listIndex('queryComplexity')), 
-//             listIndex('queryComplexity')
-//         )
-//         updateState(
-//             currentInfo('apiProfile', 'Large', listIndex('apiProfile')),
-//             listIndex('apiProfile')
-//         )
-//     }
-// };
-
-// // const apiReplicas = (requestsPerSecond) => {
-// //     if (requestsPerSecond >= 0 && requestsPerSecond <= 1) {
-// //         return 1;
-// //     } else if (requestsPerSecond >= 2 && requestsPerSecond <= 5) {
-// //         return 2;
-// //     } else if (requestsPerSecond >= 6) {
-// //         return 2 + Math.round(Math.log10(requestsPerSecond));
-// //     }
-// // };
-
-// // const postgresProfile = (queryComplexity, networksCount) => {
-// //     if (queryComplexity === 'SIMPLE' || queryComplexity === 'NOT_SURE') {
-// //         return 'SMALL';
-// //     } else if (queryComplexity === 'MID' || (networksCount >= 2 && networksCount <= 9)) {
-// //         return 'MEDIUM';
-// //     } else if (queryComplexity === 'COMPLEX' || networksCount >= 10) {
-// //         return 'LARGE';
-// //     }
-// // };
-
-// // const postgresStorage = (dataSize) => {
-// //     if (dataSize === 'LOW') {
-// //         return 50;
-// //     } else if (dataSize === 'MEDIUM') {
-// //         return 150;
-// //     } else if (dataSize === 'LARGE') {
-// //         return 500;
-// //     }
-// // };
-
-// // const x = [
-// //     {
-// //         fields: ['']
-// //     }
-// // ]
-
-import { Dispatch, SetStateAction, useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import _apiCostsMock, { IApiCostsState } from '@/_mock/apiCosts.mock';
 import { SelectValues } from '../context';
 
 type Props = {
-    selectState: SelectValues,
-    activeTab: string,
+    selectUseCaseState: SelectValues,
+    selectResourcesState: SelectValues,
 }
 
-export const useResourseCalculator = ({selectState, activeTab}: Props) => {
-    
-    const [selectValues, setSelectValues] = selectState
+export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState }: Props) => {
+
+    const [selectValuesUseCase, setSelectValuesUseCase] = selectUseCaseState
+    const [selectValuesResources, setSelectValuesResources] = selectResourcesState
+
+    let returnSelectValuesResources = selectValuesResources
+
+    const listIndex = (fieldName: string): number => {
+        const selectValuesUseCaseIndex = selectValuesUseCase.findIndex((el) => el.fieldName === fieldName)
+        const selectValuesResourcesIndex = selectValuesResources.findIndex((el) => el.fieldName === fieldName)
+        if (selectValuesUseCaseIndex !== -1) {
+            return selectValuesUseCaseIndex
+        }
+        else if (selectValuesResourcesIndex !== -1) {
+            return selectValuesResourcesIndex
+        }
+        else {
+            throw new Error('Check apiCosts.mock.tsx fields')
+        }
+    };
+
+    const updateState = (item: IApiCostsState, listIndex: number) => {
+        const updateObj = [...returnSelectValuesResources];
+        updateObj[listIndex] = !item.replicas ? { ...item, replicas: selectValuesResources[listIndex].replicas } : item
+        returnSelectValuesResources = [...updateObj]
+    };
+
+    const currentInfo = (fieldName: string, selectValue: string | number, listIndex: number): IApiCostsState => {
+        const mockField = _apiCostsMock[`byResources`].fields.find((el) => el.name === fieldName);
+        if (!mockField) {
+            throw new Error('fieldName in _apiCostsMock not found. Add fieldName in _apiCostsMock or use correct fieldName');
+        }
+        const price = (): IApiCostsState["price"] => {
+            return mockField?.type === 'radio'
+                ? {
+                    type: mockField.values.find((el) => el.value === selectValue)?.price.type ?? '',
+                    value: mockField.values.find((el) => el.value === selectValue)?.price.value ?? 0
+                }
+                : {
+                    type: mockField.price.type ?? '',
+                    value: mockField.price.value ?? 0
+                };
+        };
+        return {
+            ...selectValuesResources[listIndex],
+            select: typeof selectValue === 'string' ? selectValue : selectValuesResources[listIndex].select,
+            price: price(),
+            replicas: typeof selectValue === 'number' ? selectValue : selectValuesResources[listIndex].replicas ?? null
+        };
+    };
+
+    // processorProfile = Processor profile
+    // networksCount = How many networks to index
+    // dataSize = How much data to index
+    // apiProfile = API service
+    // queryComplexity = Query Complexity
+    // apiReplicas = API service (replicas)
+    // requestsPerSecond = API requests, per sec
+    // postgresStorage = Database size
+    // postgresProfile = Database
+    // ??? = RPC requests (2M included)
+
+    const tabConditions = [
+        {
+            name: 'processorProfile',
+            conditions: () => {
+                const indexProcessorProfile = listIndex('processorProfile')
+                const indexNetworksCount = listIndex('networksCount')
+                const indexDataSize = listIndex('dataSize')
+                const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
+                const selectValueDataSize = selectValuesUseCase[indexDataSize].select
+                if ((selectValueNetworksCount === 1 && selectValueDataSize === 'Low') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'Medium')) {
+                    updateState(
+                        currentInfo('processorProfile', 'Small', indexProcessorProfile), indexProcessorProfile
+                    );
+                }
+                else if ((selectValueNetworksCount === 1 && selectValueDataSize === 'Medium') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'Large')) {
+                    updateState(
+                        currentInfo('processorProfile', 'Medium', indexProcessorProfile), indexProcessorProfile
+                    );
+                }
+                else if (selectValueNetworksCount === 1 && selectValueDataSize === 'Large') {
+                    updateState(
+                        currentInfo('processorProfile', 'Large', indexProcessorProfile), indexProcessorProfile
+                    );
+                }
+            }
+        },
+        {
+            name: 'apiProfile',
+            conditions: () => {
+                const indexApiProfile = listIndex('apiProfile')
+                const indexQueryComplexity = listIndex('queryComplexity')
+                const selectValue = selectValuesUseCase[indexQueryComplexity].select
+                if (selectValue === 'Simple' || selectValue === 'Not sure') {
+                    updateState(
+                        currentInfo('apiProfile', 'Small', indexApiProfile), indexApiProfile
+                    );
+                }
+                else if (selectValue === 'Mid') {
+                    updateState(
+                        currentInfo('apiProfile', 'Medium', indexApiProfile), indexApiProfile
+                    );
+                }
+                else if (selectValue === 'Complex') {
+                    updateState(
+                        currentInfo('apiProfile', 'Large', indexApiProfile), indexApiProfile
+                    );
+                }
+            }
+        },
+        {
+            name: 'apiReplicas',
+            conditions: () => {
+                const indexApiReplicas = listIndex('apiProfile')
+                const indexRequestsPerSecond = listIndex('requestsPerSecond')
+                const selectValue = Number(selectValuesUseCase[indexRequestsPerSecond].select)
+                if (0 <= selectValue && selectValue <= 1) {
+                    updateState(
+                        currentInfo('apiProfile', 1, indexApiReplicas), indexApiReplicas
+                    );
+                }
+                else if (2 <= selectValue && selectValue <= 5) {
+                    updateState(
+                        currentInfo('apiProfile', 2, indexApiReplicas), indexApiReplicas
+                    );
+                }
+                else if (6 <= selectValue) {
+                    updateState(
+                        currentInfo('apiProfile', Math.round(Math.log10(selectValue)), indexApiReplicas), indexApiReplicas
+                    );
+                }
+            }
+        },
+        {
+            name: 'postgresProfile',
+            conditions: () => {
+                const indexPostgresProfile = listIndex('postgresProfile')
+                const indexQueryComplexity = listIndex('queryComplexity')
+                const indexNetworksCount = listIndex('networksCount')
+                const selectValueQueryComplexity = selectValuesUseCase[indexQueryComplexity].select
+                const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
+                if (selectValueQueryComplexity === 'Simple' || selectValueQueryComplexity === 'Not sure') {
+                    updateState(
+                        currentInfo('postgresProfile', 'Small', indexPostgresProfile), indexPostgresProfile
+                    );
+                } else if ((selectValueNetworksCount >= 2 && selectValueNetworksCount <= 9) || selectValueQueryComplexity === 'Mid') {
+                    updateState(
+                        currentInfo('postgresProfile', 'Medium', indexPostgresProfile), indexPostgresProfile
+                    );
+                } else if (selectValueNetworksCount >= 10 || selectValueQueryComplexity === 'Complex') {
+                    updateState(
+                        currentInfo('postgresProfile', 'Large', indexPostgresProfile), indexPostgresProfile
+                    );
+                }
+            }
+        },
+        {
+            name: 'postgresStorage',
+            conditions: () => {
+                const indexPostgresStorage = listIndex('postgresStorage')
+                const indexDataSize = listIndex('dataSize')
+                const selectValue = selectValuesUseCase[indexDataSize].select
+                if (selectValue === 'Low') {
+                    updateState(
+                        currentInfo('postgresStorage', '50', indexPostgresStorage), indexPostgresStorage
+                    );
+                }
+                else if (selectValue === 'Medium') {
+                    updateState(
+                        currentInfo('postgresStorage', '150', indexPostgresStorage), indexPostgresStorage
+                    );
+                }
+                else if (selectValue === 'Large') {
+                    updateState(
+                        currentInfo('postgresStorage', '500', indexPostgresStorage), indexPostgresStorage
+                    );
+                }
+            }
+        },
+    ]
 
     useEffect(() => {
 
-        const updateState = (item: IApiCostsState, listIndex: number) => {
-            const updateObj = [...selectValues];
-            updateObj[listIndex] = updateObj[listIndex].replicas ? { ...item, replicas: updateObj[listIndex].replicas } : item;
-            setSelectValues([...updateObj]);
-        };
+        tabConditions.forEach((item, _index) => {
+            item.conditions()
+        })
+        return setSelectValuesResources([...returnSelectValuesResources])
 
-        const currentInfo = (fieldName: string, selectValue: string, listIndex: number): IApiCostsState => {
-            console.log('props', fieldName, selectValue, listIndex)
-            const mockField = _apiCostsMock[`${activeTab}`].fields.find((el) => el.name === fieldName);
-            if (!mockField) {
-                throw new Error('fieldName in _apiCostsMock not found. Add fieldName in _apiCostsMock or use correct fieldName');
-            }
-            const price = (): IApiCostsState["price"] => {
-                return mockField?.type === 'radio'
-                    ? {
-                        type: mockField.values.find((el) => el.value === selectValue)?.price.type ?? '',
-                        value: mockField.values.find((el) => el.value === selectValue)?.price.value ?? 0
-                    }
-                    : {
-                        type: mockField.price.type ?? '',
-                        value: mockField.price.value ?? 0
-                    };
-            };
-            return {
-                ...selectValues[listIndex],
-                select: selectValue,
-                price: price(),
-                replicas: selectValues[listIndex].replicas ?? null
-            };
-        };
-
-        const listIndex = (fieldName: string): number => selectValues.findIndex((el) => el.fieldName === fieldName);
-
-        const apiProfile_x = () => {
-            if (selectValues[listIndex('queryComplexity')].select === 'Simple' || selectValues[listIndex('queryComplexity')].select === 'Small') {
-                updateState(
-                    currentInfo('queryComplexity', selectValues[listIndex('queryComplexity')].select === 'Simple' ? 'Simple' : 'Small', listIndex('queryComplexity')),
-                    listIndex('queryComplexity')
-                );
-                updateState(
-                    currentInfo('apiProfile', 'Small', listIndex('apiProfile')),
-                    listIndex('apiProfile')
-                );
-            } else if (selectValues[listIndex('queryComplexity')].select === 'Mid') {
-                updateState(
-                    currentInfo('queryComplexity', 'Mid', listIndex('queryComplexity')),
-                    listIndex('queryComplexity')
-                );
-                updateState(
-                    currentInfo('apiProfile', 'Medium', listIndex('apiProfile')),
-                    listIndex('apiProfile')
-                );
-            } else if (selectValues[listIndex('queryComplexity')].select === 'Complex') {
-                updateState(
-                    currentInfo('queryComplexity', 'Complex', listIndex('queryComplexity')),
-                    listIndex('queryComplexity')
-                );
-                updateState(
-                    currentInfo('apiProfile', 'Large', listIndex('apiProfile')),
-                    listIndex('apiProfile')
-                );
-            }
-        };
-
-        apiProfile_x();
-    }, [selectValues]);
+    }, [selectValuesUseCase]);
 
     return [];
 };

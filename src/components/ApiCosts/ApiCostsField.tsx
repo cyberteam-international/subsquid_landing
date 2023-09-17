@@ -32,7 +32,7 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
 
     const updateState = (item: IApiCostsState) => {
         const updateObj = [...selectValues]
-        updateObj[listIndex] = updateObj[listIndex].replicas? {...item, replicas: updateObj[listIndex].replicas} : item
+        updateObj[listIndex] = !item.replicas ? { ...item, replicas: selectValues[listIndex].replicas } : item
         setSelectValues([...updateObj])
     }
 
@@ -63,10 +63,25 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                 });
                 break;
             case 'radio-input':
-                return <ApiCostsFieldRadioInput field={field} updateState={updateState} setClassName={setClassName} />
+                return (
+                    <ApiCostsFieldRadioInput
+                        field={field}
+                        updateState={updateState}
+                        setClassName={setClassName}
+                        value={selectValues[listIndex]?.select ?? ''}
+                    />
+                )
                 break;
             case 'range':
-                return <ApiCostsFieldRange selectValuesState={selectValuesState} field={field} listIndex={listIndex} isActive={isActive} updateState={updateState} />
+                return (
+                    <ApiCostsFieldRange 
+                        field={field} 
+                        listIndex={listIndex} 
+                        isActive={isActive} 
+                        updateState={updateState} 
+                        value={selectValues[listIndex].select?? field.range[0].toString()}
+                    />
+                )
                 break;
             default:
                 break;
@@ -83,7 +98,7 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                         value: 0
                     },
                     select: null,
-                    replicas: 1,
+                    replicas: selectValues[listIndex].replicas ? 1 : null,
                 },
             )
         }
@@ -124,7 +139,7 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                     </button>
                 }
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
-                <GlobalHelper helperObj={field.helper} listIndex={listIndex}/>
+                <GlobalHelper helperObj={field.helper} listIndex={listIndex} />
             </div>
             {field.subtitle && (
                 <p className={style["api-costs__list-item__subtitle"]}>{field.subtitle}</p>
@@ -145,18 +160,19 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                         type="number"
                         min={1}
                         value={
-                            typeof selectValues[listIndex].replicas === 'number'? 
-                            Number(selectValues[listIndex].replicas)
-                            : ''
+                            typeof selectValues[listIndex].replicas === 'number' ?
+                                Number(selectValues[listIndex].replicas)
+                                : 1
                         }
-                        onChange={(e) => {
-                            const updateObj = [...selectValues];
-                            updateObj[listIndex] = { 
-                                ...updateObj[listIndex], 
-                                replicas: e.target.value !== '' ? Number(e.target.value) : null 
-                            };
-                            setSelectValues([...updateObj]);
-                        }}
+                        // onChange={(e) => {
+                        //     const updateObj = [...selectValues];
+                        //     updateObj[listIndex] = { 
+                        //         ...updateObj[listIndex], 
+                        //         replicas: Number(e.target.value)
+                        //     };
+                        //     setSelectValues([...updateObj]);
+                        // }}
+                        onChange={(e) => updateState({ ...selectValues[listIndex], replicas: Number(e.target.value) })}
                     />
                 </div>
             )}

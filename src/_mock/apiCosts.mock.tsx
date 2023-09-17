@@ -91,7 +91,7 @@ export default {
             },
             {
                 title: 'How many networks to index',
-                name: 'networks',
+                name: 'networksCount',
                 type: 'radio-input',
                 canActive: false,
                 price: {
@@ -106,7 +106,7 @@ export default {
             },
             {
                 title: 'How much data to index',
-                name: 'dataIndex',
+                name: 'dataSize',
                 type: 'radio',
                 canActive: false,
                 values: [
@@ -118,21 +118,14 @@ export default {
                         },
                     },
                     {
-                        value: 'Mid',
+                        value: 'Medium',
                         price: {
                             type: "h",
                             value: 0 
                         },
                     },
                     {
-                        value: 'High',
-                        price: {
-                            type: "h",
-                            value: 0 
-                        },
-                    },
-                    {
-                        value: 'Not sure',
+                        value: 'Large',
                         price: {
                             type: "h",
                             value: 0 
@@ -146,39 +139,14 @@ export default {
             },
             {
                 title: 'API requests, per sec',
-                name: 'apiRequests',
-                type: 'radio',
+                name: 'requestsPerSecond',
+                type: 'radio-input',
                 canActive: false,
-                values: [
-                    {
-                        value: '0-5',
-                        price: {
-                            type: "h",
-                            value: 0 
-                        },
-                    },
-                    {
-                        value: '5-100',
-                        price: {
-                            type: "h",
-                            value: 0 
-                        },
-                    },
-                    {
-                        value: '100-1000',
-                        price: {
-                            type: "h",
-                            value: 0 
-                        },
-                    },
-                    {
-                        value: '1000+',
-                        price: {
-                            type: "h",
-                            value: 0 
-                        },
-                    },
-                ],
+                price: {
+                    type: "h",
+                    value: 0 
+                },
+                values: [1, 2, 3, 4],
                 helper: {
                     title: 'API requests',
                     description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
@@ -373,7 +341,7 @@ export default {
             },
             {
                 title: 'Database size',
-                name: 'databaseSize',
+                name: 'postgresStorage',
                 type: 'range',
                 canActive: true,
                 label: 'Storage, Gb',
