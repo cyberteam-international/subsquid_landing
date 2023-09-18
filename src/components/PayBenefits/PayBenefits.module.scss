@@ -123,16 +123,18 @@
             }
         }
         &__button{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 16px;
-            background: var(--color-primary);
-            font-size: 18px;
-            color: var(--color-white);
-            border-radius: 12px;
-            width: 100%;
-            z-index: 2;
+            button{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 14px 16px;
+                background: var(--color-primary);
+                font-size: 18px;
+                color: var(--color-white);
+                border-radius: 12px;
+                width: 100%;
+                z-index: 2;
+            }
             @include media-up(lg) {
                 margin-top: auto;
             }

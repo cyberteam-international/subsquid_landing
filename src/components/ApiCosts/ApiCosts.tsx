@@ -1,48 +1,23 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 import ApiCostsField from './ApiCostsField';
 import ApiCostsResult from './ApiCostsResult';
 
-import _apiCostsMock, { IApiCostsState } from '@/_mock/apiCosts.mock'
+import { ActiveTabContext, SelectValuesUseCaseContext, SelectValuesResourcesContext } from '@/app/calculator/context';
+
+import _apiCostsMock from '@/_mock/apiCosts.mock'
 
 import style from './ApiCosts.module.scss'
 
-export interface ISelectValues {
-    squidProfile: null | IApiCostsState;
-    processorProfile: null | IApiCostsState;
-    apiService: null | IApiCostsState;
-    dataBase: null | IApiCostsState;
-    rpsRequests: null | IApiCostsState;
-    databaseSize: null | IApiCostsState;
-    dataIndex: null | IApiCostsState;
-    apiRequests: null | IApiCostsState;
-    queryComplexity: null | IApiCostsState;
-    networks: null | IApiCostsState;
-}
-
-const initialValue : ISelectValues = {
-    squidProfile: null,
-    processorProfile: null,
-    apiService: null,
-    dataBase: null,
-    rpsRequests: null,
-    databaseSize: null,
-    dataIndex: null,
-    apiRequests: null,
-    queryComplexity: null,
-    networks: null,
-}
-
 export default function ApiCosts() {
 
-    const [activeTab, setActiveTab] = useState<string>(Object.keys(_apiCostsMock)[0]);
-    const [selectValues, setSelectValues] = useState<ISelectValues>(initialValue)
-    const [helperOpen, setHelperOpen] = useState<number>(-1)
+    const [activeTab, setActiveTab] = useContext(ActiveTabContext);
 
-    useEffect(()=>{setSelectValues({...initialValue})}, [activeTab])
-    useEffect(()=>{console.log(selectValues)}, [selectValues])
+    const [selectValues, setSelectValues] = useContext(
+        activeTab === 'byUseCase'? SelectValuesUseCaseContext : SelectValuesResourcesContext
+    )
 
     const setTabNames = () => {
         const objKeys = Object.keys(_apiCostsMock)
@@ -69,9 +44,8 @@ export default function ApiCosts() {
                 <ApiCostsField 
                     key={index} 
                     field={item} 
-                    state={[selectValues, setSelectValues]} 
-                    tabState={activeTab}
-                    helperState={[helperOpen === index, ()=>setHelperOpen(helperOpen === index? -1 : index)]}
+                    listIndex={index} 
+                    selectValuesState={[selectValues, setSelectValues]} 
                 />
             )
         })
@@ -85,7 +59,7 @@ export default function ApiCosts() {
             </div>
             <div className={style["api-costs__list"]}>
                 {setTabFields()}
-                <ApiCostsResult selectValues={selectValues}/>
+                <ApiCostsResult />
             </div>
         </section>
     )

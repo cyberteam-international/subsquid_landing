@@ -4,14 +4,6 @@ import _payBenefitsMock from "@/_mock/payBenefits.mock"
 
 import style from './PayBenefits.module.scss'
 
-export interface IPayBenefit{
-    title: string,
-    subtitle?: string,
-    description: string,
-    items: string[]
-    buttonText: string
-}
-
 export default function PayBenefits() {
 
     const setItems = () => {

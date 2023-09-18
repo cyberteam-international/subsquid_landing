@@ -1,55 +1,50 @@
-import { Dispatch, Fragment, SetStateAction, useState, useEffect } from 'react'
-import ReactSlider from 'react-slider'
+import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react'
+
+import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
+import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
+import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
+import GlobalHelper from '../GlobalHelper/GlobalHelper'
+
+import { ActiveTabContext, SelectValues } from '@/app/calculator/context'
 
 import {
-    AllowedFieldsNames,
     IApiCostsRadio,
     IApiCostsRadioInput,
     IApiCostsRange,
     IApiCostsState,
 } from '@/_mock/apiCosts.mock'
-import { ISelectValues } from './ApiCosts'
 
 import style from './ApiCosts.module.scss'
 
 type Props = {
-    field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio,
-    state: [
-        selectValues: ISelectValues,
-        setSelectValues: Dispatch<SetStateAction<ISelectValues>>,
-    ],
-    tabState: string,
-    helperState: [
-        helperOpen: boolean,
-        setHelperOpen: ()=>void,
-    ],
+    field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio
+    listIndex: number,
+    selectValuesState: SelectValues,
 }
 
-export default function ApiCostsField({ field, state, tabState, helperState }: Props) {
+export default function ApiCostsField({ field, listIndex, selectValuesState }: Props) {
 
-    const [selectValues, setSelectValues] = state
-    const [helperOpen, setHelperOpen] = helperState
-
+    const [selectValues, setSelectValues] = selectValuesState
+    const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
 
     const [activeitem, setActiveItem] = useState<number>()
     const [isActive, setIsActive] = useState<boolean>(true)
 
-    const updateState = (fieldName: AllowedFieldsNames, item: IApiCostsState | null, index: number) => {
-        const updateObj = { ...selectValues }
-        updateObj[fieldName] = isActive? item : null;
-        setSelectValues({ ...updateObj })
-        setActiveItem(isActive? index : -1)
+    const updateState = (item: IApiCostsState) => {
+        const updateObj = [...selectValues]
+        updateObj[listIndex] = !item.replicas ? { ...item, replicas: selectValues[listIndex].replicas } : item
+        setSelectValues([...updateObj])
     }
 
     const setClassName = (key: number,) => {
         if (field.type === 'radio-input') {
-            return selectValues[field.name]?.select === field.values[key].toString()  ?
+            return selectValues[listIndex]?.select === field.values[key].toString() ?
                 `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_active"]} ${style["api-costs__list-item__fields-item_number"]}`
-                :`${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_number"]}`
+                : `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_number"]}`
         }
         else return activeitem === key ?
             `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_active"]}`
-            :`${style["api-costs__list-item__fields-item"]}`
+            : `${style["api-costs__list-item__fields-item"]}`
     }
 
     const setFields = () => {
@@ -57,72 +52,35 @@ export default function ApiCostsField({ field, state, tabState, helperState }: P
             case 'radio':
                 return field.values.map((item, index) => {
                     return (
-                        <button
+                        <ApiCostsFieldRadio
                             key={index}
+                            field={field}
+                            item={item}
                             className={setClassName(index)}
-                            onClick={() => updateState(field.name, {fieldName: field.name, select: item.value, price: item.price}, index)}
-                        >
-                            {item.value}
-                        </button>
-
-                    );
+                            updateState={updateState}
+                        />
+                    )
                 });
                 break;
             case 'radio-input':
-                const returnArray = field.values.map((item, index) => {
-                    return (
-                        <button
-                            key={index}
-                            className={setClassName(index)}
-                            onClick={() => updateState(field.name, { price: field.price, fieldName: field.name, select: item.toString() }, index)}
-                        >
-                            {item}
-                        </button>
-
-                    );
-                });
                 return (
-                    <Fragment>
-                        <div className={style["api-costs__list-item__fields-wrapper"]}>
-                            {returnArray}
-                        </div>
-                        <input
-                            type="number"
-                            min={1}
-                            placeholder='Your value'
-                            onChange={(e) => updateState(field.name, { price: field.price, fieldName: field.name, select: e.target.value }, -1)}
-                        />
-                    </Fragment>
+                    <ApiCostsFieldRadioInput
+                        field={field}
+                        updateState={updateState}
+                        setClassName={setClassName}
+                        value={selectValues[listIndex]?.select ?? ''}
+                    />
                 )
                 break;
             case 'range':
                 return (
-                    <Fragment>
-                        <p className={style["api-costs__list-item__fields-item__label"]}>
-                            {field.label}
-                        </p>
-                        <p className={style["api-costs__list-item__fields-item__prefix"]}>
-                            {selectValues[field.name]?.select} {field.prefix}
-                        </p>
-                        <ReactSlider
-                            className={style["api-costs__list-item__fields-item-range"]}
-                            marks
-                            disabled={!isActive}
-                            markClassName={style["api-costs__list-item__fields-item-range-mark"]}
-                            min={field.range[0]}
-                            max={field.range[1]}
-                            thumbClassName={style["api-costs__list-item__fields-item-range-thumb"]}
-                            trackClassName={style["api-costs__list-item__fields-item-range-track"]}
-                            renderThumb={(props, state) =>
-                                <div {...props}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <circle cx="8" cy="8" r="6" fill="white" stroke="#68BEFC" strokeWidth="4" />
-                                    </svg>
-                                </div>
-                            }
-                            onChange={(value) => updateState(field.name, { price: field.price, fieldName: field.name, select: value.toString() }, -1)}
-                        />
-                    </Fragment>
+                    <ApiCostsFieldRange 
+                        field={field} 
+                        listIndex={listIndex} 
+                        isActive={isActive} 
+                        updateState={updateState} 
+                        value={selectValues[listIndex].select?? field.range[0].toString()}
+                    />
                 )
                 break;
             default:
@@ -132,14 +90,36 @@ export default function ApiCostsField({ field, state, tabState, helperState }: P
 
     useEffect(() => {
         if (!isActive) {
-            updateState(field.name, null, -1)
+            updateState(
+                {
+                    fieldName: selectValues[listIndex].fieldName,
+                    price: {
+                        type: selectValues[listIndex].price.type,
+                        value: 0
+                    },
+                    select: null,
+                    replicas: selectValues[listIndex].replicas ? 1 : null,
+                },
+            )
         }
     }, [isActive])
 
     useEffect(() => {
-        setActiveItem(-1)
+        if (field.type !== 'range') {
+            const currentIndex: number = field.values.findIndex((item) => {
+                if (typeof item === 'number') {
+                    return item.toString() === selectValues[listIndex].select;
+                } else {
+                    return item.value === selectValues[listIndex].select;
+                }
+            });
+            setActiveItem(currentIndex);
+        }
+    }, [selectValues, activeTab]);
+
+    useEffect(() => {
         setIsActive(true)
-    }, [tabState])
+    }, [activeTab])
 
     return (
         <div className={
@@ -159,17 +139,11 @@ export default function ApiCostsField({ field, state, tabState, helperState }: P
                     </button>
                 }
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
-                {field.helper && (
-                    <div className={style["api-costs__list-item__header__helper"]}>
-                        <span onClick={()=> setHelperOpen()}>?</span>
-                        {helperOpen && (
-                            <div className={style["api-costs__list-item__header__helper__block"]}>
-                                <p>{field.helper.description}</p>
-                            </div>
-                        )}
-                    </div>
-                )}
+                <GlobalHelper helperObj={field.helper} listIndex={listIndex} />
             </div>
+            {field.subtitle && (
+                <p className={style["api-costs__list-item__subtitle"]}>{field.subtitle}</p>
+            )}
             <div
                 className={
                     field.type !== 'range' ?
@@ -179,6 +153,29 @@ export default function ApiCostsField({ field, state, tabState, helperState }: P
             >
                 {setFields()}
             </div>
+            {field.replicas && (
+                <div className={style["api-costs__list-item__replicas"]}>
+                    <p className={style["api-costs__list-item__replicas__title"]}>Replicas</p>
+                    <input
+                        type="number"
+                        min={1}
+                        value={
+                            typeof selectValues[listIndex].replicas === 'number' ?
+                                Number(selectValues[listIndex].replicas)
+                                : 1
+                        }
+                        // onChange={(e) => {
+                        //     const updateObj = [...selectValues];
+                        //     updateObj[listIndex] = { 
+                        //         ...updateObj[listIndex], 
+                        //         replicas: Number(e.target.value)
+                        //     };
+                        //     setSelectValues([...updateObj]);
+                        // }}
+                        onChange={(e) => updateState({ ...selectValues[listIndex], replicas: Number(e.target.value) })}
+                    />
+                </div>
+            )}
             {field.warning && (
                 <div className={style["api-costs__list-item__warning"]}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

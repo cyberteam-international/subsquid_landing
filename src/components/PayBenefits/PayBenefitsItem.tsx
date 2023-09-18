@@ -1,8 +1,8 @@
-import { IPayBenefit } from "./PayBenefits";
+import { IPayBenefit } from '@/_mock/payBenefits.mock'
 
 import style from './PayBenefits.module.scss'
 
-export default function PayBenefitsItem({ title, subtitle, items, buttonText, description }: IPayBenefit) {
+export default function PayBenefitsItem({ title, subtitle, items, button, description }: IPayBenefit) {
 
     const setItems = () => {
         return items.map((item, index) => {
@@ -35,7 +35,9 @@ export default function PayBenefitsItem({ title, subtitle, items, buttonText, de
             <ul className={style["pay-benefits__item__list"]}>
                 {setItems()}
             </ul>
-            <button className={style["pay-benefits__item__button"]}>{buttonText}</button>
+            <a className={style["pay-benefits__item__button"]} href={button.href} target="_blank" rel="noopener noreferrer">
+                <button>{button.title}</button>
+            </a>
         </div>
     )
 }

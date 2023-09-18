@@ -1,47 +1,39 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-import { AllowedFieldsNames, IApiCostsState } from "@/_mock/apiCosts.mock";
-import { ISelectValues } from "./ApiCosts";
+import {
+    TotalSumContext,
+    ScrollElementContext,
+    ActiveTabContext,
+    SelectValuesResourcesContext,
+    SelectValuesUseCaseContext
+} from "@/app/calculator/context";
 
 import style from './ApiCosts.module.scss'
 
-type Props = {
-    selectValues: ISelectValues
-};
+export default function ApiCostsResult() {
 
-export default function ApiCostsResult({ selectValues }: Props) {
+    const [totalSum, _setTotalSum] = useContext(TotalSumContext);
+    const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
+    const [selectValues, _setSelectValues] = useContext(
+        activeTab === 'byUseCase' ? SelectValuesUseCaseContext : SelectValuesResourcesContext
+    )
+
+    const totalBlockRef = useContext(ScrollElementContext)
 
     const [isOpen, setIsOpen] = useState(false);
 
-
-    const setTotalPrice = () => {
-        let total = 0
-        for (let [_key, value] of Object.entries(selectValues) as unknown as [key: AllowedFieldsNames, value: IApiCostsState][]) {
-            if (value) {
-                if (Number(value?.select)) {
-                    total += Number(value?.select) * value.price
-                }
-                else {
-                    total += value.price
-                }
-            }
-        }
-        return total
-    }
-
     const setDetailInfo = () => {
-        const entries = Object.entries(selectValues) as [key: AllowedFieldsNames, value: IApiCostsState][]
-        return entries.map((item, index) => {
-            if (item[1]) {
+        return selectValues?.map((item, index) => {
+            if (item.select) {
                 return (
                     <div className={style["api-costs__result__list-item"]} key={index}>
                         <div className={style["api-costs__result__list-item__wrapper"]}>
-                            <p>{item[1]?.fieldName}</p>
+                            <p>{item.fieldName}</p>
                             <p>
-                                ${Number(item[1]?.select) ? Number(item[1].select) * item[1].price : item[1]?.price}
+                                ${Number(item.select) ? (Number(item.select) * item.price.value).toFixed(2) : (item?.price.value).toFixed(2)}
                             </p>
                         </div>
-                        <p className={style["api-costs__result__list-item__select"]}>{item[1]?.select}</p>
+                        <p className={style["api-costs__result__list-item__select"]}>{item.select}</p>
                     </div>
                 )
             }
@@ -55,8 +47,9 @@ export default function ApiCostsResult({ selectValues }: Props) {
                     `${style["api-costs__result"]} ${style["api-costs__result_active"]}`
                     : style["api-costs__result"]
             }
+            ref={totalBlockRef}
         >
-            <p className={style["api-costs__result__total"]}>${setTotalPrice()}/mo</p>
+            <p className={style["api-costs__result__total"]}>${totalSum}/mo</p>
             <button
                 className={style["api-costs__result__more"]}
                 onClick={() => setIsOpen(!isOpen)}
