@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 
 import { TotalSumContext, ScrollElementContext } from '@/app/calculator/context';
 
@@ -11,7 +11,7 @@ export default function EstimateCost({ }: Props) {
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
     const totalBlockRef = useContext(ScrollElementContext)
 
-    const scroll = () =>{
+    const scroll = () => {
         if (totalBlockRef?.current) {
             return window.scrollTo({
                 top: totalBlockRef?.current.getBoundingClientRect().top + window.scrollY - 52 - 16,
@@ -21,12 +21,12 @@ export default function EstimateCost({ }: Props) {
     }
 
     return (
-        <div 
-            className={style["total"]} 
-            onClick={()=>scroll()}
+        <div
+            className={style["total"]}
+            onClick={() => scroll()}
         >
             <p>Estimate cost:</p>
-            <p>{totalSum? `${totalSum}$` : 'free'}</p>
+            <p>{totalSum ? `${totalSum}$` : 'free'}</p>
         </div>
     )
 }
