@@ -1,4 +1,13 @@
-import { IPayBenefit } from "@/components/PayBenefits/PayBenefits";
+export interface IPayBenefit{
+    title: string,
+    subtitle?: string,
+    description: string,
+    items: string[]
+    button: {
+        title: string,
+        href: string,
+    }
+}
 
 
 export default [
@@ -12,7 +21,10 @@ export default [
             '500k monthly RPC requests',
             'Community support',
         ],
-        buttonText: 'Get started',
+        button: {
+            title: 'Get started',
+            href: 'https://docs.subsquid.io/deploy-squid/pricing/'
+        },
     },
     {
         title: 'Premium',
@@ -24,7 +36,10 @@ export default [
             '2M monthly RPC requests',
             'Community support',
         ],
-        buttonText: 'Get started',
+        button: {
+            title: 'Get started',
+            href: 'https://docs.subsquid.io/deploy-squid/pricing/#processor-only-squid'
+        },
     },
     {
         title: 'Enterprise',
@@ -33,6 +48,9 @@ export default [
             'Everything in Premium',
             'Individual SLAs and discounts',
         ],
-        buttonText: 'Talk to us',
+        button: {
+            title: 'Talk to us',
+            href: 'https://docs.subsquid.io/deploy-squid/pricing/#slas'
+        },
     },
 ] as IPayBenefit[]

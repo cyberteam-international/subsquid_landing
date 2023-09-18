@@ -9,7 +9,7 @@ type Props = {
 
 export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState }: Props) => {
 
-    const [selectValuesUseCase, setSelectValuesUseCase] = selectUseCaseState
+    const [selectValuesUseCase, _setSelectValuesUseCase] = selectUseCaseState
     const [selectValuesResources, setSelectValuesResources] = selectResourcesState
 
     let returnSelectValuesResources = selectValuesResources
