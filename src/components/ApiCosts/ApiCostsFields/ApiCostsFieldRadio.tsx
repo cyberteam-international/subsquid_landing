@@ -1,4 +1,5 @@
-import { IApiCostsRadio, IApiCostsState, IApiCostsValueObject } from "@/_mock/apiCosts.mock";
+import { IApiCostsState, IApiCostsValueObject } from "@/_mock/apiCosts.mock";
+import { useEffect } from "react";
 
 type Props = {
     updateState: ( item: IApiCostsState)=>void,

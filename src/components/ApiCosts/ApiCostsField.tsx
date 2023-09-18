@@ -101,7 +101,7 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                             },
                         }
                     }
-                    className={`${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_active"]}`}
+                    className={setClassName(0)}
                     updateState={updateState}
                 />
             }
@@ -146,13 +146,6 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
         }
     }, [isActive])
 
-    // useEffect(() => {
-    //     if (selectValues[0].select === 'Collocated' && activeTab === 'byResources') {
-    //         console.log('setIsActive(false)')
-    //         setIsActive(false)
-    //     }
-    // }, [selectValues])
-
     useEffect(() => {
         if (field.type !== 'range') {
             const currentIndex: number = field.values.findIndex((item) => {
@@ -162,7 +155,10 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                     return item.value === selectValues[listIndex].select;
                 }
             });
-            setActiveItem(currentIndex);
+            if (selectValues[0].select !== 'Collocated' || activeTab !== 'byResources') {
+                setActiveItem(currentIndex);
+            }
+            else setActiveItem(0);
         }
     }, [selectValues, activeTab]);
 
