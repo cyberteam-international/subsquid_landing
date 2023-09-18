@@ -1,11 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, Fragment } from "react";
 
 import {
     TotalSumContext,
     ScrollElementContext,
-    ActiveTabContext,
     SelectValuesResourcesContext,
-    SelectValuesUseCaseContext
 } from "@/app/calculator/context";
 
 import style from './ApiCosts.module.scss'
@@ -13,10 +11,7 @@ import style from './ApiCosts.module.scss'
 export default function ApiCostsResult() {
 
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
-    const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
-    const [selectValues, _setSelectValues] = useContext(
-        activeTab === 'byUseCase' ? SelectValuesUseCaseContext : SelectValuesResourcesContext
-    )
+    const [selectValues, _setSelectValues] = useContext(SelectValuesResourcesContext)
 
     const totalBlockRef = useContext(ScrollElementContext)
 
@@ -24,17 +19,35 @@ export default function ApiCostsResult() {
 
     const setDetailInfo = () => {
         return selectValues?.map((item, index) => {
-            if (item.select) {
+            if (item.select && item.fieldName !== 'squidProfile') {
                 return (
-                    <div className={style["api-costs__result__list-item"]} key={index}>
-                        <div className={style["api-costs__result__list-item__wrapper"]}>
-                            <p>{item.fieldName}</p>
-                            <p>
-                                ${Number(item.select) ? (Number(item.select) * item.price.value).toFixed(2) : (item?.price.value).toFixed(2)}
+                    <Fragment key={index}>
+                        <div className={style["api-costs__result__list-item"]}>
+                            <div className={style["api-costs__result__list-item__wrapper"]}>
+                                <p>{item.fieldName}</p>
+                                <p>
+                                    ${item.replicas? 
+                                        Number(item.select) ? (Number(item.select) * item.price.value * item.replicas).toFixed(2) : (item?.price.value * item.replicas).toFixed(2)
+                                        : Number(item.select) ? (Number(item.select) * item.price.value).toFixed(2) : (item?.price.value).toFixed(2)
+                                    }/h
+                                </p>
+                            </div>
+                            <p className={style["api-costs__result__list-item__select"]}>
+                                {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
                             </p>
                         </div>
-                        <p className={style["api-costs__result__list-item__select"]}>{item.select}</p>
-                    </div>
+                        {item.replicas && (
+                            <div className={style["api-costs__result__list-item"]}>
+                                <div className={style["api-costs__result__list-item__wrapper"]}>
+                                    <p>{item.fieldName} replicas</p>
+                                    <p>
+                                        ${0}/h
+                                    </p>
+                                </div>
+                                <p className={style["api-costs__result__list-item__select"]}>{item.replicas}</p>
+                            </div>
+                        )}
+                    </Fragment>
                 )
             }
         })
@@ -49,7 +62,27 @@ export default function ApiCostsResult() {
             }
             ref={totalBlockRef}
         >
-            <p className={style["api-costs__result__total"]}>${totalSum}/mo</p>
+            {selectValues[0].select === 'Collocated' && (
+                <p className={style["api-costs__result__total"]}>free</p>
+            )}
+            <p 
+                className={
+                    selectValues[0].select === 'Collocated'?
+                    `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
+                    :style["api-costs__result__total"]
+                }
+            >
+                ${(totalSum * 720).toFixed(2)}/mo
+            </p>
+            <p 
+                className={
+                    selectValues[0].select === 'Collocated'?
+                    `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
+                    :style["api-costs__result__total"]
+                }
+            >
+                ${totalSum.toFixed(2)}/h
+            </p>
             <button
                 className={style["api-costs__result__more"]}
                 onClick={() => setIsOpen(!isOpen)}

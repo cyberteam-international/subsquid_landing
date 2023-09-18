@@ -330,7 +330,7 @@ export default {
                 prefix: 'M',
                 price: {
                     type: "h",
-                    value: 0 
+                    value: 0.0028 
                 },
                 range: [2, 500],
                 step: 1,

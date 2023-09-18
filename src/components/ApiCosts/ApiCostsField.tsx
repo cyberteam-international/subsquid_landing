@@ -30,9 +30,9 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
     const [activeitem, setActiveItem] = useState<number>()
     const [isActive, setIsActive] = useState<boolean>(true)
 
-    const updateState = (item: IApiCostsState) => {
+    const updateState = (item: IApiCostsState, index: number = listIndex) => {
         const updateObj = [...selectValues]
-        updateObj[listIndex] = !item.replicas ? { ...item, replicas: selectValues[listIndex].replicas } : item
+        updateObj[index] = !item.replicas ? { ...item, replicas: selectValues[listIndex].replicas } : item
         setSelectValues([...updateObj])
     }
 
@@ -48,44 +48,86 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
     }
 
     const setFields = () => {
-        switch (field.type) {
-            case 'radio':
+        if (selectValues[0].select !== 'Collocated' || activeTab !== 'byResources') {
+            switch (field.type) {
+                case 'radio':
+                    return field.values.map((item, index) => {
+                        return (
+                            <ApiCostsFieldRadio
+                                key={index}
+                                fieldName={field.name}
+                                item={item}
+                                className={setClassName(index)}
+                                updateState={updateState}
+                            />
+                        )
+                    });
+                    break;
+                case 'radio-input':
+                    return (
+                        <ApiCostsFieldRadioInput
+                            field={field}
+                            updateState={updateState}
+                            setClassName={setClassName}
+                            value={selectValues[listIndex]?.select ?? ''}
+                        />
+                    )
+                    break;
+                case 'range':
+                    return (
+                        <ApiCostsFieldRange
+                            field={field}
+                            listIndex={listIndex}
+                            isActive={isActive}
+                            updateState={updateState}
+                            value={selectValues[listIndex].select ?? field.range[0].toString()}
+                        />
+                    )
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (field.type !== 'range') {
+            if (field.name !== 'squidProfile') {
+                return <ApiCostsFieldRadio
+                    fieldName={field.name}
+                    item={
+                        {
+                            value: 'Default',
+                            price: {
+                                type: "h",
+                                value: 0
+                            },
+                        }
+                    }
+                    className={setClassName(0)}
+                    updateState={updateState}
+                />
+            }
+            else if (field.type === 'radio') {
                 return field.values.map((item, index) => {
                     return (
                         <ApiCostsFieldRadio
                             key={index}
-                            field={field}
+                            fieldName={field.name}
                             item={item}
                             className={setClassName(index)}
                             updateState={updateState}
                         />
                     )
                 });
-                break;
-            case 'radio-input':
-                return (
-                    <ApiCostsFieldRadioInput
-                        field={field}
-                        updateState={updateState}
-                        setClassName={setClassName}
-                        value={selectValues[listIndex]?.select ?? ''}
-                    />
-                )
-                break;
-            case 'range':
-                return (
-                    <ApiCostsFieldRange 
-                        field={field} 
-                        listIndex={listIndex} 
-                        isActive={isActive} 
-                        updateState={updateState} 
-                        value={selectValues[listIndex].select?? field.range[0].toString()}
-                    />
-                )
-                break;
-            default:
-                break;
+            }
         }
+        else return (
+            <ApiCostsFieldRange
+                field={field}
+                listIndex={listIndex}
+                isActive={isActive}
+                updateState={updateState}
+                value={selectValues[listIndex].select ?? field.range[0].toString()}
+            />
+        )
     }
 
     useEffect(() => {
@@ -113,7 +155,10 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                     return item.value === selectValues[listIndex].select;
                 }
             });
-            setActiveItem(currentIndex);
+            if (selectValues[0].select !== 'Collocated' || activeTab !== 'byResources') {
+                setActiveItem(currentIndex);
+            }
+            else setActiveItem(0);
         }
     }, [selectValues, activeTab]);
 
@@ -164,14 +209,6 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                                 Number(selectValues[listIndex].replicas)
                                 : 1
                         }
-                        // onChange={(e) => {
-                        //     const updateObj = [...selectValues];
-                        //     updateObj[listIndex] = { 
-                        //         ...updateObj[listIndex], 
-                        //         replicas: Number(e.target.value)
-                        //     };
-                        //     setSelectValues([...updateObj]);
-                        // }}
                         onChange={(e) => updateState({ ...selectValues[listIndex], replicas: Number(e.target.value) })}
                     />
                 </div>

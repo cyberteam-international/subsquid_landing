@@ -63,19 +63,23 @@ export default function CalculatorPage() {
     const totalBlockRef = useRef<HTMLDivElement | null>(null)
 
     const setTotalPrice = () => {
-        let total = 10
-        // selectValues.forEach((item, index) => {
-
-        // })
+        let total = 0
+        selectValuesResources.forEach((item, index) => {
+            total +=
+                item.replicas ?
+                    Number(item.select) ? (Number(item.select) * item.price.value * item.replicas) : (item?.price.value * item.replicas)
+                    : Number(item.select) ? (Number(item.select) * item.price.value) : (item?.price.value)
+        })
         return setTotalSum(total)
     }
 
     useEffect(() => {
         console.log('selectValuesResources', selectValuesResources)
+        setTotalPrice()
     }, [selectValuesResources])
-    useEffect(() => {
-        console.log('selectValuesUseCase', selectValuesUseCase)
-    }, [selectValuesUseCase])
+    // useEffect(() => {
+    //     console.log('selectValuesUseCase', selectValuesUseCase)
+    // }, [selectValuesUseCase])
 
     useEffect(() => {
         if (helper.index !== 'manifest') {
@@ -107,7 +111,7 @@ export default function CalculatorPage() {
                                         <ApiCosts />
                                         <ScaleManifest />
                                         {(windowWidth < 768 && totalSum > 0) && (
-                                            <EstimateCost />
+                                            <EstimateCost isCollocated={selectValuesResources[0].select === 'Collocated'}/>
                                         )}
                                     </div>
                                 </main>
