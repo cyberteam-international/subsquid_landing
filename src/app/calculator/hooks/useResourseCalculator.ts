@@ -16,7 +16,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
 
     const listIndex = (fieldName: string): number => {
         const selectValuesUseCaseIndex = selectValuesUseCase.findIndex((el) => el.fieldName === fieldName)
-        const selectValuesResourcesIndex = selectValuesResources.findIndex((el) => el.fieldName === fieldName)
+        const selectValuesResourcesIndex = returnSelectValuesResources.findIndex((el) => el.fieldName === fieldName)
         if (selectValuesUseCaseIndex !== -1) {
             return selectValuesUseCaseIndex
         }
@@ -30,7 +30,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
 
     const updateState = (item: IApiCostsState, listIndex: number) => {
         const updateObj = [...returnSelectValuesResources];
-        updateObj[listIndex] = !item.replicas ? { ...item, replicas: selectValuesResources[listIndex].replicas } : item
+        updateObj[listIndex] = !item.replicas ? { ...item, replicas: returnSelectValuesResources[listIndex].replicas } : item
         returnSelectValuesResources = [...updateObj]
     };
 
@@ -50,11 +50,29 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                     value: mockField.price.value ?? 0
                 };
         };
+        const select = (): IApiCostsState['select'] =>{
+            if (typeof selectValue === 'string') {
+                if (selectValue === 'mockData') {
+                    switch (mockField.type) {
+                        case 'radio':
+                            return mockField.values[0].value
+                        case 'radio-input':
+                            return mockField.values[0].toString()
+                        case 'range':
+                            return mockField.range[0].toString()
+                        default:
+                            throw new Error('Uncorrected field type. Update setInitial() or add field current type.')
+                    }
+                }
+                else return selectValue
+            }
+            else return returnSelectValuesResources[listIndex].select
+        }
         return {
-            ...selectValuesResources[listIndex],
-            select: typeof selectValue === 'string' ? selectValue : selectValuesResources[listIndex].select,
+            ...returnSelectValuesResources[listIndex],
+            select: typeof selectValue === 'string' ? selectValue : returnSelectValuesResources[listIndex].select,
             price: price(),
-            replicas: typeof selectValue === 'number' ? selectValue : selectValuesResources[listIndex].replicas ?? null
+            replicas: typeof selectValue === 'number' ? selectValue : returnSelectValuesResources[listIndex].replicas ?? null
         };
     };
 
@@ -67,15 +85,50 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
     // requestsPerSecond = API requests, per sec
     // postgresStorage = Database size
     // postgresProfile = Database
+    // squidProfile = Squid profile
     // ??? = RPC requests (2M included)
+
+    const indexSquidProfileUseCase = selectValuesUseCase.findIndex((el) => el.fieldName === 'squidProfile')
+    const indexSquidProfileResources = returnSelectValuesResources.findIndex((el) => el.fieldName === 'squidProfile')
+    const indexProcessorProfile = listIndex('processorProfile')
+    const indexApiProfile = listIndex('apiProfile')
+    const indexPostgresProfile = listIndex('postgresProfile')
+    const indexPostgresStorage = listIndex('postgresStorage')
+    const indexDataSize = listIndex('dataSize')
+    const indexQueryComplexity = listIndex('queryComplexity')
+    const indexNetworksCount = listIndex('networksCount')
+
+    const selectValueUseCase = selectValuesUseCase[indexSquidProfileUseCase].select
+    const selectValueResources = selectValuesResources[indexSquidProfileResources].select
 
     const tabConditions = [
         {
+            name: 'squidProfile',
+            conditions: () => {
+                if (selectValueUseCase === 'Collocated' && selectValueResources === 'Dedicated') {
+                    updateState(
+                        currentInfo('squidProfile', 'Collocated', indexSquidProfileResources), indexSquidProfileResources
+                    );
+                    updateState(
+                        currentInfo('processorProfile', 'Default', indexProcessorProfile), indexProcessorProfile
+                    );
+                    updateState(
+                        currentInfo('apiProfile', 'Default', indexApiProfile), indexApiProfile
+                    );
+                    updateState(
+                        currentInfo('postgresProfile', 'Default', indexPostgresProfile), indexPostgresProfile
+                    );
+                }
+                else if (selectValueUseCase === 'Dedicated' && selectValueResources === 'Collocated') {
+                    updateState(
+                        currentInfo('squidProfile', 'Dedicated', indexSquidProfileResources), indexSquidProfileResources
+                    );
+                }
+            }
+        },
+        {
             name: 'processorProfile',
             conditions: () => {
-                const indexProcessorProfile = listIndex('processorProfile')
-                const indexNetworksCount = listIndex('networksCount')
-                const indexDataSize = listIndex('dataSize')
                 const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
                 const selectValueDataSize = selectValuesUseCase[indexDataSize].select
                 if ((selectValueNetworksCount === 1 && selectValueDataSize === 'Low') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'Medium')) {
@@ -98,8 +151,6 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         {
             name: 'apiProfile',
             conditions: () => {
-                const indexApiProfile = listIndex('apiProfile')
-                const indexQueryComplexity = listIndex('queryComplexity')
                 const selectValue = selectValuesUseCase[indexQueryComplexity].select
                 if (selectValue === 'Simple' || selectValue === 'Not sure') {
                     updateState(
@@ -144,9 +195,6 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         {
             name: 'postgresProfile',
             conditions: () => {
-                const indexPostgresProfile = listIndex('postgresProfile')
-                const indexQueryComplexity = listIndex('queryComplexity')
-                const indexNetworksCount = listIndex('networksCount')
                 const selectValueQueryComplexity = selectValuesUseCase[indexQueryComplexity].select
                 const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
                 if (selectValueQueryComplexity === 'Simple' || selectValueQueryComplexity === 'Not sure') {
@@ -167,8 +215,6 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         {
             name: 'postgresStorage',
             conditions: () => {
-                const indexPostgresStorage = listIndex('postgresStorage')
-                const indexDataSize = listIndex('dataSize')
                 const selectValue = selectValuesUseCase[indexDataSize].select
                 if (selectValue === 'Low') {
                     updateState(
@@ -192,7 +238,9 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
     useEffect(() => {
 
         tabConditions.forEach((item, _index) => {
-            item.conditions()
+            if (item.name === 'squidProfile' || item.name === 'postgresStorage' || selectValueUseCase === 'Dedicated' ) {
+                item.conditions()
+            }
         })
         return setSelectValuesResources([...returnSelectValuesResources])
 

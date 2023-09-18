@@ -73,9 +73,9 @@ export default function CalculatorPage() {
     useEffect(() => {
         console.log('selectValuesResources', selectValuesResources)
     }, [selectValuesResources])
-    useEffect(() => {
-        console.log('selectValuesUseCase', selectValuesUseCase)
-    }, [selectValuesUseCase])
+    // useEffect(() => {
+    //     console.log('selectValuesUseCase', selectValuesUseCase)
+    // }, [selectValuesUseCase])
 
     useEffect(() => {
         if (helper.index !== 'manifest') {
