@@ -4,6 +4,7 @@ import {
     TotalSumContext,
     ScrollElementContext,
     SelectValuesResourcesContext,
+    TabsProfileContext,
 } from "@/app/calculator/context";
 
 import style from './ApiCosts.module.scss'
@@ -12,6 +13,7 @@ export default function ApiCostsResult() {
 
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
     const [selectValues, _setSelectValues] = useContext(SelectValuesResourcesContext)
+    const [tabsProfile, _setTabsProfile] = useContext(TabsProfileContext)
 
     const totalBlockRef = useContext(ScrollElementContext)
 
@@ -19,37 +21,35 @@ export default function ApiCostsResult() {
 
     const setDetailInfo = () => {
         return selectValues?.map((item, index) => {
-            if (item.select && item.fieldName !== 'squidProfile') {
-                return (
-                    <Fragment key={index}>
-                        <div className={style["api-costs__result__list-item"]}>
-                            <div className={style["api-costs__result__list-item__wrapper"]}>
-                                <p>{item.fieldName}</p>
-                                <p>
-                                    ${item.replicas? 
-                                        Number(item.select) ? (Number(item.select) * item.price.value * item.replicas).toFixed(2) : (item?.price.value * item.replicas).toFixed(2)
-                                        : Number(item.select) ? (Number(item.select) * item.price.value).toFixed(2) : (item?.price.value).toFixed(2)
-                                    }/h
-                                </p>
-                            </div>
-                            <p className={style["api-costs__result__list-item__select"]}>
-                                {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
+            return (
+                <Fragment key={index}>
+                    <div className={style["api-costs__result__list-item"]}>
+                        <div className={style["api-costs__result__list-item__wrapper"]}>
+                            <p>{item.fieldName}</p>
+                            <p>
+                                ${item.replicas? 
+                                    Number(item.select) ? (Number(item.select) * item.price.value * item.replicas).toFixed(2) : (item?.price.value * item.replicas).toFixed(2)
+                                    : Number(item.select) ? (Number(item.select) * item.price.value).toFixed(2) : (item?.price.value).toFixed(2)
+                                }/h
                             </p>
                         </div>
-                        {item.replicas && (
-                            <div className={style["api-costs__result__list-item"]}>
-                                <div className={style["api-costs__result__list-item__wrapper"]}>
-                                    <p>{item.fieldName} replicas</p>
-                                    <p>
-                                        ${0}/h
-                                    </p>
-                                </div>
-                                <p className={style["api-costs__result__list-item__select"]}>{item.replicas}</p>
+                        <p className={style["api-costs__result__list-item__select"]}>
+                            {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
+                        </p>
+                    </div>
+                    {item.replicas && (
+                        <div className={style["api-costs__result__list-item"]}>
+                            <div className={style["api-costs__result__list-item__wrapper"]}>
+                                <p>{item.fieldName} replicas</p>
+                                <p>
+                                    ${0}/h
+                                </p>
                             </div>
-                        )}
-                    </Fragment>
-                )
-            }
+                            <p className={style["api-costs__result__list-item__select"]}>{item.replicas}</p>
+                        </div>
+                    )}
+                </Fragment>
+            )
         })
     }
 
@@ -62,12 +62,12 @@ export default function ApiCostsResult() {
             }
             ref={totalBlockRef}
         >
-            {selectValues[0].select === 'Collocated' && (
+            {tabsProfile[0].select === 'COLLOCATED' && (
                 <p className={style["api-costs__result__total"]}>free</p>
             )}
             <p 
                 className={
-                    selectValues[0].select === 'Collocated'?
+                    tabsProfile[0].select === 'COLLOCATED'?
                     `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
                     :style["api-costs__result__total"]
                 }
@@ -76,7 +76,7 @@ export default function ApiCostsResult() {
             </p>
             <p 
                 className={
-                    selectValues[0].select === 'Collocated'?
+                    tabsProfile[0].select === 'COLLOCATED'?
                     `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
                     :style["api-costs__result__total"]
                 }

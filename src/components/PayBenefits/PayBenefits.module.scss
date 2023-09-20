@@ -123,6 +123,7 @@
             }
         }
         &__button{
+            z-index: 2;
             button{
                 display: flex;
                 align-items: center;
@@ -133,7 +134,6 @@
                 color: var(--color-white);
                 border-radius: 12px;
                 width: 100%;
-                z-index: 2;
             }
             @include media-up(lg) {
                 margin-top: auto;

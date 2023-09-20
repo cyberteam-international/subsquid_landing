@@ -4,8 +4,14 @@ import { IApiCostsState } from '@/_mock/apiCosts.mock'
 
 export type ActiveTab = [string, Dispatch<SetStateAction<string>>]
 export type SelectValues = [IApiCostsState[], Dispatch<SetStateAction<IApiCostsState[]>>]
-export type SumState = [number, Dispatch<SetStateAction<number>>]
+export type SumState = [Sum[], Dispatch<SetStateAction<Sum[]>>]
 export type HelperState = [Helper, Dispatch<SetStateAction<Helper>>]
+
+export type Sum = {
+    fieldName: string,
+    price: number,
+    currentPrice: number,
+}
 
 export type Helper = {
     index: number | 'manifest',
@@ -18,17 +24,19 @@ export type Helper = {
 const initialSelectValues: IApiCostsState[] = [
     {
         fieldName: '',
-        select: null,
+        select: '',
         price: {
             type: '',
             value: 0
         },
+        isActive: true,
     }
 ]
 
 export const ActiveTabContext = createContext<ActiveTab>(['', () => { }]);
+export const TabsProfileContext = createContext<SelectValues>([initialSelectValues, () => { }]);
 export const SelectValuesUseCaseContext = createContext<SelectValues>([initialSelectValues, () => { }]);
 export const SelectValuesResourcesContext = createContext<SelectValues>([initialSelectValues, () => { }]);
-export const TotalSumContext = createContext<SumState>([0, () => { }]);
+export const TotalSumContext = createContext<SumState>([[{fieldName: '', price: 0, currentPrice: 0}], () => { }]);
 export const HelperContext = createContext<HelperState>([{index:-1}, () => { }]);
 export const ScrollElementContext = createContext<MutableRefObject<HTMLDivElement | null> | null>(null);
