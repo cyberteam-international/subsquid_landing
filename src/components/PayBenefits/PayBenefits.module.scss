@@ -19,7 +19,9 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        transition: 0.3s all;
         &:hover{
+            transition: 0.3s all;
             background: var(--color-gray-light);
         }
         &:nth-child(2){

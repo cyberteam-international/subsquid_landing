@@ -103,8 +103,7 @@ export default function ApiCostsResult() {
                     :style["api-costs__result__total"]
                 }
             >
-                {currentTotalPrice() !== 0? `${(currentTotalPrice() * 720).toFixed(2)}/mo` : `${(currentOldPrice() * 720).toFixed(2)}/mo`}
-                
+                {currentTotalPrice() !== 0? `$${(currentTotalPrice() * 720).toFixed(2)}/mo` : `$${(currentOldPrice() * 720).toFixed(2)}/mo`}
             </p>
             <p 
                 className={
@@ -113,7 +112,7 @@ export default function ApiCostsResult() {
                     :style["api-costs__result__total"]
                 }
             >
-                {currentTotalPrice() !== 0? `${currentTotalPrice().toFixed(2)}/mo` : `${currentOldPrice().toFixed(2)}/mo`}
+                {currentTotalPrice() !== 0? `$${currentTotalPrice().toFixed(2)}/h` : `$${currentOldPrice().toFixed(2)}/h`}
             </p>
             <button
                 className={style["api-costs__result__more"]}
