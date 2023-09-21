@@ -20,7 +20,7 @@ import style from './ApiCosts.module.scss'
 type Props = {
     field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio
     selectValuesState: SelectValues,
-    activeTab: string
+    activeTab: string,
 }
 
 export default function ApiCostsField({ field, selectValuesState, activeTab }: Props) {
@@ -33,7 +33,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
     const [isActive, setIsActive] = useState<boolean>(true)
     const [replicasActive, setReplicasActive] = useState<boolean>(false)
 
-    const windowWidth = useWindowWidth()
+    const windowWidth = typeof window !== 'undefined' ? useWindowWidth() : 1920;
 
     const currentStateIndex = selectValues.findIndex((el) => el.fieldName === field.name)
 
@@ -187,10 +187,8 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                 {field.helper && (
                     <GlobalHelper helperObj={field.helper} listIndex={currentStateIndex} />
                 )}
-                {(windowWidth > 768 && field.name !== 'squidProfile') && (
-                    <p className={style["api-costs__list-item__header__price"]}>
-                        ${selectValues[currentStateIndex].price.value}
-                    </p>
+                {(windowWidth > 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
+                    <p className={style["api-costs__list-item__header__price"]}>${selectValues[currentStateIndex].price.value}</p>
                 )}
             </div>
             {field.subtitle && (
@@ -205,10 +203,8 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
             >
                 {setFields()}
             </div>
-            {(windowWidth < 768 && field.name !== 'squidProfile') && (
-                <p className={style["api-costs__list-item__price"]}>
-                    ${selectValues[currentStateIndex].price.value}
-                </p>
+            {(windowWidth < 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
+                <p className={style["api-costs__list-item__price"]}>${selectValues[currentStateIndex].price.value}</p>
             )}
             {field.replicas && (
                 <label

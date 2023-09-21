@@ -96,6 +96,14 @@ export default function ApiCosts() {
                     activeTab={activeTab}
                 />
             )
+            // return (
+            //     <ApiCostsField
+            //         key={index}
+            //         field={item}
+            //         selectValuesState={[selectValues, setSelectValues]}
+            //         activeTab={activeTab}
+            //     />
+            // )
         })
     }
 
@@ -105,7 +113,7 @@ export default function ApiCosts() {
             <div className={style["api-costs__tabs"]}>
                 {setTabNames()}
             </div>
-            <div className={style["api-costs__list"]}>
+            <div className={style["api-costs__list"]} >
                 <ApiCostsField
                     field={_apiCostsMock.profile}
                     selectValuesState={[tabsProfile, setTabsProfile]}
