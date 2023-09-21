@@ -46,8 +46,8 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
             }
         }
         const updateObj = [...selectValues]
-        // updateObj[currentStateIndex] = !item.replicas ? { ...item, replicas: selectValues[currentStateIndex].replicas } : item
-        updateObj[currentStateIndex] = item
+        updateObj[currentStateIndex] = !item.replicas ? { ...item, replicas: selectValues[currentStateIndex].replicas } : item
+        // updateObj[currentStateIndex] = item
         setSelectValues([...updateObj])
     }
 
