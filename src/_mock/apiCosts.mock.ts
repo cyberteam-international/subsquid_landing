@@ -4,7 +4,7 @@ export interface IApiCostsState {
     price: IApiCostsPrice;
     replicas?: string;
     limit?: number,
-    isActive: boolean
+    isActive?: boolean
 }
 
 interface IApiCostsPrice {
