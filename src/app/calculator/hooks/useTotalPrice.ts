@@ -37,23 +37,26 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
         };
     };
 
-    const collocatedFreeCondition = () =>{
-        const rangeFields = [
-            selectValuesResources.find((el)=>el.fieldName=== 'rpsRequests'),
-            selectValuesResources.find((el)=>el.fieldName=== 'postgresStorage'),
-        ]
+    const rangeFields = [
+        selectValuesResources.find((el)=>el.fieldName=== 'rpsRequests'),
+        selectValuesResources.find((el)=>el.fieldName=== 'postgresStorage'),
+    ]
+
+    const collocatedFreeRangeCondition = () =>{
         return rangeFields.every((field)=>{
+            if (!field?.isActive) return true
             if (field?.limit) {
                 return Number(field.select) <= field?.limit
             }
         })
-    } 
+    }
 
 
     useEffect(() => {
         let totalArray : Sum[] = []
         selectValuesResources.forEach((item, _index) => {
-            if (collocatedFreeCondition()) {
+            console.log('collocatedFreeCondition()', collocatedFreeRangeCondition())
+            if (collocatedFreeRangeCondition()) {
                 if (tabsState === 'COLLOCATED') {
                     totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0007}}, 0))
                 }
@@ -62,15 +65,21 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
                 }
             }
             else if (tabsState === 'COLLOCATED') {
-                totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0007}}, 0.0007))
+                if (!item.isActive) {
+                    totalArray.push(fieldPrice(item, 0))
+                }
+                else totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0007}}, 0.0007))
             }
             else {
-                totalArray.push(fieldPrice(item, item.price.value))
+                if (!item.isActive) {
+                    totalArray.push(fieldPrice(item, 0))
+                }
+                else totalArray.push(fieldPrice(item, item.price.value))                
             }
         })
         console.log('totalArray', totalArray)
         return setTotalSum([...totalArray])
-    }, [selectValuesResources]);
+    }, [selectValuesResources, tabsState]);
 
     return [];
 };

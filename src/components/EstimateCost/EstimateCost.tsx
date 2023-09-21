@@ -4,14 +4,18 @@ import { TotalSumContext, ScrollElementContext } from '@/app/calculator/context'
 
 import style from './EstimateCost.module.scss'
 
-type Props = {
-    isCollocated: boolean
-};
-
-export default function EstimateCost({ isCollocated }: Props) {
+export default function EstimateCost() {
 
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
     const totalBlockRef = useContext(ScrollElementContext)
+
+    const currentTotalPrice = () => {
+        let sum = 0
+        totalSum.forEach((item, _index) => {
+            sum += item.currentPrice
+        })
+        return sum
+    }
 
     const scroll = () => {
         if (totalBlockRef?.current) {
@@ -28,7 +32,8 @@ export default function EstimateCost({ isCollocated }: Props) {
             onClick={() => scroll()}
         >
             <p>Estimate cost:</p>
-            <p>{!isCollocated && totalSum ? `${(totalSum * 720).toFixed(2)}$` : 'free'}</p>
+            <p>{currentTotalPrice() > 0 ? `$${(currentTotalPrice() * 720).toFixed(2)}/mo` : 'free'}</p>
         </div>
+
     )
 }

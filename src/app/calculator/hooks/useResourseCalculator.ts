@@ -57,7 +57,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             ...returnSelectValuesResources[listIndex],
             select: select,
             price: price(),
-            replicas: typeof selectValue === 'number' ? selectValue : returnSelectValuesResources[listIndex].replicas ?? null
+            replicas: typeof selectValue === 'number' ? selectValue.toString() : returnSelectValuesResources[listIndex].replicas
         };
     };
 

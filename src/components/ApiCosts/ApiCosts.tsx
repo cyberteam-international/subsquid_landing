@@ -71,7 +71,7 @@ export default function ApiCosts() {
                     activeTab={activeTab} 
                 />
                 {setTabFields()}
-                {/* <ApiCostsResult /> */}
+                <ApiCostsResult />
             </div>
         </section>
     )

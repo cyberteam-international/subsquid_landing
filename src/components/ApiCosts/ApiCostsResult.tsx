@@ -19,18 +19,31 @@ export default function ApiCostsResult() {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const currentTotalPrice = () => {
+        let sum = 0
+        totalSum.forEach((item, _index)=>{
+            sum += item.currentPrice
+        })
+        return sum
+    }
+
+    const currentOldPrice = () => {
+        let sum = 0
+        totalSum.forEach((item, _index)=>{
+            sum += item.price
+        })
+        return sum
+    }
+
     const setDetailInfo = () => {
-        return selectValues?.map((item, index) => {
+        return selectValues.map((item, index) => {
             return (
                 <Fragment key={index}>
                     <div className={style["api-costs__result__list-item"]}>
                         <div className={style["api-costs__result__list-item__wrapper"]}>
                             <p>{item.fieldName}</p>
                             <p>
-                                ${item.replicas? 
-                                    Number(item.select) ? (Number(item.select) * item.price.value * item.replicas).toFixed(2) : (item?.price.value * item.replicas).toFixed(2)
-                                    : Number(item.select) ? (Number(item.select) * item.price.value).toFixed(2) : (item?.price.value).toFixed(2)
-                                }/h
+                                ${totalSum[index]?.currentPrice}/h
                             </p>
                         </div>
                         <p className={style["api-costs__result__list-item__select"]}>
@@ -62,26 +75,27 @@ export default function ApiCostsResult() {
             }
             ref={totalBlockRef}
         >
-            {tabsProfile[0].select === 'COLLOCATED' && (
+            {currentTotalPrice() === 0 && (
                 <p className={style["api-costs__result__total"]}>free</p>
             )}
             <p 
                 className={
-                    tabsProfile[0].select === 'COLLOCATED'?
+                    currentTotalPrice() === 0?
                     `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
                     :style["api-costs__result__total"]
                 }
             >
-                ${(totalSum * 720).toFixed(2)}/mo
+                {currentTotalPrice() !== 0? `${(currentTotalPrice() * 720).toFixed(2)}/mo` : `${(currentOldPrice() * 720).toFixed(2)}/mo`}
+                
             </p>
             <p 
                 className={
-                    tabsProfile[0].select === 'COLLOCATED'?
+                    currentTotalPrice() === 0?
                     `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
                     :style["api-costs__result__total"]
                 }
             >
-                ${totalSum.toFixed(2)}/h
+                {currentTotalPrice() !== 0? `${currentTotalPrice().toFixed(2)}/mo` : `${currentOldPrice().toFixed(2)}/mo`}
             </p>
             <button
                 className={style["api-costs__result__more"]}

@@ -1,10 +1,17 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import { useWindowWidth } from '@react-hook/window-size';
 
 // context
-import { ActiveTabContext, TotalSumContext, HelperContext, ScrollElementContext, SelectValuesResourcesContext, SelectValuesUseCaseContext, TabsProfileContext } from './context'
+import {
+    ActiveTabContext,
+    TotalSumContext,
+    HelperContext,
+    ScrollElementContext,
+    SelectValuesResourcesContext,
+    SelectValuesUseCaseContext,
+    TabsProfileContext
+} from './context'
 
 // context types
 import { ActiveTab, HelperState, SelectValues, SumState } from './context'
@@ -29,7 +36,7 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                 fieldName: _apiCostsMock.profile.name,
                 select: _apiCostsMock.profile.values[0].value,
                 price: { type: _apiCostsMock.profile.values[0].price.type, value: _apiCostsMock.profile.values[0].price.value },
-                replicas: _apiCostsMock.profile.replicas?? '1',
+                replicas: _apiCostsMock.profile.replicas ?? '1',
                 isActive: true,
             }
         ]
@@ -59,7 +66,7 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                     fieldName: item.name,
                     select: item.range[0].toString(),
                     price: { type: item.price.type, value: item.price.value },
-                    replicas: item.replicas?? '1',
+                    replicas: item.replicas ?? '1',
                     limit: item.limit,
                     isActive: true,
                 }
@@ -75,10 +82,9 @@ export default function CalculatorPage() {
     const [selectValuesResources, setSelectValuesResources] = useState(setInitial('byResources')) as SelectValues;
     const [activeTab, setActiveTab] = useState(Object.keys(_apiCostsMock.tabs)[0]) as ActiveTab;
     const [tabsProfile, setTabsProfile] = useState(setInitial('byUseCase', true)) as SelectValues;
-    const [totalSum, setTotalSum] = useState([{fieldName: '', price: 0, currentPrice: 0}]) as SumState;
+    const [totalSum, setTotalSum] = useState([{ fieldName: '', price: 0, currentPrice: 0 }]) as SumState;
     const [helper, setHelper] = useState({ index: -1 }) as HelperState;
 
-    const windowWidth = useWindowWidth()
     const totalBlockRef = useRef<HTMLDivElement | null>(null)
 
     useResourseCalculator({
@@ -133,9 +139,7 @@ export default function CalculatorPage() {
                                             <PayBenefits />
                                             <ApiCosts />
                                             <ScaleManifest />
-                                            {/* {(windowWidth < 768) && (
-                                                <EstimateCost isCollocated={selectValuesResources[0].select === 'Collocated'} />
-                                            )} */}
+                                            <EstimateCost />
                                         </div>
                                     </main>
                                 </ScrollElementContext.Provider>

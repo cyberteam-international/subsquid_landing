@@ -30,10 +30,11 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
 
     const [activeitem, setActiveItem] = useState<number>()
     const [isActive, setIsActive] = useState<boolean>(true)
+    const [replicasActive, setReplicasActive] = useState<boolean>(false)
 
     const currentStateIndex = selectValues.findIndex((el) => el.fieldName === field.name)
 
-    const updateState = (item: IApiCostsState, isActiveChange:boolean=false) => {
+    const updateState = (item: IApiCostsState, isActiveChange: boolean = false) => {
         if (tabsProfileState[0].select === 'COLLOCATED' && !isActiveChange) {
             if (item.select !== 'DEFAULT' && !item.replicas && item.fieldName !== 'squidProfile' && field.type !== 'range') {
                 const newTabsProfileSelect = [...tabsProfileState]
@@ -92,7 +93,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                             isActive={isActive}
                             updateState={updateState}
                             // value={Number(selectValues[currentStateIndex].select ?? field.range[0])}
-                            value={isActive? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
+                            value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
                         />
                     )
                     break;
@@ -137,13 +138,13 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                 field={field}
                 isActive={isActive}
                 updateState={updateState}
-                value={isActive? selectValues[currentStateIndex].select?? field.range[0].toString() : field.range[0].toString()}
+                value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
             />
         )
     }
 
     useEffect(() => {
-        updateState({...selectValues[currentStateIndex], isActive: isActive,}, true)
+        updateState({ ...selectValues[currentStateIndex], isActive: isActive, }, true)
     }, [isActive])
 
     useEffect(() => {
@@ -197,15 +198,28 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                 {setFields()}
             </div>
             {field.replicas && (
-                <label className={style["api-costs__list-item__replicas"]}>
+                <label
+                    onClick={() => setReplicasActive(true)}
+                    className={
+                        replicasActive ?
+                            `${style["api-costs__list-item__replicas"]} ${style["api-costs__list-item__replicas_active"]}`
+                            : style["api-costs__list-item__replicas"]
+                    }
+                >
                     <p className={style["api-costs__list-item__replicas__title"]}>Replicas</p>
                     <input
                         type="number"
                         min={1}
-                        max={tabsProfile !== 'COLLOCATED'? 1000 : 1}
-                        value={ selectValues[currentStateIndex].replicas }
+                        max={tabsProfile !== 'COLLOCATED' ? 1000 : 1}
+                        value={selectValues[currentStateIndex].replicas}
                         onChange={(e) => updateState({ ...selectValues[currentStateIndex], replicas: e.target.value })}
-                        onBlur={()=> Number(selectValues[currentStateIndex].replicas) > 0? null : updateState({ ...selectValues[currentStateIndex], replicas: '1' })}
+                        onBlur={() => {
+                            // Number(selectValues[currentStateIndex].replicas) > 0? null : updateState({ ...selectValues[currentStateIndex], replicas: '1' })
+                            if (Number(selectValues[currentStateIndex].replicas) <= 0 || tabsProfile === 'COLLOCATED') {
+                                updateState({ ...selectValues[currentStateIndex], replicas: '1' })
+                            }
+                            setReplicasActive(false)
+                        }}
                     />
                 </label>
             )}

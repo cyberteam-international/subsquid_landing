@@ -96,7 +96,8 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, value
                     left: sliderThumb,
                     bottom: '-7px',
                     zIndex: '3',
-                    pointerEvents: 'none'
+                    pointerEvents: 'none',
+                    cursor: 'pointer',
                 }}
                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"
             >
