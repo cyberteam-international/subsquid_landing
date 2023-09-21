@@ -36,7 +36,7 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                 fieldName: _apiCostsMock.profile.name,
                 select: _apiCostsMock.profile.values[0].value,
                 price: { type: _apiCostsMock.profile.values[0].price.type, value: _apiCostsMock.profile.values[0].price.value },
-                replicas: _apiCostsMock.profile.replicas ?? '1',
+                replicas: _apiCostsMock.profile.replicas ?? undefined,
                 isActive: true,
             }
         ]
@@ -48,7 +48,7 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                     fieldName: item.name,
                     select: item.values[0].value,
                     price: { type: item.values[0].price.type, value: item.values[0].price.value },
-                    replicas: item.replicas ?? '1',
+                    replicas: item.replicas ?? undefined,
                     isActive: true,
                 }
                 break;
@@ -57,7 +57,7 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                     fieldName: item.name,
                     select: item.values[0].toString(),
                     price: { type: item.price.type, value: item.price.value },
-                    replicas: item.replicas ?? '1',
+                    replicas: item.replicas ?? undefined,
                     isActive: true,
                 }
                 break;
@@ -66,7 +66,7 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                     fieldName: item.name,
                     select: item.range[0].toString(),
                     price: { type: item.price.type, value: item.price.value },
-                    replicas: item.replicas ?? '1',
+                    replicas: item.replicas ?? undefined,
                     limit: item.limit,
                     isActive: true,
                 }
@@ -98,6 +98,10 @@ export default function CalculatorPage() {
         tabsState: tabsProfile[0].select,
         setTotalSum: setTotalSum
     })
+
+    useEffect(() => {
+        console.log('totalSum', totalSum)
+    }, [totalSum])
 
     useEffect(() => {
         console.log('selectValuesResources', selectValuesResources)

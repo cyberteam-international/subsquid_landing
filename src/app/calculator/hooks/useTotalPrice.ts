@@ -44,10 +44,7 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
 
     const collocatedFreeRangeCondition = () =>{
         return rangeFields.every((field)=>{
-            if (!field?.isActive) return true
-            if (field?.limit) {
-                return Number(field.select) <= field?.limit
-            }
+            return Number(field?.select) <= Number(field?.limit) || !field?.isActive
         })
     }
 
@@ -55,14 +52,8 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
     useEffect(() => {
         let totalArray : Sum[] = []
         selectValuesResources.forEach((item, _index) => {
-            console.log('collocatedFreeCondition()', collocatedFreeRangeCondition())
-            if (collocatedFreeRangeCondition()) {
-                if (tabsState === 'COLLOCATED') {
-                    totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0007}}, 0))
-                }
-                else{
-                    totalArray.push(fieldPrice(item, item.price.value))
-                }
+            if (collocatedFreeRangeCondition() && tabsState === 'COLLOCATED') {
+                totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0007}}, 0))
             }
             else if (tabsState === 'COLLOCATED') {
                 if (!item.isActive) {
@@ -71,14 +62,15 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
                 else totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0007}}, 0.0007))
             }
             else {
-                if (!item.isActive) {
+                if (item.isActive !== undefined && !item.isActive) {
                     totalArray.push(fieldPrice(item, 0))
                 }
-                else totalArray.push(fieldPrice(item, item.price.value))                
+                else {
+                    totalArray.push(fieldPrice(item, item.price.value))
+                }
             }
         })
-        console.log('totalArray', totalArray)
-        return setTotalSum([...totalArray])
+        return setTotalSum(totalArray)
     }, [selectValuesResources, tabsState]);
 
     return [];
