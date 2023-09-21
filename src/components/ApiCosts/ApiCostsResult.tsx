@@ -41,12 +41,10 @@ export default function ApiCostsResult() {
     const setDetailProcessorsInfo = () => {
         return newProcessors.state.map((item, index)=>{
             return (
-                <div className={style["api-costs__result__list-item"]}>
+                <div key={index} className={style["api-costs__result__list-item"]}>
                     <div className={style["api-costs__result__list-item__wrapper"]}>
                         <p>{item.fieldName}</p>
-                        <p>
-                            ${item.price.value}/h
-                        </p>
+                        <p>${item.price.value}/h</p>
                     </div>
                     <p className={style["api-costs__result__list-item__select"]}>
                         {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
@@ -63,9 +61,7 @@ export default function ApiCostsResult() {
                     <div className={style["api-costs__result__list-item"]}>
                         <div className={style["api-costs__result__list-item__wrapper"]}>
                             <p>{item.fieldName}</p>
-                            <p>
-                                ${totalSum[index]?.currentPrice}/h
-                            </p>
+                            <p>${totalSum[index]?.currentPrice}/h</p>
                         </div>
                         <p className={style["api-costs__result__list-item__select"]}>
                             {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
@@ -75,15 +71,13 @@ export default function ApiCostsResult() {
                         <div className={style["api-costs__result__list-item"]}>
                             <div className={style["api-costs__result__list-item__wrapper"]}>
                                 <p>{item.fieldName} replicas</p>
-                                <p>
-                                    ${0}/h
-                                </p>
+                                <p>$0/h</p>
                             </div>
                             <p className={style["api-costs__result__list-item__select"]}>{item.replicas}</p>
                         </div>
                     )}
                     {(newProcessors.state.length > 0 && index === 0) && (
-                        <>{setDetailProcessorsInfo()}</>
+                        <div>{setDetailProcessorsInfo()}</div>
                     )}
                 </Fragment>
             )

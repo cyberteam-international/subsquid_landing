@@ -102,21 +102,21 @@ export default function CalculatorPage() {
         setTotalSum: setTotalSum
     })
 
-    useEffect(() => {
-        console.log('newProcessors', newProcessors)
-    }, [newProcessors])
+    // useEffect(() => {
+    //     console.log('newProcessors', newProcessors)
+    // }, [newProcessors])
 
-    useEffect(() => {
-        console.log('totalSum', totalSum)
-    }, [totalSum])
+    // useEffect(() => {
+    //     console.log('totalSum', totalSum)
+    // }, [totalSum])
 
-    useEffect(() => {
-        console.log('selectValuesResources', selectValuesResources)
-    }, [selectValuesResources])
+    // useEffect(() => {
+    //     console.log('selectValuesResources', selectValuesResources)
+    // }, [selectValuesResources])
 
-    useEffect(() => {
-        console.log('selectValuesUseCase', selectValuesUseCase)
-    }, [selectValuesUseCase])
+    // useEffect(() => {
+    //     console.log('selectValuesUseCase', selectValuesUseCase)
+    // }, [selectValuesUseCase])
 
     useEffect(() => {
         console.log('tabsProfile', tabsProfile)

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react'
+import { useState, useEffect } from 'react'
 import { useWindowWidth } from '@react-hook/window-size'
 
 import ApiCostsFieldRadio from './ApiCostsFieldRadio'
@@ -106,7 +106,9 @@ export default function ApiCostsFieldProcessor({ field, selectValuesState, tabsP
                     <GlobalHelper helperObj={field.helper} listIndex={currentStateIndex} />
                 )}
                 {windowWidth > 768 && (
-                    <p className={style["api-costs__list-item__header__price"]}>${selectValues.state[currentStateIndex].price.value}</p>
+                    <p className={style["api-costs__list-item__header__price"]}>
+                        ${selectValues.state[currentStateIndex].price.value}
+                    </p>
                 )}
             </div>
             {field.subtitle && (
