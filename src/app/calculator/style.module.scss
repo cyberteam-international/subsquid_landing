@@ -17,8 +17,18 @@
         &__subtitle{
             color: var(--color-secondary);
             margin-top: 16px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: 0.32px;
             @include media-up(sm) {
                 text-align: center;
+            }
+            @include media-up(lg) {
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 160%;
+                letter-spacing: 0.48px;
             }
         }
     }

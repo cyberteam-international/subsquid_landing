@@ -1,0 +1,29 @@
+@import "@/assets/scss/main";
+
+.add{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0;
+    cursor: pointer;
+    border-radius: 20px;
+    height: 100%;
+    &_disable{
+        opacity: 0.4;
+        cursor: default;
+    }
+    p{
+        color: var(--color-link);
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0.32px;
+    }
+    svg{
+        overflow: visible;
+    }
+    @include media-up(md) {
+        min-height: 150px;
+        background: var(--color-white);
+    }
+}

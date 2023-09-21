@@ -14,11 +14,14 @@
         border-radius: 20px;
         box-shadow: 0px 0px 7.95429px 0px rgba(0, 0, 0, 0.04), 0px 0px 3px 0px rgba(0, 0, 0, 0.24);
         padding: 24px;
-        background: var(--color-gray-light);
+        background: var(--color-white);
         overflow: hidden;
         display: flex;
         flex-direction: column;
         width: 100%;
+        &:hover{
+            background: var(--color-gray-light);
+        }
         &:nth-child(2){
             box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04), 0 0 2px 0 rgba(0, 0, 0, 0.12);
             position: relative;
@@ -123,20 +126,25 @@
             }
         }
         &__button{
-            button{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 14px 16px;
-                background: var(--color-primary);
-                font-size: 18px;
-                color: var(--color-white);
-                border-radius: 12px;
-                width: 100%;
-                z-index: 2;
+            z-index: 2;
+            background: var(--color-primary);
+            font-size: 18px;
+            color: var(--color-white);
+            border-radius: 12px;
+            width: 100%;
+            height: 44px;
+            @include media-up(md) {
+                height: 72px;
             }
             @include media-up(lg) {
                 margin-top: auto;
+            }
+            a{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     }

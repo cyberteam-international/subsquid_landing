@@ -1,4 +1,4 @@
-
+@import "@/assets/scss/main";
 
 .total{
     display: flex;
@@ -13,6 +13,9 @@
     padding: 16px 24px 20px 24px;
     background: var(--color-white);
     cursor: pointer;
+    @include media-up(sm) {
+        display: none;
+    }
     p{
         font-weight: 400;
         &:first-child{

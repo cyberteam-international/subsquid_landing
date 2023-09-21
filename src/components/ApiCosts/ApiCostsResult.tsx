@@ -4,6 +4,7 @@ import {
     TotalSumContext,
     ScrollElementContext,
     SelectValuesResourcesContext,
+    NewProcessorsContext,
 } from "@/app/calculator/context";
 
 import style from './ApiCosts.module.scss'
@@ -12,44 +13,80 @@ export default function ApiCostsResult() {
 
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
     const [selectValues, _setSelectValues] = useContext(SelectValuesResourcesContext)
+    const [newProcessors, _setNewProcessors] = useContext(NewProcessorsContext)
 
     const totalBlockRef = useContext(ScrollElementContext)
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const currentTotalPrice = () => {
+        let sum = 0
+        totalSum.forEach((item, _index)=>{
+            sum += item.currentPrice
+        })
+        newProcessors.state.forEach((item, _index)=>{
+            sum += item.price.value
+        })
+        return sum
+    }
+
+    const currentOldPrice = () => {
+        let sum = 0
+        totalSum.forEach((item, _index)=>{
+            sum += item.price
+        })
+        return sum
+    }
+
+    const setDetailProcessorsInfo = () => {
+        return newProcessors.state.map((item, index)=>{
+            return (
+                <div className={style["api-costs__result__list-item"]}>
+                    <div className={style["api-costs__result__list-item__wrapper"]}>
+                        <p>{item.fieldName}</p>
+                        <p>
+                            ${item.price.value}/h
+                        </p>
+                    </div>
+                    <p className={style["api-costs__result__list-item__select"]}>
+                        {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
+                    </p>
+                </div>
+            )
+        })
+    }
+
     const setDetailInfo = () => {
-        return selectValues?.map((item, index) => {
-            if (item.select && item.fieldName !== 'squidProfile') {
-                return (
-                    <Fragment key={index}>
-                        <div className={style["api-costs__result__list-item"]}>
-                            <div className={style["api-costs__result__list-item__wrapper"]}>
-                                <p>{item.fieldName}</p>
-                                <p>
-                                    ${item.replicas? 
-                                        Number(item.select) ? (Number(item.select) * item.price.value * item.replicas).toFixed(2) : (item?.price.value * item.replicas).toFixed(2)
-                                        : Number(item.select) ? (Number(item.select) * item.price.value).toFixed(2) : (item?.price.value).toFixed(2)
-                                    }/h
-                                </p>
-                            </div>
-                            <p className={style["api-costs__result__list-item__select"]}>
-                                {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
+        return selectValues.map((item, index) => {
+            return (
+                <Fragment key={index}>
+                    <div className={style["api-costs__result__list-item"]}>
+                        <div className={style["api-costs__result__list-item__wrapper"]}>
+                            <p>{item.fieldName}</p>
+                            <p>
+                                ${totalSum[index]?.currentPrice}/h
                             </p>
                         </div>
-                        {item.replicas && (
-                            <div className={style["api-costs__result__list-item"]}>
-                                <div className={style["api-costs__result__list-item__wrapper"]}>
-                                    <p>{item.fieldName} replicas</p>
-                                    <p>
-                                        ${0}/h
-                                    </p>
-                                </div>
-                                <p className={style["api-costs__result__list-item__select"]}>{item.replicas}</p>
+                        <p className={style["api-costs__result__list-item__select"]}>
+                            {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
+                        </p>
+                    </div>
+                    {item.replicas && (
+                        <div className={style["api-costs__result__list-item"]}>
+                            <div className={style["api-costs__result__list-item__wrapper"]}>
+                                <p>{item.fieldName} replicas</p>
+                                <p>
+                                    ${0}/h
+                                </p>
                             </div>
-                        )}
-                    </Fragment>
-                )
-            }
+                            <p className={style["api-costs__result__list-item__select"]}>{item.replicas}</p>
+                        </div>
+                    )}
+                    {(newProcessors.state.length > 0 && index === 0) && (
+                        <>{setDetailProcessorsInfo()}</>
+                    )}
+                </Fragment>
+            )
         })
     }
 
@@ -62,26 +99,27 @@ export default function ApiCostsResult() {
             }
             ref={totalBlockRef}
         >
-            {selectValues[0].select === 'Collocated' && (
+            {currentTotalPrice() === 0 && (
                 <p className={style["api-costs__result__total"]}>free</p>
             )}
             <p 
                 className={
-                    selectValues[0].select === 'Collocated'?
+                    currentTotalPrice() === 0?
                     `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
                     :style["api-costs__result__total"]
                 }
             >
-                ${(totalSum * 720).toFixed(2)}/mo
+                {currentTotalPrice() !== 0? `${(currentTotalPrice() * 720).toFixed(2)}/mo` : `${(currentOldPrice() * 720).toFixed(2)}/mo`}
+                
             </p>
             <p 
                 className={
-                    selectValues[0].select === 'Collocated'?
+                    currentTotalPrice() === 0?
                     `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
                     :style["api-costs__result__total"]
                 }
             >
-                ${totalSum.toFixed(2)}/h
+                {currentTotalPrice() !== 0? `${currentTotalPrice().toFixed(2)}/mo` : `${currentOldPrice().toFixed(2)}/mo`}
             </p>
             <button
                 className={style["api-costs__result__more"]}

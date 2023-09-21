@@ -35,9 +35,11 @@ export default function PayBenefitsItem({ title, subtitle, items, button, descri
             <ul className={style["pay-benefits__item__list"]}>
                 {setItems()}
             </ul>
-            <a className={style["pay-benefits__item__button"]} href={button.href} target="_blank" rel="noopener noreferrer">
-                <button>{button.title}</button>
-            </a>
+            <button className={style["pay-benefits__item__button"]}>
+                <a href={button.href} target="_blank" rel="noopener noreferrer">
+                    {button.title}
+                </a>
+            </button>
         </div>
     )
 }

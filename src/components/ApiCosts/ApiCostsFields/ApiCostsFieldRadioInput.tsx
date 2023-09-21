@@ -6,10 +6,11 @@ type Props = {
     updateState: ( item: IApiCostsState)=>void,
     field: IApiCostsRadioInput,
     setClassName: (key: number) => string,
-    value: string
+    value: string,
+    isActive: boolean
 };
 
-export default function ApiCostsFieldRadioInput({updateState, field, setClassName, value }: Props) {
+export default function ApiCostsFieldRadioInput({updateState, field, setClassName, value, isActive }: Props) {
 
     const updateObj = (item: number | string): IApiCostsState => {
         return {
@@ -19,6 +20,7 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
             },
             fieldName: field.name, 
             select: item.toString(),
+            isActive: isActive
         }
     }
 
@@ -47,6 +49,7 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
                 placeholder='Your value'
                 value={value}
                 onChange={(e) => updateState(updateObj(e.target.value))}
+                onBlur={()=> Number(value) > 0? null : updateState(updateObj('1'))}
             />
         </>
     )

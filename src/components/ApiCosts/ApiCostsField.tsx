@@ -1,11 +1,12 @@
-import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useWindowWidth } from '@react-hook/window-size'
 
 import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
 import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
 import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
 import GlobalHelper from '../GlobalHelper/GlobalHelper'
 
-import { ActiveTabContext, SelectValues } from '@/app/calculator/context'
+import { SelectValues, TabsProfileContext } from '@/app/calculator/context'
 
 import {
     IApiCostsRadio,
@@ -18,27 +19,41 @@ import style from './ApiCosts.module.scss'
 
 type Props = {
     field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio
-    listIndex: number,
     selectValuesState: SelectValues,
+    activeTab: string
 }
 
-export default function ApiCostsField({ field, listIndex, selectValuesState }: Props) {
+export default function ApiCostsField({ field, selectValuesState, activeTab }: Props) {
 
     const [selectValues, setSelectValues] = selectValuesState
-    const [activeTab, _setActiveTab] = useContext(ActiveTabContext);
+    const [tabsProfileState, setTabsProfileState] = useContext(TabsProfileContext);
+    const tabsProfile = tabsProfileState[0].select
 
     const [activeitem, setActiveItem] = useState<number>()
     const [isActive, setIsActive] = useState<boolean>(true)
+    const [replicasActive, setReplicasActive] = useState<boolean>(false)
 
-    const updateState = (item: IApiCostsState, index: number = listIndex) => {
+    const windowWidth = useWindowWidth()
+
+    const currentStateIndex = selectValues.findIndex((el) => el.fieldName === field.name)
+
+    const updateState = (item: IApiCostsState, isActiveChange: boolean = false) => {
+        if (tabsProfile === 'COLLOCATED' && !isActiveChange) {
+            if (item.select !== 'DEFAULT' && !item.replicas && item.fieldName !== 'squidProfile' && field.type !== 'range') {
+                const newTabsProfileSelect = [...tabsProfileState]
+                newTabsProfileSelect[0] = { ...tabsProfileState[0], select: 'DEDICATED' }
+                setTabsProfileState([...newTabsProfileSelect])
+            }
+        }
         const updateObj = [...selectValues]
-        updateObj[index] = !item.replicas ? { ...item, replicas: selectValues[listIndex].replicas } : item
+        // updateObj[currentStateIndex] = !item.replicas ? { ...item, replicas: selectValues[currentStateIndex].replicas } : item
+        updateObj[currentStateIndex] = item
         setSelectValues([...updateObj])
     }
 
     const setClassName = (key: number,) => {
         if (field.type === 'radio-input') {
-            return selectValues[listIndex]?.select === field.values[key].toString() ?
+            return selectValues[currentStateIndex]?.select === field.values[key].toString() ?
                 `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_active"]} ${style["api-costs__list-item__fields-item_number"]}`
                 : `${style["api-costs__list-item__fields-item"]} ${style["api-costs__list-item__fields-item_number"]}`
         }
@@ -48,7 +63,7 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
     }
 
     const setFields = () => {
-        if (selectValues[0].select !== 'Collocated' || activeTab !== 'byResources') {
+        if (tabsProfile !== 'COLLOCATED' || activeTab !== 'byResources') {
             switch (field.type) {
                 case 'radio':
                     return field.values.map((item, index) => {
@@ -69,7 +84,8 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                             field={field}
                             updateState={updateState}
                             setClassName={setClassName}
-                            value={selectValues[listIndex]?.select ?? ''}
+                            value={selectValues[currentStateIndex]?.select}
+                            isActive={isActive}
                         />
                     )
                     break;
@@ -77,10 +93,10 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                     return (
                         <ApiCostsFieldRange
                             field={field}
-                            listIndex={listIndex}
                             isActive={isActive}
                             updateState={updateState}
-                            value={selectValues[listIndex].select ?? field.range[0].toString()}
+                            // value={Number(selectValues[currentStateIndex].select ?? field.range[0])}
+                            value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
                         />
                     )
                     break;
@@ -94,7 +110,8 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                     fieldName={field.name}
                     item={
                         {
-                            value: 'Default',
+                            title: 'Default',
+                            value: 'DEFAULT',
                             price: {
                                 type: "h",
                                 value: 0
@@ -122,49 +139,32 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
         else return (
             <ApiCostsFieldRange
                 field={field}
-                listIndex={listIndex}
                 isActive={isActive}
                 updateState={updateState}
-                value={selectValues[listIndex].select ?? field.range[0].toString()}
+                value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
             />
         )
     }
 
     useEffect(() => {
-        if (!isActive) {
-            updateState(
-                {
-                    fieldName: selectValues[listIndex].fieldName,
-                    price: {
-                        type: selectValues[listIndex].price.type,
-                        value: 0
-                    },
-                    select: null,
-                    replicas: selectValues[listIndex].replicas ? 1 : null,
-                },
-            )
-        }
+        updateState({ ...selectValues[currentStateIndex], isActive: isActive, }, true)
     }, [isActive])
 
     useEffect(() => {
         if (field.type !== 'range') {
             const currentIndex: number = field.values.findIndex((item) => {
                 if (typeof item === 'number') {
-                    return item.toString() === selectValues[listIndex].select;
+                    return item.toString() === selectValues[currentStateIndex].select;
                 } else {
-                    return item.value === selectValues[listIndex].select;
+                    return item.value === selectValues[currentStateIndex].select;
                 }
             });
-            if (selectValues[0].select !== 'Collocated' || activeTab !== 'byResources') {
+            if (selectValues[currentStateIndex].select !== 'DEFAULT') {
                 setActiveItem(currentIndex);
             }
             else setActiveItem(0);
         }
-    }, [selectValues, activeTab]);
-
-    useEffect(() => {
-        setIsActive(true)
-    }, [activeTab])
+    }, [selectValues]);
 
     return (
         <div className={
@@ -184,7 +184,14 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
                     </button>
                 }
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
-                <GlobalHelper helperObj={field.helper} listIndex={listIndex} />
+                {field.helper && (
+                    <GlobalHelper helperObj={field.helper} listIndex={currentStateIndex} />
+                )}
+                {(windowWidth > 768 && field.name !== 'squidProfile') && (
+                    <p className={style["api-costs__list-item__header__price"]}>
+                        ${selectValues[currentStateIndex].price.value}
+                    </p>
+                )}
             </div>
             {field.subtitle && (
                 <p className={style["api-costs__list-item__subtitle"]}>{field.subtitle}</p>
@@ -198,20 +205,36 @@ export default function ApiCostsField({ field, listIndex, selectValuesState }: P
             >
                 {setFields()}
             </div>
+            {(windowWidth < 768 && field.name !== 'squidProfile') && (
+                <p className={style["api-costs__list-item__price"]}>
+                    ${selectValues[currentStateIndex].price.value}
+                </p>
+            )}
             {field.replicas && (
-                <div className={style["api-costs__list-item__replicas"]}>
+                <label
+                    onClick={() => setReplicasActive(true)}
+                    className={
+                        replicasActive ?
+                            `${style["api-costs__list-item__replicas"]} ${style["api-costs__list-item__replicas_active"]}`
+                            : style["api-costs__list-item__replicas"]
+                    }
+                >
                     <p className={style["api-costs__list-item__replicas__title"]}>Replicas</p>
                     <input
                         type="number"
                         min={1}
-                        value={
-                            typeof selectValues[listIndex].replicas === 'number' ?
-                                Number(selectValues[listIndex].replicas)
-                                : 1
-                        }
-                        onChange={(e) => updateState({ ...selectValues[listIndex], replicas: Number(e.target.value) })}
+                        max={tabsProfile !== 'COLLOCATED' ? 1000 : 1}
+                        value={selectValues[currentStateIndex].replicas}
+                        onChange={(e) => updateState({ ...selectValues[currentStateIndex], replicas: e.target.value })}
+                        onBlur={() => {
+                            // Number(selectValues[currentStateIndex].replicas) > 0? null : updateState({ ...selectValues[currentStateIndex], replicas: '1' })
+                            if (Number(selectValues[currentStateIndex].replicas) <= 0 || tabsProfile === 'COLLOCATED') {
+                                updateState({ ...selectValues[currentStateIndex], replicas: '1' })
+                            }
+                            setReplicasActive(false)
+                        }}
                     />
-                </div>
+                </label>
             )}
             {field.warning && (
                 <div className={style["api-costs__list-item__warning"]}>
