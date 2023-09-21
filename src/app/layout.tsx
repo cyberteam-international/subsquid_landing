@@ -12,9 +12,9 @@ import '@/globals.scss'
 import 'swiper/css';
 import 'swiper/css/grid';
 
-export const metadata: Metadata = {
-    title: 'Subsquid',
-}
+// export const metadata: Metadata = {
+//     title: 'Subsquid',
+// }
 
 const inter = Inter({subsets: ['latin']})
 
