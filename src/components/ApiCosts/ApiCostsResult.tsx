@@ -4,7 +4,7 @@ import {
     TotalSumContext,
     ScrollElementContext,
     SelectValuesResourcesContext,
-    TabsProfileContext,
+    NewProcessorsContext,
 } from "@/app/calculator/context";
 
 import style from './ApiCosts.module.scss'
@@ -13,7 +13,7 @@ export default function ApiCostsResult() {
 
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
     const [selectValues, _setSelectValues] = useContext(SelectValuesResourcesContext)
-    const [tabsProfile, _setTabsProfile] = useContext(TabsProfileContext)
+    const [newProcessors, _setNewProcessors] = useContext(NewProcessorsContext)
 
     const totalBlockRef = useContext(ScrollElementContext)
 
@@ -24,6 +24,9 @@ export default function ApiCostsResult() {
         totalSum.forEach((item, _index)=>{
             sum += item.currentPrice
         })
+        newProcessors.state.forEach((item, _index)=>{
+            sum += item.price.value
+        })
         return sum
     }
 
@@ -33,6 +36,24 @@ export default function ApiCostsResult() {
             sum += item.price
         })
         return sum
+    }
+
+    const setDetailProcessorsInfo = () => {
+        return newProcessors.state.map((item, index)=>{
+            return (
+                <div className={style["api-costs__result__list-item"]}>
+                    <div className={style["api-costs__result__list-item__wrapper"]}>
+                        <p>{item.fieldName}</p>
+                        <p>
+                            ${item.price.value}/h
+                        </p>
+                    </div>
+                    <p className={style["api-costs__result__list-item__select"]}>
+                        {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
+                    </p>
+                </div>
+            )
+        })
     }
 
     const setDetailInfo = () => {
@@ -60,6 +81,9 @@ export default function ApiCostsResult() {
                             </div>
                             <p className={style["api-costs__result__list-item__select"]}>{item.replicas}</p>
                         </div>
+                    )}
+                    {(newProcessors.state.length > 0 && index === 0) && (
+                        <>{setDetailProcessorsInfo()}</>
                     )}
                 </Fragment>
             )

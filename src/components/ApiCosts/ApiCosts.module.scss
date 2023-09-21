@@ -65,6 +65,12 @@
             padding: 16px;
             border-radius: 20px;
             background: var(--color-white);
+            @include media-up(md) {
+                padding: 24px;
+            }
+            @include media-up(lg) {
+                padding: 32px;
+            }
             &_disable{
                 .api-costs__list-item{
                     &__header__button{
@@ -92,6 +98,12 @@
                     border: 2px solid #F0DECA;
                     background: #FDF1E4;
                 }
+                &__price{
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 140%;
+                    margin-left: auto;
+                }
             }
             &__subtitle{
                 margin-top: 20px;
@@ -104,6 +116,13 @@
                     font-size: 16px;
                     letter-spacing: 0.32px;
                 }
+            }
+            &__price{
+                margin-top: 24px;
+                margin-left: auto;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 140%;
             }
             &__replicas{
                 cursor: text;
@@ -179,9 +198,38 @@
                         }
                     }
                 }
-                // &__items{
-                    
-                // }
+                &_processors{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    margin-top: 20px;
+                    justify-content: space-between;
+                    @include media-up(md) {
+                        flex-direction: row;
+                    }
+                    &__items{
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                    }
+                    &__wrapper{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 140%;
+                    }
+                }
+                &__remove{
+                    display: block;
+                    width: fit-content;
+                    height: fit-content;
+                    cursor: pointer;
+                    svg{
+                        overflow: visible;
+                    }
+                }
                 &-wrapper{
                     display: flex;
                     flex-wrap: wrap;

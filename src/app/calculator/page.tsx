@@ -10,7 +10,9 @@ import {
     ScrollElementContext,
     SelectValuesResourcesContext,
     SelectValuesUseCaseContext,
-    TabsProfileContext
+    TabsProfileContext,
+    NewProcessorsContext,
+    NewProcessors
 } from './context'
 
 // context types
@@ -78,6 +80,7 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
 }
 
 export default function CalculatorPage() {
+    const [newProcessors, setNewProcessors] = useState<NewProcessors['0']>({state: [], render: []})
     const [selectValuesUseCase, setSelectValuesUseCase] = useState(setInitial('byUseCase')) as SelectValues;
     const [selectValuesResources, setSelectValuesResources] = useState(setInitial('byResources')) as SelectValues;
     const [activeTab, setActiveTab] = useState(Object.keys(_apiCostsMock.tabs)[0]) as ActiveTab;
@@ -100,6 +103,10 @@ export default function CalculatorPage() {
     })
 
     useEffect(() => {
+        console.log('newProcessors', newProcessors)
+    }, [newProcessors])
+
+    useEffect(() => {
         console.log('totalSum', totalSum)
     }, [totalSum])
 
@@ -115,6 +122,10 @@ export default function CalculatorPage() {
         console.log('tabsProfile', tabsProfile)
         if (tabsProfile[0].select === 'COLLOCATED') {
             setSelectValuesUseCase([...setInitial('byUseCase')])
+            setNewProcessors({
+                render: [],
+                state: []
+            })
         }
     }, [tabsProfile])
 
@@ -127,30 +138,32 @@ export default function CalculatorPage() {
     return (
         <SelectValuesUseCaseContext.Provider value={[selectValuesUseCase, setSelectValuesUseCase]}>
             <SelectValuesResourcesContext.Provider value={[selectValuesResources, setSelectValuesResources]}>
-                <ActiveTabContext.Provider value={[activeTab, setActiveTab]}>
-                    <TabsProfileContext.Provider value={[tabsProfile, setTabsProfile]}>
-                        <TotalSumContext.Provider value={[totalSum, setTotalSum]}>
-                            <HelperContext.Provider value={[helper, setHelper]}>
-                                <ScrollElementContext.Provider value={totalBlockRef}>
-                                    <main className={`main ${style['calculator']}`}>
-                                        <div className="container">
-                                            <section className={style['calculator__header']}>
-                                                <h1 className="calculator__title">Pricing that fits your <i>needs</i></h1>
-                                                <p className={style['calculator__header__subtitle']}>
-                                                    Empowering your data access with flexible pricing.
-                                                </p>
-                                            </section>
-                                            <PayBenefits />
-                                            <ApiCosts />
-                                            <ScaleManifest />
-                                            <EstimateCost />
-                                        </div>
-                                    </main>
-                                </ScrollElementContext.Provider>
-                            </HelperContext.Provider>
-                        </TotalSumContext.Provider>
-                    </TabsProfileContext.Provider>
-                </ActiveTabContext.Provider>
+                <NewProcessorsContext.Provider value={[newProcessors, setNewProcessors]}>
+                    <ActiveTabContext.Provider value={[activeTab, setActiveTab]}>
+                        <TabsProfileContext.Provider value={[tabsProfile, setTabsProfile]}>
+                            <TotalSumContext.Provider value={[totalSum, setTotalSum]}>
+                                <HelperContext.Provider value={[helper, setHelper]}>
+                                    <ScrollElementContext.Provider value={totalBlockRef}>
+                                        <main className={`main ${style['calculator']}`}>
+                                            <div className="container">
+                                                <section className={style['calculator__header']}>
+                                                    <h1 className="calculator__title">Pricing that fits your <i>needs</i></h1>
+                                                    <p className={style['calculator__header__subtitle']}>
+                                                        Empowering your data access with flexible pricing.
+                                                    </p>
+                                                </section>
+                                                <PayBenefits />
+                                                <ApiCosts />
+                                                <ScaleManifest />
+                                                <EstimateCost />
+                                            </div>
+                                        </main>
+                                    </ScrollElementContext.Provider>
+                                </HelperContext.Provider>
+                            </TotalSumContext.Provider>
+                        </TabsProfileContext.Provider>
+                    </ActiveTabContext.Provider>
+                </NewProcessorsContext.Provider>
             </SelectValuesResourcesContext.Provider>
         </SelectValuesUseCaseContext.Provider>
     )

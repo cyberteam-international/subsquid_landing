@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useWindowWidth } from '@react-hook/window-size'
 
 import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
 import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
@@ -32,10 +33,12 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
     const [isActive, setIsActive] = useState<boolean>(true)
     const [replicasActive, setReplicasActive] = useState<boolean>(false)
 
+    const windowWidth = useWindowWidth()
+
     const currentStateIndex = selectValues.findIndex((el) => el.fieldName === field.name)
 
     const updateState = (item: IApiCostsState, isActiveChange: boolean = false) => {
-        if (tabsProfileState[0].select === 'COLLOCATED' && !isActiveChange) {
+        if (tabsProfile === 'COLLOCATED' && !isActiveChange) {
             if (item.select !== 'DEFAULT' && !item.replicas && item.fieldName !== 'squidProfile' && field.type !== 'range') {
                 const newTabsProfileSelect = [...tabsProfileState]
                 newTabsProfileSelect[0] = { ...tabsProfileState[0], select: 'DEDICATED' }
@@ -184,6 +187,11 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                 {field.helper && (
                     <GlobalHelper helperObj={field.helper} listIndex={currentStateIndex} />
                 )}
+                {(windowWidth > 768 && field.name !== 'squidProfile') && (
+                    <p className={style["api-costs__list-item__header__price"]}>
+                        ${selectValues[currentStateIndex].price.value}
+                    </p>
+                )}
             </div>
             {field.subtitle && (
                 <p className={style["api-costs__list-item__subtitle"]}>{field.subtitle}</p>
@@ -197,6 +205,11 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
             >
                 {setFields()}
             </div>
+            {(windowWidth < 768 && field.name !== 'squidProfile') && (
+                <p className={style["api-costs__list-item__price"]}>
+                    ${selectValues[currentStateIndex].price.value}
+                </p>
+            )}
             {field.replicas && (
                 <label
                     onClick={() => setReplicasActive(true)}
