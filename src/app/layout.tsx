@@ -16,28 +16,29 @@ import 'swiper/css/grid';
 //     title: 'Subsquid',
 // }
 
-const inter = Inter({subsets: ['latin']})
+const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout ({children}: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 
-    const currentPath = usePathname()
+	const currentPath = usePathname()
 
-    return (
-      <html lang="en">
-        <Head>
-          <title>Subsquid</title>
-            {/* <link rel="preconnect" href="https://fonts.googleapis.com"/>
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
-            <link
-                href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-                rel="stylesheet"
-            /> */}
-        </Head>
-        <body className={inter.className}>
-            {currentPath !== '/worker' && <Header/>}
-            {children}
-            {currentPath !== '/worker' && <Footer/>}
-        </body>
-      </html>
-    )
+	return (
+		<html lang="en">
+			<Head>
+				<title>Subsquid</title>
+				<script async src="https://www.googletagmanager.com/gtag/js?id=G-6JBS6RNP90"></script>
+                <script dangerouslySetInnerHTML={{
+                    __html: `window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'G-6JBS6RNP90');`,
+                }}></script>
+			</Head>
+			<body className={inter.className}>
+				{currentPath !== '/worker' && <Header />}
+				{children}
+				{currentPath !== '/worker' && <Footer />}
+			</body>
+		</html>
+	)
 }
