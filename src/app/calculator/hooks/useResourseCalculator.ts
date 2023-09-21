@@ -82,6 +82,8 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
     const indexDataSize = listIndex('dataSize')
     const indexQueryComplexity = listIndex('queryComplexity')
     const indexNetworksCount = listIndex('networksCount')
+    const indexApiReplicas = listIndex('apiProfile')
+    const indexRequestsPerSecond = listIndex('requestsPerSecond')
 
     const selectTabsProfile = tabsProfile[0].select
 
@@ -104,6 +106,9 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                     );
                     updateState(
                         currentInfo('postgresStorage', '10', indexPostgresStorage), indexPostgresStorage
+                    );
+                    updateState(
+                        currentInfo('apiProfile', 1, indexApiReplicas), indexApiReplicas
                     );
                 }
             },
@@ -154,8 +159,6 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         {
             name: 'apiReplicas',
             conditions: () => {
-                const indexApiReplicas = listIndex('apiProfile')
-                const indexRequestsPerSecond = listIndex('requestsPerSecond')
                 const selectValue = Number(selectValuesUseCase[indexRequestsPerSecond].select)
                 if (0 <= selectValue && selectValue <= 1) {
                     updateState(
