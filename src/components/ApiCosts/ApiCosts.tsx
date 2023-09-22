@@ -109,8 +109,10 @@ export default function ApiCosts() {
 
     return (
         <section className={style["api-costs"]}>
-            <h2 className="title_api-costs">Estimate indexing and API costs</h2>
-            <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
+            <div>
+                <h2 className="title_api-costs">Estimate indexing and API costs</h2>
+                <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
+            </div>
             <div className={style["api-costs__tabs"]}>
                 {setTabNames()}
             </div>

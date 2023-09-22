@@ -37,10 +37,12 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, value
     }, [value])
 
     useEffect(()=>{
-        if (ref.current) {
-            setSliderThumb(ref.current?.parentElement?.style.left?? '0px')
-        }
-    }, [ref.current?.parentElement?.style.left, sliderValue])
+        setSliderThumb(ref.current?.parentElement?.style.left?? '0px')
+    }, [ref.current?.parentElement?.style.left])
+
+    useEffect(()=>{
+        setSliderThumb(ref.current?.parentElement?.style.left?? '0px')
+    }, [])
 
     return (
         <div 

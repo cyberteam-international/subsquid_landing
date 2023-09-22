@@ -110,16 +110,15 @@ export default function CalculatorPage() {
     //     console.log('totalSum', totalSum)
     // }, [totalSum])
 
-    // useEffect(() => {
-    //     console.log('selectValuesResources', selectValuesResources)
-    // }, [selectValuesResources])
-
-    // useEffect(() => {
-    //     console.log('selectValuesUseCase', selectValuesUseCase)
-    // }, [selectValuesUseCase])
+    useEffect(() => {
+        console.log('selectValuesResources', selectValuesResources)
+    }, [selectValuesResources])
 
     useEffect(() => {
-        // console.log('tabsProfile', tabsProfile)
+        console.log('selectValuesUseCase', selectValuesUseCase)
+    }, [selectValuesUseCase])
+
+    useEffect(() => {
         if (tabsProfile[0].select === 'COLLOCATED') {
             setSelectValuesUseCase([...setInitial('byUseCase')])
             setNewProcessors({
@@ -130,9 +129,9 @@ export default function CalculatorPage() {
     }, [tabsProfile])
 
     useEffect(() => {
-        if (helper.index !== 'manifest') {
-            setHelper({ index: -1 })
-        }
+        if (activeTab === 'byUseCase') {
+            setSelectValuesUseCase([...selectValuesUseCase])
+        } 
     }, [activeTab])
 
     return (

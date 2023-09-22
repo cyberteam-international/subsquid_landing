@@ -26,7 +26,7 @@ interface IApiCostSample {
         title: string,
         description: string,
     },
-    warning?: string,
+    warning?: string | string[],
     subtitle?: string,
     replicas?: string,
 }
@@ -37,7 +37,7 @@ export interface IApiCostsRange extends IApiCostSample {
     price: IApiCostsPrice,
     prefix: string,
     range: number[],
-    limit: number,
+    limit?: number,
     step: number
 }
 
@@ -70,7 +70,7 @@ export const _apiCostsMock: IApiCosts = {
     profile: {
         title: 'Squid profile',
         name: 'squidProfile',
-        warning: 'Collocated squids are recommended only for development and prototyping',
+        warning: ['Collocated squids are recommended only for development and prototyping', 'Dedicated VM resources for reliability in production.'],
         type: 'radio',
         canActive: false,
         values: [
@@ -128,7 +128,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Medium',
-                            value: 'MEDIUM',
+                            value: 'medium',
                             price: {
                                 type: "h",
                                 value: 0
@@ -136,7 +136,15 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Large',
-                            value: 'LARGE',
+                            value: 'large',
+                            price: {
+                                type: "h",
+                                value: 0
+                            },
+                        },
+                        {
+                            title: 'Not sure',
+                            value: 'not sure',
                             price: {
                                 type: "h",
                                 value: 0
@@ -148,16 +156,38 @@ export const _apiCostsMock: IApiCosts = {
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                     }
                 },
+                // {
+                //     title: 'RPC requests (2M included)',
+                //     name: 'RPC requests',
+                //     type: 'range',
+                //     canActive: false,
+                //     label: 'RPC requests, M',
+                //     prefix: 'M',
+                //     price: {
+                //         type: "h",
+                //         value: 0.0028
+                //     },
+                //     range: [2, 500],
+                //     step: 1,
+                //     limit: 2,
+                //     helper: {
+                //         title: 'RPC requests',
+                //         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
+                //     }
+                // },
                 {
-                    title: 'API requests, per sec',
+                    title: 'API requests',
                     name: 'requestsPerSecond',
-                    type: 'radio-input',
+                    type: 'range',
+                    label: 'API requests, per sec',
+                    prefix: '/sec',
                     canActive: false,
                     price: {
                         type: "h",
                         value: 0
                     },
-                    values: [1, 2, 3, 4],
+                    range: [1, 10000],
+                    step: 1,
                     helper: {
                         title: 'API requests',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
@@ -171,7 +201,7 @@ export const _apiCostsMock: IApiCosts = {
                     values: [
                         {
                             title: 'Simple',
-                            value: 'SIMPLE',
+                            value: 'simple',
                             price: {
                                 type: "h",
                                 value: 0
@@ -179,7 +209,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Mid',
-                            value: 'MID',
+                            value: 'mid',
                             price: {
                                 type: "h",
                                 value: 0
@@ -187,7 +217,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Complex',
-                            value: 'COMPLEX',
+                            value: 'complex',
                             price: {
                                 type: "h",
                                 value: 0
@@ -195,7 +225,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Not sure',
-                            value: 'NOT_SURE',
+                            value: 'not sure',
                             price: {
                                 type: "h",
                                 value: 0
@@ -215,13 +245,13 @@ export const _apiCostsMock: IApiCosts = {
             fields: [
                 {
                     title: 'Processor profile',
-                    name: 'processorProfile',
+                    name: 'Processor profile',
                     type: 'radio',
                     canActive: false,
                     values: [
                         {
                             title: 'Small',
-                            value: 'SMALL',
+                            value: 'small',
                             price: {
                                 type: "h",
                                 value: 0.04
@@ -229,7 +259,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Medium',
-                            value: 'MEDIUM',
+                            value: 'medium',
                             price: {
                                 type: "h",
                                 value: 0.08
@@ -237,7 +267,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Large',
-                            value: 'LARGE',
+                            value: 'large',
                             price: {
                                 type: "h",
                                 value: 0.15
@@ -251,14 +281,14 @@ export const _apiCostsMock: IApiCosts = {
                 },
                 {
                     title: 'API service',
-                    name: 'apiProfile',
+                    name: 'API profile',
                     type: 'radio',
-                    canActive: false,
+                    canActive: true,
                     replicas: '1',
                     values: [
                         {
                             title: 'Small',
-                            value: 'SMALL',
+                            value: 'small',
                             price: {
                                 type: "h",
                                 value: 0.04
@@ -266,7 +296,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Medium',
-                            value: 'MEDIUM',
+                            value: 'medium',
                             price: {
                                 type: "h",
                                 value: 0.08
@@ -274,7 +304,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Large',
-                            value: 'LARGE',
+                            value: 'large',
                             price: {
                                 type: "h",
                                 value: 0.15
@@ -288,14 +318,14 @@ export const _apiCostsMock: IApiCosts = {
                 },
                 {
                     title: 'Database',
-                    name: 'postgresProfile',
+                    name: 'Postgres profile',
                     subtitle: 'Postgres profile',
                     type: 'radio',
-                    canActive: false,
+                    canActive: true,
                     values: [
                         {
                             title: 'Small',
-                            value: 'SMALL',
+                            value: 'small',
                             price: {
                                 type: "h",
                                 value: 0.08,
@@ -303,7 +333,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Medium',
-                            value: 'MEDIUM',
+                            value: 'medium',
                             price: {
                                 type: "h",
                                 value: 0.16,
@@ -311,7 +341,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                         {
                             title: 'Large',
-                            value: 'LARGE',
+                            value: 'large',
                             price: {
                                 type: "h",
                                 value: 0.33,
@@ -325,9 +355,9 @@ export const _apiCostsMock: IApiCosts = {
                 },
                 {
                     title: 'RPC requests (2M included)',
-                    name: 'rpsRequests',
+                    name: 'RPC requests',
                     type: 'range',
-                    canActive: true,
+                    canActive: false,
                     label: 'RPC requests, M',
                     prefix: 'M',
                     price: {
@@ -344,9 +374,9 @@ export const _apiCostsMock: IApiCosts = {
                 },
                 {
                     title: 'Database size',
-                    name: 'postgresStorage',
+                    name: 'Postgres storage',
                     type: 'range',
-                    canActive: true,
+                    canActive: false,
                     label: 'Storage, Gb',
                     prefix: 'GB',
                     price: {

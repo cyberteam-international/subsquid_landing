@@ -38,8 +38,8 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
     };
 
     const rangeFields = [
-        selectValuesResources.find((el)=>el.fieldName=== 'rpsRequests'),
-        selectValuesResources.find((el)=>el.fieldName=== 'postgresStorage'),
+        selectValuesResources.find((el)=>el.fieldName=== 'RPC requests'),
+        selectValuesResources.find((el)=>el.fieldName=== 'Postgres storage'),
     ]
 
     const collocatedFreeRangeCondition = () =>{

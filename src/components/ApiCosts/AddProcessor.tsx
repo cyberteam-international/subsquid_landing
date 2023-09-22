@@ -18,14 +18,14 @@ export default function AddProcessor({ tabsProfile }: Props) {
     const windowWidth = useWindowWidth()
 
     const renderItem: IApiCostsRadio = {
-        title: `Processor profile ${newProcessors.render.length + 2}`,
-        name: `processorProfile_${newProcessors.render.length + 2}`,
+        title: `Processor profile ${newProcessors.state.length + 2}`,
+        name: `Processor profile ${newProcessors.state.length + 2}`,
         type: 'radio',
         canActive: false,
         values: [
             {
                 title: 'Small',
-                value: 'SMALL',
+                value: 'small',
                 price: {
                     type: "h",
                     value: 0.04
@@ -33,7 +33,7 @@ export default function AddProcessor({ tabsProfile }: Props) {
             },
             {
                 title: 'Medium',
-                value: 'MEDIUM',
+                value: 'medium',
                 price: {
                     type: "h",
                     value: 0.08
@@ -41,7 +41,7 @@ export default function AddProcessor({ tabsProfile }: Props) {
             },
             {
                 title: 'Large',
-                value: 'LARGE',
+                value: 'large',
                 price: {
                     type: "h",
                     value: 0.15
@@ -55,12 +55,12 @@ export default function AddProcessor({ tabsProfile }: Props) {
     }
 
     const renderState = {
-        fieldName: `processorProfile_${newProcessors.state.length + 2}`,
+        fieldName: `Processor profile ${newProcessors.state.length + 2}`,
         price: {
             type: "h",
             value: 0.04
         },
-        select: 'SMALL',
+        select: 'small',
     }
 
     const pushProcessor = () => {
