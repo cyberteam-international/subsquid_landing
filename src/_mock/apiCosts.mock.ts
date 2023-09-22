@@ -37,7 +37,7 @@ export interface IApiCostsRange extends IApiCostSample {
     price: IApiCostsPrice,
     prefix: string,
     range: number[],
-    limit: number,
+    limit?: number,
     step: number
 }
 
@@ -142,22 +142,52 @@ export const _apiCostsMock: IApiCosts = {
                                 value: 0
                             },
                         },
+                        {
+                            title: 'Not sure',
+                            value: 'not sure',
+                            price: {
+                                type: "h",
+                                value: 0
+                            },
+                        },
                     ],
                     helper: {
                         title: 'How much data to index',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                     }
                 },
+                // {
+                //     title: 'RPC requests (2M included)',
+                //     name: 'RPC requests',
+                //     type: 'range',
+                //     canActive: false,
+                //     label: 'RPC requests, M',
+                //     prefix: 'M',
+                //     price: {
+                //         type: "h",
+                //         value: 0.0028
+                //     },
+                //     range: [2, 500],
+                //     step: 1,
+                //     limit: 2,
+                //     helper: {
+                //         title: 'RPC requests',
+                //         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
+                //     }
+                // },
                 {
-                    title: 'API requests, per sec',
+                    title: 'API requests',
                     name: 'requestsPerSecond',
-                    type: 'radio-input',
+                    type: 'range',
+                    label: 'API requests, per sec',
+                    prefix: '/sec',
                     canActive: false,
                     price: {
                         type: "h",
                         value: 0
                     },
-                    values: [1, 2, 3, 4],
+                    range: [1, 10000],
+                    step: 1,
                     helper: {
                         title: 'API requests',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'

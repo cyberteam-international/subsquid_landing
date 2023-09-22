@@ -18,7 +18,7 @@ export default function ApiCostsResult() {
 
     const totalBlockRef = useContext(ScrollElementContext)
 
-    const windowWidth = useWindowWidth()
+    const windowWidth = typeof window !== 'undefined' ? useWindowWidth() : 1920;
 
     const [isOpen, setIsOpen] = useState(false);
 
