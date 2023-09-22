@@ -110,9 +110,9 @@ export default function CalculatorPage() {
     //     console.log('totalSum', totalSum)
     // }, [totalSum])
 
-    // useEffect(() => {
-    //     console.log('selectValuesResources', selectValuesResources)
-    // }, [selectValuesResources])
+    useEffect(() => {
+        console.log('selectValuesResources', selectValuesResources)
+    }, [selectValuesResources])
 
     // useEffect(() => {
     //     console.log('selectValuesUseCase', selectValuesUseCase)

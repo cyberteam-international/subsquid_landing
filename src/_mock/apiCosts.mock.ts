@@ -26,7 +26,7 @@ interface IApiCostSample {
         title: string,
         description: string,
     },
-    warning?: string,
+    warning?: string | string[],
     subtitle?: string,
     replicas?: string,
 }
@@ -70,7 +70,7 @@ export const _apiCostsMock: IApiCosts = {
     profile: {
         title: 'Squid profile',
         name: 'squidProfile',
-        warning: 'Collocated squids are recommended only for development and prototyping',
+        warning: ['Collocated squids are recommended only for development and prototyping', 'Dedicated VM resources for reliability in production.'],
         type: 'radio',
         canActive: false,
         values: [
@@ -253,7 +253,7 @@ export const _apiCostsMock: IApiCosts = {
                     title: 'API service',
                     name: 'apiProfile',
                     type: 'radio',
-                    canActive: false,
+                    canActive: true,
                     replicas: '1',
                     values: [
                         {
@@ -291,7 +291,7 @@ export const _apiCostsMock: IApiCosts = {
                     name: 'postgresProfile',
                     subtitle: 'Postgres profile',
                     type: 'radio',
-                    canActive: false,
+                    canActive: true,
                     values: [
                         {
                             title: 'Small',
@@ -327,7 +327,7 @@ export const _apiCostsMock: IApiCosts = {
                     title: 'RPC requests (2M included)',
                     name: 'rpsRequests',
                     type: 'range',
-                    canActive: true,
+                    canActive: false,
                     label: 'RPC requests, M',
                     prefix: 'M',
                     price: {
@@ -346,7 +346,7 @@ export const _apiCostsMock: IApiCosts = {
                     title: 'Database size',
                     name: 'postgresStorage',
                     type: 'range',
-                    canActive: true,
+                    canActive: false,
                     label: 'Storage, Gb',
                     prefix: 'GB',
                     price: {

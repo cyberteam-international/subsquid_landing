@@ -56,29 +56,19 @@ export default function ApiCostsResult() {
 
     const setDetailInfo = () => {
         return selectValues.map((item, index) => {
+            if (!item.isActive) return;
             return (
                 <Fragment key={index}>
                     <div className={style["api-costs__result__list-item"]}>
                         <div className={style["api-costs__result__list-item__wrapper"]}>
                             <p>{item.fieldName}</p>
-                            <p>${totalSum[index]?.currentPrice}/h</p>
+                            <p>${totalSum[index]?.currentPrice.toFixed(4)}</p>
                         </div>
                         <p className={style["api-costs__result__list-item__select"]}>
-                            {item.select} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
+                            {item.select} {item.replicas? `x ${item.replicas} replicas`: ''} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
                         </p>
                     </div>
-                    {item.replicas && (
-                        <div className={style["api-costs__result__list-item"]}>
-                            <div className={style["api-costs__result__list-item__wrapper"]}>
-                                <p>{item.fieldName} replicas</p>
-                                <p>$0/h</p>
-                            </div>
-                            <p className={style["api-costs__result__list-item__select"]}>{item.replicas}</p>
-                        </div>
-                    )}
-                    {(newProcessors.state.length > 0 && index === 0) && (
-                        <div>{setDetailProcessorsInfo()}</div>
-                    )}
+                    {(newProcessors.state.length > 0 && index === 0) && setDetailProcessorsInfo()}
                 </Fragment>
             )
         })
@@ -94,13 +84,13 @@ export default function ApiCostsResult() {
             ref={totalBlockRef}
         >
             {currentTotalPrice() === 0 && (
-                <p className={style["api-costs__result__total"]}>free</p>
+                <p className={`${style["api-costs__result__total"]} ${style["api-costs__result__total_free"]}`}>free</p>
             )}
             <p 
                 className={
                     currentTotalPrice() === 0?
-                    `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
-                    :style["api-costs__result__total"]
+                    `${style["api-costs__result__total"]} ${style["api-costs__result__total_month"]} ${style["api-costs__result__total_disable"]}`
+                    :`${style["api-costs__result__total"]} ${style["api-costs__result__total_month"]}`
                 }
             >
                 {currentTotalPrice() !== 0? `$${(currentTotalPrice() * 720).toFixed(2)}/mo` : `$${(currentOldPrice() * 720).toFixed(2)}/mo`}
@@ -108,8 +98,8 @@ export default function ApiCostsResult() {
             <p 
                 className={
                     currentTotalPrice() === 0?
-                    `${style["api-costs__result__total"]} ${style["api-costs__result__total_disable"]}`
-                    :style["api-costs__result__total"]
+                    `${style["api-costs__result__total"]} ${style["api-costs__result__total_hour"]} ${style["api-costs__result__total_disable"]}`
+                    :`${style["api-costs__result__total"]} ${style["api-costs__result__total_hour"]}`
                 }
             >
                 {currentTotalPrice() !== 0? `$${currentTotalPrice().toFixed(2)}/h` : `$${currentOldPrice().toFixed(2)}/h`}

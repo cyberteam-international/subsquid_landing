@@ -47,7 +47,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
         }
         const updateObj = [...selectValues]
         // updateObj[currentStateIndex] = !item.replicas ? { ...item, replicas: selectValues[currentStateIndex].replicas } : item
-        updateObj[currentStateIndex] = item
+        updateObj[currentStateIndex] = {...item, isActive: isActive}
         setSelectValues([...updateObj])
     }
 
@@ -234,12 +234,14 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
             )}
             {field.warning && (
                 <div className={style["api-costs__list-item__warning"]}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.0499 12.4725L17.049 12.4709L12.3236 3.98237C12.3236 3.98227 12.3235 3.98217 12.3235 3.98207C11.3158 2.16124 8.67577 2.16653 7.67106 3.98213C7.67101 3.98222 7.67097 3.9823 7.67092 3.98238L2.9511 12.4768L2.95099 12.477C1.97086 14.2435 3.27048 16.3816 5.28008 16.3816H14.7201C16.7245 16.3816 18.0299 14.2532 17.0499 12.4725Z" fill="#FFDD29" stroke="#1D1D1F" strokeWidth="0.763121" />
-                        <path d="M10 6.81641V10.8164" stroke="#1D1D1F" strokeWidth="1.06837" strokeLinecap="round" />
-                        <circle cx="9.9873" cy="12.9062" r="0.75" fill="#1D1D1F" />
-                    </svg>
-                    <p>{field.warning}</p>
+                    {tabsProfile === 'COLLOCATED' && (
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.0499 12.4725L17.049 12.4709L12.3236 3.98237C12.3236 3.98227 12.3235 3.98217 12.3235 3.98207C11.3158 2.16124 8.67577 2.16653 7.67106 3.98213C7.67101 3.98222 7.67097 3.9823 7.67092 3.98238L2.9511 12.4768L2.95099 12.477C1.97086 14.2435 3.27048 16.3816 5.28008 16.3816H14.7201C16.7245 16.3816 18.0299 14.2532 17.0499 12.4725Z" fill="#FFDD29" stroke="#1D1D1F" strokeWidth="0.763121" />
+                            <path d="M10 6.81641V10.8164" stroke="#1D1D1F" strokeWidth="1.06837" strokeLinecap="round" />
+                            <circle cx="9.9873" cy="12.9062" r="0.75" fill="#1D1D1F" />
+                        </svg>
+                    )}
+                    <p>{tabsProfile === 'COLLOCATED'? field.warning[0] : field.warning[1]}</p>
                 </div>
             )}
         </div>
