@@ -61,12 +61,14 @@ export default function ApiCostsResult() {
                 <Fragment key={index}>
                     <div className={style["api-costs__result__list-item"]}>
                         <div className={style["api-costs__result__list-item__wrapper"]}>
-                            <p>{item.fieldName}</p>
+                            <div className={style["api-costs__result__list-item__wrapper_left"]}>
+                                <p>{item.fieldName}</p>
+                                <p className={style["api-costs__result__list-item__select"]}>
+                                {item.select} {item.replicas? `x ${item.replicas} replicas`: ''} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
+                            </p>
+                            </div>
                             <p>${totalSum[index]?.currentPrice.toFixed(4)}</p>
                         </div>
-                        <p className={style["api-costs__result__list-item__select"]}>
-                            {item.select} {item.replicas? `x ${item.replicas} replicas`: ''} {item.fieldName === 'postgresStorage'? 'Gb' : item.fieldName === 'rpsRequests'? 'M' : ''}
-                        </p>
                     </div>
                     {(newProcessors.state.length > 0 && index === 0) && setDetailProcessorsInfo()}
                 </Fragment>

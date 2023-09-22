@@ -12,6 +12,7 @@
         margin-top: 120px;
     }
     &__subtitle{
+        margin-top: 16px;
         text-align: center;
         font-size: 16px;
         font-style: normal;
@@ -22,12 +23,15 @@
         a{
             color: var(--color-link);
         }
+        @include media-up(md) {
+            margin-top: 20px;
+        }
         @include media-up(lg) {
-            font-size: 24px;
+            font-size: 20px;
             font-style: normal;
             font-weight: 400;
             line-height: 160%; /* 38.4px */
-            letter-spacing: 0.48px;
+            letter-spacing: 0.4px;
         }
     }
     &__tabs{
@@ -483,6 +487,17 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    &_left{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 24px;
+                        p{
+                            &:first-child{
+                                min-width: 160px;
+                            }
+                        }
+                    }
                     p{
                         font-size: 16px;
                         font-weight: 400;
