@@ -4,7 +4,7 @@ import { useWindowWidth } from '@react-hook/window-size'
 import ApiCostsFieldRadio from './ApiCostsFieldRadio'
 import GlobalHelper from '../../GlobalHelper/GlobalHelper'
 
-import { NewProcessors } from '@/app/calculator/context'
+import { NewProcessors } from '@/app/pricing/context'
 
 import {
     IApiCostsRadio,
@@ -102,9 +102,9 @@ export default function ApiCostsFieldProcessor({ field, selectValuesState, tabsP
                     </button>
                 }
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
-                {field.helper && (
-                    <GlobalHelper helperObj={field.helper} listIndex={currentStateIndex} />
-                )}
+                {/* {field.helper && (
+                    <GlobalHelper helperObj={field.helper} listIndex={1000 + currentStateIndex} />
+                )} */}
                 {windowWidth > 768 && (
                     <p className={style["api-costs__list-item__header__price"]}>
                         ${selectValues.state[currentStateIndex].price.value}

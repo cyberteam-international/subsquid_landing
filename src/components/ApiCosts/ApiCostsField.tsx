@@ -6,7 +6,7 @@ import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
 import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
 import GlobalHelper from '../GlobalHelper/GlobalHelper'
 
-import { SelectValues, TabsProfileContext } from '@/app/calculator/context'
+import { SelectValues, TabsProfileContext } from '@/app/pricing/context'
 
 import {
     IApiCostsRadio,
@@ -184,9 +184,9 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                     </button>
                 }
                 <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
-                {field.helper && (
+                {/* {field.helper && (
                     <GlobalHelper helperObj={field.helper} listIndex={currentStateIndex} />
-                )}
+                )} */}
                 {(windowWidth > 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
                     <p className={style["api-costs__list-item__header__price"]}>${selectValues[currentStateIndex].price.value}</p>
                 )}
@@ -206,7 +206,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
             {(windowWidth < 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
                 <p className={style["api-costs__list-item__price"]}>${selectValues[currentStateIndex].price.value}</p>
             )}
-            {field.replicas && (
+            {(field.replicas && tabsProfile !== 'COLLOCATED') && (
                 <label
                     onClick={() => setReplicasActive(true)}
                     className={

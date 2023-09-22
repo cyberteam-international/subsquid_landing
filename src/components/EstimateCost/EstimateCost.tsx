@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { TotalSumContext, ScrollElementContext } from '@/app/calculator/context';
+import { TotalSumContext, ScrollElementContext } from '@/app/pricing/context';
 
 import style from './EstimateCost.module.scss'
 

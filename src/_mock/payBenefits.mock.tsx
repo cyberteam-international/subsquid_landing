@@ -29,7 +29,7 @@ export default [
     {
         title: 'Premium',
         subtitle: 'Pay-as-you-go',
-        description: 'Flexible billing: pay only for what you really use.',
+        description: 'Pay only for what you use',
         items: [
             'Unlimited number of pay-as-you-go dedicated squids',
             'Unlimited number of pay-as-you-go collocated squids',
@@ -43,7 +43,7 @@ export default [
     },
     {
         title: 'Enterprise',
-        description: 'Flexible billing: pay only for what you really use.',
+        description: 'Contact us for special conditions',
         items: [
             'Everything in Premium',
             'Individual SLAs and discounts',

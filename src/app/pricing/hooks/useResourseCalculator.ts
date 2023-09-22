@@ -172,7 +172,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                 }
                 else if (6 <= selectValue) {
                     updateState(
-                        currentInfo('apiProfile', Math.round(Math.log10(selectValue)), indexApiReplicas), indexApiReplicas
+                        currentInfo('apiProfile', 2 + Math.round(Math.log10(selectValue)), indexApiReplicas), indexApiReplicas
                     );
                 }
             }

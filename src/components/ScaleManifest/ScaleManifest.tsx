@@ -1,8 +1,12 @@
 'use client'; 
 
+import { Inter } from 'next/font/google';
+
 import GlobalHelper from '../GlobalHelper/GlobalHelper';
 
 import style from './ScaleManifest.module.scss'; 
+
+const inter = Inter({ subsets: ['latin'] })
  
 export default function ScaleManifest() { 
     const codeText =  
@@ -27,11 +31,13 @@ export default function ScaleManifest() {
         <section className={style['manifest']}> 
             <div className={style['manifest__wrapper']}> 
                 <p>“Scale” for your manifest</p> 
-                <GlobalHelper listIndex={'manifest'} helperObj={helperText} />
+                {/* <GlobalHelper listIndex={'manifest'} helperObj={helperText} /> */}
             </div> 
-            <p className={style['manifest__subtitle']}>Paste scale settings into your manifest to use selected configuration.</p> 
+            <p className={style['manifest__subtitle']}>
+                Paste this scar into your manifest to use selected configuration. Discover more in the <a href="http://https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a>.
+            </p> 
             <div className={style['manifest__code']}> 
-                <code>
+                <code className={inter.className}>
                     <p>scale:</p> 
                     <p>addons:</p> 
                     <p>postgres:</p> 

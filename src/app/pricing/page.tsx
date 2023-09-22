@@ -23,12 +23,13 @@ import ApiCosts from '@/components/ApiCosts/ApiCosts';
 import ScaleManifest from '@/components/ScaleManifest/ScaleManifest';
 import EstimateCost from '@/components/EstimateCost/EstimateCost';
 
-import { useResourseCalculator } from '@/app/calculator/hooks/useResourseCalculator';
+import { useResourseCalculator } from '@/app/pricing/hooks/useResourseCalculator';
 import { useTotalCalculator } from './hooks/useTotalPrice';
 
 import { _apiCostsMock, IApiCostsState } from '@/_mock/apiCosts.mock'
 
 import style from './style.module.scss'
+import { Metadata } from 'next';
 
 const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IApiCostsState[] => {
     const currentFields = tab === 'byResources' ? _apiCostsMock.tabs['byResources'].fields : _apiCostsMock.tabs['byUseCase'].fields
@@ -79,6 +80,10 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
     })
 }
 
+export const metadata: Metadata = {
+    title: 'Pricing',
+}
+
 export default function CalculatorPage() {
     const [newProcessors, setNewProcessors] = useState<NewProcessors['0']>({state: [], render: []})
     const [selectValuesUseCase, setSelectValuesUseCase] = useState(setInitial('byUseCase')) as SelectValues;
@@ -119,7 +124,7 @@ export default function CalculatorPage() {
     // }, [selectValuesUseCase])
 
     useEffect(() => {
-        console.log('tabsProfile', tabsProfile)
+        // console.log('tabsProfile', tabsProfile)
         if (tabsProfile[0].select === 'COLLOCATED') {
             setSelectValuesUseCase([...setInitial('byUseCase')])
             setNewProcessors({
@@ -149,7 +154,7 @@ export default function CalculatorPage() {
                                                 <section className={style['calculator__header']}>
                                                     <h1 className="calculator__title">Pricing that fits your <i>needs</i></h1>
                                                     <p className={style['calculator__header__subtitle']}>
-                                                        Empowering your data access with flexible pricing.
+                                                        Empowering your data access with flexible pricing
                                                     </p>
                                                 </section>
                                                 <PayBenefits />

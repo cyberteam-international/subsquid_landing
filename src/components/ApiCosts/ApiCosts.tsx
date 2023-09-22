@@ -8,7 +8,7 @@ import {
     SelectValuesResourcesContext,
     TabsProfileContext,
     NewProcessorsContext
-} from '@/app/calculator/context';
+} from '@/app/pricing/context';
 
 import ApiCostsField from './ApiCostsField';
 import ApiCostsResult from './ApiCostsResult';
@@ -80,7 +80,7 @@ export default function ApiCosts() {
                         {activeTab === 'byResources' && (
                             <>
                                 {newProcessors.render.length > 0 && setNewProfiles()}
-                                {newProcessors.render.length < 10 && (
+                                {newProcessors.render.length < 9 && (
                                     <AddProcessor tabsProfile={tabsProfile[0].select} />
                                 )}
                             </>
@@ -110,6 +110,7 @@ export default function ApiCosts() {
     return (
         <section className={style["api-costs"]}>
             <h2 className="title_api-costs">Estimate indexing and API costs</h2>
+            <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
             <div className={style["api-costs__tabs"]}>
                 {setTabNames()}
             </div>

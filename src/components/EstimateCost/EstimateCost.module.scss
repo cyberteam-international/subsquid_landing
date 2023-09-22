@@ -13,6 +13,7 @@
     padding: 16px 24px 20px 24px;
     background: var(--color-white);
     cursor: pointer;
+    box-shadow: 0px -1px 1px 0px rgba(39, 33, 12, 0.06), 0px -1px 1px 0px rgba(39, 33, 12, 0.04), 0px -3px 1px 0px rgba(39, 33, 12, 0.01), 0px -4px 1px 0px rgba(39, 33, 12, 0.00);
     @include media-up(sm) {
         display: none;
     }
