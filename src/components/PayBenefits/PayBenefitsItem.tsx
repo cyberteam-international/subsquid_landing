@@ -27,11 +27,13 @@ export default function PayBenefitsItem({ title, subtitle, items, button, descri
 
     return (
         <div className={style["pay-benefits__item"]}>
-            <h3 className="title">{title}</h3>
-            {subtitle && (
-                <p className={style["pay-benefits__item__subtitle"]}>{subtitle}</p>
-            )}
-            <p className={style["pay-benefits__item__description"]}>{description}</p>
+            <div className={style["pay-benefits__item__wrapper"]}>
+                <h3 className="title">{title}</h3>
+                {subtitle && (
+                    <p className={style["pay-benefits__item__subtitle"]}>{subtitle}</p>
+                )}
+                <p className={style["pay-benefits__item__description"]}>{description}</p>
+            </div>
             <ul className={style["pay-benefits__item__list"]}>
                 {setItems()}
             </ul>

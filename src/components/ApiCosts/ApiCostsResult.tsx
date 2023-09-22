@@ -5,7 +5,7 @@ import {
     ScrollElementContext,
     SelectValuesResourcesContext,
     NewProcessorsContext,
-} from "@/app/calculator/context";
+} from "@/app/pricing/context";
 
 import style from './ApiCosts.module.scss'
 

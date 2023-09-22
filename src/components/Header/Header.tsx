@@ -4,6 +4,7 @@ import './Header.scss'
 import React, {useState} from "react";
 import classNames from "classnames";
 import GitHub from "@/components/GitHub/GitHub";
+import Link from 'next/link';
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false)
@@ -29,7 +30,7 @@ export default function Header() {
                 <div className="container">
                     <div className="header__wrapper">
                         <div>
-                            <a href="/"><img src="/logo.png" alt="" className="header__logo"/></a>
+                            <Link href="/"><img src="/logo.png" alt="" className="header__logo"/></Link>
                         </div>
                         <div>
                             <button className={classNames({
@@ -45,6 +46,7 @@ export default function Header() {
                                 <div className="nav__section">
                                     <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
                                     <a href="https://blog.subsquid.io/" className="nav__item" target="_blank">Blog</a>
+                                    <Link href="/pricing" className="nav__item">Pricing</Link>
                                 </div>
                                 <div className="nav__section">
                                     <GitHub username="subsquid" reponame="squid-sdk"/>

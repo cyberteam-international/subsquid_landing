@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import { useWindowWidth } from "@react-hook/window-size";
 
-import ApiCostsFieldProcessor from "./ApiCostsFields/ApiCostsFieldProcessor";
-
-import { NewProcessorsContext } from "@/app/calculator/context";
+import { NewProcessorsContext } from "@/app/pricing/context";
 
 import { IApiCostsRadio } from "@/_mock/apiCosts.mock";
 
@@ -20,8 +18,8 @@ export default function AddProcessor({ tabsProfile }: Props) {
     const windowWidth = useWindowWidth()
 
     const renderItem: IApiCostsRadio = {
-        title: `Processor profile ${newProcessors.render.length + 1}`,
-        name: `processorProfile_${newProcessors.render.length + 1}`,
+        title: `Processor profile ${newProcessors.render.length + 2}`,
+        name: `processorProfile_${newProcessors.render.length + 2}`,
         type: 'radio',
         canActive: false,
         values: [
@@ -57,7 +55,7 @@ export default function AddProcessor({ tabsProfile }: Props) {
     }
 
     const renderState = {
-        fieldName: `processorProfile_${newProcessors.state.length + 1}`,
+        fieldName: `processorProfile_${newProcessors.state.length + 2}`,
         price: {
             type: "h",
             value: 0.04
@@ -66,7 +64,7 @@ export default function AddProcessor({ tabsProfile }: Props) {
     }
 
     const pushProcessor = () => {
-        if (newProcessors.render.length < 10 && tabsProfile !== 'COLLOCATED') {
+        if (newProcessors.render.length < 9 && tabsProfile !== 'COLLOCATED') {
             const newState = newProcessors
             newState.render.push(renderItem)
             newState.state.push(renderState)

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useWindowWidth } from "@react-hook/window-size";
 
-import { HelperContext, Helper } from "@/app/calculator/context";
+import { HelperContext, Helper } from "@/app/pricing/context";
 
 import style from './GlobalHelper.module.scss'
 

@@ -56,6 +56,9 @@
             font-size: 16px;
             letter-spacing: 0.32px;
         }
+        a{
+            color: var(--color-link);
+        }
     }
     &__code{
         margin-top: 32px;
