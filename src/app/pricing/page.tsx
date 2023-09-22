@@ -29,7 +29,6 @@ import { useTotalCalculator } from './hooks/useTotalPrice';
 import { _apiCostsMock, IApiCostsState } from '@/_mock/apiCosts.mock'
 
 import style from './style.module.scss'
-import { Metadata } from 'next';
 
 const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IApiCostsState[] => {
     const currentFields = tab === 'byResources' ? _apiCostsMock.tabs['byResources'].fields : _apiCostsMock.tabs['byUseCase'].fields
@@ -78,10 +77,6 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                 throw new Error('Uncorrected field type. Update setInitial() or add field current type.')
         }
     })
-}
-
-export const metadata: Metadata = {
-    title: 'Pricing',
 }
 
 export default function CalculatorPage() {
