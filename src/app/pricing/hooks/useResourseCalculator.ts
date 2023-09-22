@@ -61,28 +61,28 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         };
     };
 
-    // processorProfile = Processor profile
+    // Processor profile = Processor profile
     // networksCount = How many networks to index
     // dataSize = How much data to index
-    // apiProfile = API service
+    // API profile = API service
     // queryComplexity = Query Complexity
     // apiReplicas = API service (replicas)
     // requestsPerSecond = API requests, per sec
-    // postgresStorage = Database size
-    // postgresProfile = Database
+    // Postgres storage = Database size
+    // Postgres profile = Database
     // squidProfile = Squid profile
     // ??? = RPC requests (2M included)
 
     // const indexSquidProfileUseCase = selectValuesUseCase.findIndex((el) => el.fieldName === 'squidProfile')
     // const indexSquidProfileResources = returnSelectValuesResources.findIndex((el) => el.fieldName === 'squidProfile')
-    const indexProcessorProfile = listIndex('processorProfile')
-    const indexApiProfile = listIndex('apiProfile')
-    const indexPostgresProfile = listIndex('postgresProfile')
-    const indexPostgresStorage = listIndex('postgresStorage')
+    const indexProcessorProfile = listIndex('Processor profile')
+    const indexApiProfile = listIndex('API profile')
+    const indexPostgresProfile = listIndex('Postgres profile')
+    const indexPostgresStorage = listIndex('Postgres storage')
     const indexDataSize = listIndex('dataSize')
     const indexQueryComplexity = listIndex('queryComplexity')
     const indexNetworksCount = listIndex('networksCount')
-    const indexApiReplicas = listIndex('apiProfile')
+    const indexApiReplicas = listIndex('API profile')
     const indexRequestsPerSecond = listIndex('requestsPerSecond')
 
     const selectTabsProfile = tabsProfile[0].select
@@ -96,62 +96,62 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             conditions: () => {
                 if (selectTabsProfile === 'COLLOCATED'){
                     updateState(
-                        currentInfo('processorProfile', 'DEFAULT', indexProcessorProfile), indexProcessorProfile
+                        currentInfo('Processor profile', 'default', indexProcessorProfile), indexProcessorProfile
                     );
                     updateState(
-                        currentInfo('apiProfile', 'DEFAULT', indexApiProfile), indexApiProfile
+                        currentInfo('API profile', 'default', indexApiProfile), indexApiProfile
                     );
                     updateState(
-                        currentInfo('postgresProfile', 'DEFAULT', indexPostgresProfile), indexPostgresProfile
+                        currentInfo('Postgres profile', 'default', indexPostgresProfile), indexPostgresProfile
                     );
                     updateState(
-                        currentInfo('postgresStorage', '10', indexPostgresStorage), indexPostgresStorage
+                        currentInfo('Postgres storage', '10', indexPostgresStorage), indexPostgresStorage
                     );
                     updateState(
-                        currentInfo('apiProfile', 1, indexApiReplicas), indexApiReplicas
+                        currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
                     );
                 }
             },
         },
         {
-            name: 'processorProfile',
+            name: 'Processor profile',
             conditions: () => {
                 const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
                 const selectValueDataSize = selectValuesUseCase[indexDataSize].select
-                if ((selectValueNetworksCount === 1 && selectValueDataSize === 'LOW') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'MEDIUM')) {
+                if ((selectValueNetworksCount === 1 && selectValueDataSize === 'LOW') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'medium')) {
                     updateState(
-                        currentInfo('processorProfile', 'SMALL', indexProcessorProfile), indexProcessorProfile
+                        currentInfo('Processor profile', 'small', indexProcessorProfile), indexProcessorProfile
                     );
                 }
-                else if ((selectValueNetworksCount === 1 && selectValueDataSize === 'MEDIUM') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'LARGE')) {
+                else if ((selectValueNetworksCount === 1 && selectValueDataSize === 'medium') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'large')) {
                     updateState(
-                        currentInfo('processorProfile', 'MEDIUM', indexProcessorProfile), indexProcessorProfile
+                        currentInfo('Processor profile', 'medium', indexProcessorProfile), indexProcessorProfile
                     );
                 }
-                else if (selectValueNetworksCount === 1 && selectValueDataSize === 'LARGE') {
+                else if (selectValueNetworksCount === 1 && selectValueDataSize === 'large') {
                     updateState(
-                        currentInfo('processorProfile', 'LARGE', indexProcessorProfile), indexProcessorProfile
+                        currentInfo('Processor profile', 'large', indexProcessorProfile), indexProcessorProfile
                     );
                 }
             }
         },
         {
-            name: 'apiProfile',
+            name: 'API profile',
             conditions: () => {
                 const selectValue = selectValuesUseCase[indexQueryComplexity].select
-                if (selectValue === 'SIMPLE' || selectValue === 'NOT_SURE') {
+                if (selectValue === 'simple' || selectValue === 'not sure') {
                     updateState(
-                        currentInfo('apiProfile', 'SMALL', indexApiProfile), indexApiProfile
+                        currentInfo('API profile', 'small', indexApiProfile), indexApiProfile
                     );
                 }
-                else if (selectValue === 'MID') {
+                else if (selectValue === 'mid') {
                     updateState(
-                        currentInfo('apiProfile', 'MEDIUM', indexApiProfile), indexApiProfile
+                        currentInfo('API profile', 'medium', indexApiProfile), indexApiProfile
                     );
                 }
-                else if (selectValue === 'COMPLEX') {
+                else if (selectValue === 'complex') {
                     updateState(
-                        currentInfo('apiProfile', 'LARGE', indexApiProfile), indexApiProfile
+                        currentInfo('API profile', 'large', indexApiProfile), indexApiProfile
                     );
                 }
             }
@@ -162,58 +162,58 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                 const selectValue = Number(selectValuesUseCase[indexRequestsPerSecond].select)
                 if (0 <= selectValue && selectValue <= 1) {
                     updateState(
-                        currentInfo('apiProfile', 1, indexApiReplicas), indexApiReplicas
+                        currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
                     );
                 }
                 else if (2 <= selectValue && selectValue <= 5) {
                     updateState(
-                        currentInfo('apiProfile', 2, indexApiReplicas), indexApiReplicas
+                        currentInfo('API profile', 2, indexApiReplicas), indexApiReplicas
                     );
                 }
                 else if (6 <= selectValue) {
                     updateState(
-                        currentInfo('apiProfile', 2 + Math.round(Math.log10(selectValue)), indexApiReplicas), indexApiReplicas
+                        currentInfo('API profile', 2 + Math.round(Math.log10(selectValue)), indexApiReplicas), indexApiReplicas
                     );
                 }
             }
         },
         {
-            name: 'postgresProfile',
+            name: 'Postgres profile',
             conditions: () => {
                 const selectValueQueryComplexity = selectValuesUseCase[indexQueryComplexity].select
                 const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
-                if (selectValueQueryComplexity === 'SIMPLE' || selectValueQueryComplexity === 'NOT_SURE') {
+                if (selectValueQueryComplexity === 'simple' || selectValueQueryComplexity === 'not sure') {
                     updateState(
-                        currentInfo('postgresProfile', 'SMALL', indexPostgresProfile), indexPostgresProfile
+                        currentInfo('Postgres profile', 'small', indexPostgresProfile), indexPostgresProfile
                     );
-                } else if ((selectValueNetworksCount >= 2 && selectValueNetworksCount <= 9) || selectValueQueryComplexity === 'MID') {
+                } else if ((selectValueNetworksCount >= 2 && selectValueNetworksCount <= 9) || selectValueQueryComplexity === 'mid') {
                     updateState(
-                        currentInfo('postgresProfile', 'MEDIUM', indexPostgresProfile), indexPostgresProfile
+                        currentInfo('Postgres profile', 'medium', indexPostgresProfile), indexPostgresProfile
                     );
-                } else if (selectValueNetworksCount >= 10 || selectValueQueryComplexity === 'COMPLEX') {
+                } else if (selectValueNetworksCount >= 10 || selectValueQueryComplexity === 'complex') {
                     updateState(
-                        currentInfo('postgresProfile', 'LARGE', indexPostgresProfile), indexPostgresProfile
+                        currentInfo('Postgres profile', 'large', indexPostgresProfile), indexPostgresProfile
                     );
                 }
             }
         },
         {
-            name: 'postgresStorage',
+            name: 'Postgres storage',
             conditions: () => {
                 const selectValue = selectValuesUseCase[indexDataSize].select
                 if (selectValue === 'LOW') {
                     updateState(
-                        currentInfo('postgresStorage', '50', indexPostgresStorage), indexPostgresStorage
+                        currentInfo('Postgres storage', '50', indexPostgresStorage), indexPostgresStorage
                     );
                 }
-                else if (selectValue === 'MEDIUM') {
+                else if (selectValue === 'medium') {
                     updateState(
-                        currentInfo('postgresStorage', '150', indexPostgresStorage), indexPostgresStorage
+                        currentInfo('Postgres storage', '150', indexPostgresStorage), indexPostgresStorage
                     );
                 }
-                else if (selectValue === 'LARGE') {
+                else if (selectValue === 'large') {
                     updateState(
-                        currentInfo('postgresStorage', '500', indexPostgresStorage), indexPostgresStorage
+                        currentInfo('Postgres storage', '500', indexPostgresStorage), indexPostgresStorage
                     );
                 }
             }

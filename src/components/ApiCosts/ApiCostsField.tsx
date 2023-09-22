@@ -39,7 +39,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
 
     const updateState = (item: IApiCostsState, isActiveChange: boolean = false) => {
         if (tabsProfile === 'COLLOCATED' && !isActiveChange) {
-            if (item.select !== 'DEFAULT' && !item.replicas && item.fieldName !== 'squidProfile' && field.type !== 'range') {
+            if (item.select !== 'default' && !item.replicas && item.fieldName !== 'squidProfile' && field.type !== 'range') {
                 const newTabsProfileSelect = [...tabsProfileState]
                 newTabsProfileSelect[0] = { ...tabsProfileState[0], select: 'DEDICATED' }
                 setTabsProfileState([...newTabsProfileSelect])
@@ -111,7 +111,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                     item={
                         {
                             title: 'Default',
-                            value: 'DEFAULT',
+                            value: 'default',
                             price: {
                                 type: "h",
                                 value: 0
@@ -159,7 +159,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                     return item.value === selectValues[currentStateIndex].select;
                 }
             });
-            if (selectValues[currentStateIndex].select !== 'DEFAULT') {
+            if (selectValues[currentStateIndex].select !== 'default') {
                 setActiveItem(currentIndex);
             }
             else setActiveItem(0);

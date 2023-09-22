@@ -65,13 +65,13 @@ export default function ApiCostsFieldProcessor({ field, selectValuesState, tabsP
             return {
                 ...item,
                 title: `Processor profile ${index + 1}`,
-                name: `processorProfile_${index + 1}`
+                name: `Processor profile ${index + 1}`
             }
         })
         newState.state = newState.state.filter((_item, index)=> index !== currentStateIndex).map((item, index)=>{
             return {
                 ...item,
-                fieldName: `processorProfile_${index + 1}`,
+                fieldName: `Processor profile ${index + 1}`,
             }
         })
         setSelectValues({...newState})
