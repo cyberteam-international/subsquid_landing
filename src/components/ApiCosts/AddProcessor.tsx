@@ -78,8 +78,6 @@ export default function AddProcessor({ tabsProfile }: Props) {
         }
     }
 
-    useEffect(()=>{console.log(cursorPosition)}, [cursorPosition])
-
     return (
         <>
             <div
