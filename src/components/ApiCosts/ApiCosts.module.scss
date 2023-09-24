@@ -190,6 +190,9 @@
                 flex-wrap: wrap;
                 gap: 8px;
                 margin-top: 20px;
+                @include media-up(lg) {
+                    flex-wrap: nowrap;
+                }
                 &_range{
                     flex-direction: column;
                     gap: 0;
@@ -260,9 +263,16 @@
                     display: flex;
                     flex-wrap: wrap;
                     gap: 8px;
+                    @include media-up(lg) {
+                        flex-wrap: nowrap;
+                    }
                 }
                 input{
+                    width: fit-content;
+                    max-width: 120px;
+                    height: fit-content;
                     border-bottom: 1px solid var(--color-primary);
+                    display: block;
                     padding: 5px;
                     margin-top: 9px;
                     &::-webkit-outer-spin-button,

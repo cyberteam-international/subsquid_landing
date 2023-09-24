@@ -16,10 +16,10 @@
         padding: 24px;
         background: var(--color-white);
         overflow: hidden;
-        display: flex;
         flex-direction: column;
         width: 100%;
         transition: 0.3s all;
+        display: grid;
         &:nth-child(2){
             box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04), 0 0 2px 0 rgba(0, 0, 0, 0.12);
             background: var(--color-gray-light);
@@ -68,6 +68,9 @@
                 background: var(--color-primary);
                 color: var(--color-white);
                 border: none;
+                &:hover {
+                    background: var(--color-secondary);
+                }
             }
         }
         &:hover{
@@ -77,10 +80,9 @@
         @include media-up(lg) {
             padding: 48px 40px;
         }
-        // &__wrapper{
-        //     height: fit-content;
-        //     margin-bottom: 32px;
-        // }
+        &__wrapper{
+            // height: fit-content;
+        }
         h3{
             font-size: 28px;
             font-weight: 700;
@@ -167,6 +169,11 @@
             border-radius: 12px;
             width: 100%;
             height: 44px;
+            transition: 0.2s all;
+            &:hover {
+                transition: 0.2s all;
+                border-color: var(--color-secondary-button-hover);
+            }
             @include media-up(md) {
                 height: 72px;
             }
