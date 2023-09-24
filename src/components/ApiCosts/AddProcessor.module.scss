@@ -1,17 +1,23 @@
 @import "@/assets/scss/main";
 
 .add{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 0;
-    cursor: pointer;
     border-radius: 20px;
-    height: 100%;
+    padding: 12px 0;
+    position: relative;
+    overflow: visible;
     &_disable{
-        opacity: 0.4;
-        cursor: default;
+        .add__wrapper{
+            opacity: 0.4;
+            cursor: default;
+        }
+    }
+    &__wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        height: 100%;
     }
     p{
         color: var(--color-link);
@@ -21,6 +27,23 @@
     }
     svg{
         overflow: visible;
+    }
+    &__hint{
+        display: block;
+        box-sizing: border-box;
+        border-radius: 8px;
+        border: 1px solid rgba(29, 29, 31, 0.20);
+        background: var(--color-white);
+        box-shadow: 0px 4px 14px 0px rgba(101, 101, 101, 0.21);
+        padding: 12px 20px;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 450;
+        line-height: 24px; /* 171.429% */
+        color: rgba(29, 29, 31, 0.80) !important;
+        opacity: 1;
+        // width: fit-content;
+        position: fixed;
     }
     @include media-up(md) {
         min-height: 150px;
