@@ -46,7 +46,7 @@ export default function Header() {
                                 <div className="nav__section">
                                     <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
                                     <a href="https://blog.subsquid.io/" className="nav__item" target="_blank">Blog</a>
-                                    <Link href="/pricing" className="nav__item">Pricing</Link>
+                                    <a href="/pricing" className="nav__item">Pricing</a>
                                 </div>
                                 <div className="nav__section">
                                     <GitHub username="subsquid" reponame="squid-sdk"/>
