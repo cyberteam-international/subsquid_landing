@@ -373,10 +373,27 @@
                         }
                         &-thumb{
                             top: -7px;
-                            bottom: 0;
+                            bottom: 0px;
                             cursor: pointer;
+                            &:focus{
+                                outline: none !important;
+                            }
                             svg{
                                 overflow: visible;
+                                &:focus{
+                                    outline: none !important;
+                                }
+                            }
+                            &_fake{
+                                cursor: pointer;
+                                z-index: 2 !important;
+                                bottom: 0px;
+                                display: flex;
+                                align-items: center;
+                                transform: translateY(7px);
+                                &:focus{
+                                    outline: none !important;
+                                }
                             }
                         }
                     }
