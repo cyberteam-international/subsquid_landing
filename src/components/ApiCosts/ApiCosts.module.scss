@@ -275,8 +275,7 @@
                     display: block;
                     padding: 5px;
                     margin-top: 9px;
-                    appearance: initial;
-                    -webkit-appearance: none;
+                    border-radius: 0;
                     &::-webkit-outer-spin-button,
                     &::-webkit-inner-spin-button {
                         -webkit-appearance: none;
