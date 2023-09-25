@@ -28,7 +28,7 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, value
                 className={style["api-costs__list-item__fields-item__wrapper"]}
             >
                 <p className={style["api-costs__list-item__fields-item__prefix"]}>
-                    {sliderValue} {field.prefix}
+                    {Number(sliderValue) === 0? '< 1' : sliderValue} {field.prefix}
                 </p>
             </div>
             <ReactSlider

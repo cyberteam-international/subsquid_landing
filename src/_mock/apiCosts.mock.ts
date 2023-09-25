@@ -177,7 +177,7 @@ export const _apiCostsMock: IApiCosts = {
                         type: "h",
                         value: 0
                     },
-                    range: [10, 10000],
+                    range: [0, 10000],
                     step: 10,
                     helper: {
                         title: 'API requests',
