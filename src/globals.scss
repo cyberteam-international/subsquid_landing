@@ -190,7 +190,7 @@ p, .paragraph {
 }
 
 .main {
-  padding-top: 76px;
+  margin-top: 76px;
   overflow: hidden;
   padding-bottom: 60px;
 
@@ -204,13 +204,18 @@ p, .paragraph {
     padding-bottom: 140px;
   }
 
-  @include media-up(xl) {
-    margin-top: 130px;
-    padding-bottom: 160px;
-  }
+  // @include media-up(xl) {
+  //   margin-top: 130px;
+  //   padding-bottom: 160px;
+  // }
 
-  @include media-up(xxl) {
-    margin-top: 250px;
+  // @include media-up(xxl) {
+  //   margin-top: 250px;
+  //   padding-bottom: 250px;
+  // }
+
+  @include media-up(xl) {
+    margin-top: 212px;
     padding-bottom: 250px;
   }
 }

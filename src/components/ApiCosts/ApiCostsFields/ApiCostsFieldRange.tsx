@@ -1,9 +1,9 @@
+import { useEffect, useRef, useState } from 'react';
 import ReactSlider from 'react-slider'
 
 import { IApiCostsRange, IApiCostsState } from "@/_mock/apiCosts.mock";
 
 import style from '../ApiCosts.module.scss'
-import { useEffect, useRef, useState } from 'react';
 
 type Props = {
     field: IApiCostsRange,
