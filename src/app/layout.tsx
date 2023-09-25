@@ -1,6 +1,5 @@
 'use client'
 
-import { Metadata } from 'next'
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { usePathname } from 'next/navigation'
@@ -24,8 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 	return (
 		<html lang="en">
-			<head>
-				<title>Subsquid</title>
+			<Head>
 				<script async src="https://www.googletagmanager.com/gtag/js?id=G-6JBS6RNP90"></script>
                 <script dangerouslySetInnerHTML={{
                     __html: `window.dataLayer = window.dataLayer || [];
@@ -33,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     gtag('js', new Date());
                     gtag('config', 'G-6JBS6RNP90');`,
                 }}></script>
-			</head>
+			</Head>
 			<body className={inter.className}>
 				{currentPath !== '/worker' && <Header />}
 				{children}

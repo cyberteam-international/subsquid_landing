@@ -76,7 +76,7 @@
             letter-spacing: 0.32px;
             // color: var(--color-primary);
             p{
-                color: rgb(255, 92, 0);
+                color: rgb(0, 164, 219);
                 display: block;
                 &:nth-child(2), &:nth-child(6), &:nth-child(8), &:nth-child(11){
                     padding-left: 30px;
@@ -87,10 +87,13 @@
                 &:nth-child(4), &:nth-child(5){
                     padding-left: 75px;
                 }
-                span{
-                    color: rgb(21, 47, 101);
-                }
             }
+        }
+        &_default{
+            color: var(--color-primary);
+        }
+        &_number, &_boolean{
+            color: rgb(54, 172, 170);
         }
         button{
             position: absolute;

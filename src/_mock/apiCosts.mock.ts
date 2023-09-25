@@ -31,6 +31,16 @@ interface IApiCostSample {
     replicas?: string,
 }
 
+export interface IApiCostsRangeInput extends IApiCostSample {
+    type: 'range-input',
+    label: string,
+    price: IApiCostsPrice,
+    prefix: string,
+    range: number[],
+    limit?: number,
+    step: number
+}
+
 export interface IApiCostsRange extends IApiCostSample {
     type: 'range',
     label: string,
@@ -55,7 +65,7 @@ export interface IApiCostsRadio extends IApiCostSample {
 export interface IApiCostsTabs {
     title: string;
     name: string,
-    fields: (IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio)[],
+    fields: (IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio | IApiCostsRangeInput)[],
 }
 
 export type IApiCosts = {
@@ -156,27 +166,8 @@ export const _apiCostsMock: IApiCosts = {
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                     }
                 },
-                // {
-                //     title: 'RPC requests (2M included)',
-                //     name: 'RPC requests',
-                //     type: 'range',
-                //     canActive: false,
-                //     label: 'RPC requests, M',
-                //     prefix: 'M',
-                //     price: {
-                //         type: "h",
-                //         value: 0.0028
-                //     },
-                //     range: [2, 500],
-                //     step: 1,
-                //     limit: 2,
-                //     helper: {
-                //         title: 'RPC requests',
-                //         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
-                //     }
-                // },
                 {
-                    title: 'API requests',
+                    title: 'API requests, per sec',
                     name: 'requestsPerSecond',
                     type: 'range',
                     label: 'API requests, per sec',
@@ -186,8 +177,8 @@ export const _apiCostsMock: IApiCosts = {
                         type: "h",
                         value: 0
                     },
-                    range: [1, 10000],
-                    step: 1,
+                    range: [10, 10000],
+                    step: 10,
                     helper: {
                         title: 'API requests',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
@@ -356,7 +347,7 @@ export const _apiCostsMock: IApiCosts = {
                 {
                     title: 'RPC requests (2M included)',
                     name: 'RPC requests',
-                    type: 'range',
+                    type: 'range-input',
                     canActive: false,
                     label: 'RPC requests, M',
                     prefix: 'M',
@@ -375,7 +366,7 @@ export const _apiCostsMock: IApiCosts = {
                 {
                     title: 'Database size',
                     name: 'Postgres storage',
-                    type: 'range',
+                    type: 'range-input',
                     canActive: false,
                     label: 'Storage, Gb',
                     prefix: 'GB',

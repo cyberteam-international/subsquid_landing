@@ -197,6 +197,18 @@
                     flex-direction: column;
                     gap: 0;
                     flex-wrap: nowrap;
+                    position: relative;
+                    .api-costs__list-item__fields-item{
+                        &__wrapper{
+                            text-align: center;
+                            cursor: default;
+                        }
+                    }
+                }
+                &_range_input{
+                    flex-direction: column;
+                    gap: 0;
+                    flex-wrap: nowrap;
                     border-radius: 8px;
                     background: var(--color-grey-light-2);
                     position: relative;

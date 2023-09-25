@@ -70,14 +70,14 @@ export default function ScaleManifest() {
                     <p>scale:</p>
                     <p>addons:</p>
                     <p>postgres:</p>
-                    <p>storage: <span>100G</span></p>
-                    <p>profile: <span>medium</span></p>
+                    <p>storage: <span className={style['manifest__code_default']}>100G</span></p>
+                    <p>profile: <span className={style['manifest__code_default']}>medium</span></p>
                     <p>processor:</p>
-                    <p>profile: <span>medium</span></p>
+                    <p>profile: <span className={style['manifest__code_default']}>medium</span></p>
                     <p>api:</p>
-                    <p>profile: <span>large</span></p>
-                    <p>replicas: <span>3</span></p>
-                    <p>dedicated: <span>true</span></p>
+                    <p>profile: <span className={style['manifest__code_default']}>large</span></p>
+                    <p>replicas: <span className={style['manifest__code_number']}>3</span></p>
+                    <p>dedicated: <span className={style['manifest__code_boolean']}>true</span></p>
                 </code>
                 <button
                     onClick={() => {

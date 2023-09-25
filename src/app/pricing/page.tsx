@@ -63,6 +63,16 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                     isActive: true,
                 }
                 break;
+            case 'range-input':
+                return {
+                    fieldName: item.name,
+                    select: item.range[0].toString(),
+                    price: { type: item.price.type, value: item.price.value },
+                    replicas: item.replicas ?? undefined,
+                    limit: item.limit,
+                    isActive: true,
+                }
+                break;
             case 'range':
                 return {
                     fieldName: item.name,

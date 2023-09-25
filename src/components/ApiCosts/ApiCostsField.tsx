@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { useWindowWidth } from '@react-hook/window-size'
 
-import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
+import ApiCostsFieldRangeInput from './ApiCostsFields/ApiCostsFieldRangeInput'
 import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
 import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
 import GlobalHelper from '../GlobalHelper/GlobalHelper'
@@ -12,13 +12,15 @@ import {
     IApiCostsRadio,
     IApiCostsRadioInput,
     IApiCostsRange,
+    IApiCostsRangeInput,
     IApiCostsState,
 } from '@/_mock/apiCosts.mock'
 
 import style from './ApiCosts.module.scss'
+import ApiCostsFieldRange from './ApiCostsFields/ApiCostsFieldRange'
 
 type Props = {
-    field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio
+    field: IApiCostsRange | IApiCostsRadioInput | IApiCostsRadio | IApiCostsRangeInput
     selectValuesState: SelectValues,
     activeTab: string,
 }
@@ -39,7 +41,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
 
     const updateState = (item: IApiCostsState, isActiveChange: boolean = false) => {
         if (tabsProfile === 'COLLOCATED' && !isActiveChange) {
-            if (item.select !== 'default' && !item.replicas && item.fieldName !== 'squidProfile' && (activeTab === 'byUseCase' || field.type !== 'range')) {
+            if (item.select !== 'default' && !item.replicas && item.fieldName !== 'squidProfile' && (activeTab === 'byUseCase' || (field.type !== 'range-input' && field.type !== 'range'))) {
                 const newTabsProfileSelect = [...tabsProfileState]
                 newTabsProfileSelect[0] = { ...tabsProfileState[0], select: 'DEDICATED' }
                 setTabsProfileState([...newTabsProfileSelect])
@@ -47,7 +49,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
         }
         const updateObj = [...selectValues]
         // updateObj[currentStateIndex] = !item.replicas ? { ...item, replicas: selectValues[currentStateIndex].replicas } : item
-        updateObj[currentStateIndex] = {...item, isActive: isActive}
+        updateObj[currentStateIndex] = { ...item, isActive: isActive }
         setSelectValues([...updateObj])
     }
 
@@ -89,6 +91,17 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                         />
                     )
                     break;
+                case 'range-input':
+                    return (
+                        <ApiCostsFieldRangeInput
+                            field={field}
+                            isActive={isActive}
+                            updateState={updateState}
+                            // value={Number(selectValues[currentStateIndex].select ?? field.range[0])}
+                            value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
+                        />
+                    )
+                    break;
                 case 'range':
                     return (
                         <ApiCostsFieldRange
@@ -104,7 +117,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                     break;
             }
         }
-        else if (field.type !== 'range') {
+        else if (field.type !== 'range-input' && field.type !== 'range') {
             if (field.name !== 'squidProfile') {
                 return <ApiCostsFieldRadio
                     fieldName={field.name}
@@ -136,14 +149,36 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                 });
             }
         }
-        else return (
-            <ApiCostsFieldRange
-                field={field}
-                isActive={isActive}
-                updateState={updateState}
-                value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
-            />
-        )
+        else if (field.type !== 'range-input') {
+            return (
+                <ApiCostsFieldRange
+                    field={field}
+                    isActive={isActive}
+                    updateState={updateState}
+                    value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
+                />
+            )
+        }
+        else {
+            return (
+                <ApiCostsFieldRangeInput
+                    field={field}
+                    isActive={isActive}
+                    updateState={updateState}
+                    value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
+                />
+            )
+        }
+    }
+
+    const setClassNameField = () => {
+        if (field.type === 'range-input') {
+            return `${style["api-costs__list-item__fields"]} ${style["api-costs__list-item__fields_range_input"]}`
+        }
+        else if (field.type === 'range') {
+            return `${style["api-costs__list-item__fields"]} ${style["api-costs__list-item__fields_range"]}`
+        }
+        else return style["api-costs__list-item__fields"]
     }
 
     useEffect(() => {
@@ -151,7 +186,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
     }, [isActive])
 
     useEffect(() => {
-        if (field.type !== 'range') {
+        if (field.type !== 'range-input' && field.type !== 'range') {
             const currentIndex: number = field.values.findIndex((item) => {
                 if (typeof item === 'number') {
                     return item.toString() === selectValues[currentStateIndex].select;
@@ -195,11 +230,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                 <p className={style["api-costs__list-item__subtitle"]}>{field.subtitle}</p>
             )}
             <div
-                className={
-                    field.type !== 'range' ?
-                        style["api-costs__list-item__fields"]
-                        : `${style["api-costs__list-item__fields"]} ${style["api-costs__list-item__fields_range"]}`
-                }
+                className={setClassNameField()}
             >
                 {setFields()}
             </div>
@@ -241,7 +272,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                             <circle cx="9.9873" cy="12.9062" r="0.75" fill="#1D1D1F" />
                         </svg>
                     )}
-                    <p>{tabsProfile === 'COLLOCATED'? field.warning[0] : field.warning[1]}</p>
+                    <p>{tabsProfile === 'COLLOCATED' ? field.warning[0] : field.warning[1]}</p>
                 </div>
             )}
         </div>
