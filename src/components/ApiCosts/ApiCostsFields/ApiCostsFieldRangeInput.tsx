@@ -46,8 +46,8 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
         <div
             className={
                 focuse ?
-                    `${style["api-costs__list-item__fields_range__wrapper"]} ${style["api-costs__list-item__fields_range__wrapper_active"]}`
-                    : style["api-costs__list-item__fields_range__wrapper"]
+                    `${style["api-costs__list-item__fields_range_input__wrapper"]} ${style["api-costs__list-item__fields_range_input__wrapper_active"]}`
+                    : style["api-costs__list-item__fields_range_input__wrapper"]
             }
         >
             <p className={style["api-costs__list-item__fields-item__label"]}>
