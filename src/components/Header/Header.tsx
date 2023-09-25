@@ -46,11 +46,11 @@ export default function Header() {
                                 <div className="nav__section">
                                     <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
                                     <a href="https://blog.subsquid.io/" className="nav__item" target="_blank">Blog</a>
-                                    <a href="/pricing" className="nav__item">Pricing</a>
+                                    {/*<a href="/pricing" className="nav__item">Pricing</a>*/}
                                 </div>
                                 <div className="nav__section">
                                     <GitHub username="subsquid" reponame="squid-sdk"/>
-                                    <a href="https://www.subsquid.io/launch-app" className="btn btn--primary" target="_blank">Launch app</a>
+                                    <a href="https://app.subsquid.io/" className="btn btn--primary" target="_blank">Launch app</a>
                                 </div>
                             </div>
                         </div>

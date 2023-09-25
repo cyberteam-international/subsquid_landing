@@ -16,22 +16,24 @@ export default function Tabs() {
             title: "Squid SDK",
             body: <ul>
                 <li>100% open-source</li>
-                <li>Deploy locally with ease</li>
-                <li>Custom data sources & targets</li>
-                <li>TypeScript-based!</li>
-                <li>Automated tools: TypeGen & SquidGen</li>
+                <li>No archival RPC node needed</li>
+                <li>Postgres, parquet or custom data targets</li>
+                <li>TypeScript-based, install from npm</li>
+                <li>Support for real-time indexing and chain reorgs</li>
+                <li>Access state diffs, traces and internal transactions</li>
             </ul>,
             active: true,
         },
         {
             icon: "/chart.png",
-            title: "Aquarium SaaS",
+            title: "Aquarium Cloud",
             body: <>
                 <ul>
                     <li>Instant GraphQL API and indexer deployment</li>
                     <li>High-uptime & SLA-compliant</li>
                     <li>Built-in monitoring & analytics</li>
                     <li>Transparent pay-as-you-go billing</li>
+                    <li>Generous RPC package included</li>
                     <li>Team collaboration tools</li>
                 </ul>
                 <div className="tabs__item-wrap">

@@ -27,7 +27,7 @@ export default function Enterprise() {
                 <FadeInUp delay={100}>
                     <div className="enterprise__header">
                         <h2>Enterprise-ready, dev-friendly</h2>
-                        <p className="subtitle">Open-source toolkit and one-line cloud deployment</p>
+                        <p className="subtitle">Blazing-fast, zero setup indexing powered by Subsquid Network.<br/>Run locally, on-premises or in the cloud.</p>
                     </div>
                 </FadeInUp>
                 <div className="enterprise__items">
@@ -62,7 +62,7 @@ export default function Enterprise() {
                     <SlideInLeft className="enterprise__buttons" delay={400}>
                         <div className="enterprise__buttons-wrap">
                             <a href="https://docs.subsquid.io/" className="btn btn--outline" target="_blank">Docs</a>
-                            <a href="https://www.subsquid.io/launch-app" className="btn btn--primary" target="_blank">Launch
+                            <a href="https://app.subsquid.io/" className="btn btn--primary" target="_blank">Launch
                                 app</a>
                         </div>
                     </SlideInLeft>

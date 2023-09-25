@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 	return (
 		<html lang="en">
-			<Head>
+			<head>
 				<title>Subsquid</title>
 				<script async src="https://www.googletagmanager.com/gtag/js?id=G-6JBS6RNP90"></script>
                 <script dangerouslySetInnerHTML={{
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     gtag('js', new Date());
                     gtag('config', 'G-6JBS6RNP90');`,
                 }}></script>
-			</Head>
+			</head>
 			<body className={inter.className}>
 				{currentPath !== '/worker' && <Header />}
 				{children}
