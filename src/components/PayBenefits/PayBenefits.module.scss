@@ -24,46 +24,46 @@
             box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04), 0 0 2px 0 rgba(0, 0, 0, 0.12);
             background: var(--color-gray-light);
             position: relative;
-            &::before{
-                content: '';
-                display: block;
-                background: url('../../../public/blub-blue.svg') center center/cover no-repeat;
-                width: 1694px;
-                height: 617px;
-                filter: blur(55.5px);
-                fill: #68BEFC;
-                position: absolute;
-                bottom: -20px;
-                left: 50%;
-                transform: translateX(-50%) rotate(-69.422deg);
-                mix-blend-mode: multiply;
-                z-index: 1;
-                pointer-events: none;
-                @include media-up(sm) {
-                    left: 40%;
-                    top: -177px;
-                }
-            }
-            &::after{
-                content: "";
-                display: block;
-                background: url('/_next/static/media/blub-orange.94a87fda.svg') center center/cover no-repeat;
-                width: 1772.314px;
-                height: 586.141px;
-                filter: blur(55.5px);
-                position: absolute;
-                bottom: 20px;
-                left: 100%;
-                transform: translateX(-50%) rotate(100.963deg);
-                mix-blend-mode: overlay;
-                z-index: 1;
-                pointer-events: none;
-                @include media-up(sm) {
-                    right: 10%;
-                    transform: translateX(50%) rotate(100.963deg);
-                    left: auto;
-                }
-            }
+            // &::before{
+            //     content: '';
+            //     display: block;
+            //     background: url('../../../public/blub-blue.svg') center center/cover no-repeat;
+            //     width: 1694px;
+            //     height: 617px;
+            //     filter: blur(55.5px);
+            //     fill: #68BEFC;
+            //     position: absolute;
+            //     bottom: -20px;
+            //     left: 50%;
+            //     transform: translateX(-50%) rotate(-69.422deg);
+            //     mix-blend-mode: multiply;
+            //     z-index: 1;
+            //     pointer-events: none;
+            //     @include media-up(sm) {
+            //         left: 40%;
+            //         top: -177px;
+            //     }
+            // }
+            // &::after{
+            //     content: "";
+            //     display: block;
+            //     background: url('/_next/static/media/blub-orange.94a87fda.svg') center center/cover no-repeat;
+            //     width: 1772.314px;
+            //     height: 586.141px;
+            //     filter: blur(55.5px);
+            //     position: absolute;
+            //     bottom: 20px;
+            //     left: 100%;
+            //     transform: translateX(-50%) rotate(100.963deg);
+            //     mix-blend-mode: overlay;
+            //     z-index: 1;
+            //     pointer-events: none;
+            //     @include media-up(sm) {
+            //         right: 10%;
+            //         transform: translateX(50%) rotate(100.963deg);
+            //         left: auto;
+            //     }
+            // }
             button{
                 background: var(--color-primary);
                 color: var(--color-white);

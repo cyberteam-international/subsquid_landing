@@ -14,17 +14,33 @@ export default function ScaleManifest() {
     const [isHover, setIsHover] = useState(false)
 
     const codeText =
-        `scale: 
-        addons: 
-            postgres: 
-                storage: 100G 
-                profile: medium 
-        processor: 
-            profile: medium 
-        api: 
-            profile: large 
-            replicas: 3 
-        dedicated: true `;
+        `"scale": { 
+            "addons": { 
+                "postgres": { 
+                    "storage": "100G", 
+                    "profile": "medium" 
+                } 
+            }, 
+            "processor": { 
+                "profile": "medium" 
+            }, 
+            "api": { 
+                "profile": "large", 
+                "replicas": 3 
+            }, 
+            "dedicated": true 
+        } `;
+    // `scale: 
+    // addons: 
+    //     postgres: 
+    //         storage: 100G 
+    //         profile: medium 
+    // processor: 
+    //     profile: medium 
+    // api: 
+    //     profile: large 
+    //     replicas: 3 
+    // dedicated: true `;
 
     const helperText = {
         title: '“Scale” for your manifest',
@@ -47,21 +63,21 @@ export default function ScaleManifest() {
                 {/* <GlobalHelper listIndex={'manifest'} helperObj={helperText} /> */}
             </div>
             <p className={style['manifest__subtitle']}>
-                Paste this scar into your manifest to use selected configuration. Discover more in the <a href="http://https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a>.
+                Paste this scar into your manifest to use selected configuration. Discover more in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a>.
             </p>
             <div className={style['manifest__code']}>
                 <code className={inter.className}>
                     <p>scale:</p>
                     <p>addons:</p>
                     <p>postgres:</p>
-                    <p>storage: 100G</p>
-                    <p>profile: medium</p>
+                    <p>storage: <span>100G</span></p>
+                    <p>profile: <span>medium</span></p>
                     <p>processor:</p>
-                    <p>profile: medium</p>
+                    <p>profile: <span>medium</span></p>
                     <p>api:</p>
-                    <p>profile: large</p>
-                    <p>replicas: 3</p>
-                    <p>dedicated: true</p>
+                    <p>profile: <span>large</span></p>
+                    <p>replicas: <span>3</span></p>
+                    <p>dedicated: <span>true</span></p>
                 </code>
                 <button
                     onClick={() => {

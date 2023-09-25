@@ -14,7 +14,7 @@ export default [
     {
         title: 'Playground',
         subtitle: 'Free',
-        description: 'For development purposes.',
+        description: 'For development purposes',
         items: [
             'One collocated squid (API + processor + Postgres)',
             '10GB of database storage',
