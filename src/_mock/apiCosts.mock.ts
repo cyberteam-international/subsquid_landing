@@ -19,7 +19,6 @@ export interface IApiCostsValueObject {
 }
 
 interface IApiCostSample {
-    title: string,
     name: string,
     canActive: boolean,
     helper?: {
@@ -34,14 +33,19 @@ interface IApiCostSample {
 export interface IApiCostsRangeInput extends IApiCostSample {
     type: 'range-input',
     label: string,
-    price: IApiCostsPrice,
+    price: {
+        type: string,
+        value: number[]
+    },
     prefix: string,
-    range: number[],
-    limit?: number,
-    step: number
+    range: number[][],
+    limit: number[],
+    step: number[],
+    title: string[]
 }
 
 export interface IApiCostsRange extends IApiCostSample {
+    title: string,
     type: 'range',
     label: string,
     price: IApiCostsPrice,
@@ -52,12 +56,14 @@ export interface IApiCostsRange extends IApiCostSample {
 }
 
 export interface IApiCostsRadioInput extends IApiCostSample {
+    title: string,
     type: 'radio-input',
     values: number[],
     price: IApiCostsPrice,
 }
 
 export interface IApiCostsRadio extends IApiCostSample {
+    title: string,
     type: 'radio',
     values: IApiCostsValueObject[],
 }
@@ -345,7 +351,7 @@ export const _apiCostsMock: IApiCosts = {
                     }
                 },
                 {
-                    title: 'RPC requests (2M included)',
+                    title: ['RPC requests', 'RPC requests (2M included)'],
                     name: 'RPC requests',
                     type: 'range-input',
                     canActive: false,
@@ -353,18 +359,18 @@ export const _apiCostsMock: IApiCosts = {
                     prefix: 'M',
                     price: {
                         type: "h",
-                        value: 0.0028
+                        value: [0.0028, 0.0028]
                     },
-                    range: [2, 500],
-                    step: 1,
-                    limit: 2,
+                    range: [[0.5, 500], [2, 500]],
+                    step: [0.5, 1],
+                    limit: [0.5, 2],
                     helper: {
                         title: 'RPC requests',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                     }
                 },
                 {
-                    title: 'Database size',
+                    title: ['Database size', 'Database size'],
                     name: 'Postgres storage',
                     type: 'range-input',
                     canActive: false,
@@ -372,11 +378,11 @@ export const _apiCostsMock: IApiCosts = {
                     prefix: 'GB',
                     price: {
                         type: "h",
-                        value: 0.0007
+                        value: [0.0007, 0.0007]
                     },
-                    range: [10, 5000],
-                    step: 10,
-                    limit: 10,
+                    range: [[10, 5000], [10, 5000]],
+                    step: [10, 10],
+                    limit: [10, 10],
                     helper: {
                         title: 'Database size',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'

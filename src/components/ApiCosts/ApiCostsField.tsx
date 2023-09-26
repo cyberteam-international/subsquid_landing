@@ -96,7 +96,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                             field={field}
                             isActive={isActive}
                             updateState={updateState}
-                            // value={Number(selectValues[currentStateIndex].select ?? field.range[0])}
+                            tabsProfile={tabsProfile}
                             value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
                         />
                     )
@@ -107,7 +107,6 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                             field={field}
                             isActive={isActive}
                             updateState={updateState}
-                            // value={Number(selectValues[currentStateIndex].select ?? field.range[0])}
                             value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
                         />
                     )
@@ -164,6 +163,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                     field={field}
                     isActive={isActive}
                     updateState={updateState}
+                    tabsProfile={tabsProfile}
                     value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
                 />
             )
@@ -217,7 +217,9 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                         </svg>
                     </button>
                 }
-                <p className={style["api-costs__list-item__header__title"]}>{field.title}</p>
+                <p className={style["api-costs__list-item__header__title"]}>
+                    {field.type === 'range-input'? field.title[tabsProfile === 'COLLOCATED'? 0 : 1]: field.title}
+                </p>
                 {/* {field.helper && (
                     <GlobalHelper helperObj={field.helper} listIndex={currentStateIndex} />
                 )} */}

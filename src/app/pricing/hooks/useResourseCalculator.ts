@@ -43,14 +43,31 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         }
         const select = typeof selectValue === 'string' ? selectValue : returnSelectValuesResources[listIndex].select
         const price = (): IApiCostsState["price"] => {
+            const currentValue = () => {
+                if (mockField?.type === 'radio') {
+                    return mockField.values.find((el) => el.value === select)?.price.value ?? 0.0069
+                }
+                else{
+                    if (Array.isArray(mockField.price.value)) {
+                        if (tabsProfile[0].select === 'COLLOCATED') {
+                            return mockField.price.value[0]
+                        }
+                        else{
+                            return mockField.price.value[1]
+                        }
+                    }
+                    else return mockField.price.value?? 0.069
+                }
+            }
             return mockField?.type === 'radio'
                 ? {
                     type: mockField.values.find((el) => el.value === select)?.price.type ?? 'h',
-                    value: mockField.values.find((el) => el.value === select)?.price.value ?? 0.0069
+                    value: currentValue()
                 }
                 : {
                     type: mockField.price.type ?? 'h',
-                    value: mockField.price.value ?? 0.069
+                    // value: mockField.price.value ?? 0.069
+                    value: currentValue()
                 };
         };
         return {
@@ -84,7 +101,8 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
     const indexNetworksCount = listIndex('networksCount')
     const indexApiReplicas = listIndex('API profile')
     const indexRequestsPerSecond = listIndex('requestsPerSecond')
-
+    const indexRPCrequests = listIndex('RPC requests')
+    
     const selectTabsProfile = tabsProfile[0].select
 
     // const selectValueUseCase = selectValuesUseCase[indexSquidProfileUseCase].select
@@ -109,6 +127,9 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                     );
                     updateState(
                         currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
+                    );
+                    updateState(
+                        currentInfo('RPC requests', '0.5', indexRPCrequests), indexRPCrequests
                     );
                 }
             },

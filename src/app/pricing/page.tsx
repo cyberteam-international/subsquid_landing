@@ -66,10 +66,10 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
             case 'range-input':
                 return {
                     fieldName: item.name,
-                    select: item.range[0].toString(),
-                    price: { type: item.price.type, value: item.price.value },
+                    select: item.range[0][0].toString(),
+                    price: { type: item.price.type, value: item.price.value[0] },
                     replicas: item.replicas ?? undefined,
-                    limit: item.limit,
+                    limit: item.limit[0],
                     isActive: true,
                 }
                 break;
@@ -120,9 +120,9 @@ export default function CalculatorPage() {
         console.log('totalSum', totalSum)
     }, [totalSum])
 
-    // useEffect(() => {
-    //     console.log('selectValuesResources', selectValuesResources)
-    // }, [selectValuesResources])
+    useEffect(() => {
+        console.log('selectValuesResources', selectValuesResources)
+    }, [selectValuesResources])
 
     // useEffect(() => {
     //     console.log('selectValuesUseCase', selectValuesUseCase)

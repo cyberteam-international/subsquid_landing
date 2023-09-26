@@ -9,29 +9,39 @@ type Props = {
     field: IApiCostsRangeInput,
     updateState: (item: IApiCostsState) => void,
     isActive: boolean,
-    value: string
+    value: string,
+    tabsProfile: string
 };
 
-export default function ApiCostsFieldRangeInput({ field, updateState, isActive, value }: Props) {
+export default function ApiCostsFieldRangeInput({ field, updateState, isActive, value, tabsProfile }: Props) {
 
     const [sliderValue, setSliderValue] = useState(value)
     const [inputActive, setInputActive] = useState(false)
-    // const [sliderThumb, setSliderThumb] = useState<string>(`0px`)
     const [focuse, setFocuse] = useState(false)
 
-    // const ref = useRef<SVGSVGElement | null>(null)
     const x = useRef<any | null>(null)
+
+    const currentField = {
+        ...field,
+        limit: tabsProfile === 'COLLOCATED'? field.limit[0]: field.limit[1],
+        range: tabsProfile === 'COLLOCATED'? field.range[0]: field.range[1],
+        step: tabsProfile === 'COLLOCATED'? field.step[0]: field.step[1],
+        price: {
+            type: 'h',
+            value: tabsProfile === 'COLLOCATED'? field.price.value[0]: field.price.value[1],
+        }
+    }
 
     const updateObj = (item: string): IApiCostsState => {
         return {
             price: {
-                type: field.price.type,
-                value: field.price.value
+                type: currentField.price.type,
+                value: currentField.price.value
             },
-            fieldName: field.name,
+            fieldName: currentField.name,
             select: item,
             isActive: isActive,
-            limit: field.limit
+            limit: currentField.limit
         }
     }
 
@@ -69,15 +79,15 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                     onChange={(e) => updateState(updateObj(e.target.value.toString()))}
                     onFocus={() => { setFocuse(true) }}
                     onBlur={() => {
-                        if (Number(value) < field.range[0]) {
+                        if (Number(value) < currentField.range[0]) {
                             setFocuse(false)
                             setInputActive(false)
-                            updateState(updateObj(field.range[0].toString()))
+                            updateState(updateObj(currentField.range[0].toString()))
                         }
-                        else if (Number(value) > field.range[1]) {
+                        else if (Number(value) > currentField.range[1]) {
                             setFocuse(false)
                             setInputActive(false)
-                            updateState(updateObj(field.range[1].toString()))
+                            updateState(updateObj(currentField.range[1].toString()))
                         }
                         else {
                             setFocuse(false)
@@ -87,7 +97,7 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                     }}
                 />
                 <p className={style["api-costs__list-item__fields-item__prefix"]}>
-                    {sliderValue} {field.prefix}
+                    {sliderValue} {currentField.prefix}
                 </p>
             </label>
             <svg
@@ -101,17 +111,16 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                 className={style["api-costs__list-item__fields-item-range"]}
                 disabled={!isActive}
                 markClassName={style["api-costs__list-item__fields-item-range-mark"]}
-                min={field.range[0]}
-                max={field.range[1]}
+                min={currentField.range[0]}
+                max={currentField.range[1]}
                 value={Number(value)}
-                step={field.step}
+                step={currentField.step}
                 thumbClassName={style["api-costs__list-item__fields-item-range-thumb"]}
                 trackClassName={style["api-costs__list-item__fields-item-range-track"]}
                 renderThumb={(props, _state) => {
                     x.current = props
                     return (
                         <div {...props}>
-                            {/* <svg ref={ref} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"> */}
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                 <circle cx="8" cy="8" r="6" fill="white" stroke="#68BEFC" strokeWidth="4" />
                             </svg>
@@ -123,10 +132,10 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                 onAfterChange={(val) => {
                     updateState(
                         {
-                            price: field.price,
-                            fieldName: field.name,
+                            price: currentField.price,
+                            fieldName: currentField.name,
                             select: val.toString(),
-                            limit: field.limit,
+                            limit: currentField.limit,
                             isActive: isActive
                         }
                     )
