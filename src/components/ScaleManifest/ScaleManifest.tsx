@@ -33,7 +33,7 @@ export default function ScaleManifest() {
             profile: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'API profile')].select, 
             replicas: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'API profile')].replicas,
         }, 
-        dedicated: tabsProfile[0].select !== 'Collocated' 
+        dedicated: tabsProfile[0].select === 'DEDICATED'
         
     }
 
