@@ -1,46 +1,59 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Inter } from 'next/font/google';
 
 import GlobalHelper from '../GlobalHelper/GlobalHelper';
 
 import style from './ScaleManifest.module.scss';
+import { SelectValuesResourcesContext, TabsProfileContext } from '@/app/pricing/context';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function ScaleManifest() {
 
+    const [selectValuesResources, _setSelectValuesResources] = useContext(SelectValuesResourcesContext)
+    const [tabsProfile, _setTabsProfile] = useContext(TabsProfileContext)
+
     const [isCopied, setIsCopied] = useState(false)
     const [isHover, setIsHover] = useState(false)
+
+    const findField = () =>{
+
+    }
+
+    const values = {
+        postgres: {
+            storage: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'Postgres storage')].select,
+            profile: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'Postgres profile')].select,
+        },
+        processor: { 
+            profile: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'Processor profile')].select, 
+        }, 
+        api: { 
+            profile: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'API profile')].select, 
+            replicas: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'API profile')].replicas,
+        }, 
+        dedicated: tabsProfile[0].select !== 'Collocated' 
+        
+    }
 
     const codeText =
         `"scale": { 
             "addons": { 
                 "postgres": { 
-                    "storage": "100G", 
-                    "profile": "medium" 
+                    "storage": "${values.postgres.storage}G", 
+                    "profile": "${values.postgres.profile}" 
                 } 
             }, 
             "processor": { 
-                "profile": "medium" 
+                "profile": "${values.processor.profile}" 
             }, 
             "api": { 
-                "profile": "large", 
-                "replicas": 3 
+                "profile": "${values.api.profile}", 
+                "replicas": ${values.api.replicas} 
             }, 
-            "dedicated": true 
+            "dedicated": ${values.dedicated}
         } `;
-    // `scale: 
-    // addons: 
-    //     postgres: 
-    //         storage: 100G 
-    //         profile: medium 
-    // processor: 
-    //     profile: medium 
-    // api: 
-    //     profile: large 
-    //     replicas: 3 
-    // dedicated: true `;
 
     const helperText = {
         title: '“Scale” for your manifest',
@@ -70,14 +83,14 @@ export default function ScaleManifest() {
                     <p>scale:</p>
                     <p>addons:</p>
                     <p>postgres:</p>
-                    <p>storage: <span className={style['manifest__code_default']}>100G</span></p>
-                    <p>profile: <span className={style['manifest__code_default']}>medium</span></p>
+                    <p>storage: <span className={style['manifest__code_default']}>{values.postgres.storage}G</span></p>
+                    <p>profile: <span className={style['manifest__code_default']}>{values.postgres.profile}</span></p>
                     <p>processor:</p>
-                    <p>profile: <span className={style['manifest__code_default']}>medium</span></p>
+                    <p>profile: <span className={style['manifest__code_default']}>{values.processor.profile}</span></p>
                     <p>api:</p>
-                    <p>profile: <span className={style['manifest__code_default']}>large</span></p>
-                    <p>replicas: <span className={style['manifest__code_number']}>3</span></p>
-                    <p>dedicated: <span className={style['manifest__code_boolean']}>true</span></p>
+                    <p>profile: <span className={style['manifest__code_default']}>{values.api.profile}</span></p>
+                    <p>replicas: <span className={style['manifest__code_number']}>{values.api.replicas}</span></p>
+                    <p>dedicated: <span className={style['manifest__code_boolean']}>{`${values.dedicated}`}</span></p>
                 </code>
                 <button
                     onClick={() => {

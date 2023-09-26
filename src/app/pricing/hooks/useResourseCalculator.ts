@@ -46,11 +46,11 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             return mockField?.type === 'radio'
                 ? {
                     type: mockField.values.find((el) => el.value === select)?.price.type ?? 'h',
-                    value: mockField.values.find((el) => el.value === select)?.price.value ?? 0
+                    value: mockField.values.find((el) => el.value === select)?.price.value ?? 0.0069
                 }
                 : {
-                    type: mockField.price.type ?? '',
-                    value: mockField.price.value ?? 0
+                    type: mockField.price.type ?? 'h',
+                    value: mockField.price.value ?? 0.069
                 };
         };
         return {

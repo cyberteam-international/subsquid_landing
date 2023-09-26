@@ -30,7 +30,8 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
             },
             fieldName: field.name,
             select: item,
-            isActive: isActive
+            isActive: isActive,
+            limit: field.limit
         }
     }
 
@@ -81,7 +82,7 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                         else {
                             setFocuse(false)
                             setInputActive(false)
-                            updateState(updateObj(sliderValue))
+                            updateState(updateObj(sliderValue.toString()))
                         }
                     }}
                 />
@@ -102,7 +103,7 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                 markClassName={style["api-costs__list-item__fields-item-range-mark"]}
                 min={field.range[0]}
                 max={field.range[1]}
-                value={Number(sliderValue)}
+                value={Number(value)}
                 step={field.step}
                 thumbClassName={style["api-costs__list-item__fields-item-range-thumb"]}
                 trackClassName={style["api-costs__list-item__fields-item-range-track"]}

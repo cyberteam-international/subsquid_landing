@@ -126,7 +126,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                             value: 'default',
                             price: {
                                 type: "h",
-                                value: 0
+                                value: 0.0069
                             },
                         }
                     }
@@ -222,7 +222,15 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                     <GlobalHelper helperObj={field.helper} listIndex={currentStateIndex} />
                 )} */}
                 {(windowWidth > 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
-                    <p className={style["api-costs__list-item__header__price"]}>${selectValues[currentStateIndex].price.value}</p>
+                    <p className={style["api-costs__list-item__header__price"]}>
+                        {field.type === 'range' || field.type === 'range-input' ? (
+                            <>${((selectValues[currentStateIndex].price.value * 720) * Number(selectValues[currentStateIndex].select)).toFixed(2)}/mo</>
+                        ) : field.replicas ? (
+                            <>${((selectValues[currentStateIndex].price.value * 720) * Number(selectValues[currentStateIndex].replicas)).toFixed(2)}/mo</>
+                        ) : (
+                            <>${(selectValues[currentStateIndex].price.value * 720).toFixed(2)}/mo</>
+                        )}
+                    </p>
                 )}
             </div>
             {field.subtitle && (
@@ -234,7 +242,15 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                 {setFields()}
             </div>
             {(windowWidth < 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
-                <p className={style["api-costs__list-item__price"]}>${selectValues[currentStateIndex].price.value}</p>
+                <p className={style["api-costs__list-item__price"]}>
+                    {field.type === 'range' || field.type === 'range-input' ? (
+                        <>${((selectValues[currentStateIndex].price.value * 720) * Number(selectValues[currentStateIndex].select)).toFixed(2)}/mo</>
+                    ) : field.replicas ? (
+                        <>${((selectValues[currentStateIndex].price.value * 720) * Number(selectValues[currentStateIndex].replicas)).toFixed(2)}/mo</>
+                    ) : (
+                        <>${(selectValues[currentStateIndex].price.value * 720).toFixed(2)}/mo</>
+                    )}
+                </p>
             )}
             {(field.replicas && tabsProfile !== 'COLLOCATED') && (
                 <label

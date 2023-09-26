@@ -52,7 +52,7 @@ export default function ApiCostsResult() {
                                 {item.select} {item.fieldName === 'Postgres storage'? 'Gb' : item.fieldName === 'RPC requests'? 'M' : ''}
                             </p>
                         </div>
-                        <p>${item.price.value.toFixed(4)}</p>
+                        <p>${(item.price.value * 720).toFixed(2)}/mo</p>
                     </div>
                 </div>
             )
@@ -72,7 +72,7 @@ export default function ApiCostsResult() {
                                 {item.select} {item.replicas? `x ${item.replicas} replicas`: ''} {item.fieldName === 'Postgres storage'? 'Gb' : item.fieldName === 'RPC requests'? 'M' : ''}
                             </p>
                             </div>
-                            <p>${totalSum[index]?.currentPrice.toFixed(4)}</p>
+                            <p>${(totalSum[index]?.price * 720).toFixed(2)}/mo</p>
                         </div>
                     </div>
                     {(newProcessors.state.length > 0 && index === 0) && setDetailProcessorsInfo()}
@@ -105,7 +105,7 @@ export default function ApiCostsResult() {
                             :`${style["api-costs__result__total"]} ${style["api-costs__result__total_month"]}`
                         }
                     >
-                        {currentTotalPrice() !== 0? `$${(currentTotalPrice() * 720).toFixed(2)}/mo` : `$${(currentOldPrice() * 720).toFixed(2)}/mo`}
+                        {`$${(currentOldPrice() * 720).toFixed(2)}/mo`}
                     </p>
                     <p 
                         className={
@@ -114,7 +114,7 @@ export default function ApiCostsResult() {
                             :`${style["api-costs__result__total"]} ${style["api-costs__result__total_hour"]}`
                         }
                     >
-                        {currentTotalPrice() !== 0? `$${currentTotalPrice().toFixed(2)}/h` : `$${currentOldPrice().toFixed(2)}/h`}
+                        {`$${(currentOldPrice()).toFixed(2)}/h`}
                     </p>
                 </div>
             </div>

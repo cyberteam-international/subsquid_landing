@@ -44,7 +44,7 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
 
     const collocatedFreeRangeCondition = () =>{
         return rangeFields.every((field)=>{
-            return Number(field?.select) <= Number(field?.limit) || !field?.isActive
+            return Number(field?.select) <= Number(field?.limit)
         })
     }
 
@@ -52,14 +52,17 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
     useEffect(() => {
         let totalArray : Sum[] = []
         selectValuesResources.forEach((item, _index) => {
+            // console.log(collocatedFreeRangeCondition() && tabsState === 'COLLOCATED')
             if (collocatedFreeRangeCondition() && tabsState === 'COLLOCATED') {
-                totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0007}}, 0))
+                // totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0069}}, 0.0069))
+                totalArray.push(fieldPrice(item, 0))
             }
             else if (tabsState === 'COLLOCATED') {
                 if (!item.isActive) {
                     totalArray.push(fieldPrice(item, 0))
                 }
-                else totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0007}}, 0.0007))
+                // else totalArray.push(fieldPrice({...item, price: {...item.price, value: 0.0069}}, 0.0069))
+                else totalArray.push(fieldPrice(item, 0.0069))
             }
             else {
                 if (item.isActive !== undefined && !item.isActive) {
