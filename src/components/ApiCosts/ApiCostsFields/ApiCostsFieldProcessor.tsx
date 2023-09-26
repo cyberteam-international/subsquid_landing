@@ -64,14 +64,14 @@ export default function ApiCostsFieldProcessor({ field, selectValuesState, tabsP
         newState.render = newState.render.filter((_item, index)=> index !== currentStateIndex).map((item, index)=>{
             return {
                 ...item,
-                title: `Processor profile ${index + 1}`,
-                name: `Processor profile ${index + 1}`
+                title: `Processor profile ${index + 2}`,
+                name: `Processor profile ${index + 2}`
             }
         })
         newState.state = newState.state.filter((_item, index)=> index !== currentStateIndex).map((item, index)=>{
             return {
                 ...item,
-                fieldName: `Processor profile ${index + 1}`,
+                fieldName: `Processor profile ${index + 2}`,
             }
         })
         setSelectValues({...newState})
@@ -107,7 +107,7 @@ export default function ApiCostsFieldProcessor({ field, selectValuesState, tabsP
                 )} */}
                 {windowWidth > 768 && (
                     <p className={style["api-costs__list-item__header__price"]}>
-                        ${selectValues.state[currentStateIndex].price.value}
+                        ${(selectValues.state[currentStateIndex].price.value * 720).toFixed(2)}/mo
                     </p>
                 )}
             </div>
@@ -131,7 +131,7 @@ export default function ApiCostsFieldProcessor({ field, selectValuesState, tabsP
                         </svg>
                     </div>
                     {windowWidth < 768 && (
-                        <p>${selectValues.state[currentStateIndex].price.value}</p>
+                        <p>${(selectValues.state[currentStateIndex].price.value * 720).toFixed(2)}/mo</p>
                     )}
                 </div>
             </div>
