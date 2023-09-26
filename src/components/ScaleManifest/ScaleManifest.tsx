@@ -55,10 +55,10 @@ export default function ScaleManifest() {
             "dedicated": ${values.dedicated}
         } `;
 
-    const helperText = {
-        title: '“Scale” for your manifest',
-        description: 'Paste scale settings into your manifest to use selected configuration.'
-    }
+    // const helperText = {
+    //     title: '“Scale” for your manifest',
+    //     description: 'Paste scale settings into your manifest to use selected configuration.'
+    // }
 
     useEffect(() => {
         if (!isHover) {
