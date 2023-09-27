@@ -142,7 +142,7 @@
                     margin: 16px auto;
                     gap: 32px;
                 }
-                @include media-up(lg) {
+                @include media-up(xl) {
                     grid-template-columns: repeat(4, 230px);
                     grid-template-rows: repeat(1, 230px);
                     gap: 48px;
