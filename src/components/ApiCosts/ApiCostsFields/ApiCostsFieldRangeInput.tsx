@@ -26,10 +26,6 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
         limit: tabsProfile === 'COLLOCATED'? field.limit[0]: field.limit[1],
         range: tabsProfile === 'COLLOCATED'? field.range[0]: field.range[1],
         step: tabsProfile === 'COLLOCATED'? field.step[0]: field.step[1],
-        price: {
-            type: 'h',
-            value: tabsProfile === 'COLLOCATED'? field.price.value[0]: field.price.value[1],
-        }
     }
 
     const updateObj = (item: string): IApiCostsState => {

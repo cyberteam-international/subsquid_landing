@@ -47,6 +47,7 @@ export default function Header() {
                                     <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
                                     <a href="https://blog.subsquid.io/" className="nav__item" target="_blank">Blog</a>
                                     {/* <a href="/pricing" className="nav__item">Pricing</a> */}
+                                    <Link href={'/brand-assets'}>Brand assets</Link>
                                 </div>
                                 <div className="nav__section">
                                     <GitHub username="subsquid" reponame="squid-sdk"/>

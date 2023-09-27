@@ -33,10 +33,7 @@ interface IApiCostSample {
 export interface IApiCostsRangeInput extends IApiCostSample {
     type: 'range-input',
     label: string,
-    price: {
-        type: string,
-        value: number[]
-    },
+    price: IApiCostsPrice,
     prefix: string,
     range: number[][],
     limit: number[],
@@ -359,7 +356,7 @@ export const _apiCostsMock: IApiCosts = {
                     prefix: 'M',
                     price: {
                         type: "h",
-                        value: [0.0028, 0.0028]
+                        value: 0.0028
                     },
                     range: [[0.5, 500], [2, 500]],
                     step: [0.5, 1],
@@ -378,7 +375,7 @@ export const _apiCostsMock: IApiCosts = {
                     prefix: 'GB',
                     price: {
                         type: "h",
-                        value: [0.0007, 0.0007]
+                        value: 0.0007
                     },
                     range: [[10, 5000], [10, 5000]],
                     step: [10, 10],

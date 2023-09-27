@@ -67,7 +67,7 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
                 return {
                     fieldName: item.name,
                     select: item.range[0][0].toString(),
-                    price: { type: item.price.type, value: item.price.value[0] },
+                    price: { type: item.price.type, value: item.price.value },
                     replicas: item.replicas ?? undefined,
                     limit: item.limit[0],
                     isActive: true,
