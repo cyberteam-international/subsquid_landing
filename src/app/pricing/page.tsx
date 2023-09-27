@@ -104,6 +104,7 @@ export default function CalculatorPage() {
         selectUseCaseState: [selectValuesUseCase, setSelectValuesUseCase],
         selectResourcesState: [selectValuesResources, setSelectValuesResources],
         tabsProfileState: [tabsProfile, setTabsProfile],
+        selectNewProcessors: [newProcessors, setNewProcessors],
     })
 
     useTotalCalculator({

@@ -20,7 +20,7 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
             },
             fieldName: field.name, 
             select: item.toString(),
-            isActive: isActive
+            isActive: isActive,
         }
     }
 
@@ -37,6 +37,19 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
 
         );
     });
+
+    const blurHandler = () => {
+        if (field.limit) {
+            if (Number(value) > field?.limit) {
+                return updateState(updateObj(field.limit.toString()))
+            }
+            else return null
+        }
+        else if (Number(value) < 0) {
+            return updateState(updateObj('1'))
+        }
+        else return null
+    }
     
     return(
         <>
@@ -49,7 +62,7 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
                 placeholder='Your value'
                 value={value}
                 onChange={(e) => updateState(updateObj(e.target.value))}
-                onBlur={()=> Number(value) > 0? null : updateState(updateObj('1'))}
+                onBlur={()=> blurHandler()}
             />
         </>
     )

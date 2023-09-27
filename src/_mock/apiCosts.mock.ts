@@ -57,6 +57,7 @@ export interface IApiCostsRadioInput extends IApiCostSample {
     type: 'radio-input',
     values: number[],
     price: IApiCostsPrice,
+    limit?: number
 }
 
 export interface IApiCostsRadio extends IApiCostSample {
@@ -120,6 +121,7 @@ export const _apiCostsMock: IApiCosts = {
                         value: 0
                     },
                     values: [1, 2, 3, 4],
+                    limit: 10,
                     helper: {
                         title: 'How many networks to index',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
@@ -133,7 +135,7 @@ export const _apiCostsMock: IApiCosts = {
                     values: [
                         {
                             title: 'Low',
-                            value: 'LOW',
+                            value: 'low',
                             price: {
                                 type: "h",
                                 value: 0

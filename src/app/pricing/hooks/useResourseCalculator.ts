@@ -1,17 +1,19 @@
 import { useEffect } from 'react';
 import { _apiCostsMock, IApiCostsState } from '@/_mock/apiCosts.mock';
-import { SelectValues } from '../context';
+import { NewProcessors, SelectValues } from '../context';
 
 type Props = {
     selectUseCaseState: SelectValues,
     selectResourcesState: SelectValues,
     tabsProfileState: SelectValues,
+    selectNewProcessors: NewProcessors
 }
 
-export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState, tabsProfileState }: Props) => {
+export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState, tabsProfileState, selectNewProcessors }: Props) => {
 
     const [selectValuesUseCase, _setSelectValuesUseCase] = selectUseCaseState
     const [selectValuesResources, setSelectValuesResources] = selectResourcesState
+    const [newProcessors, setNewProcessors] = selectNewProcessors
     const [tabsProfile, _setTabsProfile] = tabsProfileState
 
     let returnSelectValuesResources = selectValuesResources
@@ -134,22 +136,51 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                 }
             },
         },
+        // {
+        //     name: 'Processor profile',
+        //     conditions: () => {
+        //         const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
+        //         const selectValueDataSize = selectValuesUseCase[indexDataSize].select
+        //         if ((selectValueNetworksCount === 1 && selectValueDataSize === 'low') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'medium')) {
+        //             updateState(
+        //                 currentInfo('Processor profile', 'small', indexProcessorProfile), indexProcessorProfile
+        //             );
+        //         }
+        //         else if ((selectValueNetworksCount === 1 && selectValueDataSize === 'medium') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'large')) {
+        //             updateState(
+        //                 currentInfo('Processor profile', 'medium', indexProcessorProfile), indexProcessorProfile
+        //             );
+        //         }
+        //         else if (selectValueNetworksCount === 1 && selectValueDataSize === 'large') {
+        //             updateState(
+        //                 currentInfo('Processor profile', 'large', indexProcessorProfile), indexProcessorProfile
+        //             );
+        //         }
+        //     }
+        // },
+        {
+            name: 'New processors',
+            conditions: () => {
+                const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
+                
+            }
+        },
         {
             name: 'Processor profile',
             conditions: () => {
-                const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
+                // const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
                 const selectValueDataSize = selectValuesUseCase[indexDataSize].select
-                if ((selectValueNetworksCount === 1 && selectValueDataSize === 'LOW') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'medium')) {
+                if (selectValueDataSize === 'low' || selectValueDataSize === 'not sure') {
                     updateState(
                         currentInfo('Processor profile', 'small', indexProcessorProfile), indexProcessorProfile
                     );
                 }
-                else if ((selectValueNetworksCount === 1 && selectValueDataSize === 'medium') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'large')) {
+                else if (selectValueDataSize === 'medium') {
                     updateState(
                         currentInfo('Processor profile', 'medium', indexProcessorProfile), indexProcessorProfile
                     );
                 }
-                else if (selectValueNetworksCount === 1 && selectValueDataSize === 'large') {
+                else if (selectValueDataSize === 'large') {
                     updateState(
                         currentInfo('Processor profile', 'large', indexProcessorProfile), indexProcessorProfile
                     );
@@ -222,7 +253,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             name: 'Postgres storage',
             conditions: () => {
                 const selectValue = selectValuesUseCase[indexDataSize].select
-                if (selectValue === 'LOW') {
+                if (selectValue === 'low') {
                     updateState(
                         currentInfo('Postgres storage', '50', indexPostgresStorage), indexPostgresStorage
                     );
@@ -250,7 +281,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         })
         return setSelectValuesResources([...returnSelectValuesResources])
 
-    }, [selectValuesUseCase, tabsProfile, ]);
+    }, [selectValuesUseCase, tabsProfile ]);
 
     return [];
 };
