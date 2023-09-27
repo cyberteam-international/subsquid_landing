@@ -48,7 +48,7 @@ export default function page({ }: Props) {
                         <p>Our logo can be utilized in two distinct configurations. </p>
                         <p>Squiddie icon with company name: this is the primary version of our logo, featuring the iconic Squiddie graphic alongside our company name. It represents the full brand identity and is the preferred choice for most use cases.</p>
                         <div className={`${style["assets-section__logo-img"]} ${style["assets-section__logo-img_company"]}`}>
-                            <Image {...icon_company} quality={100}/>
+                            <Image {...icon_company} quality={100} unoptimized={true}/>
                         </div>
                         <p>Icon only: alternatively, you can use just the Squiddie icon without the company name. This simplified version is suitable for situations where a more minimalistic or icon-based representation is required while maintaining brand recognition.</p>
                         <div className={`${style["assets-section__logo-img"]} ${style["assets-section__logo-img_icon"]}`}>
