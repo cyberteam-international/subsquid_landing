@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { _apiCostsMock, IApiCostsState } from '@/_mock/apiCosts.mock';
+import { _apiCostsMock, IApiCostsRadio, IApiCostsState } from '@/_mock/apiCosts.mock';
 import { NewProcessors, SelectValues } from '../context';
 
 type Props = {
@@ -49,16 +49,16 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                 if (mockField?.type === 'radio') {
                     return mockField.values.find((el) => el.value === select)?.price.value ?? 0.0069
                 }
-                else{
+                else {
                     if (Array.isArray(mockField.price.value)) {
                         if (tabsProfile[0].select === 'COLLOCATED') {
                             return mockField.price.value[0]
                         }
-                        else{
+                        else {
                             return mockField.price.value[1]
                         }
                     }
-                    else return mockField.price.value?? 0.069
+                    else return mockField.price.value ?? 0.069
                 }
             }
             return mockField?.type === 'radio'
@@ -80,20 +80,6 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         };
     };
 
-    // Processor profile = Processor profile
-    // networksCount = How many networks to index
-    // dataSize = How much data to index
-    // API profile = API service
-    // queryComplexity = Query Complexity
-    // apiReplicas = API service (replicas)
-    // requestsPerSecond = API requests, per sec
-    // Postgres storage = Database size
-    // Postgres profile = Database
-    // squidProfile = Squid profile
-    // ??? = RPC requests (2M included)
-
-    // const indexSquidProfileUseCase = selectValuesUseCase.findIndex((el) => el.fieldName === 'squidProfile')
-    // const indexSquidProfileResources = returnSelectValuesResources.findIndex((el) => el.fieldName === 'squidProfile')
     const indexProcessorProfile = listIndex('Processor profile')
     const indexApiProfile = listIndex('API profile')
     const indexPostgresProfile = listIndex('Postgres profile')
@@ -104,17 +90,14 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
     const indexApiReplicas = listIndex('API profile')
     const indexRequestsPerSecond = listIndex('requestsPerSecond')
     const indexRPCrequests = listIndex('RPC requests')
-    
-    const selectTabsProfile = tabsProfile[0].select
 
-    // const selectValueUseCase = selectValuesUseCase[indexSquidProfileUseCase].select
-    // const selectValueResources = selectValuesResources[indexSquidProfileResources].select
+    const selectTabsProfile = tabsProfile[0].select
 
     const tabConditions = [
         {
             name: 'squidProfile',
             conditions: () => {
-                if (selectTabsProfile === 'COLLOCATED'){
+                if (selectTabsProfile === 'COLLOCATED') {
                     updateState(
                         currentInfo('Processor profile', 'default', indexProcessorProfile), indexProcessorProfile
                     );
@@ -132,6 +115,11 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                     );
                     updateState(
                         currentInfo('RPC requests', '0.5', indexRPCrequests), indexRPCrequests
+                    );
+                }
+                else if (selectTabsProfile === 'DEDICATED') {
+                    updateState(
+                        currentInfo('RPC requests', '2', indexRPCrequests), indexRPCrequests
                     );
                 }
             },
@@ -162,7 +150,59 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             name: 'New processors',
             conditions: () => {
                 const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
-                
+                const newState: NewProcessors['0'] = {
+                    render: [],
+                    state: []
+                }
+                for (let index = 0; index < selectValueNetworksCount-1; index++) {
+                    const renderItem: IApiCostsRadio = {
+                        title: `Processor profile ${newState.state.length + 2}`,
+                        name: `Processor profile ${newState.state.length + 2}`,
+                        type: 'radio',
+                        canActive: false,
+                        values: [
+                            {
+                                title: 'Small',
+                                value: 'small',
+                                price: {
+                                    type: "h",
+                                    value: 0.04
+                                },
+                            },
+                            {
+                                title: 'Medium',
+                                value: 'medium',
+                                price: {
+                                    type: "h",
+                                    value: 0.08
+                                },
+                            },
+                            {
+                                title: 'Large',
+                                value: 'large',
+                                price: {
+                                    type: "h",
+                                    value: 0.15
+                                },
+                            }
+                        ],
+                        helper: {
+                            title: `Processor profile ${newProcessors.render.length + 1}`,
+                            description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
+                        }
+                    }
+                    const renderState = {
+                        fieldName: `Processor profile ${newState.state.length + 2}`,
+                        price: {
+                            type: "h",
+                            value: 0.04
+                        },
+                        select: 'small',
+                    }
+                    newState.render.push(renderItem)
+                    newState.state.push(renderState)
+                }
+                setNewProcessors({...newState})
             }
         },
         {
@@ -281,7 +321,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         })
         return setSelectValuesResources([...returnSelectValuesResources])
 
-    }, [selectValuesUseCase, tabsProfile ]);
+    }, [selectValuesUseCase, tabsProfile]);
 
     return [];
 };

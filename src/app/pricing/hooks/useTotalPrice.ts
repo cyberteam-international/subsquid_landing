@@ -13,6 +13,11 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
     const fieldPrice = (item: IApiCostsState, newPrice: number): Sum => {
         let price = 0;
         let currentPrice = 0
+        // if (tabsState === 'DEDICATED' && item.fieldName === 'RPC requests' && Number(item.select) <= 2) {
+        //     console.log('1111111111111111111111111', item.fieldName)
+        //     price = 0;
+        //     currentPrice = 0;
+        // }
         if (item.replicas) {
             if (Number(item.select)) {
                 price = Number(item.select) * item.price.value * Number(item.replicas);
@@ -21,7 +26,8 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
                 price = item.price.value * Number(item.replicas);
                 currentPrice = newPrice * Number(item.replicas);
             }
-        } else {
+        } 
+        else {
             if (Number(item.select)) {
                 price = Number(item.select) * item.price.value;
                 currentPrice = Number(item.select) * newPrice;
@@ -32,43 +38,43 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
         }
         return {
             fieldName: item.fieldName,
-            price: price,
+            price: tabsState === 'DEDICATED' && item.fieldName === 'RPC requests'? price - (2 * item.price.value) : price,
             currentPrice: currentPrice,
         };
     };
 
     const rangeFields = [
-        selectValuesResources.find((el)=>el.fieldName=== 'RPC requests'),
-        selectValuesResources.find((el)=>el.fieldName=== 'Postgres storage'),
+        selectValuesResources.find((el) => el.fieldName === 'RPC requests'),
+        selectValuesResources.find((el) => el.fieldName === 'Postgres storage'),
     ]
 
-    const collocatedFreeRangeCondition = () =>{
-        return rangeFields.every((field)=>{
+    const collocatedFreeRangeCondition = () => {
+        return rangeFields.every((field) => {
             return Number(field?.select) <= Number(field?.limit)
         })
     }
 
 
     useEffect(() => {
-        let totalArray : Sum[] = []
+        let totalArray: Sum[] = []
         selectValuesResources.forEach((item, _index) => {
             if (collocatedFreeRangeCondition() && tabsState === 'COLLOCATED') {
                 if (item.isActive) {
                     totalArray.push(fieldPrice(item, 0))
                 }
-                else totalArray.push(fieldPrice({...item, price: {...item.price, value: 0}}, 0))
+                else totalArray.push(fieldPrice({ ...item, price: { ...item.price, value: 0 } }, 0))
             }
             else if (tabsState === 'COLLOCATED') {
                 if (item.isActive) {
                     totalArray.push(fieldPrice(item, 0.0069))
                 }
-                else totalArray.push(fieldPrice({...item, price: {...item.price, value: 0}}, 0))
+                else totalArray.push(fieldPrice({ ...item, price: { ...item.price, value: 0 } }, 0))
             }
             else {
                 if (item.isActive) {
                     totalArray.push(fieldPrice(item, item.price.value))
                 }
-                else totalArray.push(fieldPrice({...item, price: {...item.price, value: 0}}, 0))
+                else totalArray.push(fieldPrice({ ...item, price: { ...item.price, value: 0 } }, 0))
             }
         })
         return setTotalSum(totalArray)

@@ -142,7 +142,10 @@ export default function CalculatorPage() {
     useEffect(() => {
         if (activeTab === 'byUseCase') {
             setSelectValuesUseCase([...selectValuesUseCase])
-        } 
+        }
+        else if (activeTab === 'byResources') {
+            setTabsProfile([...setInitial('byResources', true)])
+        }
     }, [activeTab])
 
     return (

@@ -42,12 +42,9 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
     }
 
     useEffect(() => {
+        console.log('kfsakfhsakfnsakfas', value)
         setSliderValue(value)
-    }, [value])
-
-    // useEffect(()=>{
-    //     setSliderThumb(ref.current?.parentElement?.style.left?? '0px')
-    // }, [ref.current?.parentElement?.style.left, sliderValue])
+    }, [tabsProfile, value])
 
     return (
         <div

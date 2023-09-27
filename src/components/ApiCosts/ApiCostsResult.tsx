@@ -38,6 +38,9 @@ export default function ApiCostsResult() {
         totalSum.forEach((item, _index)=>{
             sum += item.price
         })
+        newProcessors.state.forEach((item, _index)=>{
+            sum += item.price.value
+        })
         return sum
     }
 

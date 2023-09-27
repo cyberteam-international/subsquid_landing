@@ -48,19 +48,19 @@ export default function page({ }: Props) {
                         <p>Our logo can be utilized in two distinct configurations. </p>
                         <p>Squiddie icon with company name: this is the primary version of our logo, featuring the iconic Squiddie graphic alongside our company name. It represents the full brand identity and is the preferred choice for most use cases.</p>
                         <div className={`${style["assets-section__logo-img"]} ${style["assets-section__logo-img_company"]}`}>
-                            <Image {...icon_company} quality={100} unoptimized={true}/>
+                            <Image {...icon_company} quality={100} unoptimized/>
                         </div>
                         <p>Icon only: alternatively, you can use just the Squiddie icon without the company name. This simplified version is suitable for situations where a more minimalistic or icon-based representation is required while maintaining brand recognition.</p>
                         <div className={`${style["assets-section__logo-img"]} ${style["assets-section__logo-img_icon"]}`}>
-                            <Image {...icon} quality={100}/>
+                            <Image {...icon} quality={100} unoptimized/>
                         </div>
                         <p>When placing our logo on a dark background, please utilize the reverse version. In this version, the text becomes white to ensure maximum visibility and legibility against the dark backdrop. This ensures our logo maintains its clarity and impact, regardless of the background color.</p>
                         <div className={`${style["assets-section__logo-img"]} ${style["assets-section__logo-img_reverse"]}`}>
-                            <Image {...icon_reverse} quality={100}/>
+                            <Image {...icon_reverse} quality={100} unoptimized/>
                         </div>
                         <p>If the logo needs to be monochromatic for specific purposes, please use the black and white version.</p>
                         <div className={`${style["assets-section__logo-img"]} ${style["assets-section__logo-img_black_white"]}`}>
-                            <Image {...icon_black_white} quality={100}/>
+                            <Image {...icon_black_white} quality={100} unoptimized/>
                         </div>
                     </div>
                     <div className={`${style['assets-section']} ${style['assets-section__colors']}`}>
