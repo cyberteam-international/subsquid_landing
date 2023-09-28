@@ -1,10 +1,9 @@
 import Image from "next/image";
 import React from "react";
 
-import icon_black_white from '@/../public/pageAssets/icon_black_white.svg'
-import icon_company from '@/../public/pageAssets/icon_company.svg'
-import icon_reverse from '@/../public/pageAssets/icon_reverse.svg'
 import icon from '@/../public/pageAssets/icon.png'
+import '@/../public/pageAssets/pageAssets_svg.zip'
+import '@/../public/pageAssets/pageAssets_png.zip'
 
 import style from './style.module.scss'
 
@@ -102,7 +101,7 @@ export default function page({ }: Props) {
                     <div className={`${style['assets-section']} ${style['assets-section__download']}`}>
                         <h2 className="title">Download</h2>
                         <p>
-                            You can download <a href="@/../public/pageAssets/pageAssets_svg.rar" download={true}>SVG</a> or <a href="@/../public/pageAssets/pageAssets_png.rar" download={true}>PNG</a> files.
+                            You can download <a href="/_next/server/chunks/public/pageAssets/pageAssets_png.zip" download={true}>SVG</a> or <a href="@/../public/pageAssets/pageAssets_png.rar" download={true}>PNG</a> files.
                         </p>
                     </div>
                 </section>
