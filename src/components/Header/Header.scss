@@ -16,10 +16,19 @@
   }
 
   p {
-    color: var(--color-primary);
+    color: var(--Black-secondary, #525C70);
     font-size: 14px;
     font-weight: 400;
     line-height: 100%;
+
+    a {
+      text-decoration: underline;
+      transition: color .2s;
+
+      &:hover {
+        color: #000;
+      }
+    }
   }
 
   &__close {

@@ -16,8 +16,8 @@ export default function Header() {
             'header--open': isOpen
         })}>
             { isVisibleTopBar ? <div className="header-top">
-                <img src="/star.png" alt=""/>
-                <p>We've got a new look!</p>
+                <img src="/rocket.png" alt=""/>
+                <p><a href="https://coinlist.co/subsquid-testnet" target="_blank">The incentivized testnet is LIVE</a></p>
 
                 <button className="header-top__close" onClick={() => setIsVisibleTopBar(false)}>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
