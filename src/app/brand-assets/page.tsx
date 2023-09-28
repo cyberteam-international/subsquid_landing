@@ -4,7 +4,7 @@ import React from "react";
 import icon_black_white from '@/../public/pageAssets/icon_black_white.svg'
 import icon_company from '@/../public/pageAssets/icon_company.svg'
 import icon_reverse from '@/../public/pageAssets/icon_reverse.svg'
-import icon from '@/../public/pageAssets/icon.svg'
+import icon from '@/../public/pageAssets/icon.png'
 
 import style from './style.module.scss'
 
