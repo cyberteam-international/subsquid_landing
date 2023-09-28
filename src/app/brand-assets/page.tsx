@@ -52,7 +52,7 @@ export default function page({ }: Props) {
                         </div>
                         <p>Icon only: alternatively, you can use just the Squiddie icon without the company name. This simplified version is suitable for situations where a more minimalistic or icon-based representation is required while maintaining brand recognition.</p>
                         <div className={`${style["assets-section__logo-img"]} ${style["assets-section__logo-img_icon"]}`}>
-                            <Image {...icon} quality={100} unoptimized/>
+                            <Image src={icon} quality={100} unoptimized alt="subsquid"/>
                         </div>
                         <p>When placing our logo on a dark background, please utilize the reverse version. In this version, the text becomes white to ensure maximum visibility and legibility against the dark backdrop. This ensures our logo maintains its clarity and impact, regardless of the background color.</p>
                         <div className={`${style["assets-section__logo-img"]} ${style["assets-section__logo-img_reverse"]}`}>
