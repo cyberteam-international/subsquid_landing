@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<main ref={mainRef} style={{marginTop: `${headerWidth}px`}} className='main'>
 					{headerWidth !== 0 && children}
 				</main>
-				{currentPath !== '/worker' && <Footer />}
+				{(currentPath !== '/worker' && headerWidth !== 0) && <Footer />}
 			</body>
 		</html>
 	)

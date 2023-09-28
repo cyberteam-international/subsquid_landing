@@ -9,7 +9,10 @@ const nextConfig = {
     webpack: (config, options) => {
         config.module.rules.push({
             test: /\.(zip)$/,
-            type: 'asset/resource'
+            type: 'asset/resource',
+            generator: {
+                filename: '[name][ext]'
+            }
         });
         return config;
     }

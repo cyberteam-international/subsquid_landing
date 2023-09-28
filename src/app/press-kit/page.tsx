@@ -2,10 +2,12 @@ import Image from "next/image";
 import React from "react";
 
 import icon from '@/../public/pageAssets/icon.png'
-import '@/../public/pageAssets/pageAssets_svg.zip'
-import '@/../public/pageAssets/pageAssets_png.zip'
+import '@/../public/pageAssets/assets_svg.zip'
+import '@/../public/pageAssets/assets_png.zip'
 
 import style from './style.module.scss'
+
+import { Metadata } from "next";
 
 type Props = {};
 
@@ -19,6 +21,10 @@ const svgTextSubsquid = <svg xmlns="http://www.w3.org/2000/svg" width="530" heig
     <path d="M448.021 76.2414H433.317V1.77468H448.021V76.2414Z" fill="currentColor"/>
     <path d="M480.555 62.7974H492.109C504.292 62.7974 514.48 55.2352 514.48 39.0605C514.48 22.8858 504.397 15.2186 492.214 15.2186H480.555V62.7974ZM492.634 76.2414H466.061V1.77468H492.739C513.955 1.77468 529.5 15.5337 529.5 39.0605C529.5 62.5874 513.85 76.2414 492.634 76.2414Z" fill="currentColor"/>
 </svg>
+
+export const metadata: Metadata = {
+    title: 'Press kit',
+}
 
 export default function page({ }: Props) {
 
@@ -101,7 +107,7 @@ export default function page({ }: Props) {
                     <div className={`${style['assets-section']} ${style['assets-section__download']}`}>
                         <h2 className="title">Download</h2>
                         <p>
-                            You can download <a href="/_next/server/chunks/public/pageAssets/pageAssets_png.zip" download={true}>SVG</a> or <a href="@/../public/pageAssets/pageAssets_png.rar" download={true}>PNG</a> files.
+                            You can download <a href="/api/assets_svg.zip" download={true}>SVG</a> or <a href="/api/assets_png.zip" download={true}>PNG</a> files.
                         </p>
                     </div>
                 </section>
