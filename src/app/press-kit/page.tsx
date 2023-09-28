@@ -1,9 +1,6 @@
 import Image from "next/image";
 import React from "react";
-
-import icon from '@/../public/pageAssets/icon.png'
-import '@/../public/pageAssets/assets_svg.zip'
-import '@/../public/pageAssets/assets_png.zip'
+import icon from '../../../public/assets/icon.png'
 
 import style from './style.module.scss'
 
@@ -107,7 +104,7 @@ export default function page({ }: Props) {
                     <div className={`${style['assets-section']} ${style['assets-section__download']}`}>
                         <h2 className="title">Download</h2>
                         <p>
-                            You can download <a href="/api/assets_svg.zip" download={true}>SVG</a> or <a href="/api/assets_png.zip" download={true}>PNG</a> files.
+                            You can download <a href="/assets/assets_svg.zip" download={true}>SVG</a> or <a href="/assets/assets_png.zip" download={true}>PNG</a> files.
                         </p>
                     </div>
                 </section>
