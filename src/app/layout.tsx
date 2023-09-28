@@ -1,9 +1,9 @@
 'use client'
 
 import Head from 'next/head'
+import { useRef, useState } from 'react'
 import { Inter } from 'next/font/google'
 import { usePathname } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
 
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
@@ -16,18 +16,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
-	const [headerWidth, setHeaderWidth] = useState<number>()
+	const [headerWidth, setHeaderWidth] = useState<number>(0)
 
 	const mainRef = useRef<HTMLElement>(null)
 
 	const currentPath = usePathname()
-
-	useEffect(()=>{
-		
-		if (mainRef.current) {
-			mainRef.current.style.marginTop = `${headerWidth}px`
-		}
-	}, [mainRef, headerWidth])
 
 	return (
 		<html lang="en">
@@ -42,8 +35,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			</Head>
 			<body className={inter.className}>
 				{currentPath !== '/worker' && <Header setHeaderWidth={setHeaderWidth} />}
-				<main ref={mainRef} className='main'>
-					{children}
+				<main ref={mainRef} style={{marginTop: `${headerWidth}px`}} className='main'>
+					{headerWidth !== 0 && children}
 				</main>
 				{currentPath !== '/worker' && <Footer />}
 			</body>

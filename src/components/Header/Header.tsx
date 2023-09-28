@@ -7,7 +7,7 @@ import GitHub from "@/components/GitHub/GitHub";
 import Link from 'next/link';
 
 type Props = {
-    setHeaderWidth: Dispatch<SetStateAction<number | undefined>>
+    setHeaderWidth: Dispatch<SetStateAction<number>>
 }
 
 export default function Header({setHeaderWidth}: Props) {
