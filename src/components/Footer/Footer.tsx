@@ -12,7 +12,8 @@ const Chevron = <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
 
 export interface INavItem {
     text: string,
-    link: string
+    link: string,
+    target: string
 }
 
 export interface INav {
@@ -29,24 +30,25 @@ export default function Footer() {
         {
             title: "Resources",
             items: [
-                {link: "https://docs.subsquid.io/", text: "Documentation"},
-                {link: "https://blog.subsquid.io/", text: "Blog"},
+                {link: "https://docs.subsquid.io/", text: "Documentation", target: '_blank'},
+                {link: "https://blog.subsquid.io/", text: "Blog", target: '_blank'},
+                {link: "/brand-assets", text: "Brand assets", target: '_self'},
                 // {link: "#!", text: "Press kit"},
             ]
         },
         {
             title: "Follow us",
             items: [
-                {link: "https://twitter.com/subsquid", text: "Twitter"},
-                {link: "https://discord.com/invite/subsquid", text: "Discord"},
-                {link: "https://www.youtube.com/@subsquid", text: "YouTube"},
-                {link: "https://github.com/subsquid", text: "GitHub"},
+                {link: "https://twitter.com/subsquid", text: "Twitter", target: '_blank'},
+                {link: "https://discord.com/invite/subsquid", text: "Discord", target: '_blank'},
+                {link: "https://www.youtube.com/@subsquid", text: "YouTube", target: '_blank'},
+                {link: "https://github.com/subsquid", text: "GitHub", target: '_blank'},
             ]
         },
         {
             title: "Legal",
             items: [
-                {link: "/imprint", text: "Imprint & Privacy"},
+                {link: "/imprint", text: "Imprint & Privacy", target: '_self'},
             ]
         },
     ])
@@ -129,7 +131,7 @@ export default function Footer() {
                                     <div className="footer-item__items">
                                         {nav.items.map((item, _index) => <a key={_index}
                                                                             href={item.link}
-                                                                            target="_blank">{item.text}</a>) || []}
+                                                                            target={item.target}>{item.text}</a>) || []}
                                     </div>
                                 </div>
                             ))}

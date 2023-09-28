@@ -32,7 +32,7 @@ export default function page({ }: Props) {
     ]
 
     return (
-        <main className={`main ${style['assets']}`}>
+        <div className={style['assets']}>
             <div className={`container ${style['assets__container']}`}>
                 <section className={style['assets__header']}>
                     <h1 className="title">Brand assets</h1>
@@ -93,6 +93,6 @@ export default function page({ }: Props) {
                     </div>
                 </section>
             </div>
-        </main>
+        </div>
     )
 }

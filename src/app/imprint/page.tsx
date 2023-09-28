@@ -2,7 +2,7 @@
 
 export default function Imprint() {
     return (
-        <main className="imprint">
+        <div className="imprint">
             <div className={'container'}>
                 <div className="imprint__sections">
                     <div className="imprint__section">
@@ -165,6 +165,6 @@ export default function Imprint() {
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     )
 }

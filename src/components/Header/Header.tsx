@@ -1,17 +1,29 @@
 "use client"
 
 import './Header.scss'
-import React, {useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 import classNames from "classnames";
 import GitHub from "@/components/GitHub/GitHub";
 import Link from 'next/link';
 
-export default function Header() {
+type Props = {
+    setHeaderWidth: Dispatch<SetStateAction<number | undefined>>
+}
+
+export default function Header({setHeaderWidth}: Props) {
     const [isOpen, setIsOpen] = useState(false)
     const [isVisibleTopBar, setIsVisibleTopBar] = useState(true)
 
+    const headerRef = useRef<HTMLElement>(null)
+
+    useEffect(()=>{
+        if (headerRef.current) {
+            setHeaderWidth(headerRef.current.offsetHeight)
+        }
+    }, [headerRef, isVisibleTopBar])
+
     return (
-        <header className={classNames({
+        <header ref={headerRef} className={classNames({
             'header': true,
             'header--open': isOpen
         })}>
@@ -46,9 +58,6 @@ export default function Header() {
                                 <div className="nav__section">
                                     <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
                                     <a href="https://blog.subsquid.io/" className="nav__item" target="_blank">Blog</a>
-                                    {/* <a href="/pricing" className="nav__item">Pricing</a> */}
-                                    <a href="/brand-assets" className="nav__item">Brand assets</a>
-                                    {/* <Link href={'/brand-assets'}>Brand assets</Link> */}
                                 </div>
                                 <div className="nav__section">
                                     <GitHub username="subsquid" reponame="squid-sdk"/>

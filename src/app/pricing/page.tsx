@@ -157,7 +157,7 @@ export default function CalculatorPage() {
                             <TotalSumContext.Provider value={[totalSum, setTotalSum]}>
                                 <HelperContext.Provider value={[helper, setHelper]}>
                                     <ScrollElementContext.Provider value={totalBlockRef}>
-                                        <main className={`main ${style['calculator']}`}>
+                                        <div className={style['calculator']}>
                                             <div className="container">
                                                 <section className={style['calculator__header']}>
                                                     <h1 className="calculator__title">Pricing that fits your <i>needs</i></h1>
@@ -170,7 +170,7 @@ export default function CalculatorPage() {
                                                 <ScaleManifest />
                                                 <EstimateCost />
                                             </div>
-                                        </main>
+                                        </div>
                                     </ScrollElementContext.Provider>
                                 </HelperContext.Provider>
                             </TotalSumContext.Provider>

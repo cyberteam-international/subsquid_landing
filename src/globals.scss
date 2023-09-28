@@ -190,27 +190,27 @@ p, .paragraph {
 }
 
 .main {
-  margin-top: 76px;
+  padding-top: 24px;
   overflow: hidden;
   padding-bottom: 60px;
 
   @include media-up(md) {
-    margin-top: calc(60px + 52px);
+    padding-top: 60px;
     padding-bottom: 100px;
   }
 
   @include media-up(lg) {
-    margin-top: calc(140px + 84px);
+    padding-top: 140px;
     padding-bottom: 140px;
   }
 
   @include media-up(xl) {
-    margin-top: calc(140px + 84px);
+    padding-top: 140px;
     padding-bottom: 250px;
   }
 
   @include media-up(xxl) {
-    margin-top: calc(180px + 84px);
+    padding-top: 180px;
     padding-bottom: 250px;
   }
 
@@ -239,18 +239,18 @@ p, .paragraph {
 }
 
 .imprint {
-  padding-top: 52px + 24px;
-  padding-bottom: 64px;
+  // padding-top: 52px + 24px;
+  // padding-bottom: 64px;
 
-  @include media-up(lg) {
-    margin-top: 120px;
-    padding-bottom: 120px;
-  }
+  // @include media-up(lg) {
+  //   margin-top: 120px;
+  //   padding-bottom: 120px;
+  // }
 
-  @include media-up(xxl) {
-    margin-top: 200px;
-    padding-bottom: 200px;
-  }
+  // @include media-up(xxl) {
+  //   margin-top: 200px;
+  //   padding-bottom: 200px;
+  // }
 
   h1, h2, h3, h4, h5, h6 {
     text-align: left;
