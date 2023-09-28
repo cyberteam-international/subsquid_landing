@@ -1,6 +1,5 @@
 'use client'
 
-import Head from 'next/head'
 import { useRef, useState } from 'react'
 import { Inter } from 'next/font/google'
 import { usePathname } from 'next/navigation'
@@ -24,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 	return (
 		<html lang="en">
-			<Head>
+			<head>
 				<script async src="https://www.googletagmanager.com/gtag/js?id=G-6JBS6RNP90"></script>
                 <script dangerouslySetInnerHTML={{
                     __html: `window.dataLayer = window.dataLayer || [];
@@ -32,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     gtag('js', new Date());
                     gtag('config', 'G-6JBS6RNP90');`,
                 }}></script>
-			</Head>
+			</head>
 			<body className={inter.className}>
 				{currentPath !== '/worker' && <Header setHeaderWidth={setHeaderWidth} />}
 				<main ref={mainRef} style={{marginTop: `${headerWidth}px`}} className='main'>
