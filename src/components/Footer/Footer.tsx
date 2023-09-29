@@ -32,7 +32,7 @@ export default function Footer() {
             items: [
                 {link: "https://docs.subsquid.io/", text: "Documentation", target: '_blank'},
                 {link: "https://blog.subsquid.io/", text: "Blog", target: '_blank'},
-                // {link: "/press-kit", text: "Press kit", target: '_self'},
+                {link: "/press-kit", text: "Press kit", target: '_self'},
             ]
         },
         {
