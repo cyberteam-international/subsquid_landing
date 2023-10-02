@@ -35,10 +35,13 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
     if (isProfile) {
         return [
             {
-                fieldName: _apiCostsMock.profile.name,
-                select: _apiCostsMock.profile.values[0].value,
-                price: { type: _apiCostsMock.profile.values[0].price.type, value: _apiCostsMock.profile.values[0].price.value },
-                replicas: _apiCostsMock.profile.replicas ?? undefined,
+                fieldName: _apiCostsMock.profile[0].name,
+                select: _apiCostsMock.profile[0].values[0].value,
+                price: { 
+                    type: _apiCostsMock.profile[0].values[0].price.type, 
+                    value: _apiCostsMock.profile[0].values[0].price.value 
+                },
+                replicas: _apiCostsMock.profile[0].replicas ?? undefined,
                 isActive: true,
             }
         ]

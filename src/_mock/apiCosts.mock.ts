@@ -73,7 +73,7 @@ export interface IApiCostsTabs {
 }
 
 export type IApiCosts = {
-    profile: IApiCostsRadio,
+    profile: IApiCostsRadio[],
     tabs: {
         byUseCase: IApiCostsTabs,
         byResources: IApiCostsTabs,
@@ -81,31 +81,58 @@ export type IApiCosts = {
 }
 
 export const _apiCostsMock: IApiCosts = {
-    profile: {
-        title: 'Squid profile',
-        name: 'squidProfile',
-        warning: ['Collocated squids are recommended only for development and prototyping', 'Dedicated VM resources for reliability in production.'],
-        type: 'radio',
-        canActive: false,
-        values: [
-            {
-                title: 'Collocated',
-                value: 'COLLOCATED',
-                price: {
-                    type: "h",
-                    value: 0
+    profile: [
+        {
+            title: 'Squid profile',
+            name: 'squidProfile',
+            warning: ['For development environment you can use collocated squids profile.', 'Dedicated VM resources for reliability in production.'],
+            type: 'radio',
+            canActive: false,
+            values: [
+                {
+                    title: 'Development',
+                    value: 'COLLOCATED',
+                    price: {
+                        type: "h",
+                        value: 0
+                    },
                 },
-            },
-            {
-                title: 'Dedicated',
-                value: 'DEDICATED',
-                price: {
-                    type: "h",
-                    value: 0
+                {
+                    title: 'Production',
+                    value: 'DEDICATED',
+                    price: {
+                        type: "h",
+                        value: 0
+                    },
                 },
-            },
-        ],
-    },
+            ],
+        },
+        {
+            title: 'Squid profile',
+            name: 'squidProfile',
+            warning: ['Collocated squids are recommended only for development and prototyping', 'Dedicated VM resources for reliability in production.'],
+            type: 'radio',
+            canActive: false,
+            values: [
+                {
+                    title: 'Collocated',
+                    value: 'COLLOCATED',
+                    price: {
+                        type: "h",
+                        value: 0
+                    },
+                },
+                {
+                    title: 'Dedicated',
+                    value: 'DEDICATED',
+                    price: {
+                        type: "h",
+                        value: 0
+                    },
+                },
+            ],
+        }
+    ],
     tabs: {
         byUseCase: {
             title: 'By use-case',
