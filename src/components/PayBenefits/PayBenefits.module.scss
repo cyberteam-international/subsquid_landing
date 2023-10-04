@@ -1,14 +1,44 @@
 @import "@/assets/scss/main";
 
 .pay-benefits{
-    display: grid;
-    gap: 32px;
-    margin-top: 48px;
-    @include media-up(sm) {
-        margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    // margin-top: 60px;
+    @include media-up(md) {
+        gap: 40px;
+        // margin-top: 120px;
     }
-    @include media-up(lg) {
-        grid-template-columns: repeat(3, 1fr);
+    @include media-up(xxl) {
+        gap: 60px;
+    }
+    &__subtitle{
+        margin-top: 12px;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        letter-spacing: 0.32px;
+        color: var(--color-secondary);
+        text-align: center;
+        @include media-up(md) {
+            margin-top: 20px;
+            line-height: 160%;
+            letter-spacing: 0.4px;
+        }
+        @include media-up(lg) {
+            font-size: 24px;
+        }
+        @include media-up(xxl) {
+            letter-spacing: 0.48px;
+        }
+    }
+    &__wrapper{
+        display: grid;
+        gap: 32px;
+        @include media-up(lg) {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
     &__item{
         border-radius: 20px;

@@ -14,7 +14,13 @@ export default function PayBenefits() {
 
     return (
         <section className={style["pay-benefits"]}>
-            {setItems()}
+            <div className="">
+                <h2 className="title">Pricing</h2>
+                <p className={style["pay-benefits__subtitle"]}>Simple and transparent for projects and companies of all sizes</p>
+            </div>
+            <div className={style["pay-benefits__wrapper"]}>
+                {setItems()}
+            </div>
         </section>
     )
 }

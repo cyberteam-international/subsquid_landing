@@ -6,7 +6,7 @@ type Props = {
 };
 
 export const metadata: Metadata = {
-    title: 'Pricing',
+    title: 'Subsquid Cloud',
 }
 
 export default function layout({ children }: Props) {

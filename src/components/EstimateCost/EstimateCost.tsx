@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { TotalSumContext, ScrollElementContext } from '@/app/pricing/context';
+import { TotalSumContext, ScrollElementContext } from '@/app/subsquid-cloud/context';
 
 import style from './EstimateCost.module.scss'
 

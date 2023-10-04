@@ -42,7 +42,6 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
     }
 
     useEffect(() => {
-        console.log('kfsakfhsakfnsakfas', value)
         setSliderValue(value)
     }, [tabsProfile, value])
 

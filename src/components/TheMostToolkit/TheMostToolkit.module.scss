@@ -1,0 +1,72 @@
+@import "@/assets/scss/main";
+
+.toolkit{
+    display: grid;
+    gap: 24px;
+    @include media-up(lg) {
+        gap: 100px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    h2{
+        @include media-up(lg) {
+            text-align: left;
+        }
+        i{
+            font-weight: normal;
+        }
+    }
+    &__subtitle{
+        color: var(--color-secondary);
+        text-align: center;
+        margin-top: 12px;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        letter-spacing: 0.32px;
+        @include media-up(lg) {
+            text-align: left;
+            margin-top: 16px;
+        }
+        @include media-up(lg) {
+            font-size: 24px;
+            letter-spacing: 0.48px;
+        }
+    }
+    &__list{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        @include media-up(lg) {
+            gap: 20px;
+        }
+        &-item{
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--color-white);
+            box-shadow: 0px 0px 7.95429px 0px rgba(0, 0, 0, 0.04), 0px 0px 3px 0px rgba(0, 0, 0, 0.24);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            @include media-up(lg) {
+                border-radius: 20px;
+                gap: 14px;
+                padding: 24px;
+            }
+            p{
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 160%;
+                letter-spacing: 0.28px;
+                @include media-up(lg) {
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 160%;
+                    letter-spacing: 0.32px;
+                }
+            }
+        }
+    }
+}

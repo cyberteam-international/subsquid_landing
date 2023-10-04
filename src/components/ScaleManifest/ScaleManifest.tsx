@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 import GlobalHelper from '../GlobalHelper/GlobalHelper';
 
 import style from './ScaleManifest.module.scss';
-import { SelectValuesResourcesContext, TabsProfileContext } from '@/app/pricing/context';
+import { SelectValuesResourcesContext, TabsProfileContext } from '@/app/subsquid-cloud/context';
 
 const inter = Inter({ subsets: ['latin'] })
 

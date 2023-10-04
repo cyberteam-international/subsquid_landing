@@ -3,7 +3,7 @@ import { useWindowWidth } from "@react-hook/window-size";
 
 import useMousePosition from "@/hooks/useMousePosition";
 
-import { NewProcessorsContext } from "@/app/pricing/context";
+import { NewProcessorsContext } from "@/app/subsquid-cloud/context";
 
 import { IApiCostsRadio } from "@/_mock/apiCosts.mock";
 

@@ -6,7 +6,7 @@ import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
 import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
 import GlobalHelper from '../GlobalHelper/GlobalHelper'
 
-import { SelectValues, TabsProfileContext } from '@/app/pricing/context'
+import { SelectValues, TabsProfileContext } from '@/app/subsquid-cloud/context'
 
 import {
     IApiCostsRadio,

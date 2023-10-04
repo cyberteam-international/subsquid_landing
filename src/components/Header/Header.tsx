@@ -57,6 +57,7 @@ export default function Header({setHeaderWidth}: Props) {
                             })}>
                                 <div className="nav__section">
                                     <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
+                                    <a href="/subsquid-cloud" className="nav__item">Subsquid Cloud</a>
                                     <a href="https://blog.subsquid.io/" className="nav__item" target="_blank">Blog</a>
                                 </div>
                                 <div className="nav__section">

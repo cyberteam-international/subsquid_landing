@@ -1,0 +1,120 @@
+@import "@/assets/scss/main";
+
+.charts{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-row: auto;
+    gap: 24px;
+    color: var(--color-primary);
+    @include media-up(md) {
+        grid-auto-rows: 520px;
+    }
+    @include media-up(xl) {
+        grid-auto-rows: 596px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    &-item{
+        padding: 24px;
+        border-radius: 20px;
+        background: #FDF1E4;
+        max-width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        @include media-up(md) {
+            gap: 0;
+            justify-content: space-between;
+            padding: 44px 36px;
+        }
+        img{
+            max-width: none;
+            width: 800px;
+            @include media-up(md) {
+                width: auto;
+            }
+            @include media-up(lg) {
+                width: 105%;
+            }
+            @include media-up(xl) {
+                width: 140%;
+            }
+        }
+        &__title{
+            font-size: 28px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 110%;
+            letter-spacing: -0.28px;
+            @include media-up(md) {
+                font-size: 44px;
+                letter-spacing: -0.44px;
+                line-height: 120%;
+            }
+        }
+        &__subtitle{
+            margin-top: 12px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 160%;
+            letter-spacing: 0.28px;
+            color: var(--color-secondary);
+            @include media-up(md) {
+                margin-top: 16px;
+                font-size: 16px;
+                letter-spacing: 0.32px;
+            }
+        }
+        &__wrapper{
+            display: block;
+        }
+        &__stats{
+            display: flex;
+            align-items: center;
+            gap: 44px;
+            @include media-up(md) {
+                gap: 102px;
+            }
+            &-item{
+                display: block;
+                p{
+                    &:first-child{
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 110%;
+                        letter-spacing: -0.14px;
+                        @include media-up(md) {
+                            font-size: 19.799px;
+                            letter-spacing: -0.198px;
+                        }
+                    }
+                    &:last-child{
+                        font-size: 32px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 120%;
+                        letter-spacing: -0.32px;
+                        margin-top: 7px;
+                        @include media-up(md) {
+                            font-size: 44px;
+                            letter-spacing: -0.44px;
+                        }
+                    }
+                }
+            }
+        }
+        &__image{
+            margin-top: 12px;
+            width: 100%;
+            overflow: hidden;
+            @include media-up(md) {
+                margin-top: 24px;
+            }
+            @include media-up(xl) {
+                margin-top: 21px;
+            }
+        }
+    }
+}

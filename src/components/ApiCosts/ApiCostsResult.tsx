@@ -6,7 +6,7 @@ import {
     ScrollElementContext,
     SelectValuesResourcesContext,
     NewProcessorsContext,
-} from "@/app/pricing/context";
+} from "@/app/subsquid-cloud/context";
 
 import style from './ApiCosts.module.scss'
 

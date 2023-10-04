@@ -4,7 +4,7 @@ import { useWindowWidth } from '@react-hook/window-size'
 import ApiCostsFieldRadio from './ApiCostsFieldRadio'
 import GlobalHelper from '../../GlobalHelper/GlobalHelper'
 
-import { NewProcessors } from '@/app/pricing/context'
+import { NewProcessors } from '@/app/subsquid-cloud/context'
 
 import {
     IApiCostsRadio,

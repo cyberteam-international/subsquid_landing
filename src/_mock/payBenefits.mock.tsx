@@ -27,7 +27,7 @@ export default [
         },
     },
     {
-        title: 'Premium',
+        title: 'Professional',
         subtitle: 'Pay-as-you-go',
         description: 'Pay only for what you use',
         items: [

@@ -1,0 +1,80 @@
+@import "@/assets/scss/main";
+
+.calculator{
+    display: block;
+    section{
+        margin-top: 60px;
+        &:first-child{
+            margin-top: 0;
+        }
+        @include media-up(sm) {
+            margin-top: 120px;
+        }
+        @include media-up(lg) {
+            margin-top: 140px;
+        }
+        @include media-up(xxl) {
+            margin-top: 180px;
+        }
+    }
+    &__header{
+        h4{
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 120%; /* 24px */
+            letter-spacing: -0.2px;
+            color: var(--color-secondary);
+            @include media-up(sm) {
+                text-align: center;
+                font-size: 32px;
+                font-weight: 600;
+                letter-spacing: -0.32px;
+            }
+        }
+        h1{
+            margin-top: 12px;
+            @include media-up(sm) {
+                margin-top: 16px;
+                text-align: center;
+            }
+            @include media-up(lg) {
+                letter-spacing: -2.4px;
+            }
+            @include media-up(xxl) {
+                margin-top: 24px;
+                letter-spacing: -3px;
+            }
+        }
+        &__subtitle{
+            color: var(--color-secondary);
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: 0.32px;
+            @include media-up(sm) {
+                text-align: center;
+            }
+            @include media-up(lg) {
+                margin-top: 24px;
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 160%;
+                letter-spacing: 0.48px;
+            }
+        }
+        &-buttons{
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            @include media-up(sm) {
+                justify-content: center;
+            }
+            @include media-up(lg) {
+                margin-top: 32px;
+            }
+        }
+    }
+}
