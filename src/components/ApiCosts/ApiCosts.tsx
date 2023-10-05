@@ -18,6 +18,7 @@ import { _apiCostsMock } from '@/_mock/apiCosts.mock'
 
 import style from './ApiCosts.module.scss'
 import ApiCostsFieldProcessor from './ApiCostsFields/ApiCostsFieldProcessor';
+import { FadeInUp, FadeInUpFast } from '../Animation';
 
 export default function ApiCosts() {
 
@@ -102,21 +103,33 @@ export default function ApiCosts() {
     return (
         <section className={style["api-costs"]}>
             <div>
-                <h2 className="title_api-costs">Cost calculator</h2>
-                <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
+                <FadeInUpFast delay={100}>
+                    <h2 className="title_api-costs">Cost calculator</h2>
+                </FadeInUpFast>
+                <FadeInUpFast delay={300}>
+                    <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
+                </FadeInUpFast>
             </div>
-            <div className={style["api-costs__tabs"]}>
-                {setTabNames()}
-            </div>
-            <div className={style["api-costs__list"]} >
-                <ApiCostsField
-                    field={_apiCostsMock.profile[activeTab === 'byUseCase'? 0 : 1]}
-                    selectValuesState={[tabsProfile, setTabsProfile]}
-                    activeTab={activeTab}
-                />
-                {setTabFields()}
-                <ApiCostsResult />
-            </div>
+            <FadeInUp delay={500}>
+                <div className={
+                    activeTab === 'byUseCase'? 
+                    `${style["api-costs__tabs"]} ${style["api-costs__tabs_left"]}`
+                    : `${style["api-costs__tabs"]} ${style["api-costs__tabs_right"]}`
+                }>
+                    {setTabNames()}
+                </div>
+            </FadeInUp>
+            <FadeInUp delay={500}>
+                <div className={style["api-costs__list"]} >
+                    <ApiCostsField
+                        field={_apiCostsMock.profile[activeTab === 'byUseCase'? 0 : 1]}
+                        selectValuesState={[tabsProfile, setTabsProfile]}
+                        activeTab={activeTab}
+                    />
+                    {setTabFields()}
+                    <ApiCostsResult />
+                </div>
+            </FadeInUp>
         </section>
     )
 }

@@ -1,19 +1,22 @@
 @import "@/assets/scss/main";
 
 .manifest{
-    border-radius: 20px;
-    background: var(--color-grey-light-2);
-    padding: 16px;
+    display: block;
     margin-top: 32px !important;
-    @include media-up(sm) {
-        padding: 24px;
-    }
-    @include media-up(lg) {
-        padding: 40px;
-        margin-top: 40px !important;
-    }
-    @include media-up(xl) {
-        padding: 60px;
+    &__block{
+        border-radius: 20px;
+        background: var(--color-grey-light-2);
+        padding: 16px;
+        @include media-up(sm) {
+            padding: 24px;
+        }
+        @include media-up(lg) {
+            padding: 40px;
+            margin-top: 40px !important;
+        }
+        @include media-up(xl) {
+            padding: 60px;
+        }
     }
     &__wrapper{
         display: flex;

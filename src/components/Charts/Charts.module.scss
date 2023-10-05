@@ -1,17 +1,20 @@
 @import "@/assets/scss/main";
 
 .charts{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-row: auto;
-    gap: 24px;
-    color: var(--color-primary);
-    @include media-up(md) {
-        grid-auto-rows: 520px;
-    }
-    @include media-up(xl) {
-        grid-auto-rows: 596px;
-        grid-template-columns: repeat(2, 1fr);
+    display: block;
+    &__wrapper{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-row: auto;
+        gap: 24px;
+        color: var(--color-primary);
+        @include media-up(md) {
+            grid-auto-rows: 520px;
+        }
+        @include media-up(xl) {
+            grid-auto-rows: 596px;
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
     &-item{
         padding: 24px;
@@ -22,6 +25,40 @@
         display: flex;
         flex-direction: column;
         gap: 60px;
+        &:last-child{
+            position: relative;
+            background: var(--color-grey-light-2);
+            &::before{
+                content: '';
+                position: absolute;
+                display: block;
+                width: 483px;
+                height: 1462px;
+                background: url('../../../public/blub-11.png') center center/cover no-repeat;
+                pointer-events: none;
+                bottom: -218px;
+                right: -219px;
+                // left: 50%;
+                // transform: translateX(-50%);
+                fill: #FBC688;
+                mix-blend-mode: overlay;
+                filter: blur(45.784912109375px);
+            }
+            &::after{
+                content: '';
+                position: absolute;
+                display: block;
+                width: 1397px;
+                height: 509px;
+                background: url('../../../public/blub-12.png') center center/cover no-repeat;
+                pointer-events: none;
+                fill: #68BEFC;
+                mix-blend-mode: multiply;
+                filter: blur(45.784912109375px);
+                bottom: -329px;
+                right: -413px;
+            }
+        }
         @include media-up(md) {
             gap: 0;
             justify-content: space-between;

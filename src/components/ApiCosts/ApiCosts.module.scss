@@ -43,6 +43,29 @@
         border-radius: 100px;
         background: #F0DECA;
         padding: 4px;
+        position: relative;
+        &_left{
+            &::after{
+                animation: tabToLeft 0.4s forwards;
+            }
+        }
+        &_right{
+            &::after{
+                animation: tabToRight 0.4s forwards;
+            }
+        }
+        &::after{
+            content: '';
+            border-radius: 100px;
+            display: block;
+            width: calc(50% - 4px);
+            height: calc(100% - 8px);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fdf1e4;
+            z-index: 1;
+        }
         &-item{
             padding: 16px;
             font-size: 16px;
@@ -51,8 +74,8 @@
             color: var(--color-secondary);
             border-radius: 100px;
             transition: 0.3s all;
+            z-index: 2;
             &_active{
-                background: #FDF1E4;
                 color: var(--color-primary);
             }
             &:hover{
@@ -488,6 +511,7 @@
             text-align: right;
             color: var(--color-primary);
             margin-top: 16px;
+            transition: 0.5s all;
             &_month{
                 font-size: 32px;
                 font-weight: 400;
@@ -501,6 +525,14 @@
                 font-weight: 400;
                 line-height: 120%;
                 letter-spacing: 0.32px;
+            }
+            &_free{
+                display: block;
+                transition: 0.5s all;
+                &_disable{
+                    font-size: 0;
+                    transition: 0.5s all;
+                }
             }
             &_disable{
                 text-decoration: line-through;
@@ -583,5 +615,35 @@
                 }
             }
         }
+    }
+}
+
+@keyframes tabToLeft {
+    0%{
+        left: calc(50% - 4px);
+    }
+    50%{
+        left: calc(4px - 20px)
+    }
+    75%{
+        left: calc(4px + 5px);
+    }
+    100%{
+        left: 4px;
+    }
+}
+
+@keyframes tabToRight {
+    0%{
+        left: 4px;
+    }
+    50%{
+        left: calc(50% + 20px);
+    }
+    75%{
+        left: calc(50% - 5px);
+    }
+    100%{
+        left: 50%;
     }
 }

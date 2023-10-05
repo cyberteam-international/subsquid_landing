@@ -98,9 +98,11 @@ export default function ApiCostsResult() {
                     <p className={style["api-costs__result__title"]}>Estimate cost</p>
                 )}
                 <div>
-                    {currentTotalPrice() === 0 && (
-                        <p className={`${style["api-costs__result__total"]} ${style["api-costs__result__total_free"]}`}>free</p>
-                    )}
+                    <p className={
+                        currentTotalPrice() === 0?
+                        `${style["api-costs__result__total"]} ${style["api-costs__result__total_free"]}`
+                        : `${style["api-costs__result__total"]} ${style["api-costs__result__total_free"]} ${style["api-costs__result__total_free_disable"]}`
+                        }>free</p>
                     <p 
                         className={
                             currentTotalPrice() === 0?

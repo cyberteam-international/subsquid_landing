@@ -31,6 +31,7 @@ import { useTotalCalculator } from './hooks/useTotalPrice';
 import { _apiCostsMock, IApiCostsState } from '@/_mock/apiCosts.mock'
 
 import style from './style.module.scss'
+import { FadeInUpFast } from '@/components/Animation';
 
 const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IApiCostsState[] => {
     const currentFields = tab === 'byResources' ? _apiCostsMock.tabs['byResources'].fields : _apiCostsMock.tabs['byUseCase'].fields
@@ -165,17 +166,21 @@ export default function CalculatorPage() {
                                         <div className={style['calculator']}>
                                             <div className="container">
                                                 <section className={style['calculator__header']}>
-                                                    <h4 className="title">Subsquid Cloud</h4>
-                                                    <h1 className="calculator__title">Build and Deploy APIs for <i>Blockchain Data</i></h1>
-                                                    <p className={style['calculator__header__subtitle']}>
-                                                    Join thousands of developers who use Subsquid Cloud to deploy GraphQL APIs and sophisticated indexers for Web3 apps. 
-                                                    </p>
-                                                    <div className={style['calculator__header-buttons']}>
-                                                        <button className="btn btn--outline">
-                                                            <a href="https://app.subsquid.io/" target="_blank" rel="noopener noreferrer">Get started</a>
-                                                        </button>
-                                                        <button className="btn btn--primary"><a href="https://calendly.com/d/yzj-48g-bf7/subsquid-demo?month=2023-10" target="_blank" rel="noopener noreferrer">Book demo</a></button>
-                                                    </div>
+                                                    <FadeInUpFast delay={100}>
+                                                        <h4 className="title">Subsquid Cloud</h4>
+                                                    </FadeInUpFast>
+                                                    <FadeInUpFast delay={300}>
+                                                        <h1 className="calculator__title">Build and Deploy APIs for <i>Blockchain Data</i></h1>
+                                                        <p className={style['calculator__header__subtitle']}>
+                                                        Join thousands of developers who use Subsquid Cloud to deploy GraphQL APIs and sophisticated indexers for Web3 apps. 
+                                                        </p>
+                                                        <div className={style['calculator__header-buttons']}>
+                                                            <button className="btn btn--outline">
+                                                                <a href="https://app.subsquid.io/" target="_blank" rel="noopener noreferrer">Get started</a>
+                                                            </button>
+                                                            <button className="btn btn--primary"><a href="https://calendly.com/d/yzj-48g-bf7/subsquid-demo?month=2023-10" target="_blank" rel="noopener noreferrer">Book demo</a></button>
+                                                        </div>
+                                                    </FadeInUpFast>
                                                 </section>
                                                 <Charts/>
                                                 <TheMostToolkit/>
