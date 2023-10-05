@@ -75,17 +75,26 @@
             line-height: 160%;
             letter-spacing: 0.32px;
             // color: var(--color-primary);
-            p{
+            p, div{
                 color: rgb(0, 164, 219);
                 display: block;
-                &:nth-child(2), &:nth-child(6), &:nth-child(8), &:nth-child(11){
+                &:nth-child(2), &:nth-child(6), &:nth-child(7), &:nth-child(10), &:nth-child(11){
                     padding-left: 30px;
                 }
-                &:nth-child(3), &:nth-child(7), &:nth-child(9), &:nth-child(10){
+                &:nth-child(3), &:nth-child(8), &:nth-child(9){
                     padding-left: 45px;
                 }
                 &:nth-child(4), &:nth-child(5){
                     padding-left: 75px;
+                }
+            }
+            div{
+                padding-left: 30px !important;
+                p{
+                    padding-left: 15px !important;
+                    &:first-child{
+                        padding-left: 0 !important;
+                    }
                 }
             }
         }

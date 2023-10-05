@@ -6,6 +6,7 @@
     @include media-up(lg) {
         gap: 100px;
         grid-template-columns: repeat(2, 1fr);
+        align-items: center;
     }
     h2{
         @include media-up(lg) {

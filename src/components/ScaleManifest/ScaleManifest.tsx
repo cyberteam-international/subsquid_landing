@@ -1,37 +1,56 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { Inter } from 'next/font/google';
 
 import GlobalHelper from '../GlobalHelper/GlobalHelper';
 
+import { SelectValuesResourcesContext, TabsProfileContext, NewProcessorsContext } from '@/app/subsquid-cloud/context';
+
 import style from './ScaleManifest.module.scss';
-import { SelectValuesResourcesContext, TabsProfileContext } from '@/app/subsquid-cloud/context';
+import { IApiCostsState } from '@/_mock/apiCosts.mock';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function ScaleManifest() {
 
     const [selectValuesResources, _setSelectValuesResources] = useContext(SelectValuesResourcesContext)
+    const [newProcessors, _setNewProcessors] = useContext(NewProcessorsContext)
     const [tabsProfile, _setTabsProfile] = useContext(TabsProfileContext)
 
     const [isCopied, setIsCopied] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
-    const findField = () =>{
+    const selectItem = (array:IApiCostsState[], name: string) =>{
+        return array[array.findIndex((el)=>el.fieldName === name)]
+    }
 
+    const setNewProcessors = () => {
+        const returnArray = [
+            {
+                name: `${selectItem(selectValuesResources, 'Processor profile').fieldName} 1`,
+                profile: selectItem(selectValuesResources, 'Processor profile').select,
+            }
+        ]
+        newProcessors.state.forEach((item, index)=>{
+            returnArray.push(
+                {
+                    name: `${selectItem(newProcessors.state, `Processor profile ${index+2}`).fieldName}`,
+                    profile: selectItem(newProcessors.state, `Processor profile ${index+2}`).select,
+                }
+            )
+        })
+        return returnArray
     }
 
     const values = {
         postgres: {
-            storage: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'Postgres storage')].select,
-            profile: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'Postgres profile')].select,
+            storage: selectItem(selectValuesResources, 'Postgres storage').select,
+            profile: selectItem(selectValuesResources, 'Postgres profile').select,
         },
-        processor: { 
-            profile: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'Processor profile')].select, 
-        }, 
+        processors: setNewProcessors(), 
         api: { 
-            profile: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'API profile')].select, 
-            replicas: selectValuesResources[selectValuesResources.findIndex((el)=>el.fieldName === 'API profile')].replicas,
+            profile: selectItem(selectValuesResources, 'API profile').select, 
+            replicas: selectItem(selectValuesResources, 'API profile').replicas,
         }, 
         dedicated: tabsProfile[0].select === 'DEDICATED'
         
@@ -44,10 +63,14 @@ export default function ScaleManifest() {
                     "storage": "${values.postgres.storage}G", 
                     "profile": "${values.postgres.profile}" 
                 } 
-            }, 
-            "processor": { 
-                "profile": "${values.processor.profile}" 
-            }, 
+            },
+            "processors": {
+                ${values.processors.map((item, _index)=>{
+                    return (
+                        `\n"- name": "${item.name.toLowerCase()}",\n"profile": "${item.profile.toLowerCase()}"`
+                    )
+                })}
+            },  
             "api": { 
                 "profile": "${values.api.profile}", 
                 "replicas": ${values.api.replicas} 
@@ -55,6 +78,9 @@ export default function ScaleManifest() {
             "dedicated": ${values.dedicated}
         } `;
 
+    // "processor": { 
+    //     "profile": "${values.processor.profile}" 
+    // }, 
     // const helperText = {
     //     title: '“Scale” for your manifest',
     //     description: 'Paste scale settings into your manifest to use selected configuration.'
@@ -85,8 +111,17 @@ export default function ScaleManifest() {
                     <p>postgres:</p>
                     <p>storage: <span className={style['manifest__code_default']}>{values.postgres.storage}G</span></p>
                     <p>profile: <span className={style['manifest__code_default']}>{values.postgres.profile}</span></p>
-                    <p>processor:</p>
-                    <p>profile: <span className={style['manifest__code_default']}>{values.processor.profile}</span></p>
+                    <div>
+                        <p>processor:</p>
+                        {values.processors.map((item, index)=>{
+                            return(
+                                <Fragment key={index}>
+                                    <p>- name: <span className={style['manifest__code_default']}>{item.name.toLowerCase()}</span></p>
+                                    <p>profile: <span className={style['manifest__code_default']}>{item.profile.toLowerCase()}</span></p>
+                                </Fragment>
+                            )
+                        })}
+                    </div>
                     <p>api:</p>
                     <p>profile: <span className={style['manifest__code_default']}>{values.api.profile}</span></p>
                     <p>replicas: <span className={style['manifest__code_number']}>{values.api.replicas}</span></p>
