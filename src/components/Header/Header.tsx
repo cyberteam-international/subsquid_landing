@@ -15,6 +15,17 @@ export default function Header({setHeaderWidth}: Props) {
     const [isVisibleTopBar, setIsVisibleTopBar] = useState(true)
 
     const headerRef = useRef<HTMLElement>(null)
+    const headerTopRef = useRef<HTMLDivElement>(null)
+
+    const setTopSpace = () =>{
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        if (headerRef.current && headerTopRef.current) {
+            if (isSafari) {
+                return `${headerRef.current?.offsetHeight}px`
+            }
+            else return `${headerRef.current?.offsetHeight - headerTopRef.current?.offsetHeight}px`
+        }
+    }
 
     useEffect(()=>{
         if (headerRef.current) {
@@ -27,7 +38,7 @@ export default function Header({setHeaderWidth}: Props) {
             'header': true,
             'header--open': isOpen
         })}>
-            { isVisibleTopBar ? <div className="header-top">
+            { isVisibleTopBar ? <div className="header-top" ref={headerTopRef}>
                 <img src="/rocket.png" alt=""/>
                 <p><a href="https://coinlist.co/subsquid-testnet" target="_blank">The incentivized testnet is LIVE</a></p>
 
@@ -51,10 +62,13 @@ export default function Header({setHeaderWidth}: Props) {
                             })} onClick={() => setIsOpen(!isOpen)}>
                                 <span></span><span></span><span></span>
                             </button>
-                            <div className={classNames({
-                                'nav': true,
-                                'nav--active': isOpen
-                            })}>
+                            <div
+                                style={{top: setTopSpace(), transition: '0.5s all'}}
+                                className={classNames({
+                                    'nav': true,
+                                    'nav--active': isOpen
+                                }
+                            )}>
                                 <div className="nav__section">
                                     <a href="https://docs.subsquid.io/" className="nav__item" target="_blank">Docs</a>
                                     <a href="/subsquid-cloud" className="nav__item">Subsquid Cloud</a>
