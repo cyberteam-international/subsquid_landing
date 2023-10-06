@@ -138,6 +138,7 @@ export default function CalculatorPage() {
     }, [selectValuesUseCase])
 
     useEffect(() => {
+        console.log('tabsProfile', tabsProfile[0].select)
         if (tabsProfile[0].select === 'COLLOCATED') {
             setSelectValuesUseCase([...setInitial('byUseCase')])
             setNewProcessors({

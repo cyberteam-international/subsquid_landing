@@ -137,6 +137,7 @@ export default function ApiCosts({ refObj }: Props) {
                 }>
                     {setTabNames()}
                 </div>
+                <div className={style["api-costs__list"]}>
                 <SwitchTransition>
                     <CSSTransition
                         key={activeTab}
@@ -144,11 +145,19 @@ export default function ApiCosts({ refObj }: Props) {
                         classNames={activeTab === 'byUseCase' ? 'api-costs_left' : 'api-costs_right'}
                         nodeRef={nodeRef}
                     >
-                        <div className={style["api-costs__list"]} ref={nodeRef}>
+                        <div className={style["api-costs__list__wrapper"]} ref={nodeRef}>
+                            {/* <ApiCostsField
+                                field={_apiCostsMock.profile[activeTab === 'byUseCase' ? 0 : 1]}
+                                selectValuesState={[tabsProfile, setTabsProfile]}
+                                activeTab={activeTab}
+                            />
+                            {setTabFields(_apiCostsMock.tabs[activeTab === 'byUseCase'? 'byUseCase': 'byResources'].fields, activeTab === 'byUseCase'? 'byUseCase': 'byResources')}
+                            <ApiCostsResult /> */}
                             {renderList[activeTab === 'byUseCase' ? 0 : 1]}
                         </div>
                     </CSSTransition>
                 </SwitchTransition>
+                </div>
             </FadeInUp>
         </section>
     )

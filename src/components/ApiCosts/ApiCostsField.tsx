@@ -201,10 +201,13 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
             }
             else setActiveItem(0);
         }
+        setRelicasValue(selectValues[currentStateIndex].replicas)
     }, [selectValues]);
 
     useEffect(()=>{
-        updateState({ ...selectValues[currentStateIndex], replicas: replicasValue })
+        if (tabsProfile === 'byResources') {
+            updateState({ ...selectValues[currentStateIndex], replicas: replicasValue })
+        }
     }, [replicasValue])
 
     return (
@@ -266,8 +269,8 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                         value={replicasValue}
                         onChange={(e) => setRelicasValue(e.target.value)}
                         onBlur={() => {
-                            if (Number(replicasValue) <= 0 || tabsProfile === 'COLLOCATED') {
-                                setRelicasValue('1')
+                            if ((Number(replicasValue) <= 0 || tabsProfile === 'COLLOCATED')) {
+                                setRelicasValue(field.replicas)
                             }
                             setReplicasActive(false)
                         }}
