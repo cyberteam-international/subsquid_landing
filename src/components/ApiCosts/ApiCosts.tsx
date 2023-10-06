@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useContext } from 'react';
+import { Fragment, RefObject, useContext, useEffect } from 'react';
 
 import {
     ActiveTabContext,
@@ -20,7 +20,11 @@ import style from './ApiCosts.module.scss'
 import ApiCostsFieldProcessor from './ApiCostsFields/ApiCostsFieldProcessor';
 import { FadeInUp, FadeInUpFast } from '../Animation';
 
-export default function ApiCosts() {
+type Props = {
+    refObj: RefObject<HTMLDivElement>
+}
+
+export default function ApiCosts({refObj}:Props) {
 
     const [activeTab, setActiveTab] = useContext(ActiveTabContext);
     const [tabsProfile, setTabsProfile] = useContext(TabsProfileContext);
@@ -101,7 +105,7 @@ export default function ApiCosts() {
     }
 
     return (
-        <section className={style["api-costs"]}>
+        <section ref={refObj} className={style["api-costs"]}>
             <FadeInUp delay={500}>
                 <div>
                     <h2 className="title_api-costs">Cost calculator</h2>

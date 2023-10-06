@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 // context
 import {
@@ -103,7 +103,9 @@ export default function CalculatorPage() {
     const [tabsProfile, setTabsProfile] = useState(setInitial('byUseCase', true)) as SelectValues;
     const [totalSum, setTotalSum] = useState([{ fieldName: '', price: 0, currentPrice: 0 }]) as SumState;
     const [helper, setHelper] = useState({ index: -1 }) as HelperState;
+    const [estimateVisible, setEstimateVisible] = useState<boolean>(false)
 
+    const calculatorBlockRef = useRef<HTMLDivElement | null>(null)
     const totalBlockRef = useRef<HTMLDivElement | null>(null)
 
     useResourseCalculator({
@@ -123,13 +125,13 @@ export default function CalculatorPage() {
     //     console.log('newProcessors', newProcessors)
     // }, [newProcessors])
 
-    useEffect(() => {
-        console.log('totalSum', totalSum)
-    }, [totalSum])
+    // useEffect(() => {
+    //     console.log('totalSum', totalSum)
+    // }, [totalSum])
 
-    useEffect(() => {
-        console.log('selectValuesResources', selectValuesResources)
-    }, [selectValuesResources])
+    // useEffect(() => {
+    //     console.log('selectValuesResources', selectValuesResources)
+    // }, [selectValuesResources])
 
     // useEffect(() => {
     //     console.log('selectValuesUseCase', selectValuesUseCase)
@@ -153,6 +155,26 @@ export default function CalculatorPage() {
             setTabsProfile([...setInitial('byResources', true)])
         }
     }, [activeTab])
+
+    const observerCallback: IntersectionObserverCallback = function(entries, observer) {
+        if (entries[0].isIntersecting) {
+            setEstimateVisible(true)
+        }
+    };
+
+    const observer = useRef<IntersectionObserver>(new IntersectionObserver(observerCallback));
+
+    useEffect(()=>{
+        if (calculatorBlockRef?.current) {
+            observer.current.observe(calculatorBlockRef.current)
+        }
+    }, [calculatorBlockRef?.current])
+
+    useEffect(()=>{
+        if (estimateVisible === true) {
+            observer.current?.disconnect()
+        }
+    }, [estimateVisible])
 
     return (
         <SelectValuesUseCaseContext.Provider value={[selectValuesUseCase, setSelectValuesUseCase]}>
@@ -185,9 +207,9 @@ export default function CalculatorPage() {
                                                 <Charts/>
                                                 <TheMostToolkit/>
                                                 <PayBenefits />
-                                                <ApiCosts />
+                                                <ApiCosts refObj={calculatorBlockRef}/>
                                                 <ScaleManifest />
-                                                <EstimateCost />
+                                                <EstimateCost isVisible={estimateVisible} />
                                             </div>
                                         </div>
                                     </ScrollElementContext.Provider>

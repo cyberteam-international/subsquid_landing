@@ -4,7 +4,11 @@ import { TotalSumContext, ScrollElementContext, NewProcessorsContext } from '@/a
 
 import style from './EstimateCost.module.scss'
 
-export default function EstimateCost() {
+type Props = {
+    isVisible: boolean
+}
+
+export default function EstimateCost({isVisible}:Props) {
 
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
     const totalBlockRef = useContext(ScrollElementContext)
@@ -43,7 +47,11 @@ export default function EstimateCost() {
 
     return (
         <div
-            className={style["total"]}
+            className={
+                isVisible?
+                style["total"]
+                :`${style["total"]} ${style["total_disable"]}`
+            }
             onClick={() => scroll()}
         >
             <p>Estimate cost:</p>
