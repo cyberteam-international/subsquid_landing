@@ -40,6 +40,8 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
 
     const currentStateIndex = selectValues.findIndex((el) => el.fieldName === field.name)
 
+    const [replicasValue, setRelicasValue] = useState<string|undefined>(selectValues[currentStateIndex].replicas)
+
     const updateState = (item: IApiCostsState, isActiveChange: boolean = false) => {
         if (tabsProfile === 'COLLOCATED' && !isActiveChange) {
             if (item.select !== 'default' && !item.replicas && item.fieldName !== 'squidProfile' && (activeTab === 'byUseCase' || (field.type !== 'range-input' && field.type !== 'range'))) {
@@ -201,6 +203,10 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
         }
     }, [selectValues]);
 
+    useEffect(()=>{
+        updateState({ ...selectValues[currentStateIndex], replicas: replicasValue })
+    }, [replicasValue])
+
     return (
         <div className={
             isActive ?
@@ -257,12 +263,11 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                         type="number"
                         min={1}
                         max={tabsProfile !== 'COLLOCATED' ? 1000 : 1}
-                        value={selectValues[currentStateIndex].replicas}
-                        onChange={(e) => updateState({ ...selectValues[currentStateIndex], replicas: e.target.value })}
+                        value={replicasValue}
+                        onChange={(e) => setRelicasValue(e.target.value)}
                         onBlur={() => {
-                            // Number(selectValues[currentStateIndex].replicas) > 0? null : updateState({ ...selectValues[currentStateIndex], replicas: '1' })
-                            if (Number(selectValues[currentStateIndex].replicas) <= 0 || tabsProfile === 'COLLOCATED') {
-                                updateState({ ...selectValues[currentStateIndex], replicas: '1' })
+                            if (Number(replicasValue) <= 0 || tabsProfile === 'COLLOCATED') {
+                                setRelicasValue('1')
                             }
                             setReplicasActive(false)
                         }}
