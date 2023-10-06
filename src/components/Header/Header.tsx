@@ -18,7 +18,7 @@ export default function Header({setHeaderWidth}: Props) {
     const headerTopRef = useRef<HTMLDivElement>(null)
 
     const setTopSpace = () =>{
-        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const isSafari = typeof window !== 'undefined' ? /^((?!chrome|android).)*safari/i.test(navigator.userAgent) : false;
         if (headerRef.current && headerTopRef.current) {
             if (isSafari) {
                 return `${headerRef.current?.offsetHeight}px`
