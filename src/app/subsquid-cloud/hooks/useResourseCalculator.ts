@@ -72,11 +72,22 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                     value: currentValue()
                 };
         };
+
+        const limit = () =>{
+            if (mockField?.type === 'range' && mockField.limit) {
+                return mockField.limit
+            }
+            else if (mockField.type === 'range-input' && mockField.limit) {
+                return tabsProfile[0].select === 'COLLOCATED'? mockField.limit[0] : mockField.limit[1]
+            }
+        }
+
         return {
             ...returnSelectValuesResources[listIndex],
             select: select,
             price: price(),
-            replicas: typeof selectValue === 'number' ? selectValue.toString() : returnSelectValuesResources[listIndex].replicas
+            replicas: typeof selectValue === 'number' ? selectValue.toString() : returnSelectValuesResources[listIndex].replicas,
+            limit: limit()
         };
     };
 

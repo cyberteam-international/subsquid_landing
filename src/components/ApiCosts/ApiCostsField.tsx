@@ -6,7 +6,7 @@ import ApiCostsFieldRadio from './ApiCostsFields/ApiCostsFieldRadio'
 import ApiCostsFieldRadioInput from './ApiCostsFields/ApiCostsFieldRadioInput'
 import GlobalHelper from '../GlobalHelper/GlobalHelper'
 
-import { SelectValues, TabsProfileContext } from '@/app/subsquid-cloud/context'
+import { SelectValues, TabsProfileContext, TotalSumContext } from '@/app/subsquid-cloud/context'
 
 import {
     IApiCostsRadio,
@@ -29,6 +29,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
 
     const [selectValues, setSelectValues] = selectValuesState
     const [tabsProfileState, setTabsProfileState] = useContext(TabsProfileContext);
+    const [totalSum, _setTotalSum] = useContext(TotalSumContext)
     const tabsProfile = tabsProfileState[0].select
 
     const [activeitem, setActiveItem] = useState<number>()
@@ -153,7 +154,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                     field={field}
                     isActive={isActive}
                     updateState={updateState}
-                    value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
+                    value={isActive ? selectValues[currentStateIndex].select ?? field.range[1].toString() : field.range[1].toString()}
                 />
             )
         }
@@ -164,7 +165,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                     isActive={isActive}
                     updateState={updateState}
                     tabsProfile={tabsProfile}
-                    value={isActive ? selectValues[currentStateIndex].select ?? field.range[0].toString() : field.range[0].toString()}
+                    value={isActive ? selectValues[currentStateIndex].select ?? field.range[1].toString() : field.range[1].toString()}
                 />
             )
         }
@@ -225,13 +226,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                 )} */}
                 {(windowWidth > 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
                     <p className={style["api-costs__list-item__header__price"]}>
-                        {field.type === 'range' || field.type === 'range-input' ? (
-                            <>${((selectValues[currentStateIndex].price.value * 720) * Number(selectValues[currentStateIndex].select)).toFixed(2)}/mo</>
-                        ) : field.replicas ? (
-                            <>${((selectValues[currentStateIndex].price.value * 720) * Number(selectValues[currentStateIndex].replicas)).toFixed(2)}/mo</>
-                        ) : (
-                            <>${(selectValues[currentStateIndex].price.value * 720).toFixed(2)}/mo</>
-                        )}
+                        ${(totalSum[currentStateIndex].price * 720).toFixed(2)}/mo
                     </p>
                 )}
             </div>
@@ -245,13 +240,7 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
             </div>
             {(windowWidth < 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
                 <p className={style["api-costs__list-item__price"]}>
-                    {field.type === 'range' || field.type === 'range-input' ? (
-                        <>${((selectValues[currentStateIndex].price.value * 720) * Number(selectValues[currentStateIndex].select)).toFixed(2)}/mo</>
-                    ) : field.replicas ? (
-                        <>${((selectValues[currentStateIndex].price.value * 720) * Number(selectValues[currentStateIndex].replicas)).toFixed(2)}/mo</>
-                    ) : (
-                        <>${(selectValues[currentStateIndex].price.value * 720).toFixed(2)}/mo</>
-                    )}
+                    ${(totalSum[currentStateIndex].price * 720).toFixed(2)}/mo
                 </p>
             )}
             {(field.replicas && tabsProfile !== 'COLLOCATED') && (

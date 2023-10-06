@@ -123,13 +123,13 @@ export default function CalculatorPage() {
     //     console.log('newProcessors', newProcessors)
     // }, [newProcessors])
 
-    // useEffect(() => {
-    //     console.log('totalSum', totalSum)
-    // }, [totalSum])
+    useEffect(() => {
+        console.log('totalSum', totalSum)
+    }, [totalSum])
 
-    // useEffect(() => {
-    //     console.log('selectValuesResources', selectValuesResources)
-    // }, [selectValuesResources])
+    useEffect(() => {
+        console.log('selectValuesResources', selectValuesResources)
+    }, [selectValuesResources])
 
     // useEffect(() => {
     //     console.log('selectValuesUseCase', selectValuesUseCase)

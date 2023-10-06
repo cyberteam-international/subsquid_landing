@@ -29,7 +29,7 @@ export default function Charts() {
                             </div>
                         </div>
                         <div className={style["charts-item__image"]}>
-                            {/* <Image {...chart_1} alt="chart 1" /> */}
+                            <Image {...chart_1} alt="chart 1" />
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ export default function Charts() {
                     </div>
                     <div className={style["charts-item__wrapper"]}>
                         <div className={style["charts-item__image"]}>
-                            {/* <Image {...chart_2} alt="chart 2" /> */}
+                            <Image {...chart_2} alt="chart 2" />
                         </div>
                     </div>
                 </div>
