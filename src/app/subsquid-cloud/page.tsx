@@ -129,13 +129,13 @@ export default function CalculatorPage() {
     //     console.log('totalSum', totalSum)
     // }, [totalSum])
 
-    // useEffect(() => {
-    //     console.log('selectValuesResources', selectValuesResources)
-    // }, [selectValuesResources])
+    useEffect(() => {
+        console.log('selectValuesResources', selectValuesResources)
+    }, [selectValuesResources])
 
-    // useEffect(() => {
-    //     console.log('selectValuesUseCase', selectValuesUseCase)
-    // }, [selectValuesUseCase])
+    useEffect(() => {
+        console.log('selectValuesUseCase', selectValuesUseCase)
+    }, [selectValuesUseCase])
 
     useEffect(() => {
         if (tabsProfile[0].select === 'COLLOCATED') {

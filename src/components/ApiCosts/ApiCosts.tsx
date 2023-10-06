@@ -1,30 +1,32 @@
 'use client'
 
-import { Fragment, RefObject, useContext, useEffect } from 'react';
+import { Fragment, RefObject, useContext, useRef } from 'react';
 
 import {
     ActiveTabContext,
     SelectValuesUseCaseContext,
     SelectValuesResourcesContext,
     TabsProfileContext,
-    NewProcessorsContext
+    NewProcessorsContext,
+    SelectValues
 } from '@/app/subsquid-cloud/context';
 
 import ApiCostsField from './ApiCostsField';
 import ApiCostsResult from './ApiCostsResult';
 import AddProcessor from './AddProcessor';
 
-import { _apiCostsMock } from '@/_mock/apiCosts.mock'
+import { IApiCostsTabs, _apiCostsMock } from '@/_mock/apiCosts.mock'
 
 import style from './ApiCosts.module.scss'
 import ApiCostsFieldProcessor from './ApiCostsFields/ApiCostsFieldProcessor';
-import { FadeInUp, FadeInUpFast } from '../Animation';
+import { FadeIn, FadeInUp, FadeInUpFast } from '../Animation';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 type Props = {
     refObj: RefObject<HTMLDivElement>
 }
 
-export default function ApiCosts({refObj}:Props) {
+export default function ApiCosts({ refObj }: Props) {
 
     const [activeTab, setActiveTab] = useContext(ActiveTabContext);
     const [tabsProfile, setTabsProfile] = useContext(TabsProfileContext);
@@ -32,6 +34,10 @@ export default function ApiCosts({refObj}:Props) {
     const [selectValues, setSelectValues] = useContext(
         activeTab === 'byUseCase' ? SelectValuesUseCaseContext : SelectValuesResourcesContext
     )
+    const [selectValuesUseCase, setSelectValuesUseCase] = useContext(SelectValuesUseCaseContext);
+    const [selectValuesResources, setSelectValuesResources] = useContext(SelectValuesResourcesContext);
+
+    const nodeRef = useRef<HTMLDivElement>(null)
 
     const setTabNames = () => {
         const objKeys = Object.entries(_apiCostsMock.tabs)
@@ -65,24 +71,18 @@ export default function ApiCosts({refObj}:Props) {
         })
     }
 
-    const currentFields = () => {
-        if (activeTab === 'byResources') {
-            return _apiCostsMock.tabs['byResources'].fields
-        }
-        return _apiCostsMock.tabs['byUseCase'].fields
-    }
-
-    const setTabFields = () => {
-        return currentFields().map((item, index) => {
+    const setTabFields = (fieldsArray: IApiCostsTabs["fields"], tabName: string) => {
+        const currentValueState: SelectValues = tabName === 'byUseCase' ? [selectValuesUseCase, setSelectValuesUseCase] : [selectValuesResources, setSelectValuesResources]
+        return fieldsArray.map((item, index) => {
             if (index === 0) {
                 return (
                     <Fragment key={index}>
                         <ApiCostsField
                             field={item}
-                            selectValuesState={[selectValues, setSelectValues]}
+                            selectValuesState={currentValueState}
                             activeTab={activeTab}
                         />
-                        {activeTab === 'byResources' && (
+                        {tabName === 'byResources' && (
                             <>
                                 {newProcessors.render.length > 0 && setNewProfiles()}
                                 {newProcessors.render.length < 9 && (
@@ -97,12 +97,34 @@ export default function ApiCosts({refObj}:Props) {
                 <ApiCostsField
                     key={index}
                     field={item}
-                    selectValuesState={[selectValues, setSelectValues]}
+                    selectValuesState={currentValueState}
                     activeTab={activeTab}
                 />
             )
         })
     }
+
+    const renderList = [
+        <>
+            <ApiCostsField
+                field={_apiCostsMock.profile[0]}
+                selectValuesState={[tabsProfile, setTabsProfile]}
+                activeTab={activeTab}
+            />
+            {setTabFields(_apiCostsMock.tabs['byUseCase'].fields, 'byUseCase')}
+            <ApiCostsResult />
+        </>
+        ,
+        <>
+            <ApiCostsField
+                field={_apiCostsMock.profile[1]}
+                selectValuesState={[tabsProfile, setTabsProfile]}
+                activeTab={activeTab}
+            />
+            {setTabFields(_apiCostsMock.tabs['byResources'].fields, 'byResources')}
+            <ApiCostsResult />
+        </>
+    ]
 
     return (
         <section ref={refObj} className={style["api-costs"]}>
@@ -118,15 +140,18 @@ export default function ApiCosts({refObj}:Props) {
                 }>
                     {setTabNames()}
                 </div>
-                <div className={style["api-costs__list"]} >
-                    <ApiCostsField
-                        field={_apiCostsMock.profile[activeTab === 'byUseCase' ? 0 : 1]}
-                        selectValuesState={[tabsProfile, setTabsProfile]}
-                        activeTab={activeTab}
-                    />
-                    {setTabFields()}
-                    <ApiCostsResult />
-                </div>
+                <SwitchTransition>
+                    <CSSTransition
+                        key={activeTab}
+                        timeout={350}
+                        classNames={activeTab === 'byUseCase' ? 'api-costs_left' : 'api-costs_right'}
+                        nodeRef={nodeRef}
+                    >
+                        <div className={style["api-costs__list"]} ref={nodeRef}>
+                            {renderList[activeTab === 'byUseCase' ? 0 : 1]}
+                        </div>
+                    </CSSTransition>
+                </SwitchTransition>
             </FadeInUp>
         </section>
     )
