@@ -15,11 +15,15 @@ export default function PayBenefits() {
 
     return (
         <section className={style["pay-benefits"]}>
-            <FadeInUp delay={500}>
-                <div className="">
+            <div className="">
+                <FadeInUpFast delay={100}>
                     <h2 className="title">Pricing</h2>
+                </FadeInUpFast>
+                <FadeInUpFast delay={300}>
                     <p className={style["pay-benefits__subtitle"]}>Simple and transparent for projects and companies of all sizes</p>
-                </div>
+                </FadeInUpFast>
+            </div>
+            <FadeInUp delay={500}>
                 <div className={style["pay-benefits__wrapper"]}>
                     {setItems()}
                 </div>

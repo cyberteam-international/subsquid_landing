@@ -125,18 +125,22 @@ export default function ApiCosts({ refObj }: Props) {
 
     return (
         <section ref={refObj} className={style["api-costs"]}>
-            <FadeInUp delay={500}>
-                <div>
-                    <h2 className="title_api-costs">Cost calculator</h2>
-                    <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
-                </div>
-                <div className={
-                    activeTab === 'byUseCase' ?
-                        `${style["api-costs__tabs"]} ${style["api-costs__tabs_left"]}`
-                        : `${style["api-costs__tabs"]} ${style["api-costs__tabs_right"]}`
-                }>
-                    {setTabNames()}
-                </div>
+                <FadeInUpFast delay={100}>
+                    <div>
+                        <h2 className="title_api-costs">Cost calculator</h2>
+                        <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
+                    </div>
+                </FadeInUpFast>
+                <FadeInUpFast delay={300}>
+                    <div className={
+                        activeTab === 'byUseCase' ?
+                            `${style["api-costs__tabs"]} ${style["api-costs__tabs_left"]}`
+                            : `${style["api-costs__tabs"]} ${style["api-costs__tabs_right"]}`
+                    }>
+                        {setTabNames()}
+                    </div>
+                </FadeInUpFast>
+                <FadeInUp delay={500}>
                 <div className={style["api-costs__list"]}>
                 <SwitchTransition>
                     <CSSTransition
