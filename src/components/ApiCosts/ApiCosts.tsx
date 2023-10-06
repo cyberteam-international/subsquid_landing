@@ -31,9 +31,6 @@ export default function ApiCosts({ refObj }: Props) {
     const [activeTab, setActiveTab] = useContext(ActiveTabContext);
     const [tabsProfile, setTabsProfile] = useContext(TabsProfileContext);
     const [newProcessors, setNewProcessors] = useContext(NewProcessorsContext)
-    const [selectValues, setSelectValues] = useContext(
-        activeTab === 'byUseCase' ? SelectValuesUseCaseContext : SelectValuesResourcesContext
-    )
     const [selectValuesUseCase, setSelectValuesUseCase] = useContext(SelectValuesUseCaseContext);
     const [selectValuesResources, setSelectValuesResources] = useContext(SelectValuesResourcesContext);
 
