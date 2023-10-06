@@ -78,6 +78,8 @@ export default function AddProcessor({ tabsProfile }: Props) {
         }
     }
 
+    console.log(cursorPosition, {top: `${cursorPosition.y + 25}px`, left: `${cursorPosition.x - 40}px`})
+
     return (
         <>
             <div
