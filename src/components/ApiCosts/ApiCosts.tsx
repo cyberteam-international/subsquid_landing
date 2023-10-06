@@ -141,7 +141,7 @@ export default function ApiCosts({ refObj }: Props) {
                 <SwitchTransition>
                     <CSSTransition
                         key={activeTab}
-                        timeout={350}
+                        timeout={250}
                         classNames={activeTab === 'byUseCase' ? 'api-costs_left' : 'api-costs_right'}
                         nodeRef={nodeRef}
                     >

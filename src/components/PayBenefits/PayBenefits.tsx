@@ -9,7 +9,7 @@ export default function PayBenefits() {
 
     const setItems = () => {
         return _payBenefitsMock.map((item, index) => {
-            return <PayBenefitsItem key={index} {...item} />
+            return <PayBenefitsItem key={index} {...item} index={index} />
         })
     }
 
