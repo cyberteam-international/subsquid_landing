@@ -248,11 +248,6 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
             >
                 {setFields()}
             </div>
-            {(windowWidth < 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
-                <p className={style["api-costs__list-item__price"]}>
-                    ${(totalSum[currentStateIndex].price * 720).toFixed(2)}/mo
-                </p>
-            )}
             {(field.replicas && tabsProfile !== 'COLLOCATED') && (
                 <label
                     onClick={() => setReplicasActive(true)}
@@ -280,6 +275,11 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
                         }}
                     />
                 </label>
+            )}
+            {(windowWidth < 768 && field.name !== 'squidProfile' && activeTab === 'byResources') && (
+                <p className={style["api-costs__list-item__price"]}>
+                    ${(totalSum[currentStateIndex].price * 720).toFixed(2)}/mo
+                </p>
             )}
             {field.warning && (
                 <div className={style["api-costs__list-item__warning"]}>

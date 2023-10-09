@@ -1,5 +1,4 @@
 import { useState, useContext, Fragment, useRef, useEffect } from "react";
-import { useWindowWidth } from "@react-hook/window-size";
 
 import {
     TotalSumContext,
@@ -18,8 +17,6 @@ export default function ApiCostsResult() {
 
     const totalBlockRef = useContext(ScrollElementContext)
     const resultBlockRef = useRef<HTMLDivElement>(null)
-
-    const windowWidth = typeof window !== 'undefined' ? useWindowWidth() : 1920;
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -106,9 +103,7 @@ export default function ApiCostsResult() {
             ref={totalBlockRef}
         >
             <div className={style["api-costs__result__wrapper"]}>
-                {windowWidth > 768 && (
-                    <p className={style["api-costs__result__title"]}>Estimate cost</p>
-                )}
+                <p className={style["api-costs__result__title"]}>Estimate cost</p>
                 <div>
                     <p className={
                         currentTotalPrice() === 0?
