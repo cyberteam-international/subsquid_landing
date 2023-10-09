@@ -406,9 +406,9 @@ export const _apiCostsMock: IApiCosts = {
                         type: "h",
                         value: 0.0007
                     },
-                    range: [[10, 5000], [10, 5000]],
+                    range: [[1, 5000], [1, 5000]],
                     step: [10, 10],
-                    limit: [10, 10],
+                    limit: [1, -1],
                     helper: {
                         title: 'Database size',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'

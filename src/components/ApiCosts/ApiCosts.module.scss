@@ -502,10 +502,10 @@
                         transform: rotate(0) !important;
                     }
                 }
-                &__list{
-                    max-height: 5000px;
-                    transition: max-height 1s ease-in;
-                }
+                // &__list{
+                //     max-height: 5000px;
+                //     transition: max-height 1s ease-in;
+                // }
             }
         }
         &__wrapper{
@@ -571,20 +571,20 @@
             font-weight: 500;
             letter-spacing: 0.32px;
             color: var(--color-link);
-            margin: 24px 0 0 auto;
+            margin: 24px 0 24px auto;
             svg{
                 overflow: visible;
                 transform: rotate(180deg);
             }
         }
         &__list{
-            max-height: 0;
-            transition: max-height 0.25s ease-out;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 24px;
+            transition: 0.3s height;
+            &__wrapper{
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
             &-item{
                 position: relative;
                 padding-bottom: 16px;
@@ -600,6 +600,7 @@
                     opacity: 0.7;
                 }
                 &:last-child{
+                    padding-bottom: 0;
                     &::after{
                         content: none;
                     }

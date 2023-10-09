@@ -31,7 +31,7 @@ export const useTotalCalculator = ({ selectValuesResources, tabsState, setTotalS
                 currentPrice = newPrice;
             }
         }
-        if (item.limit && item.limit >= Number(item.select)) {
+        if (item.limit && item.fieldName === 'RPC requests' && item.limit >= Number(item.select)) {
             price = 0;
             currentPrice = 0;
         }

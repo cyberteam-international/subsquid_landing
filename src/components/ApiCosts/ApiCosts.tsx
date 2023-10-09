@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, RefObject, useContext, useRef } from 'react';
+import { Fragment, RefObject, useContext, useEffect, useRef, useState } from 'react';
 
 import {
     ActiveTabContext,
@@ -33,6 +33,8 @@ export default function ApiCosts({ refObj }: Props) {
     const [newProcessors, setNewProcessors] = useContext(NewProcessorsContext)
     const [selectValuesUseCase, setSelectValuesUseCase] = useContext(SelectValuesUseCaseContext);
     const [selectValuesResources, setSelectValuesResources] = useContext(SelectValuesResourcesContext);
+
+    // const [isAnimated, setIsAnimated] = useState(false)
 
     const nodeRef = useRef<HTMLDivElement>(null)
 
@@ -123,46 +125,58 @@ export default function ApiCosts({ refObj }: Props) {
         </>
     ]
 
+    // const fadeInEvent = (isVisible: Boolean) =>{
+    //     const timeout = setTimeout(()=>{
+    //         if (isVisible) {
+    //             setIsAnimated(true)
+    //         }
+    //     }, 500)
+    // }
+
+    // useEffect(()=>{
+    //     console.log('isAnimated', isAnimated)
+    // }, [isAnimated])
+
     return (
         <section ref={refObj} className={style["api-costs"]}>
-                <FadeInUpFast delay={100}>
-                    <div>
-                        <h2 className="title_api-costs">Cost calculator</h2>
-                        <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
-                    </div>
-                </FadeInUpFast>
-                <FadeInUpFast delay={300}>
-                    <div className={
-                        activeTab === 'byUseCase' ?
-                            `${style["api-costs__tabs"]} ${style["api-costs__tabs_left"]}`
-                            : `${style["api-costs__tabs"]} ${style["api-costs__tabs_right"]}`
-                    }>
-                        {setTabNames()}
-                    </div>
-                </FadeInUpFast>
-                <FadeInUp delay={500}>
+            <FadeInUpFast delay={100}>
+                <div>
+                    <h2 className="title_api-costs">Cost calculator</h2>
+                    <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
+                </div>
+            </FadeInUpFast>
+            <FadeInUpFast delay={300}>
+                <div className={
+                    activeTab === 'byUseCase' ?
+                        `${style["api-costs__tabs"]} ${style["api-costs__tabs_left"]}`
+                        : `${style["api-costs__tabs"]} ${style["api-costs__tabs_right"]}`
+                }>
+                    {setTabNames()}
+                </div>
+            </FadeInUpFast>
+            <FadeIn delay={500}>
                 <div className={style["api-costs__list"]}>
-                <SwitchTransition>
-                    <CSSTransition
-                        key={activeTab}
-                        timeout={250}
-                        classNames={activeTab === 'byUseCase' ? 'api-costs_left' : 'api-costs_right'}
-                        nodeRef={nodeRef}
-                    >
-                        <div className={style["api-costs__list__wrapper"]} ref={nodeRef}>
-                            {/* <ApiCostsField
+                    <SwitchTransition>
+                        <CSSTransition
+                            key={activeTab}
+                            timeout={100}
+                            classNames={activeTab === 'byUseCase' ? 'api-costs_left' : 'api-costs_right'}
+                            nodeRef={nodeRef}
+                        >
+                            <div className={style["api-costs__list__wrapper"]} ref={nodeRef}>
+                                {/* <ApiCostsField
                                 field={_apiCostsMock.profile[activeTab === 'byUseCase' ? 0 : 1]}
                                 selectValuesState={[tabsProfile, setTabsProfile]}
                                 activeTab={activeTab}
                             />
                             {setTabFields(_apiCostsMock.tabs[activeTab === 'byUseCase'? 'byUseCase': 'byResources'].fields, activeTab === 'byUseCase'? 'byUseCase': 'byResources')}
                             <ApiCostsResult /> */}
-                            {renderList[activeTab === 'byUseCase' ? 0 : 1]}
-                        </div>
-                    </CSSTransition>
-                </SwitchTransition>
+                                {renderList[activeTab === 'byUseCase' ? 0 : 1]}
+                            </div>
+                        </CSSTransition>
+                    </SwitchTransition>
                 </div>
-            </FadeInUp>
+            </FadeIn>
         </section>
     )
 }

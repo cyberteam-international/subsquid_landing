@@ -128,7 +128,9 @@ export default function ScaleManifest() {
                             <p>api:</p>
                             <p>profile: <span className={style['manifest__code_default']}>{values.api.profile}</span></p>
                             <p>replicas: <span className={style['manifest__code_number']}>{values.api.replicas}</span></p>
-                            <p>dedicated: <span className={style['manifest__code_boolean']}>{`${values.dedicated}`}</span></p>
+                            {values.dedicated && (
+                                <p>dedicated: <span className={style['manifest__code_boolean']}>{`${values.dedicated}`}</span></p>
+                            )}
                         </code>
                         <button
                             onClick={() => {

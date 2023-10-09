@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment } from "react";
+import { useState, useContext, Fragment, useRef, useEffect } from "react";
 import { useWindowWidth } from "@react-hook/window-size";
 
 import {
@@ -17,6 +17,7 @@ export default function ApiCostsResult() {
     const [newProcessors, _setNewProcessors] = useContext(NewProcessorsContext)
 
     const totalBlockRef = useContext(ScrollElementContext)
+    const resultBlockRef = useRef<HTMLDivElement>(null)
 
     const windowWidth = typeof window !== 'undefined' ? useWindowWidth() : 1920;
 
@@ -84,6 +85,17 @@ export default function ApiCostsResult() {
         })
     }
 
+    useEffect(()=>{
+        if (resultBlockRef.current) {
+            if (isOpen && resultBlockRef.current.parentElement) {
+                resultBlockRef.current.parentElement.style.height = `${resultBlockRef.current.getBoundingClientRect().height}px`
+            }
+            else if (!isOpen && resultBlockRef.current.parentElement) {
+                resultBlockRef.current.parentElement.style.height = '0px'
+            }
+        }
+    }, [resultBlockRef, selectValues, newProcessors, isOpen])
+
     return (
         <div
             className={
@@ -133,7 +145,9 @@ export default function ApiCostsResult() {
                 </svg>
             </button>
             <div className={style["api-costs__result__list"]}>
-                {setDetailInfo()}
+                <div ref={resultBlockRef} className={style["api-costs__result__list__wrapper"]}>
+                    {setDetailInfo()}
+                </div>
             </div>
         </div>
     )

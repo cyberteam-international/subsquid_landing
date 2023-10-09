@@ -119,7 +119,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                         currentInfo('Postgres profile', 'default', indexPostgresProfile), indexPostgresProfile
                     );
                     updateState(
-                        currentInfo('Postgres storage', '10', indexPostgresStorage), indexPostgresStorage
+                        currentInfo('Postgres storage', '1', indexPostgresStorage), indexPostgresStorage
                     );
                     updateState(
                         currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
@@ -263,21 +263,24 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             name: 'apiReplicas',
             conditions: () => {
                 const selectValue = Number(selectValuesUseCase[indexRequestsPerSecond].select)
-                if (0 <= selectValue && selectValue <= 1) {
-                    updateState(
-                        currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
-                    );
-                }
-                else if (2 <= selectValue && selectValue <= 5) {
-                    updateState(
-                        currentInfo('API profile', 2, indexApiReplicas), indexApiReplicas
-                    );
-                }
-                else if (6 <= selectValue) {
-                    updateState(
-                        currentInfo('API profile', Math.floor(Math.log10(selectValue)), indexApiReplicas), indexApiReplicas
-                    );
-                }
+                // if (0 <= selectValue && selectValue <= 1) {
+                //     updateState(
+                //         currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
+                //     );
+                // }
+                // else if (2 <= selectValue && selectValue <= 5) {
+                //     updateState(
+                //         currentInfo('API profile', 2, indexApiReplicas), indexApiReplicas
+                //     );
+                // }
+                // else if (6 <= selectValue) {
+                //     updateState(
+                //         currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/720))), indexApiReplicas), indexApiReplicas
+                //     );
+                // }
+                updateState(
+                    currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/720))), indexApiReplicas), indexApiReplicas
+                );
             }
         },
         {
