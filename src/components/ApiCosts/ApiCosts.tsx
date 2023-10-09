@@ -138,7 +138,7 @@ export default function ApiCosts({ refObj }: Props) {
     // }, [isAnimated])
 
     return (
-        <section ref={refObj} className={style["api-costs"]}>
+        <section ref={refObj} className={style["api-costs"]} id={'#calculator'}>
             <FadeInUpFast delay={100}>
                 <div>
                     <h2 className="title_api-costs">Cost calculator</h2>

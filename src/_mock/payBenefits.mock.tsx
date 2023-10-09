@@ -23,7 +23,7 @@ export default [
         ],
         button: {
             title: 'Get started',
-            href: 'https://docs.subsquid.io/deploy-squid/pricing/'
+            href: 'https://app.subsquid.io/'
         },
     },
     {
@@ -38,7 +38,7 @@ export default [
         ],
         button: {
             title: 'Get started',
-            href: 'https://docs.subsquid.io/deploy-squid/pricing/#processor-only-squid'
+            href: 'https://app.subsquid.io/'
         },
     },
     {

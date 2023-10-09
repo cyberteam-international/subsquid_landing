@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Inter } from 'next/font/google'
 import { usePathname } from 'next/navigation'
 
@@ -20,6 +20,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	const mainRef = useRef<HTMLElement>(null)
 
 	const currentPath = usePathname()
+
+	useEffect(()=>{
+		if (typeof window !== 'undefined') {
+			if (window.location.href.indexOf('#calculator') !== -1) {
+				const block = document.getElementById("#calculator")
+				if (block) {
+					block.style.scrollMarginTop = `${headerWidth}px`
+					block.scrollIntoView();
+				}
+			}
+		}
+	})
 
 	return (
 		<html lang="en">
