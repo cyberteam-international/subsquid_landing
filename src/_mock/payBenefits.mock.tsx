@@ -19,7 +19,7 @@ export default [
             'One collocated squid (API + processor + Postgres)',
             '10GB of database storage',
             '500k monthly RPC requests',
-            'Community support',
+            'Premium support',
         ],
         button: {
             title: 'Get started',
@@ -34,7 +34,7 @@ export default [
             'Unlimited number of pay-as-you-go dedicated squids',
             'Unlimited number of pay-as-you-go collocated squids',
             '2M monthly RPC requests',
-            'Community support',
+            'Premium support',
         ],
         button: {
             title: 'Get started',
@@ -45,7 +45,7 @@ export default [
         title: 'Enterprise',
         description: 'Contact us for special conditions',
         items: [
-            'Everything in Premium',
+            'Everything in Professional',
             'Individual SLAs and discounts',
         ],
         button: {

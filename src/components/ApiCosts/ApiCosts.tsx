@@ -142,7 +142,7 @@ export default function ApiCosts({ refObj }: Props) {
             <FadeInUpFast delay={100}>
                 <div>
                     <h2 className="title_api-costs">Cost calculator</h2>
-                    <h3 className={style["api-costs__subtitle"]}>Discover how to configure your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
+                    <h3 className={style["api-costs__subtitle"]}>Learn best practices for configuring your squid in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a></h3>
                 </div>
             </FadeInUpFast>
             <FadeInUpFast delay={300}>

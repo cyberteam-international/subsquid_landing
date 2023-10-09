@@ -85,7 +85,7 @@ export const _apiCostsMock: IApiCosts = {
         {
             title: 'Squid profile',
             name: 'squidProfile',
-            warning: ['For development environment you can use collocated squids profile.', 'Dedicated VM resources for reliability in production.'],
+            warning: ['You may use collocated squid profiles for development environments', 'Dedicated VM resources for reliability in production.'],
             type: 'radio',
             canActive: false,
             values: [
@@ -155,14 +155,14 @@ export const _apiCostsMock: IApiCosts = {
                     }
                 },
                 {
-                    title: 'How much data to index',
+                    title: 'Expected indexing load',
                     name: 'dataSize',
                     type: 'radio',
                     canActive: false,
                     values: [
                         {
-                            title: 'Low',
-                            value: 'low',
+                            title: 'Small',
+                            value: 'small',
                             price: {
                                 type: "h",
                                 value: 0
@@ -194,7 +194,7 @@ export const _apiCostsMock: IApiCosts = {
                         },
                     ],
                     helper: {
-                        title: 'How much data to index',
+                        title: 'Expected monthly API requests',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                     }
                 },
@@ -217,7 +217,7 @@ export const _apiCostsMock: IApiCosts = {
                     }
                 },
                 {
-                    title: 'Query Complexity',
+                    title: 'Query complexity',
                     name: 'queryComplexity',
                     type: 'radio',
                     canActive: false,
@@ -231,8 +231,8 @@ export const _apiCostsMock: IApiCosts = {
                             },
                         },
                         {
-                            title: 'Mid',
-                            value: 'mid',
+                            title: 'Medium',
+                            value: 'medium',
                             price: {
                                 type: "h",
                                 value: 0
@@ -408,7 +408,7 @@ export const _apiCostsMock: IApiCosts = {
                     },
                     range: [[1, 5000], [1, 5000]],
                     step: [10, 10],
-                    limit: [1, -1],
+                    limit: [10, -1],
                     helper: {
                         title: 'Database size',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'

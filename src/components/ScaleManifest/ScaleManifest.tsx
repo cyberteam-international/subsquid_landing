@@ -105,7 +105,7 @@ export default function ScaleManifest() {
                         {/* <GlobalHelper listIndex={'manifest'} helperObj={helperText} /> */}
                     </div>
                     <p className={style['manifest__subtitle']}>
-                        Paste this scar into your manifest to use selected configuration. Discover more in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a>.
+                    To use the configuration you selected above, paste this scare into your manifest. Learn more in the <a href="https://docs.subsquid.io/deploy-squid/scale/" target="_blank" rel="noopener noreferrer">docs</a>.
                     </p>
                     <div className={style['manifest__code']}>
                         <code className={inter.className}>

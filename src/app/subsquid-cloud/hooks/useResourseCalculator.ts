@@ -221,7 +221,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             conditions: () => {
                 // const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
                 const selectValueDataSize = selectValuesUseCase[indexDataSize].select
-                if (selectValueDataSize === 'low' || selectValueDataSize === 'not sure') {
+                if (selectValueDataSize === 'small' || selectValueDataSize === 'not sure') {
                     updateState(
                         currentInfo('Processor profile', 'small', indexProcessorProfile), indexProcessorProfile
                     );
@@ -247,7 +247,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                         currentInfo('API profile', 'small', indexApiProfile), indexApiProfile
                     );
                 }
-                else if (selectValue === 'mid') {
+                else if (selectValue === 'medium') {
                     updateState(
                         currentInfo('API profile', 'medium', indexApiProfile), indexApiProfile
                     );
@@ -292,7 +292,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                     updateState(
                         currentInfo('Postgres profile', 'small', indexPostgresProfile), indexPostgresProfile
                     );
-                } else if ((selectValueNetworksCount >= 2 && selectValueNetworksCount <= 9) || selectValueQueryComplexity === 'mid') {
+                } else if ((selectValueNetworksCount >= 2 && selectValueNetworksCount <= 9) || selectValueQueryComplexity === 'medium') {
                     updateState(
                         currentInfo('Postgres profile', 'medium', indexPostgresProfile), indexPostgresProfile
                     );
@@ -307,7 +307,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             name: 'Postgres storage',
             conditions: () => {
                 const selectValue = selectValuesUseCase[indexDataSize].select
-                if (selectValue === 'low') {
+                if (selectValue === 'small') {
                     updateState(
                         currentInfo('Postgres storage', '50', indexPostgresStorage), indexPostgresStorage
                     );

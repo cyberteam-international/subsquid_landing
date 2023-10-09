@@ -43,10 +43,9 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
             if (Number(value) > field?.limit) {
                 return updateState(updateObj(field.limit.toString()))
             }
-            else return null
-        }
-        else if (Number(value) < 0) {
-            return updateState(updateObj('1'))
+            else if (Number(value) <= 0) {
+                return updateState(updateObj(1))
+            }
         }
         else return null
     }
@@ -62,7 +61,7 @@ export default function ApiCostsFieldRadioInput({updateState, field, setClassNam
                 placeholder='Your value'
                 value={value}
                 onChange={(e) => updateState(updateObj(e.target.value))}
-                onBlur={()=> blurHandler()}
+                onBlur={blurHandler}
             />
         </>
     )
