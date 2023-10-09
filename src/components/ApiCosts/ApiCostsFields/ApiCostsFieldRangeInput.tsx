@@ -41,6 +41,40 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
         }
     }
 
+    const blurHandler = () =>{
+        if (Number(value) < currentField.range[0]) {
+            updateState(updateObj(currentField.range[0].toString()))
+        }
+        else if (Number(value) > currentField.range[1]) {
+            updateState(updateObj(currentField.range[1].toString()))
+        }
+        else {
+            updateState(updateObj(sliderValue.toString()))
+        }
+        setFocuse(false)
+        setInputActive(false)   
+    }
+
+    const setStep = () => {
+        if (Number(sliderValue) < currentField.step) {
+            return currentField.step - Number(sliderValue)
+        }
+        else return currentField.step
+    }
+
+    const setValueWithSteps = (value: number) => {
+        if (currentField.range[0] % currentField.step === 0) {
+            return value.toString()
+        }
+        else if (value - currentField.range[0] > 0) {
+            return (value - currentField.range[0]).toString()
+        }
+        // else if (value === 0) {
+        //     return '1'
+        // }
+        else return value.toString()
+    }
+
     useEffect(() => {
         setSliderValue(value)
     }, [tabsProfile, value])
@@ -70,23 +104,7 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                     value={sliderValue}
                     onChange={(e) => updateState(updateObj(e.target.value.toString()))}
                     onFocus={() => { setFocuse(true) }}
-                    onBlur={() => {
-                        if (Number(value) < currentField.range[0]) {
-                            setFocuse(false)
-                            setInputActive(false)
-                            updateState(updateObj(currentField.range[0].toString()))
-                        }
-                        else if (Number(value) > currentField.range[1]) {
-                            setFocuse(false)
-                            setInputActive(false)
-                            updateState(updateObj(currentField.range[1].toString()))
-                        }
-                        else {
-                            setFocuse(false)
-                            setInputActive(false)
-                            updateState(updateObj(sliderValue.toString()))
-                        }
-                    }}
+                    onBlur={blurHandler}
                 />
                 <p className={style["api-costs__list-item__fields-item__prefix"]}>
                     {sliderValue} {currentField.prefix}
@@ -107,6 +125,7 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                 max={currentField.range[1]}
                 value={Number(value)}
                 step={currentField.step}
+                // step={setStep()}
                 thumbClassName={style["api-costs__list-item__fields-item-range-thumb"]}
                 trackClassName={style["api-costs__list-item__fields-item-range-track"]}
                 renderThumb={(props, _state) => {
@@ -120,13 +139,15 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
                     )
                 }
                 }
-                onChange={(val) => { setSliderValue(val.toString()) }}
+                onChange={(val) => { setSliderValue(setValueWithSteps(val)) }}
+                // onChange={(val) => { setSliderValue(currentField.step % val === 0? val.toString(): ) }}
                 onAfterChange={(val) => {
                     updateState(
                         {
                             price: currentField.price,
                             fieldName: currentField.name,
-                            select: val.toString(),
+                            select: setValueWithSteps(val),
+                            // select: val.toString(),
                             limit: currentField.limit,
                             isActive: isActive
                         }
