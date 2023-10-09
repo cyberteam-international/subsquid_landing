@@ -203,7 +203,7 @@ export const _apiCostsMock: IApiCosts = {
                     name: 'requestsPerSecond',
                     type: 'range',
                     label: 'API requests, per month',
-                    prefix: '/sec',
+                    prefix: '/month',
                     canActive: false,
                     price: {
                         type: "h",
