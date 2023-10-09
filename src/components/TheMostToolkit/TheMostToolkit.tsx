@@ -28,14 +28,12 @@ export default function TheMostToolkit() {
 
     return (
         <section className={style["toolkit"]}>
+            <FadeInUpFast delay={300}>
                 <div>
-                    <FadeInUpFast delay={100}>
-                        <h2 className="title">The most powerful indexing toolkit in <i>Web3</i></h2>
-                    </FadeInUpFast>
-                    <FadeInUpFast delay={300}>
-                        <p className={style["toolkit__subtitle"]}>Instantly retrieve unlimited data from 100+ blockchains, using familiar development tools</p>
-                    </FadeInUpFast>
+                    <h2 className="title">The most powerful indexing toolkit in <i>Web3</i></h2>
+                    <p className={style["toolkit__subtitle"]}>Instantly retrieve unlimited data from 100+ blockchains, using familiar development tools</p>
                 </div>
+                </FadeInUpFast>
                 <FadeInUp delay={500}>
                     <div className={style["toolkit__list"]}>{setItems()}</div>
                 </FadeInUp>
