@@ -50,7 +50,7 @@ export default [
         ],
         button: {
             title: 'Talk to us',
-            href: 'https://docs.subsquid.io/deploy-squid/pricing/#slas'
+            href: 'https://calendly.com/david-subsquid/subsquid-enterprise-sales'
         },
     },
 ] as IPayBenefit[]

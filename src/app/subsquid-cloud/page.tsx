@@ -209,7 +209,7 @@ export default function CalculatorPage() {
                                                 <TheMostToolkit/>
                                                 <PayBenefits />
                                                 <ApiCosts refObj={calculatorBlockRef}/>
-                                                <ScaleManifest />
+                                                {/* <ScaleManifest /> */}
                                                 <EstimateCost isVisible={estimateVisible} />
                                             </div>
                                         </div>

@@ -119,7 +119,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                         currentInfo('Postgres profile', 'default', indexPostgresProfile), indexPostgresProfile
                     );
                     updateState(
-                        currentInfo('Postgres storage', '1', indexPostgresStorage), indexPostgresStorage
+                        currentInfo('Postgres storage', '10', indexPostgresStorage), indexPostgresStorage
                     );
                     updateState(
                         currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
@@ -279,7 +279,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                 //     );
                 // }
                 updateState(
-                    currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/720))), indexApiReplicas), indexApiReplicas
+                    currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/1420))), indexApiReplicas), indexApiReplicas
                 );
             }
         },
