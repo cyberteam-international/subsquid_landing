@@ -263,24 +263,34 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             name: 'apiReplicas',
             conditions: () => {
                 const selectValue = Number(selectValuesUseCase[indexRequestsPerSecond].select)
-                // if (0 <= selectValue && selectValue <= 1) {
-                //     updateState(
-                //         currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
-                //     );
-                // }
-                // else if (2 <= selectValue && selectValue <= 5) {
-                //     updateState(
-                //         currentInfo('API profile', 2, indexApiReplicas), indexApiReplicas
-                //     );
-                // }
+                if (0 <= selectValue && selectValue < 500000) {
+                    updateState(
+                        currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
+                    );
+                }
+                else if (500000 <= selectValue && selectValue < 4000000) {
+                    updateState(
+                        currentInfo('API profile', 2, indexApiReplicas), indexApiReplicas
+                    );
+                }
+                else if (4000000 <= selectValue && selectValue < 7000000) {
+                    updateState(
+                        currentInfo('API profile', 3, indexApiReplicas), indexApiReplicas
+                    );
+                }
+                else if (7000000 <= selectValue && selectValue <= 10000000) {
+                    updateState(
+                        currentInfo('API profile', 4, indexApiReplicas), indexApiReplicas
+                    );
+                }
                 // else if (6 <= selectValue) {
                 //     updateState(
                 //         currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/720))), indexApiReplicas), indexApiReplicas
                 //     );
                 // }
-                updateState(
-                    currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/1420))), indexApiReplicas), indexApiReplicas
-                );
+                // updateState(
+                //     currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/1420))), indexApiReplicas), indexApiReplicas
+                // );
             }
         },
         {
