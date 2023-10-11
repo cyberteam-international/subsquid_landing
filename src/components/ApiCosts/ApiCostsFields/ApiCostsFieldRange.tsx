@@ -39,7 +39,7 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, value
             >
                 <p className={style["api-costs__list-item__fields-item__prefix"]}>
                     {Number(sliderValue) === field.range[0]?
-                        `> ${Number(sliderValue).toLocaleString()} ${field.prefix}`
+                        `< ${Number(sliderValue).toLocaleString()} ${field.prefix}`
                         : Number(sliderValue) === field.range[1]?
                         `> ${Number(sliderValue).toLocaleString()} ${field.prefix}`
                         : `${Number(sliderValue).toLocaleString()} ${field.prefix}`
