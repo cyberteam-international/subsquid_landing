@@ -135,28 +135,6 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                 }
             },
         },
-        // {
-        //     name: 'Processor profile',
-        //     conditions: () => {
-        //         const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
-        //         const selectValueDataSize = selectValuesUseCase[indexDataSize].select
-        //         if ((selectValueNetworksCount === 1 && selectValueDataSize === 'low') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'medium')) {
-        //             updateState(
-        //                 currentInfo('Processor profile', 'small', indexProcessorProfile), indexProcessorProfile
-        //             );
-        //         }
-        //         else if ((selectValueNetworksCount === 1 && selectValueDataSize === 'medium') || (selectValueNetworksCount >= 2 && selectValueDataSize === 'large')) {
-        //             updateState(
-        //                 currentInfo('Processor profile', 'medium', indexProcessorProfile), indexProcessorProfile
-        //             );
-        //         }
-        //         else if (selectValueNetworksCount === 1 && selectValueDataSize === 'large') {
-        //             updateState(
-        //                 currentInfo('Processor profile', 'large', indexProcessorProfile), indexProcessorProfile
-        //             );
-        //         }
-        //     }
-        // },
         {
             name: 'New processors',
             conditions: () => {
@@ -241,76 +219,90 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         {
             name: 'API profile',
             conditions: () => {
-                const selectValue = selectValuesUseCase[indexQueryComplexity].select
-                if (selectValue === 'simple' || selectValue === 'not sure') {
-                    updateState(
-                        currentInfo('API profile', 'small', indexApiProfile), indexApiProfile
-                    );
-                }
-                else if (selectValue === 'medium') {
-                    updateState(
-                        currentInfo('API profile', 'medium', indexApiProfile), indexApiProfile
-                    );
-                }
-                else if (selectValue === 'complex') {
-                    updateState(
-                        currentInfo('API profile', 'large', indexApiProfile), indexApiProfile
-                    );
-                }
+                // const selectValue = selectValuesUseCase[indexQueryComplexity].select
+                // if (selectValue === 'simple' || selectValue === 'not sure') {
+                //     updateState(
+                //         currentInfo('API profile', 'small', indexApiProfile), indexApiProfile
+                //     );
+                // }
+                // else if (selectValue === 'medium') {
+                //     updateState(
+                //         currentInfo('API profile', 'medium', indexApiProfile), indexApiProfile
+                //     );
+                // }
+                // else if (selectValue === 'complex') {
+                //     updateState(
+                //         currentInfo('API profile', 'large', indexApiProfile), indexApiProfile
+                //     );
+                // }
             }
         },
         {
             name: 'apiReplicas',
             conditions: () => {
                 const selectValue = Number(selectValuesUseCase[indexRequestsPerSecond].select)
-                if (0 <= selectValue && selectValue < 500000) {
-                    updateState(
-                        currentInfo('API profile', 1, indexApiReplicas), indexApiReplicas
-                    );
-                }
-                else if (500000 <= selectValue && selectValue < 4000000) {
+                if (selectValue >= 1 && selectValue < 1000) {
                     updateState(
                         currentInfo('API profile', 2, indexApiReplicas), indexApiReplicas
                     );
                 }
-                else if (4000000 <= selectValue && selectValue < 7000000) {
+                else if (selectValue >= 1000 && selectValue <= 4000) {
                     updateState(
                         currentInfo('API profile', 3, indexApiReplicas), indexApiReplicas
                     );
                 }
-                else if (7000000 <= selectValue && selectValue <= 10000000) {
-                    updateState(
-                        currentInfo('API profile', 4, indexApiReplicas), indexApiReplicas
-                    );
-                }
-                // else if (6 <= selectValue) {
-                //     updateState(
-                //         currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/720))), indexApiReplicas), indexApiReplicas
-                //     );
-                // }
-                // updateState(
-                //     currentInfo('API profile', Math.floor(Math.log10(Math.floor(selectValue/1420))), indexApiReplicas), indexApiReplicas
-                // );
+                updateState(
+                    currentInfo('API profile', 'small', indexApiReplicas), indexApiReplicas
+                );
             }
         },
         {
             name: 'Postgres profile',
             conditions: () => {
                 const selectValueQueryComplexity = selectValuesUseCase[indexQueryComplexity].select
-                const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
-                if (selectValueQueryComplexity === 'simple' || selectValueQueryComplexity === 'not sure') {
-                    updateState(
-                        currentInfo('Postgres profile', 'small', indexPostgresProfile), indexPostgresProfile
-                    );
-                } else if ((selectValueNetworksCount >= 2 && selectValueNetworksCount <= 9) || selectValueQueryComplexity === 'medium') {
-                    updateState(
-                        currentInfo('Postgres profile', 'medium', indexPostgresProfile), indexPostgresProfile
-                    );
-                } else if (selectValueNetworksCount >= 10 || selectValueQueryComplexity === 'complex') {
-                    updateState(
-                        currentInfo('Postgres profile', 'large', indexPostgresProfile), indexPostgresProfile
-                    );
+                // const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
+                const selectValueRequestsPerSecond = Number(selectValuesUseCase[indexRequestsPerSecond].select)
+                let updateStateQueryComplexity: number = 0
+                let updateStateRequestsPerSecond: number = 0
+                const updateValue = (number: number) =>{
+                    if (number === 1){
+                        return 'small'
+                    }
+                    else if (number === 2){
+                        return 'medium'
+                    }
+                    else {
+                        return 'large'
+                    }
                 }
+                if (selectValueQueryComplexity === 'simple') {
+                    updateStateQueryComplexity = 1
+                } else if (selectValueQueryComplexity === 'medium') {
+                    updateStateQueryComplexity = 2
+                } else if (selectValueQueryComplexity === 'complex') {
+                    updateStateQueryComplexity = 3
+                }
+                if (selectValueRequestsPerSecond >= 1 && selectValueRequestsPerSecond < 300) {
+                    updateStateRequestsPerSecond = 1
+                }
+                else if (selectValueRequestsPerSecond >= 300 && selectValueRequestsPerSecond < 2000) {
+                    updateStateRequestsPerSecond = 2
+                }
+                else if (selectValueRequestsPerSecond >= 2000 && selectValueRequestsPerSecond <= 4000) {
+                    updateStateRequestsPerSecond = 3
+                }
+                updateState(
+                    currentInfo(
+                        'Postgres profile', 
+                        updateValue(
+                            updateStateRequestsPerSecond > updateStateQueryComplexity? 
+                            updateStateRequestsPerSecond 
+                            :updateStateQueryComplexity
+                        ), 
+                        indexPostgresProfile
+                    ), 
+                    indexPostgresProfile
+                );
             }
         },
         {

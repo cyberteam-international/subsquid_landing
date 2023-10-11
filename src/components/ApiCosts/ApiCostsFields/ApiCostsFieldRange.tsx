@@ -16,6 +16,16 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, value
 
     const [sliderValue, setSliderValue] = useState(value)
 
+    const setValueWithSteps = (value: number) => {
+        if (field.range[0] % field.step === 0) {
+            return value.toString()
+        }
+        else if (value - field.range[0] > 0) {
+            return (value - field.range[0]).toString()
+        }
+        else return value.toString()
+    }
+
     useEffect(() => {
         setSliderValue(value)
     }, [value])
@@ -28,7 +38,12 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, value
                 className={style["api-costs__list-item__fields-item__wrapper"]}
             >
                 <p className={style["api-costs__list-item__fields-item__prefix"]}>
-                    {Number(sliderValue) === 0? '< 1' : Number(sliderValue).toLocaleString()} {field.prefix}
+                    {Number(sliderValue) === field.range[0]?
+                        `> ${Number(sliderValue).toLocaleString()} ${field.prefix}`
+                        : Number(sliderValue) === field.range[1]?
+                        `< ${Number(sliderValue).toLocaleString()} ${field.prefix}`
+                        : `${Number(sliderValue).toLocaleString()} ${field.prefix}`
+                    }
                 </p>
             </div>
             <ReactSlider
@@ -51,13 +66,13 @@ export default function ApiCostsFieldRange({ field, updateState, isActive, value
                     )
                 }
                 }
-                onChange={(val) => { setSliderValue(val.toString()) }}
+                onChange={(val) => { setSliderValue(setValueWithSteps(val)) }}
                 onAfterChange={(val) => {
                     updateState(
                         {
                             price: field.price,
                             fieldName: field.name,
-                            select: val.toString(),
+                            select: setValueWithSteps(val),
                             limit: field.limit,
                             isActive: isActive
                         }

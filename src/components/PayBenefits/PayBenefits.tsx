@@ -14,7 +14,7 @@ export default function PayBenefits() {
     }
 
     return (
-        <section className={style["pay-benefits"]}>
+        <section className={style["pay-benefits"]} id={"#pricing"}>
             <div className="">
                 <FadeInUpFast delay={100}>
                     <h2 className="title">Pricing</h2>

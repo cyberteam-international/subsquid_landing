@@ -30,6 +30,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					block.scrollIntoView();
 				}
 			}
+			else if (window.location.href.indexOf('#pricing') !== -1) {
+				const block = document.getElementById("#pricing")
+				if (block) {
+					block.style.scrollMarginTop = `${headerWidth}px`
+					block.scrollIntoView();
+				}
+			}
 		}
 	})
 

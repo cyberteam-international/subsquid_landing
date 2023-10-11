@@ -69,9 +69,6 @@ export default function ApiCostsFieldRangeInput({ field, updateState, isActive, 
         else if (value - currentField.range[0] > 0) {
             return (value - currentField.range[0]).toString()
         }
-        // else if (value === 0) {
-        //     return '1'
-        // }
         else return value.toString()
     }
 
