@@ -95,8 +95,8 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
     const indexApiProfile = listIndex('API profile')
     const indexPostgresProfile = listIndex('Postgres profile')
     const indexPostgresStorage = listIndex('Postgres storage')
-    const indexDataSize = listIndex('dataSize')
-    const indexQueryComplexity = listIndex('queryComplexity')
+    // const indexDataSize = listIndex('dataSize')
+    // const indexQueryComplexity = listIndex('queryComplexity')
     const indexNetworksCount = listIndex('networksCount')
     const indexApiReplicas = listIndex('API profile')
     const indexRequestsPerSecond = listIndex('requestsPerSecond')
@@ -198,20 +198,30 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             name: 'Processor profile',
             conditions: () => {
                 // const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
-                const selectValueDataSize = selectValuesUseCase[indexDataSize].select
-                if (selectValueDataSize === 'small' || selectValueDataSize === 'not sure') {
+                // const selectValueDataSize = selectValuesUseCase[indexDataSize].select
+                // if (selectValueDataSize === 'small' || selectValueDataSize === 'not sure') {
+                //     updateState(
+                //         currentInfo('Processor profile', 'small', indexProcessorProfile), indexProcessorProfile
+                //     );
+                // }
+                // else if (selectValueDataSize === 'medium') {
+                //     updateState(
+                //         currentInfo('Processor profile', 'medium', indexProcessorProfile), indexProcessorProfile
+                //     );
+                // }
+                // else if (selectValueDataSize === 'large') {
+                //     updateState(
+                //         currentInfo('Processor profile', 'large', indexProcessorProfile), indexProcessorProfile
+                //     );
+                // }
+                if (selectTabsProfile === 'COLLOCATED') {
+                    updateState(
+                        currentInfo('Processor profile', 'default', indexProcessorProfile), indexProcessorProfile
+                    );
+                }
+                else if (selectTabsProfile === 'DEDICATED'){
                     updateState(
                         currentInfo('Processor profile', 'small', indexProcessorProfile), indexProcessorProfile
-                    );
-                }
-                else if (selectValueDataSize === 'medium') {
-                    updateState(
-                        currentInfo('Processor profile', 'medium', indexProcessorProfile), indexProcessorProfile
-                    );
-                }
-                else if (selectValueDataSize === 'large') {
-                    updateState(
-                        currentInfo('Processor profile', 'large', indexProcessorProfile), indexProcessorProfile
                     );
                 }
             }
@@ -259,7 +269,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         {
             name: 'Postgres profile',
             conditions: () => {
-                const selectValueQueryComplexity = selectValuesUseCase[indexQueryComplexity].select
+                // const selectValueQueryComplexity = selectValuesUseCase[indexQueryComplexity].select
                 // const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
                 const selectValueRequestsPerSecond = Number(selectValuesUseCase[indexRequestsPerSecond].select)
                 let updateStateQueryComplexity: number = 0
@@ -275,13 +285,13 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                         return 'large'
                     }
                 }
-                if (selectValueQueryComplexity === 'simple') {
-                    updateStateQueryComplexity = 1
-                } else if (selectValueQueryComplexity === 'medium') {
-                    updateStateQueryComplexity = 2
-                } else if (selectValueQueryComplexity === 'complex') {
-                    updateStateQueryComplexity = 3
-                }
+                // if (selectValueQueryComplexity === 'simple') {
+                //     updateStateQueryComplexity = 1
+                // } else if (selectValueQueryComplexity === 'medium') {
+                //     updateStateQueryComplexity = 2
+                // } else if (selectValueQueryComplexity === 'complex') {
+                //     updateStateQueryComplexity = 3
+                // }
                 if (selectValueRequestsPerSecond >= 1 && selectValueRequestsPerSecond < 300) {
                     updateStateRequestsPerSecond = 1
                 }
@@ -305,27 +315,27 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                 );
             }
         },
-        {
-            name: 'Postgres storage',
-            conditions: () => {
-                const selectValue = selectValuesUseCase[indexDataSize].select
-                if (selectValue === 'small') {
-                    updateState(
-                        currentInfo('Postgres storage', '50', indexPostgresStorage), indexPostgresStorage
-                    );
-                }
-                else if (selectValue === 'medium') {
-                    updateState(
-                        currentInfo('Postgres storage', '150', indexPostgresStorage), indexPostgresStorage
-                    );
-                }
-                else if (selectValue === 'large') {
-                    updateState(
-                        currentInfo('Postgres storage', '500', indexPostgresStorage), indexPostgresStorage
-                    );
-                }
-            }
-        },
+        // {
+        //     name: 'Postgres storage',
+        //     conditions: () => {
+        //         const selectValue = selectValuesUseCase[indexDataSize].select
+        //         if (selectValue === 'small') {
+        //             updateState(
+        //                 currentInfo('Postgres storage', '50', indexPostgresStorage), indexPostgresStorage
+        //             );
+        //         }
+        //         else if (selectValue === 'medium') {
+        //             updateState(
+        //                 currentInfo('Postgres storage', '150', indexPostgresStorage), indexPostgresStorage
+        //             );
+        //         }
+        //         else if (selectValue === 'large') {
+        //             updateState(
+        //                 currentInfo('Postgres storage', '500', indexPostgresStorage), indexPostgresStorage
+        //             );
+        //         }
+        //     }
+        // },
     ]
 
     useEffect(() => {

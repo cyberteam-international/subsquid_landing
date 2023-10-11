@@ -16,6 +16,7 @@ export default [
         subtitle: 'Free',
         description: 'For development purposes',
         items: [
+            'No query limit',
             'One collocated squid (API + processor + Postgres)',
             '10GB of database storage',
             '500k monthly RPC requests',
@@ -31,6 +32,7 @@ export default [
         subtitle: 'Pay-as-you-go',
         description: 'Pay only for what you use',
         items: [
+            'No query limit',
             'Unlimited number of pay-as-you-go dedicated squids',
             'Unlimited number of pay-as-you-go collocated squids',
             '2M monthly RPC requests',

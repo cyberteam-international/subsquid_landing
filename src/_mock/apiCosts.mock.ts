@@ -85,7 +85,7 @@ export const _apiCostsMock: IApiCosts = {
         {
             title: 'Squid profile',
             name: 'squidProfile',
-            warning: ['You may use collocated squid profiles for development environments', 'Dedicated VM resources for reliability in production.'],
+            warning: ['You may use development squid profiles for development environments', 'Dedicated VM resources for reliability in production.'],
             type: 'radio',
             canActive: false,
             values: [
@@ -154,56 +154,56 @@ export const _apiCostsMock: IApiCosts = {
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                     }
                 },
+                // {
+                //     title: 'Expected indexing load',
+                //     name: 'dataSize',
+                //     type: 'radio',
+                //     canActive: false,
+                //     values: [
+                //         {
+                //             title: 'Small',
+                //             value: 'small',
+                //             price: {
+                //                 type: "h",
+                //                 value: 0
+                //             },
+                //         },
+                //         {
+                //             title: 'Medium',
+                //             value: 'medium',
+                //             price: {
+                //                 type: "h",
+                //                 value: 0
+                //             },
+                //         },
+                //         {
+                //             title: 'Large',
+                //             value: 'large',
+                //             price: {
+                //                 type: "h",
+                //                 value: 0
+                //             },
+                //         },
+                //         {
+                //             title: 'Not sure',
+                //             value: 'not sure',
+                //             price: {
+                //                 type: "h",
+                //                 value: 0
+                //             },
+                //         },
+                //     ],
+                //     helper: {
+                //         title: 'Expected monthly API requests',
+                //         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
+                //     }
+                // },
                 {
-                    title: 'Expected indexing load',
-                    name: 'dataSize',
-                    type: 'radio',
-                    canActive: false,
-                    values: [
-                        {
-                            title: 'Small',
-                            value: 'small',
-                            price: {
-                                type: "h",
-                                value: 0
-                            },
-                        },
-                        {
-                            title: 'Medium',
-                            value: 'medium',
-                            price: {
-                                type: "h",
-                                value: 0
-                            },
-                        },
-                        {
-                            title: 'Large',
-                            value: 'large',
-                            price: {
-                                type: "h",
-                                value: 0
-                            },
-                        },
-                        {
-                            title: 'Not sure',
-                            value: 'not sure',
-                            price: {
-                                type: "h",
-                                value: 0
-                            },
-                        },
-                    ],
-                    helper: {
-                        title: 'Expected monthly API requests',
-                        description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
-                    }
-                },
-                {
-                    title: 'API requests, per month',
+                    title: 'Provisional API request load, rps',
                     name: 'requestsPerSecond',
                     type: 'range',
                     label: 'API requests, per month',
-                    prefix: '/month',
+                    prefix: 'rps',
                     canActive: false,
                     price: {
                         type: "h",
@@ -216,50 +216,50 @@ export const _apiCostsMock: IApiCosts = {
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
                     }
                 },
-                {
-                    title: 'Query complexity',
-                    name: 'queryComplexity',
-                    type: 'radio',
-                    canActive: false,
-                    values: [
-                        {
-                            title: 'Simple',
-                            value: 'simple',
-                            price: {
-                                type: "h",
-                                value: 0
-                            },
-                        },
-                        {
-                            title: 'Medium',
-                            value: 'medium',
-                            price: {
-                                type: "h",
-                                value: 0
-                            },
-                        },
-                        {
-                            title: 'Complex',
-                            value: 'complex',
-                            price: {
-                                type: "h",
-                                value: 0
-                            },
-                        },
-                        {
-                            title: 'Not sure',
-                            value: 'not sure',
-                            price: {
-                                type: "h",
-                                value: 0
-                            },
-                        },
-                    ],
-                    helper: {
-                        title: 'Query Complexity',
-                        description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
-                    }
-                },
+                // {
+                //     title: 'Query complexity',
+                //     name: 'queryComplexity',
+                //     type: 'radio',
+                //     canActive: false,
+                //     values: [
+                //         {
+                //             title: 'Simple',
+                //             value: 'simple',
+                //             price: {
+                //                 type: "h",
+                //                 value: 0
+                //             },
+                //         },
+                //         {
+                //             title: 'Medium',
+                //             value: 'medium',
+                //             price: {
+                //                 type: "h",
+                //                 value: 0
+                //             },
+                //         },
+                //         {
+                //             title: 'Complex',
+                //             value: 'complex',
+                //             price: {
+                //                 type: "h",
+                //                 value: 0
+                //             },
+                //         },
+                //         {
+                //             title: 'Not sure',
+                //             value: 'not sure',
+                //             price: {
+                //                 type: "h",
+                //                 value: 0
+                //             },
+                //         },
+                //     ],
+                //     helper: {
+                //         title: 'Query Complexity',
+                //         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
+                //     }
+                // },
             ]
         },
         byResources: {
