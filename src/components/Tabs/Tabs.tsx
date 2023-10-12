@@ -26,7 +26,7 @@ export default function Tabs() {
         },
         {
             icon: "/chart.png",
-            title: "Aquarium Cloud",
+            title: "Subsquid Cloud",
             body: <>
                 <ul>
                     <li>Instant GraphQL API and indexer deployment</li>
@@ -37,7 +37,7 @@ export default function Tabs() {
                     <li>Team collaboration tools</li>
                 </ul>
                 <div className="tabs__item-wrap">
-                    <a href="https://docs.subsquid.io/deploy-squid/pricing/" target="_blank">View pricing</a>
+                    <a href="https://subsquid.io/subsquid-cloud" target="_blank">View pricing</a>
                 </div>
             </>,
             active: false,

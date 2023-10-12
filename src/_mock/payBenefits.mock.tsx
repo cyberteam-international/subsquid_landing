@@ -16,11 +16,11 @@ export default [
         subtitle: 'Free',
         description: 'For development purposes',
         items: [
-            'No query limit',
-            'One collocated squid (API + processor + Postgres)',
+            'No API query limit',
+            'One development indexer',
             '10GB of database storage',
             '500k monthly RPC requests',
-            'Premium support',
+            'Community support',
         ],
         button: {
             title: 'Get started',
@@ -32,11 +32,11 @@ export default [
         subtitle: 'Pay-as-you-go',
         description: 'Pay only for what you use',
         items: [
-            'No query limit',
-            'Unlimited number of pay-as-you-go dedicated squids',
-            'Unlimited number of pay-as-you-go collocated squids',
+            'No API query limit',
+            'Unlimited pay-as-you-go production indexers',
+            'Unlimited pay-as-you-go development indexers',
             '2M monthly RPC requests',
-            'Premium support',
+            'Pro support',
         ],
         button: {
             title: 'Get started',
