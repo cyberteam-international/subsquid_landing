@@ -8,6 +8,7 @@ import {
 } from "@/app/subsquid-cloud/context";
 
 import style from './ApiCosts.module.scss'
+import { useWindowWidth } from "@react-hook/window-size";
 
 export default function ApiCostsResult() {
 
@@ -20,12 +21,14 @@ export default function ApiCostsResult() {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const windowWidth = typeof window !== undefined? useWindowWidth() : 0
+
     const currentTotalPrice = () => {
         let sum = 0
-        totalSum.forEach((item, _index)=>{
+        totalSum.forEach((item, _index) => {
             sum += item.currentPrice
         })
-        newProcessors.state.forEach((item, _index)=>{
+        newProcessors.state.forEach((item, _index) => {
             sum += item.price.value
         })
         return sum
@@ -33,24 +36,24 @@ export default function ApiCostsResult() {
 
     const currentOldPrice = () => {
         let sum = 0
-        totalSum.forEach((item, _index)=>{
+        totalSum.forEach((item, _index) => {
             sum += item.price
         })
-        newProcessors.state.forEach((item, _index)=>{
+        newProcessors.state.forEach((item, _index) => {
             sum += item.price.value
         })
         return sum
     }
 
     const setDetailProcessorsInfo = () => {
-        return newProcessors.state.map((item, index)=>{
+        return newProcessors.state.map((item, index) => {
             return (
                 <div key={index} className={style["api-costs__result__list-item"]}>
                     <div className={style["api-costs__result__list-item__wrapper"]}>
                         <div className={style["api-costs__result__list-item__wrapper_left"]}>
                             <p>{item.fieldName}</p>
                             <p className={style["api-costs__result__list-item__select"]}>
-                                {item.select} {item.fieldName === 'Postgres storage'? 'Gb' : item.fieldName === 'RPC requests'? 'M' : ''}
+                                {item.select} {item.fieldName === 'Postgres storage' ? 'Gb' : item.fieldName === 'RPC requests' ? 'M' : ''}
                             </p>
                         </div>
                         <p>${(item.price.value * 720).toFixed(2)}/mo</p>
@@ -68,10 +71,10 @@ export default function ApiCostsResult() {
                     <div className={style["api-costs__result__list-item"]}>
                         <div className={style["api-costs__result__list-item__wrapper"]}>
                             <div className={style["api-costs__result__list-item__wrapper_left"]}>
-                                <p>{item.fieldName === 'Processor profile'? `${item.fieldName} 1` : item.fieldName}</p>
+                                <p>{item.fieldName === 'Processor profile' ? `${item.fieldName} 1` : item.fieldName}</p>
                                 <p className={style["api-costs__result__list-item__select"]}>
-                                {item.select} {item.replicas? `x ${item.replicas} replicas`: ''} {item.fieldName === 'Postgres storage'? 'Gb' : item.fieldName === 'RPC requests'? 'M' : ''}
-                            </p>
+                                    {item.select} {item.replicas ? `x ${item.replicas} replicas` : ''} {item.fieldName === 'Postgres storage' ? 'Gb' : item.fieldName === 'RPC requests' ? 'M' : ''}
+                                </p>
                             </div>
                             <p>${(totalSum[index]?.price * 720).toFixed(2)}/mo</p>
                         </div>
@@ -82,7 +85,7 @@ export default function ApiCostsResult() {
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         if (resultBlockRef.current) {
             if (isOpen && resultBlockRef.current.parentElement) {
                 resultBlockRef.current.parentElement.style.height = `${resultBlockRef.current.getBoundingClientRect().height}px`
@@ -103,27 +106,43 @@ export default function ApiCostsResult() {
             ref={totalBlockRef}
         >
             <div className={style["api-costs__result__wrapper"]}>
-                <p className={style["api-costs__result__title"]}>Estimate cost</p>
+                { windowWidth > 768 && (
+                    <p
+                        className={
+                            isOpen?
+                            `${style["api-costs__result__info"]} ${style["api-costs__result__info_open"]}`
+                            : style["api-costs__result__info"]
+                        }
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect width="24" height="24" rx="12" fill="white" />
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M12 16V12" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M12 8H12.01" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data.
+                    </p>
+                )}
                 <div>
                     <p className={
-                        currentTotalPrice() === 0?
-                        `${style["api-costs__result__total"]} ${style["api-costs__result__total_free"]}`
-                        : `${style["api-costs__result__total"]} ${style["api-costs__result__total_free"]} ${style["api-costs__result__total_free_disable"]}`
-                        }>free</p>
-                    <p 
+                        currentTotalPrice() === 0 ?
+                            `${style["api-costs__result__total"]} ${style["api-costs__result__total_free"]}`
+                            : `${style["api-costs__result__total"]} ${style["api-costs__result__total_free"]} ${style["api-costs__result__total_free_disable"]}`
+                    }>free</p>
+                    <p
                         className={
-                            currentTotalPrice() === 0?
-                            `${style["api-costs__result__total"]} ${style["api-costs__result__total_month"]} ${style["api-costs__result__total_disable"]}`
-                            :`${style["api-costs__result__total"]} ${style["api-costs__result__total_month"]}`
+                            currentTotalPrice() === 0 ?
+                                `${style["api-costs__result__total"]} ${style["api-costs__result__total_month"]} ${style["api-costs__result__total_disable"]}`
+                                : `${style["api-costs__result__total"]} ${style["api-costs__result__total_month"]}`
                         }
                     >
                         {`$${(currentOldPrice() * 720).toFixed(2)}/mo`}
                     </p>
-                    <p 
+                    <p
                         className={
-                            currentTotalPrice() === 0?
-                            `${style["api-costs__result__total"]} ${style["api-costs__result__total_hour"]} ${style["api-costs__result__total_disable"]}`
-                            :`${style["api-costs__result__total"]} ${style["api-costs__result__total_hour"]}`
+                            currentTotalPrice() === 0 ?
+                                `${style["api-costs__result__total"]} ${style["api-costs__result__total_hour"]} ${style["api-costs__result__total_disable"]}`
+                                : `${style["api-costs__result__total"]} ${style["api-costs__result__total_hour"]}`
                         }
                     >
                         {`$${(currentOldPrice()).toFixed(2)}/h`}
@@ -144,6 +163,23 @@ export default function ApiCostsResult() {
                     {setDetailInfo()}
                 </div>
             </div>
+            { windowWidth < 768 && (
+                <p
+                    className={
+                        isOpen?
+                        `${style["api-costs__result__info"]} ${style["api-costs__result__info_open"]}`
+                        : style["api-costs__result__info"]
+                    }
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect width="24" height="24" rx="12" fill="white" />
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M12 16V12" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M12 8H12.01" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data.
+                </p>
+            )}
         </div>
     )
 }
