@@ -5,6 +5,8 @@ import {
     ScrollElementContext,
     SelectValuesResourcesContext,
     NewProcessorsContext,
+    ActiveTabContext,
+    TabsProfileContext
 } from "@/app/subsquid-cloud/context";
 
 import style from './ApiCosts.module.scss'
@@ -15,6 +17,8 @@ export default function ApiCostsResult() {
     const [totalSum, _setTotalSum] = useContext(TotalSumContext);
     const [selectValues, _setSelectValues] = useContext(SelectValuesResourcesContext)
     const [newProcessors, _setNewProcessors] = useContext(NewProcessorsContext)
+    const [activeTab, _setActiveTab] = useContext(ActiveTabContext)
+    const [tabsProfile, _setTabsProfile] = useContext(TabsProfileContext)
 
     const totalBlockRef = useContext(ScrollElementContext)
     const resultBlockRef = useRef<HTMLDivElement>(null)
@@ -22,6 +26,23 @@ export default function ApiCostsResult() {
     const [isOpen, setIsOpen] = useState(false);
 
     const windowWidth = typeof window !== undefined? useWindowWidth() : 0
+
+    const setInfoText = () =>{
+        const profile = tabsProfile[0].select
+        if (activeTab === 'byUseCase') {
+            if (profile === 'COLLOCATED') {
+                return 'A free development indexer can only be deployed to the Playground. The Playground is an isolated space automatically created for each Cloud account. The deployments to the Playground are not billed'
+            }
+            else if (profile === 'DEDICATED') {
+                return 'The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data.'
+            }
+        }
+        else if (activeTab === 'byResources') {
+            if (profile === 'COLLOCATED') {
+                return 'A free collocated indexer can only be deployed to the Playground. The Playground is an isolated space automatically created for each Cloud account. The deployments to the Playground are not billed'
+            }
+        }
+    }
 
     const currentTotalPrice = () => {
         let sum = 0
@@ -113,6 +134,7 @@ export default function ApiCostsResult() {
                             `${style["api-costs__result__info"]} ${style["api-costs__result__info_open"]}`
                             : style["api-costs__result__info"]
                         }
+                        style={{opacity: `${activeTab === 'byResources' && tabsProfile[0].select === 'DEDICATED' ? 0 : 1}`}}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect width="24" height="24" rx="12" fill="white" />
@@ -120,7 +142,7 @@ export default function ApiCostsResult() {
                             <path d="M12 16V12" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             <path d="M12 8H12.01" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data.
+                        {setInfoText()}
                     </p>
                 )}
                 <div>
@@ -170,6 +192,7 @@ export default function ApiCostsResult() {
                         `${style["api-costs__result__info"]} ${style["api-costs__result__info_open"]}`
                         : style["api-costs__result__info"]
                     }
+                    style={{display: `${activeTab === 'byResources' && tabsProfile[0].select === 'DEDICATED' ? 'none' : 'block'}`}}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <rect width="24" height="24" rx="12" fill="white" />
@@ -177,7 +200,7 @@ export default function ApiCostsResult() {
                         <path d="M12 16V12" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M12 8H12.01" stroke="#CAE1F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data.
+                    {setInfoText()}
                 </p>
             )}
         </div>
