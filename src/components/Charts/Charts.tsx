@@ -24,8 +24,8 @@ export default function Charts() {
                                     <p>650+</p>
                                 </div>
                                 <div className={style["charts-item__stats-item"]}>
-                                    <p>LIVE PROJECTS</p>
-                                    <p>1000+</p>
+                                    <p>CLOUD INDEXERS</p>
+                                    <p>8,5k+</p>
                                 </div>
                             </div>
                             <div className={style["charts-item__image"]}>

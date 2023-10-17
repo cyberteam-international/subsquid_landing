@@ -34,7 +34,7 @@ export default function ApiCostsResult() {
                 return 'A free development indexer can only be deployed to the Playground. The Playground is an isolated space automatically created for each Cloud account. The deployments to the Playground are not billed'
             }
             else if (profile === 'DEDICATED') {
-                return 'The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data.'
+                return 'The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data. A collocated squid is available for free in the Playground, your personal space. If the same squid is deployed within an organization, it\'s subject to our standard tariffs.'
             }
         }
         else if (activeTab === 'byResources') {
@@ -131,8 +131,8 @@ export default function ApiCostsResult() {
                     <p
                         className={
                             isOpen?
-                            `${style["api-costs__result__info"]} ${style["api-costs__result__info_open"]}`
-                            : style["api-costs__result__info"]
+                                `${style["api-costs__result__info"]} ${style["api-costs__result__info_open"]}`
+                                : style["api-costs__result__info"]
                         }
                         style={{opacity: `${activeTab === 'byResources' && tabsProfile[0].select === 'DEDICATED' ? 0 : 1}`}}
                     >
@@ -189,8 +189,8 @@ export default function ApiCostsResult() {
                 <p
                     className={
                         isOpen?
-                        `${style["api-costs__result__info"]} ${style["api-costs__result__info_open"]}`
-                        : style["api-costs__result__info"]
+                            `${style["api-costs__result__info"]} ${style["api-costs__result__info_open"]}`
+                            : style["api-costs__result__info"]
                     }
                     style={{display: `${activeTab === 'byResources' && tabsProfile[0].select === 'DEDICATED' ? 'none' : 'block'}`}}
                 >

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 // context
 import {
@@ -40,9 +40,9 @@ const setInitial = (tab: string = 'byResources', isProfile: boolean = false): IA
             {
                 fieldName: _apiCostsMock.profile[0].name,
                 select: _apiCostsMock.profile[0].values[0].value,
-                price: { 
-                    type: _apiCostsMock.profile[0].values[0].price.type, 
-                    value: _apiCostsMock.profile[0].values[0].price.value 
+                price: {
+                    type: _apiCostsMock.profile[0].values[0].price.type,
+                    value: _apiCostsMock.profile[0].values[0].price.value
                 },
                 replicas: _apiCostsMock.profile[0].replicas ?? undefined,
                 isActive: true,
@@ -195,7 +195,7 @@ export default function CalculatorPage() {
                                                     <FadeInUpFast delay={300}>
                                                         <h1 className="calculator__title">Build and Deploy APIs for <i>Blockchain Data</i></h1>
                                                         <p className={style['calculator__header__subtitle']}>
-                                                        Join thousands of developers who use Subsquid Cloud to deploy GraphQL APIs and sophisticated indexers for Web3 apps. 
+                                                            Join thousands of developers who use Subsquid Cloud to deploy GraphQL APIs and sophisticated indexers for Web3 apps.
                                                         </p>
                                                         <div className={style['calculator__header-buttons']}>
                                                             <button className="btn btn--outline">

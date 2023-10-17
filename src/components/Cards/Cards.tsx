@@ -7,7 +7,7 @@ export default function Cards() {
     const items = [
         {title: '100+', text: 'supported networks'},
         {title: '30+ billion', text: 'data lake requests'},
-        {title: '5000+', text: 'projects'},
+        {title: '25 000+', text: 'indexers deployed'},
     ]
 
     return (
