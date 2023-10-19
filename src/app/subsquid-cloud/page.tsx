@@ -28,7 +28,7 @@ import TheMostToolkit from '@/components/TheMostToolkit/TheMostToolkit';
 import { useResourseCalculator } from './hooks/useResourseCalculator';
 import { useTotalCalculator } from './hooks/useTotalPrice';
 
-import { _apiCostsMock, IApiCostsState } from '@/_mock/apiCosts.mock'
+import { _apiCostsMock, IApiCostsRangeInput, IApiCostsState } from '@/_mock/apiCosts.mock'
 
 import style from './style.module.scss'
 import { FadeInUpFast } from '@/components/Animation';
@@ -176,6 +176,16 @@ export default function CalculatorPage() {
             observer.current?.disconnect()
         }
     }, [estimateVisible])
+
+    useEffect(()=>{
+        const postgresProfileIndex = selectValuesResources.findIndex((el) => el.fieldName === 'Postgres profile')
+        const postgresStorageIndex = selectValuesResources.findIndex((el) => el.fieldName === 'Postgres storage')
+        const updateObj = [...selectValuesResources]
+        if (!selectValuesResources[postgresProfileIndex].isActive) {
+            updateObj[postgresStorageIndex] = {...updateObj[postgresStorageIndex], select: '0'}
+            setSelectValuesResources([...updateObj])
+        }
+    }, [selectValuesResources])
 
     return (
         <SelectValuesUseCaseContext.Provider value={[selectValuesUseCase, setSelectValuesUseCase]}>
