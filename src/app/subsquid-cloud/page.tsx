@@ -182,7 +182,7 @@ export default function CalculatorPage() {
         const postgresStorageIndex = selectValuesResources.findIndex((el) => el.fieldName === 'Postgres storage')
         const updateObj = [...selectValuesResources]
         if (!selectValuesResources[postgresProfileIndex].isActive) {
-            updateObj[postgresStorageIndex] = {...updateObj[postgresStorageIndex], select: '0'}
+            updateObj[postgresStorageIndex] = {...updateObj[postgresStorageIndex], select: '0', isActive: false}
             setSelectValuesResources([...updateObj])
         }
     }, [selectValuesResources])
