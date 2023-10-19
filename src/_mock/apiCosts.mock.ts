@@ -83,9 +83,9 @@ export type IApiCosts = {
 export const _apiCostsMock: IApiCosts = {
     profile: [
         {
-            title: 'Squid profile',
+            title: 'Indexer profile',
             name: 'squidProfile',
-            warning: ['You may use development squid profiles for development environments', 'Dedicated VM resources for reliability in production.'],
+            warning: ['You may use development indexer profiles for development environments', 'Dedicated VM resources for reliability in production.'],
             type: 'radio',
             canActive: false,
             values: [
@@ -108,9 +108,9 @@ export const _apiCostsMock: IApiCosts = {
             ],
         },
         {
-            title: 'Squid profile',
+            title: 'Indexer profile',
             name: 'squidProfile',
-            warning: ['Collocated squids are recommended only for development and prototyping', 'Dedicated VM resources for reliability in production.'],
+            warning: ['Collocated indexers are recommended only for development and prototyping', 'Dedicated VM resources for reliability in production.'],
             type: 'radio',
             canActive: false,
             values: [
