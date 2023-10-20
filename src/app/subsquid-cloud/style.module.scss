@@ -42,7 +42,7 @@
                 letter-spacing: -2.4px;
             }
             @include media-up(xxl) {
-                margin-top: 24px;
+                margin-top: 32px;
                 letter-spacing: -3px;
             }
         }
@@ -73,7 +73,7 @@
                 justify-content: center;
             }
             @include media-up(lg) {
-                margin-top: 32px;
+                margin-top: 48px;
             }
         }
     }

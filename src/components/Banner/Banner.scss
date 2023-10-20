@@ -14,6 +14,10 @@
       justify-content: center;
       margin-top: 12px;
     }
+
+    @include media-up(xxl) {
+      margin-top: 48px;
+    }
   }
 
   &__title {

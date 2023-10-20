@@ -130,19 +130,19 @@
 
         svg {
           max-width: 165px;
-          margin-left: 8px;
+          margin-left: 5.63px;
 
           @include media-up(md) {
             max-width: 276px;
-            margin-left: 13px;
+            margin-left: 9.39px;
           }
           @include media-up(lg) {
             max-width: 373px;
-            margin-left: 18px;
+            margin-left: 12.68px;
           }
           @include media-up(xl) {
             max-width: 528px;
-            margin-left: 26px;
+            margin-left: 17.96px;
           }
         }
       }
