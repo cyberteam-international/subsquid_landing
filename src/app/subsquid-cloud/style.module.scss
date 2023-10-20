@@ -41,8 +41,10 @@
             @include media-up(lg) {
                 letter-spacing: -2.4px;
             }
-            @include media-up(xxl) {
+            @include media-up(xl) {
                 margin-top: 32px;
+            }
+            @include media-up(xxl) {
                 letter-spacing: -3px;
             }
         }
