@@ -60,6 +60,9 @@
             letter-spacing: 0.32px;
             @include media-up(sm) {
                 text-align: center;
+                span{
+                    display: block;
+                }
             }
             @include media-up(lg) {
                 margin-top: 24px;
@@ -78,7 +81,7 @@
                 justify-content: center;
             }
             @include media-up(lg) {
-                margin-top: 48px;
+                margin-top: 32px;
             }
         }
     }
