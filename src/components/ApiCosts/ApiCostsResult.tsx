@@ -31,15 +31,15 @@ export default function ApiCostsResult() {
         const profile = tabsProfile[0].select
         if (activeTab === 'byUseCase') {
             if (profile === 'COLLOCATED') {
-                return 'A free development indexer can only be deployed to the Playground. The Playground is an isolated space automatically created for each Cloud account. The deployments to the Playground are not billed'
+                return 'A free development indexer can only be deployed to the Playground. The Playground is an isolated space automatically created for each Cloud account. The deployments to the Playground are not billed.'
             }
             else if (profile === 'DEDICATED') {
-                return 'The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data. A collocated squid is available for free in the Playground, your personal space. If the same squid is deployed within an organization, it\'s subject to our standard tariffs.'
+                return 'The calculated price quote is provisional. An optimal configuration may require more compute resources for use-cases serving complex API queries and/or processing high volumes of indexed data.'
             }
         }
         else if (activeTab === 'byResources') {
             if (profile === 'COLLOCATED') {
-                return 'A free collocated indexer can only be deployed to the Playground. The Playground is an isolated space automatically created for each Cloud account. The deployments to the Playground are not billed'
+                return 'A free collocated indexer can only be deployed to the Playground. The Playground is an isolated space automatically created for each Cloud account. The deployments to the Playground are not billed.'
             }
         }
     }

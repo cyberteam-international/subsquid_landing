@@ -36,7 +36,7 @@ export default [
             'Unlimited pay-as-you-go production indexers',
             'Unlimited pay-as-you-go development indexers',
             '2M monthly RPC requests',
-            'Pro support',
+            'Premium support',
         ],
         button: {
             title: 'Get started',
