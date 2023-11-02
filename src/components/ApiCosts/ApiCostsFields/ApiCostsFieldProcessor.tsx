@@ -44,7 +44,7 @@ export default function ApiCostsFieldProcessor({ field, selectValuesState, tabsP
     }
 
     const setFields = () => {
-        if (tabsProfile !== 'COLLOCATED') {
+        // if (tabsProfile !== 'COLLOCATED') {
             return field.values.map((item, index) => {
                 return (
                     <ApiCostsFieldRadio
@@ -56,7 +56,7 @@ export default function ApiCostsFieldProcessor({ field, selectValuesState, tabsP
                     />
                 )
             });
-        }
+        // }
     }
 
     const removeItem = () =>{

@@ -44,10 +44,12 @@ export default function ApiCostsField({ field, selectValuesState, activeTab }: P
 
     const updateState = (item: IApiCostsState, isActiveChange: boolean = false) => {
         if (tabsProfile === 'COLLOCATED' && !isActiveChange) {
-            if (item.select !== 'default' && !item.replicas && item.fieldName !== 'squidProfile' && (activeTab === 'byUseCase' || (field.type !== 'range-input' && field.type !== 'range'))) {
-                const newTabsProfileSelect = [...tabsProfileState]
-                newTabsProfileSelect[0] = { ...tabsProfileState[0], select: 'DEDICATED' }
-                setTabsProfileState([...newTabsProfileSelect])
+            if (item.fieldName !== 'squidProfile' && item.fieldName !== 'networksCount') {
+                if (item.select !== 'default' && !item.replicas && (activeTab === 'byUseCase' || (field.type !== 'range-input' && field.type !== 'range'))) {
+                    const newTabsProfileSelect = [...tabsProfileState]
+                    newTabsProfileSelect[0] = { ...tabsProfileState[0], select: 'DEDICATED' }
+                    setTabsProfileState([...newTabsProfileSelect])
+                }
             }
         }
         const updateObj = [...selectValues]

@@ -91,6 +91,51 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
         };
     };
 
+    const setRenderItemValues = () =>{
+        if (selectTabsProfile === 'COLLOCATED') {
+            return (
+                [
+                    {
+                        title: 'Default',
+                        value: 'default',
+                        price: {
+                            type: "h",
+                            value: 0.0069
+                        },
+                    }
+                ]
+            )
+        }
+        else return (
+            [
+                {
+                    title: 'Small',
+                    value: 'small',
+                    price: {
+                        type: "h",
+                        value: 0.04
+                    },
+                },
+                {
+                    title: 'Medium',
+                    value: 'medium',
+                    price: {
+                        type: "h",
+                        value: 0.08
+                    },
+                },
+                {
+                    title: 'Large',
+                    value: 'large',
+                    price: {
+                        type: "h",
+                        value: 0.15
+                    },
+                }
+            ]
+        )
+    }
+
     const indexProcessorProfile = listIndex('Processor profile')
     const indexApiProfile = listIndex('API profile')
     const indexPostgresProfile = listIndex('Postgres profile')
@@ -136,7 +181,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
             },
         },
         {
-            name: 'New processors',
+            name: 'networksCount',
             conditions: () => {
                 const selectValueNetworksCount = Number(selectValuesUseCase[indexNetworksCount].select)
                 const newState: NewProcessors['0'] = {
@@ -149,32 +194,7 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                         name: `Processor profile ${newState.state.length + 2}`,
                         type: 'radio',
                         canActive: false,
-                        values: [
-                            {
-                                title: 'Small',
-                                value: 'small',
-                                price: {
-                                    type: "h",
-                                    value: 0.04
-                                },
-                            },
-                            {
-                                title: 'Medium',
-                                value: 'medium',
-                                price: {
-                                    type: "h",
-                                    value: 0.08
-                                },
-                            },
-                            {
-                                title: 'Large',
-                                value: 'large',
-                                price: {
-                                    type: "h",
-                                    value: 0.15
-                                },
-                            }
-                        ],
+                        values: setRenderItemValues(),
                         helper: {
                             title: `Processor profile ${newProcessors.render.length + 1}`,
                             description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
@@ -182,11 +202,8 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                     }
                     const renderState = {
                         fieldName: `Processor profile ${newState.state.length + 2}`,
-                        price: {
-                            type: "h",
-                            value: 0.04
-                        },
-                        select: 'small',
+                        price: setRenderItemValues()[0].price,
+                        select: setRenderItemValues()[0].value,
                     }
                     newState.render.push(renderItem)
                     newState.state.push(renderState)
@@ -315,33 +332,12 @@ export const useResourseCalculator = ({ selectUseCaseState, selectResourcesState
                 );
             }
         },
-        // {
-        //     name: 'Postgres storage',
-        //     conditions: () => {
-        //         const selectValue = selectValuesUseCase[indexDataSize].select
-        //         if (selectValue === 'small') {
-        //             updateState(
-        //                 currentInfo('Postgres storage', '50', indexPostgresStorage), indexPostgresStorage
-        //             );
-        //         }
-        //         else if (selectValue === 'medium') {
-        //             updateState(
-        //                 currentInfo('Postgres storage', '150', indexPostgresStorage), indexPostgresStorage
-        //             );
-        //         }
-        //         else if (selectValue === 'large') {
-        //             updateState(
-        //                 currentInfo('Postgres storage', '500', indexPostgresStorage), indexPostgresStorage
-        //             );
-        //         }
-        //     }
-        // },
     ]
 
     useEffect(() => {
 
         tabConditions.forEach((item, _index) => {
-            if (item.name === 'squidProfile' || selectTabsProfile === 'DEDICATED') {
+            if (item.name === 'squidProfile' || item.name === 'networksCount' || selectTabsProfile === 'DEDICATED') {
                 item.conditions()
             }
         })

@@ -81,6 +81,10 @@ export default function ApiCosts({ refObj }: Props) {
                             selectValuesState={currentValueState}
                             activeTab={activeTab}
                         />
+                        {/* {newProcessors.render.length > 0 && setNewProfiles()}
+                        {newProcessors.render.length < 9 && (
+                            <AddProcessor tabsProfile={tabsProfile[0].select} />
+                        )} */}
                         {tabName === 'byResources' && (
                             <>
                                 {newProcessors.render.length > 0 && setNewProfiles()}
