@@ -1,7 +1,11 @@
 "use client"
 
+import Image from 'next/image';
 import './Banner.scss'
 import {FadeInUp, FadeInUpFast} from "@/components/Animation";
+
+import duckdb_logo_1 from '@/../public/duckdb_logo_1.svg'
+import duckdb_logo_2 from '@/../public/duckdb_logo_2.svg'
 
 export default function Banner() {
     return (
@@ -10,11 +14,17 @@ export default function Banner() {
                 <h1 className={'banner__title'}>The <i>Web3</i> Data Lake</h1>
             </FadeInUpFast>
             <FadeInUpFast delay={300}>
-                <p className={'subtitle banner__subtitle'}>A peer-to-peer network to batch query and aggregate terabytes
-                    of on-chain and off-chain data in a ridiculously efficient way<br /><br />
-                    ▶ Powered by DuckDB<br />
-                    ▶ Secured by zero-knowledge proofs
-                </p>
+                <p className={'subtitle banner__subtitle'}>A peer-to-peer network to batch query and aggregate terabytes of on-chain and off-chain data in a ridiculously efficient way</p>
+                <div className={"banner__items"}>
+                    <div className={"banner__item"}>
+                        <Image {...duckdb_logo_1} alt='duckdb-logo_1' />
+                        <p>Powered by DuckDB</p>
+                    </div>
+                    <div className={"banner__item"}>
+                        <Image {...duckdb_logo_2} alt='duckdb-logo_2' />
+                        <p>Secured by zero-knowledge proofs</p>
+                    </div>
+                </div>
             </FadeInUpFast>
 
             <FadeInUpFast delay={500}>
