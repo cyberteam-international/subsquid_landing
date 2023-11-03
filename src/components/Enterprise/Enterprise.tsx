@@ -27,7 +27,7 @@ export default function Enterprise() {
                 <FadeInUp delay={100}>
                     <div className="enterprise__header">
                         <h2>Enterprise-ready, dev-friendly</h2>
-                        <p className="subtitle">Blazing-fast, zero setup indexing powered by Subsquid Network.<br/>Run locally, on-premises or in the cloud.</p>
+                        <p className="subtitle">Open-source toolkit and one-line cloud deployment</p>
                     </div>
                 </FadeInUp>
                 <div className="enterprise__items">

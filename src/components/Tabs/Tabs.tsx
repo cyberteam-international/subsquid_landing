@@ -16,11 +16,10 @@ export default function Tabs() {
             title: "Squid SDK",
             body: <ul>
                 <li>100% open-source</li>
-                <li>No archival RPC node needed</li>
-                <li>Postgres, parquet or custom data targets</li>
-                <li>TypeScript-based, install from npm</li>
-                <li>Support for real-time indexing and chain reorgs</li>
-                <li>Access state diffs, traces and internal transactions</li>
+                <li>Deploy locally with ease</li>
+                <li>Custom data sources & targets</li>
+                <li>TypeScript-based!</li>
+                <li>Automated tools: TypeGen & SquidGen</li>
             </ul>,
             active: true,
         },
