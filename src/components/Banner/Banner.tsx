@@ -5,13 +5,13 @@ import './Banner.scss'
 import {FadeInUp, FadeInUpFast} from "@/components/Animation";
 
 import duckdb_logo_1 from '@/../public/duckdb_logo_1.svg'
-import duckdb_logo_2 from '@/../public/duckdb_logo_2.svg'
+import duckdb_logo_2 from '@/../public/duckdb_logo_2.png'
 
 export default function Banner() {
     return (
         <div className={'banner'}>
             <FadeInUpFast delay={100}>
-                <h1 className={'banner__title'}>The <i>Web3</i> Data Lake</h1>
+                <h1 className={'banner__title'}>The <i>Web3</i> <span>Data Lake</span></h1>
             </FadeInUpFast>
             <FadeInUpFast delay={300}>
                 <p className={'subtitle banner__subtitle'}>A peer-to-peer network to batch query and aggregate terabytes of on-chain and off-chain data in a ridiculously efficient way</p>

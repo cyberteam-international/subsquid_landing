@@ -21,7 +21,12 @@
   }
 
   &__title {
-    
+    span{
+      display: block;
+      @include media-up(md) {
+        display: inline-block;
+      }
+    }
   }
 
   &__items{
