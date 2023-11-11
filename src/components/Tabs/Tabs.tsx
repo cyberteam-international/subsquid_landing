@@ -65,7 +65,7 @@ export default function Tabs() {
                         'tabs__button': true,
                         'tabs__button--active': tab.active
                     })} key={index}>
-                        <Image src={tab.icon} width={16} height={16} alt=""/>
+                        <img src={tab.icon} width={16} height={16} alt=""/>
                         <span>{tab.title}</span>
                     </button>
                 ))}

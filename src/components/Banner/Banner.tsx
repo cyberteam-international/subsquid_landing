@@ -17,11 +17,11 @@ export default function Banner() {
                 <p className={'subtitle banner__subtitle'}>A peer-to-peer network to batch query and aggregate terabytes of on-chain and off-chain data in a ridiculously efficient way</p>
                 <div className={"banner__items"}>
                     <div className={"banner__item"}>
-                        <Image {...duckdb_logo_1} alt='duckdb-logo_1' />
+                        <img src="/duckdb_logo_1.svg" alt="duckdb-logo_1"/>
                         <p>Powered by DuckDB</p>
                     </div>
                     <div className={"banner__item"}>
-                        <Image {...duckdb_logo_2} alt='duckdb-logo_2' />
+                        <img src="/duckdb_logo_2.png" alt="duckdb-logo_2"/>
                         <p>Secured by zero-knowledge proofs</p>
                     </div>
                 </div>
