@@ -34,8 +34,8 @@ export default function Blog(props: BlogProps) {
             <div className="blog__wrapper">
                 <FadeInUp delay={100}>
                     <div className="blog__header">
-                        <h2>Squid blog</h2>
-                        <p className={'subtitle'}>Get the latest updates about Subsquid</p>
+                        <h2>Read the blog</h2>
+                        <p className={'subtitle'}>Project updates, industry insights, and much more</p>
                     </div>
                 </FadeInUp>
 

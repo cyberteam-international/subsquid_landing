@@ -73,10 +73,10 @@ h1 i, .h1 i {
 }
 
 h2, .h2 {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   line-height: 120%;
-  letter-spacing: -0.28px;
+  letter-spacing: -0.32px;
   text-align: center;
 
   @include media-up(lg) {

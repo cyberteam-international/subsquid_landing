@@ -7,6 +7,7 @@ import Developers from "@/components/Developers/Developers";
 import Blog from "@/components/Blog/Blog";
 import _developersMock from "@/_mock/developers.mock"
 import _blogMock from "@/_mock/blog.mock"
+import Indexer from "@/components/Indexer/Indexer";
 
 export const metadata: Metadata = {
     title: 'Subsquid',
@@ -19,7 +20,8 @@ export default function Home() {
                 <div className="sections">
                     <Banner/>
                     <Cards/>
-                    <Enterprise/>
+                    <Indexer/>
+                    {/* <Enterprise/> */}
                     <Developers items={_developersMock}/>
                     <Blog slides={_blogMock}/>
                 </div>

@@ -5,9 +5,10 @@ import {FadeInUp} from "@/components/Animation";
 
 export default function Cards() {
     const items = [
-        {title: '100+', text: 'supported networks'},
-        {title: '30+ billion', text: 'data lake requests'},
-        {title: '40000+', text: 'indexers deployed'},
+        {title: '100+', text: 'networks supported'},
+        {title: '50K+', text: 'indexers deployed'},
+        {title: '40+ billion', text: 'data lake requests'},
+        {title: '5K+ ', text: 'real dApps powered'},
     ]
 
     return (
@@ -20,7 +21,7 @@ export default function Cards() {
                     <img src="/blub-2.png" alt=""/>
                 </div>
 
-                <h2 className="cards__title">Web3’s largest decentralized data lake</h2>
+                <h2 className="cards__title">The new standard for blockchain data</h2>
 
                 <div className={'cards__items'}>
                     {items.map((item, index) => (

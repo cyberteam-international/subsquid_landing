@@ -107,9 +107,8 @@ export default function Developers(props: DevepolerCardsProps) {
             <div className="developers__wrapper">
                 <FadeInUp>
                     <div className="developers__header">
-                        <h2>Builders love it!</h2>
-                        <p className='subtitle'>Thousands of developers are building the future of Web3 with
-                            Subsquid</p>
+                        <h2>Built for builders</h2>
+                        <p className='subtitle'>Tens of thousands of real Web3 devs choose Subsquid for their projects</p>
                     </div>
                 </FadeInUp>
 
