@@ -41,7 +41,7 @@ export default function Indexer({ }: Props) {
         return (
             <>
                 <h2>{title}</h2>
-                <p className="subtitle">{subtitle}</p>
+                <p className={classNames('subtitle', style.indexer__header__subtitle)}>{subtitle}</p>
             </>
         )
     }

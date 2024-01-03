@@ -3,7 +3,13 @@
 .indexer{
     margin-bottom: 60px;
     background: var(--color-grey-light-2);
-    padding: 100px 0;
+    padding: 40px 0;
+    @include media-up(md) {
+        padding: 60px 0;
+    }
+    @include media-up(xl) {
+        padding: 100px 0;
+    }
     &__container{
         display: flex;
         flex-direction: column;
@@ -20,6 +26,11 @@
         flex-direction: column;
         gap: 10px;
         text-align: center;
+        &__subtitle{
+            @include media-down(sm) {
+                min-height: 50px;
+            }
+        }
     }
     &__radio{
         display: flex;
