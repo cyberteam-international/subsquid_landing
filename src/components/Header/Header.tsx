@@ -69,7 +69,7 @@ export default function Header({ setHeaderWidth }: Props) {
         })}>
             {isVisibleTopBar ? <div className="header-top" ref={headerTopRef}>
                 <img src="/rocket.png" alt="" />
-                <p><a href="https://coinlist.co/subsquid-testnet" target="_blank">The incentivized testnet is LIVE</a></p>
+                <p><a href="https://blog.subsquid.io/subsquid-testnet-phase-i-a-huge-success/" target="_blank">Testnet phase 1 complete. 50k indexers onboarded. Learn more</a></p>
 
                 <button className="header-top__close" onClick={() => setIsVisibleTopBar(false)}>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

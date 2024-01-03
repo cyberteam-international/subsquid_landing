@@ -205,7 +205,7 @@ export default function CalculatorPage() {
                                                     <FadeInUpFast delay={300}>
                                                         <h1 className="calculator__title">Build and Deploy APIs for <i>Blockchain Data</i></h1>
                                                         <p className={style['calculator__header__subtitle']}>
-                                                            <span>Join thousands of developers who use Subsquid Cloud to deploy</span><span>GraphQL APIs and sophisticated indexers for Web3 apps.</span>
+                                                            <span>Join thousands of developers who use Subsquid Cloud to deploy</span><span> GraphQL APIs and sophisticated indexers for Web3 apps.</span>
                                                         </p>
                                                         <div className={style['calculator__header-buttons']}>
                                                             <button className="btn btn--outline">
