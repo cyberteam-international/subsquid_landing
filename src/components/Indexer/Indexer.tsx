@@ -166,10 +166,12 @@ export default function Indexer({ }: Props) {
     let startX: number, startY: number, endX: number, endY: number;
     let swipePosition: 'left' | 'right'
     const touchstartEvent = (e: React.TouchEvent<HTMLDivElement>) => {
+        if(windowWidth > 767.99) return
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
     }
     const touchendEvent = (e: React.TouchEvent<HTMLDivElement>) => {
+        if(windowWidth > 767.99) return
         endX = e.changedTouches[0].clientX;
         endY = e.changedTouches[0].clientY;
         const distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
