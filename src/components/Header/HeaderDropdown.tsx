@@ -48,7 +48,7 @@ export default function HeaderDropdown({ items, title }: IHeaderList) {
         if (navRef.current) {
             let maxWidth = 0
             if (isOpen && navRef.current.parentElement) {
-                navRef.current.parentElement.style.height = `${navRef.current.getBoundingClientRect().height}px`
+                navRef.current.parentElement.style.height = `${navRef.current.getBoundingClientRect().height + 5}px`
             }
             else if (!isOpen && navRef.current.parentElement) {
                 navRef.current.parentElement.style.height = '0px'
