@@ -42,7 +42,10 @@ import img_2_1_center_without from '@/../public/diagrams/img_2_1_center_without.
 export interface IIndexerDataLeftBlock{
     title: string,
     images?: StaticImageData[],
-    image?: StaticImageData
+    image?: {
+        src: StaticImageData,
+        type: 'logo' | 'img'
+    }
 }
 
 interface IIndexerDataCenterBlock{
@@ -154,7 +157,10 @@ export const indexerData: IIndexerData = {
             with: {
                 leftBlock: {
                     title: 'Subsquid Network',
-                    image: img_1_left_with
+                    image: {
+                        type: 'logo',
+                        src: img_1_left_with
+                    }
                 },
                 center: {
                     title: 'Blazing fast up to\n150k blocks/s',
@@ -219,7 +225,10 @@ export const indexerData: IIndexerData = {
             with: {
                 leftBlock: {
                     title: 'Subsquid Network',
-                    image: img_1_1_left_with
+                    image: {
+                        type: 'logo',
+                        src: img_1_1_left_with
+                    }
                 },
                 center: {
                     title: 'Permissionless\n& Open',
@@ -254,7 +263,10 @@ export const indexerData: IIndexerData = {
             without: {
                 leftBlock: {
                     title: 'Blockchain',
-                    image: img_2_1_left_without
+                    image: {
+                        src: img_2_1_left_without,
+                        type: "img"
+                    }
                 },
                 center: {
                     title: 'No historical data',
@@ -267,7 +279,10 @@ export const indexerData: IIndexerData = {
             with: {
                 leftBlock: {
                     title: 'Blockchain',
-                    image: img_2_1_left_with
+                    image: {
+                        src: img_2_1_left_with,
+                        type: 'img'
+                    }
                 },
                 center: {
                     title: 'All historical data',

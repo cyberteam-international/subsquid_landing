@@ -3,8 +3,15 @@
 import { ReactNode, useState } from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
+import { useWindowWidth } from '@react-hook/window-size';
+import { FadeInUp } from '../Animation';
 
 import { indexerData, IIndexerDataRightBlock, IIndexerDataLeftBlock } from '@/_mock/indexer.mock';
+
+import background_with from '@/../../public/diagrams/background_with.svg'
+import background_without from '@/../../public/diagrams/background_without.svg'
+import background_with_mobile from '@/../../public/diagrams/background_with_mobile.svg'
+import background_without_mobile from '@/../../public/diagrams/background_without_mobile.svg'
 
 import style from './Indexer.module.scss'
 
@@ -20,6 +27,8 @@ export default function Indexer({ }: Props) {
 
     const [activeMode, setActiveMode] = useState<'Without' | 'With'>('With')
     const [activeTab, setActiveTab] = useState<number>(0)
+
+    const windowWidth = useWindowWidth()
 
     const setHeader = () => {
         const title = activeMode === 'With' ? indexerData.header[activeTab].with.title : indexerData.header[activeTab].without.title
@@ -67,7 +76,7 @@ export default function Indexer({ }: Props) {
                     </div>
                 )}
                 {rightItem.image && (
-                    <Image {...rightItem.image} alt={rightItem.title} />
+                    <div className={style.indexer__block__inner__image}><Image {...rightItem.image} alt={rightItem.title} /></div>
                 )}
             </>
         )
@@ -88,7 +97,14 @@ export default function Indexer({ }: Props) {
                     <div className={style.indexer__block__inner__images}>{setImages()}</div>
                 )}
                 {leftItem.image && (
-                    <Image {...leftItem.image} alt={leftItem.title} />
+                    <>
+                        {leftItem.image.type === 'logo' && (
+                            <div className={classNames(style.indexer__block__inner__image)}><Image {...leftItem.image} alt={leftItem.title} /></div>
+                        )}
+                        {leftItem.image.type === 'img' && (
+                            <Image {...leftItem.image} alt={leftItem.title} />
+                        )}
+                    </>
                 )}
             </>
         )
@@ -98,12 +114,17 @@ export default function Indexer({ }: Props) {
         return indexerData.diagrams.map((item, index) => {
             return (
                 <div key={index} className={style.indexer__block__inner}>
-                    <div className={style.indexer__block__inner__wrapper} style={{left: `-${(activeMode === 'With'? 0 : 1) * 100}%`}}>
+                    <div className={style.indexer__block__inner__wrapper} style={{ left: `-${(activeMode === 'With' ? 0 : 1) * 100}%` }}>
                         <div className={style.indexer__block__inner__with}>
                             <div className={style.indexer__block__inner__left}>
                                 {setLeftBlock(item.with.leftBlock)}
                             </div>
                             <div className={style.indexer__block__inner__center}>
+                                {windowWidth < 767.999 ? (
+                                    <Image {...background_with_mobile} className={style.indexer__block__inner__center_arrow} alt={item.with.center.title} />
+                                ) : (
+                                    <Image {...background_with} className={style.indexer__block__inner__center_arrow} alt={item.with.center.title} />
+                                )}
                                 <Image {...item.with.center.image} alt={item.with.center.title} />
                                 <p>{item.with.center.title}</p>
                             </div>
@@ -116,8 +137,13 @@ export default function Indexer({ }: Props) {
                                 {setLeftBlock(item.without.leftBlock)}
                             </div>
                             <div className={style.indexer__block__inner__center}>
+                                {windowWidth < 767.999 ? (
+                                    <Image {...background_without_mobile} className={style.indexer__block__inner__center_arrow} alt={item.with.center.title} />
+                                ) : (
+                                    <Image {...background_without} className={style.indexer__block__inner__center_arrow} alt={item.with.center.title} />
+                                )}
                                 <Image {...item.without.center.image} alt={item.without.center.title} />
-                                <p>{item.without.center.title}</p>     
+                                <p>{item.without.center.title}</p>
                             </div>
                             <div className={classNames(style.indexer__block__inner__right, !item.without.rightBlock.items && !item.without.rightBlock.image && style.indexer__block__inner__right_center)}>
                                 {setRigthBlock(item.without.rightBlock)}
@@ -130,26 +156,28 @@ export default function Indexer({ }: Props) {
     }
 
     return (
-        <div className={style.indexer}>
-            <div className={style.indexer__header}>
-                {setHeader()}
-            </div>
-            <div className={classNames(style.indexer__radio, activeMode === 'Without' ? style.indexer__radio_left : style.indexer__radio_right)}>
-                <button
-                    className={classNames(style.indexer__radio__button, activeMode === 'Without' && style.indexer__radio__button_active)}
-                    onClick={() => setActiveMode('Without')}
-                >Without Subsquid</button>
-                <button
-                    className={classNames(style.indexer__radio__button, activeMode === 'With' && style.indexer__radio__button_active)}
-                    onClick={() => setActiveMode('With')}
-                >With Subsquid</button>
-            </div>
-            <div className={style.indexer__wrapper}>
-                <div className={style.indexer__tabs}>{setTabs()}</div>
-                <div className={style.indexer__block}>
-                    <div className={style.indexer__block__wrapper} style={{left: `-${(activeTab) * 100}%`}}>{setBlock()}</div>
+        <FadeInUp delay={600}>
+            <div className={style.indexer}>
+                <div className={style.indexer__header}>
+                    {setHeader()}
+                </div>
+                <div className={classNames(style.indexer__radio, activeMode === 'Without' ? style.indexer__radio_left : style.indexer__radio_right)}>
+                    <button
+                        className={classNames(style.indexer__radio__button, activeMode === 'Without' && style.indexer__radio__button_active)}
+                        onClick={() => setActiveMode('Without')}
+                    >Without Subsquid</button>
+                    <button
+                        className={classNames(style.indexer__radio__button, activeMode === 'With' && style.indexer__radio__button_active)}
+                        onClick={() => setActiveMode('With')}
+                    >With Subsquid</button>
+                </div>
+                <div className={style.indexer__wrapper}>
+                    <div className={style.indexer__tabs}>{setTabs()}</div>
+                    <div className={style.indexer__block}>
+                        <div className={style.indexer__block__wrapper} style={{ left: `-${(activeTab) * 100}%` }}>{setBlock()}</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </FadeInUp>
     );
 }
