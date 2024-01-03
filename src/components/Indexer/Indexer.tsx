@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { useWindowWidth } from '@react-hook/window-size';
@@ -27,6 +27,10 @@ export default function Indexer({ }: Props) {
 
     const [activeMode, setActiveMode] = useState<'Without' | 'With'>('With')
     const [activeTab, setActiveTab] = useState<number>(0)
+
+    const [scrollValue, setScrollValue] = useState<number>(0)
+
+    const blockRef = useRef<HTMLDivElement>(null)
 
     const windowWidth = useWindowWidth()
 
@@ -125,8 +129,10 @@ export default function Indexer({ }: Props) {
                                 ) : (
                                     <Image {...background_with} className={style.indexer__block__inner__center_arrow} alt={item.with.center.title} />
                                 )}
-                                <Image {...item.with.center.image} alt={item.with.center.title} />
-                                <p>{item.with.center.title}</p>
+                                <div className={style.indexer__block__inner__center__wrapper}>
+                                    <Image {...item.with.center.image} alt={item.with.center.title} />
+                                    <p>{item.with.center.title}</p>
+                                </div>
                             </div>
                             <div className={style.indexer__block__inner__right}>
                                 {setRigthBlock(item.with.rightBlock)}
@@ -142,8 +148,10 @@ export default function Indexer({ }: Props) {
                                 ) : (
                                     <Image {...background_without} className={style.indexer__block__inner__center_arrow} alt={item.with.center.title} />
                                 )}
-                                <Image {...item.without.center.image} alt={item.without.center.title} />
-                                <p>{item.without.center.title}</p>
+                                <div className={style.indexer__block__inner__center__wrapper}>
+                                    <Image {...item.without.center.image} alt={item.without.center.title} />
+                                    <p>{item.without.center.title}</p>
+                                </div>
                             </div>
                             <div className={classNames(style.indexer__block__inner__right, !item.without.rightBlock.items && !item.without.rightBlock.image && style.indexer__block__inner__right_center)}>
                                 {setRigthBlock(item.without.rightBlock)}
@@ -155,26 +163,123 @@ export default function Indexer({ }: Props) {
         })
     }
 
+    let startX: number, startY: number, endX: number, endY: number;
+    let swipePosition: 'left' | 'right'
+    const touchstartEvent = (e: React.TouchEvent<HTMLDivElement>) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }
+    const touchendEvent = (e: React.TouchEvent<HTMLDivElement>) => {
+        endX = e.changedTouches[0].clientX;
+        endY = e.changedTouches[0].clientY;
+        const distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (deltaX > 0) {
+                swipePosition = 'right'
+            } else {
+                swipePosition = 'left'
+            }
+        }
+        if (swipePosition === 'left' || swipePosition === 'right') {
+            setScrollValue(distance)
+            // console.log(`Пройденное расстояние: ${distance}`);
+            if (blockRef.current && blockRef.current.getBoundingClientRect().width / 3 < distance) {
+                // console.log(`Пройдено больше чем ширина блока`);
+                if (swipePosition === 'right') {
+                    if (activeTab !== 0 ) {
+                        console.log('activeTab', activeTab, 'indexerData.diagrams.length', indexerData.diagrams.length)
+                        return setActiveTab((prev) => prev - 1)
+                        // console.log('activeTab', activeTab, 'indexerData.diagrams.length', indexerData.diagrams.length)
+                    }
+                }
+                else if (swipePosition === 'left'){
+                    if (activeTab < indexerData.diagrams.length && activeTab + 1 < indexerData.diagrams.length) {
+                        return setActiveTab((prev) => prev + 1)
+                    }
+                }
+            }
+        }
+    }
+
+    useEffect(()=>{console.log('activeTab12321321321321312', activeTab);
+    }, [activeTab])
+
+    // useEffect(() => {
+    //     let startX: number, startY: number, endX: number, endY: number;
+    //     let swipePosition: 'left' | 'right'
+    //     const touchstartEvent = (e: TouchEvent) => {
+    //         startX = e.touches[0].clientX;
+    //         startY = e.touches[0].clientY;
+    //     }
+    //     const touchendEvent = (e: TouchEvent) => {
+    //         endX = e.changedTouches[0].clientX;
+    //         endY = e.changedTouches[0].clientY;
+    //         const distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+
+    //         const deltaX = endX - startX;
+    //         const deltaY = endY - startY;
+
+    //         if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    //             if (deltaX > 0) {
+    //                 swipePosition = 'right'
+    //             } else {
+    //                 swipePosition = 'left'
+    //             }
+    //         }
+    //         if (swipePosition === 'left' || swipePosition === 'right') {
+    //             setScrollValue(distance)
+    //             console.log(`Пройденное расстояние: ${distance}`);
+    //             if (blockRef.current && blockRef.current.getBoundingClientRect().width / 3 < distance) {
+    //                 console.log(`Пройдено больше чем ширина блока`);
+    //                 if (swipePosition === 'right') {
+    //                     if (activeTab < indexerData.diagrams.length) {
+    //                         console.log('activeTab', activeTab, 'indexerData.diagrams.length', indexerData.diagrams.length)
+    //                     }
+    //                 }
+    //                 // else if (swipePosition === 'right'){
+    //                 //     if (activeTab <= indexerData.diagrams.length) {
+    //                 //         setActiveTab(activeTab - 1)
+    //                 //     }
+    //                 // }
+    //             }
+    //         }
+    //     }
+    //     if (blockRef.current) {
+    //         blockRef.current.addEventListener('touchstart', touchstartEvent);
+    //         blockRef.current.addEventListener('touchend', touchendEvent);
+    //     }
+    //     return () => {
+    //         blockRef.current?.removeEventListener('touchstart', touchstartEvent);
+    //         blockRef.current?.removeEventListener('touchend', touchendEvent);
+    //     }
+    // }, [blockRef])
+
     return (
         <FadeInUp delay={600}>
             <div className={style.indexer}>
-                <div className={style.indexer__header}>
-                    {setHeader()}
-                </div>
-                <div className={classNames(style.indexer__radio, activeMode === 'Without' ? style.indexer__radio_left : style.indexer__radio_right)}>
-                    <button
-                        className={classNames(style.indexer__radio__button, activeMode === 'Without' && style.indexer__radio__button_active)}
-                        onClick={() => setActiveMode('Without')}
-                    >Without Subsquid</button>
-                    <button
-                        className={classNames(style.indexer__radio__button, activeMode === 'With' && style.indexer__radio__button_active)}
-                        onClick={() => setActiveMode('With')}
-                    >With Subsquid</button>
-                </div>
-                <div className={style.indexer__wrapper}>
-                    <div className={style.indexer__tabs}>{setTabs()}</div>
-                    <div className={style.indexer__block}>
-                        <div className={style.indexer__block__wrapper} style={{ left: `-${(activeTab) * 100}%` }}>{setBlock()}</div>
+                <div className={classNames(style.indexer__container, 'container')}>
+                    <div className={style.indexer__header}>
+                        {setHeader()}
+                    </div>
+                    <div className={classNames(style.indexer__radio, activeMode === 'Without' ? style.indexer__radio_left : style.indexer__radio_right)}>
+                        <button
+                            className={classNames(style.indexer__radio__button, activeMode === 'Without' && style.indexer__radio__button_active)}
+                            onClick={() => setActiveMode('Without')}
+                        >Without Subsquid</button>
+                        <button
+                            className={classNames(style.indexer__radio__button, activeMode === 'With' && style.indexer__radio__button_active)}
+                            onClick={() => setActiveMode('With')}
+                        >With Subsquid</button>
+                    </div>
+                    <div className={style.indexer__wrapper}>
+                        <div className={style.indexer__tabs}>{setTabs()}</div>
+                        <div className={style.indexer__block} ref={blockRef} onTouchStart={(e) => touchstartEvent(e)} onTouchEnd={(e)=>touchendEvent(e)}>
+                            <div className={style.indexer__block__wrapper} style={{ left: `-${(activeTab) * 100}%` }}>{setBlock()}</div>
+                        </div>
                     </div>
                 </div>
             </div>

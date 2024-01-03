@@ -16,16 +16,20 @@ export const metadata: Metadata = {
 export default function Home() {
     return (
         // <main className="main">
-            <div className={'container'}>
                 <div className="sections">
-                    <Banner/>
-                    <Cards/>
+                    <div className={'container'}>
+                        <Banner/>
+                    </div>
+                    <div className={'container'}>
+                        <Cards/>
+                    </div>
                     <Indexer/>
                     {/* <Enterprise/> */}
-                    <Developers items={_developersMock}/>
-                    <Blog slides={_blogMock}/>
+                    <div className={'container'}>
+                        <Developers items={_developersMock}/>
+                        <Blog slides={_blogMock}/>
+                    </div>
                 </div>
-            </div>
         // </main>
     )
 }

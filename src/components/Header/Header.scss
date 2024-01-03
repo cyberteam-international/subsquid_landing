@@ -146,7 +146,7 @@
 		}
 	}
 
-	@include media-up(sm) {
+	@include media-up(lg) {
 		display: none;
 	}
 }
@@ -156,7 +156,12 @@
 	width: 100%;
 	justify-content: space-between;
 
-	@include media-down(xs) {
+	@include media-up(lg) {
+		display: flex;
+		align-items: center;
+	}
+
+	@include media-down(md) {
 		z-index: -1;
 		opacity: 0;
 		visibility: hidden;
@@ -182,7 +187,7 @@
 		align-items: center;
 		gap: 50px;
 		margin: 0 auto;
-		@include media-up(sm) {
+		@include media-up(lg) {
 			gap: 5px;
 			margin: 0;
 		}
@@ -204,12 +209,12 @@
 		align-items: center;
 		gap: 24px;
 
-		@include media-down(xs) {
+		@include media-down(md) {
 			flex-direction: column;
 			align-items: flex-start;
 		}
 
-		@include media-up(md){
+		@include media-up(lg){
 			width: fit-content;
 		}
 
@@ -226,7 +231,7 @@
 				justify-content: flex-end;
 			}
 
-			@include media-down(xs) {
+			@include media-down(md) {
 				align-items: center;
 
 				.btn.btn--primary {
@@ -254,7 +259,7 @@
 		position: relative;
 		transition: color .3s;
 
-		@include media-down(xs) {
+		@include media-down(md) {
 			width: 100%;
 			justify-content: flex-start;
 			align-items: flex-start;
@@ -266,7 +271,7 @@
 	}
 
 	&--active {
-		@include media-down(xs) {
+		@include media-down(md) {
 			top: 52px;
 			visibility: visible;
 			opacity: 1;
@@ -274,10 +279,5 @@
 			user-select: inherit;
 			pointer-events: inherit;
 		}
-	}
-
-	@include media-up(sm) {
-		display: flex;
-		align-items: center;
 	}
 }

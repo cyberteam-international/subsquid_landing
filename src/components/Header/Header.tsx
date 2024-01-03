@@ -100,9 +100,9 @@ export default function Header({ setHeaderWidth }: Props) {
                                 )}>
                                 <div className="nav__section">
                                     {setHeaderDropdown()}
-                                    <a href="https://blog.subsquid.io/" className="nav__item" target="_blank">Blog</a>
+                                    <a href="https://www.google.com/" className="nav__item" target="_blank">Token</a>
                                 </div>
-                                {windowWidth < 767.999 && (
+                                {windowWidth < 1023.999 && (
                                     <div className="nav__section">
                                         <div className="nav__social">
                                             <a href="https://discord.com/" target="_blank" rel="noopener noreferrer">
@@ -119,10 +119,10 @@ export default function Header({ setHeaderWidth }: Props) {
                                 )}
                                 
                                 <div className="nav__section">
-                                    {windowWidth > 767.999 && (
+                                    {windowWidth > 1023.999 && (
                                         <GitHub username="subsquid" reponame="squid-sdk" />
                                     )}
-                                    {windowWidth > 767.999 && (
+                                    {windowWidth > 1023.999 && (
                                         <div className="nav__social">
                                             <a href="https://discord.com/" target="_blank" rel="noopener noreferrer">
                                                 <Image {...discord} alt=''/>
@@ -136,7 +136,7 @@ export default function Header({ setHeaderWidth }: Props) {
                                         </div>
                                     )}
                                     <a href="https://app.subsquid.io/" className="btn btn--primary" target="_blank">Launch app</a>
-                                    {windowWidth < 767.999 && (
+                                    {windowWidth < 1023.999 && (
                                         <GitHub username="subsquid" reponame="squid-sdk" />
                                     )}
                                 </div>
