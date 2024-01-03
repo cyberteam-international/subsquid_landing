@@ -32,7 +32,7 @@
             padding: 14px 0;
             width: 160px;
             border-radius: 100px;
-            transition: 0.3s all;
+            transition: 0.3s color;
             z-index: 1;
             font-size: 14px;
             font-style: normal;
@@ -54,18 +54,18 @@
             position: absolute;
             top: 0;
             background: var(--color-primary);
-            transition: 0.3s all;
+            transition: 0.3s transform;
             border-radius: 100px;
             box-shadow: 0px 4px 14px 0px rgba(42, 42, 42, 0.30);
         }
         &_left{
             &::after{
-                left: 0;
+                transform: translate(0);
             }
         }
         &_right{
             &::after{
-                left: 50%;
+                transform: translate(100%)
             }
         }
     }
@@ -199,7 +199,7 @@
                     margin: 0;
                 }
                 img{
-                    transition: 0.3s all;
+                    transition: 0.3s opacity;
                     top: 0;
                     left: 0;
                     &:first-child{
@@ -219,18 +219,18 @@
         background: var(--color-white);
         overflow: hidden;
         &__wrapper{
-            transition: 0.3s all;
+            transition: 0.3s transform;
             position: relative;
             height: 100%;
             display: grid;
             grid-template-rows: 1fr;
             grid-template-columns: repeat(3, 100%);
-            left: -50%;
+            // left: -50%;
         }
         &__inner{
             overflow: hidden;
             &__wrapper{
-                transition: 0.3s all;
+                transition: 0.3s transform;
                 position: relative;
                 height: 100%;
                 display: grid;
@@ -428,7 +428,7 @@
                     align-items: center;
                     justify-content: center;
                     img{
-                        mix-blend-mode: luminosity;
+                        filter: grayscale(100%);
                         width: auto;
                         height: inherit;
                     }

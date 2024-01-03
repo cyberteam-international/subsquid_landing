@@ -118,7 +118,7 @@ export default function Indexer({ }: Props) {
         return indexerData.diagrams.map((item, index) => {
             return (
                 <div key={index} className={style.indexer__block__inner}>
-                    <div className={style.indexer__block__inner__wrapper} style={{ left: `-${(activeMode === 'With' ? 0 : 1) * 100}%` }}>
+                    <div className={style.indexer__block__inner__wrapper} style={{ transform: `translate(-${(activeMode === 'With' ? 0 : 1) * 100}%)` }}>
                         <div className={style.indexer__block__inner__with}>
                             <div className={style.indexer__block__inner__left}>
                                 {setLeftBlock(item.with.leftBlock)}
@@ -207,8 +207,8 @@ export default function Indexer({ }: Props) {
         }
     }
 
-    useEffect(()=>{console.log('activeTab12321321321321312', activeTab);
-    }, [activeTab])
+    // useEffect(()=>{console.log('activeTab12321321321321312', activeTab);
+    // }, [activeTab])
 
     // useEffect(() => {
     //     let startX: number, startY: number, endX: number, endY: number;
@@ -280,7 +280,8 @@ export default function Indexer({ }: Props) {
                     <div className={style.indexer__wrapper}>
                         <div className={style.indexer__tabs}>{setTabs()}</div>
                         <div className={style.indexer__block} ref={blockRef} onTouchStart={(e) => touchstartEvent(e)} onTouchEnd={(e)=>touchendEvent(e)}>
-                            <div className={style.indexer__block__wrapper} style={{ left: `-${(activeTab) * 100}%` }}>{setBlock()}</div>
+                            {/* <div className={style.indexer__block__wrapper} style={{ left: `-${(activeTab) * 100}%` }}>{setBlock()}</div> */}
+                            <div className={style.indexer__block__wrapper} style={{ transform: `translate(-${(activeTab) * 100}%)`  }}>{setBlock()}</div>
                         </div>
                     </div>
                 </div>
