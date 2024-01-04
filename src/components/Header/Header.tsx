@@ -100,23 +100,24 @@ export default function Header({ setHeaderWidth }: Props) {
                                 )}>
                                 <div className="nav__section">
                                     {setHeaderDropdown()}
-                                    <a href="https://www.google.com/" className="nav__item" target="_blank">Token</a>
+                                    <a href="https://coinlist.co/subsquid" className="nav__item" target="_blank">Token</a>
                                 </div>
                                 {windowWidth < 1023.999 && (
                                     <div className="nav__section">
                                         <div className="nav__social">
-                                            <a href="https://discord.com/" target="_blank" rel="noopener noreferrer">
+                                            <a href="https://discord.com/invite/subsquid" target="_blank" rel="noopener noreferrer">
                                                 <Image {...discord} alt=''/>
                                             </a>
-                                            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+                                            <a href="https://twitter.com/subsquid" target="_blank" rel="noopener noreferrer">
                                                 <Image {...twitter} alt=''/>
                                             </a>
-                                            <a href="https://web.telegram.org/" target="_blank" rel="noopener noreferrer">
+                                            <a href="https://t.me/subsquid" target="_blank" rel="noopener noreferrer">
                                                 <Image {...telegram} alt=''/>
                                             </a>
                                         </div>
                                     </div>
                                 )}
+
                                 
                                 <div className="nav__section">
                                     {windowWidth > 1023.999 && (

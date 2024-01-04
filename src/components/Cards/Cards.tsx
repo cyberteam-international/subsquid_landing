@@ -8,7 +8,7 @@ export default function Cards() {
         {title: '100+', text: 'networks supported'},
         {title: '50K+', text: 'indexers deployed'},
         {title: '40+ billion', text: 'data lake requests'},
-        {title: '5K+ ', text: 'real dApps powered'},
+        {title: '5K+ ', text: 'dApps powered'},
     ]
 
     return (
