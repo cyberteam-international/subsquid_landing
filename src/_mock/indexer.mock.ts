@@ -1,65 +1,65 @@
 import { StaticImageData } from "next/image"
 
-import point_1 from '@/../public/diagrams/point_1.svg'
-import point_1_disable from '@/../public/diagrams/point_1_disable.svg'
-import point_2 from '@/../public/diagrams/point_2.svg'
-import point_2_disable from '@/../public/diagrams/point_2_disable.svg'
-import point_3 from '@/../public/diagrams/point_3.svg'
-import point_3_disable from '@/../public/diagrams/point_3_disable.svg'
+const point_1 = 'diagrams/point_1.svg'
+const point_1_disable = 'diagrams/point_1_disable.svg'
+const point_2 = 'diagrams/point_2.svg'
+const point_2_disable = 'diagrams/point_2_disable.svg'
+const point_3 = 'diagrams/point_3.svg'
+const point_3_disable = 'diagrams/point_3_disable.svg'
 
-import img_1_left_without from '@/../public/diagrams/img_1_left_without.svg'
-import img_2_left_without from '@/../public/diagrams/img_2_left_without.svg'
-import img_1_right_without from '@/../public/diagrams/img_1_right_without.png'
-import img_2_right_without from '@/../public/diagrams/img_2_right_without.png'
-import img_1_left_with from '@/../public/diagrams/img_1_left_with.png'
-import img_1_center_without from '@/../public/diagrams/img_1_center_without.png'
-import img_1_center_with from '@/../public/diagrams/img_1_center_with.png'
-import img_1_right_with from '@/../public/diagrams/img_1_right_with.png'
-import img_2_right_with from '@/../public/diagrams/img_2_right_with.png'
-import img_3_right_with from '@/../public/diagrams/img_3_right_with.png'
+const img_1_left_without = 'diagrams/img_1_left_without.svg'
+const img_2_left_without = 'diagrams/img_2_left_without.svg'
+const img_1_right_without = 'diagrams/img_1_right_without.png'
+const img_2_right_without = 'diagrams/img_2_right_without.png'
+const img_1_left_with = 'diagrams/img_1_left_with.png'
+const img_1_center_without = 'diagrams/img_1_center_without.png'
+const img_1_center_with = 'diagrams/img_1_center_with.png'
+const img_1_right_with = 'diagrams/img_1_right_with.png'
+const img_2_right_with = 'diagrams/img_2_right_with.png'
+const img_3_right_with = 'diagrams/img_3_right_with.png'
 
-import img_1_1_left_with from '@/../public/diagrams/img_1_1_left_with.png'
-import img_1_1_center_with from '@/../public/diagrams/img_1_1_center_with.png'
-import img_1_1_right_with from '@/../public/diagrams/img_1_1_right_with.png'
-import img_1_2_right_with from '@/../public/diagrams/img_1_2_right_with.png'
-import img_1_3_right_with from '@/../public/diagrams/img_1_3_right_with.png'
-import img_1_4_right_with from '@/../public/diagrams/img_1_4_right_with.png'
-import img_1_1_left_without from '@/../public/diagrams/img_1_1_left_without.png'
-import img_1_2_left_without from '@/../public/diagrams/img_1_2_left_without.png'
-import img_1_1_center_without from '@/../public/diagrams/img_1_1_center_without.png'
-import img_1_1_right_without from '@/../public/diagrams/img_1_1_right_without.png'
-import img_1_2_right_without from '@/../public/diagrams/img_1_2_right_without.png'
-import img_1_3_right_without from '@/../public/diagrams/img_1_3_right_without.png'
-import img_1_4_right_without from '@/../public/diagrams/img_1_4_right_without.png'
+const img_1_1_left_with = 'diagrams/img_1_1_left_with.png'
+const img_1_1_center_with = 'diagrams/img_1_1_center_with.png'
+const img_1_1_right_with = 'diagrams/img_1_1_right_with.png'
+const img_1_2_right_with = 'diagrams/img_1_2_right_with.png'
+const img_1_3_right_with = 'diagrams/img_1_3_right_with.png'
+const img_1_4_right_with = 'diagrams/img_1_4_right_with.png'
+const img_1_1_left_without = 'diagrams/img_1_1_left_without.png'
+const img_1_2_left_without = 'diagrams/img_1_2_left_without.png'
+const img_1_1_center_without = 'diagrams/img_1_1_center_without.png'
+const img_1_1_right_without = 'diagrams/img_1_1_right_without.png'
+const img_1_2_right_without = 'diagrams/img_1_2_right_without.png'
+const img_1_3_right_without = 'diagrams/img_1_3_right_without.png'
+const img_1_4_right_without = 'diagrams/img_1_4_right_without.png'
 
-import img_2_1_left_with from '@/../public/diagrams/img_2_1_left_with.svg'
-import img_2_1_center_with from '@/../public/diagrams/img_2_1_center_with.png'
-import img_2_1_right_with from '@/../public/diagrams/img_2_1_right_with.png'
-import img_2_1_left_without from '@/../public/diagrams/img_2_1_left_without.svg'
-import img_2_1_center_without from '@/../public/diagrams/img_2_1_center_without.png'
+const img_2_1_left_with = 'diagrams/img_2_1_left_with.svg'
+const img_2_1_center_with = 'diagrams/img_2_1_center_with.png'
+const img_2_1_right_with = 'diagrams/img_2_1_right_with.png'
+const img_2_1_left_without = 'diagrams/img_2_1_left_without.svg'
+const img_2_1_center_without = 'diagrams/img_2_1_center_without.png'
 
 
 export interface IIndexerDataLeftBlock{
     title: string,
-    images?: StaticImageData[],
+    images?: string[],
     image?: {
-        src: StaticImageData,
+        src: string,
         type: 'logo' | 'img'
     }
 }
 
 interface IIndexerDataCenterBlock{
     title: string,
-    image: StaticImageData
+    image: string
 }
 
 export interface IIndexerDataRightBlock{
     title: string,
     items?: {
         title: string,
-        image: StaticImageData
+        image: string
     }[],
-    image?: StaticImageData
+    image?: string
 }
 
 export type IIndexerTabName = 'Indexing' | 'Decentralized Analytics' | 'Data Availability'
@@ -77,7 +77,7 @@ export interface IIndexerData{
     }[],
     diagrams: {
         name: IIndexerTabName,
-        images: StaticImageData[],
+        images: string[],
         without: {
             leftBlock: IIndexerDataLeftBlock,
             center: IIndexerDataCenterBlock,
