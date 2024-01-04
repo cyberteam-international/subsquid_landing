@@ -67,7 +67,7 @@ export const HeaderList: IHeaderList[] = [
                 img_hover: img_nut_hover,
                 href: {
                     type: 'remote',
-                    value: 'https://docs.subsquid.io/sdk/overview/Subsquid',
+                    value: 'https://docs.subsquid.io/sdk/overview',
                     title: 'Indexing SDK',
                 }
             },
