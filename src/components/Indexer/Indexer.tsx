@@ -81,7 +81,7 @@ export default function Indexer({}: Props) {
                 </div>
               )}
               {rightItem.image && (
-                <div className={style.indexer__block__inner__image}><img {...rightItem.image} alt={rightItem.title}/></div>
+                <div className={style.indexer__block__inner__image}><img src={rightItem.image.src} alt={rightItem.title}/></div>
               )}
           </>
         )
@@ -105,7 +105,7 @@ export default function Indexer({}: Props) {
                 <>
                     {leftItem.image.type === 'logo' && (
                       //@ts-ignore
-                      <div className={classNames(style.indexer__block__inner__image)}><img src={leftItem.image.src as string}
+                      <div className={classNames(style.indexer__block__inner__image)}><img src={leftItem.image}
                                                                                            alt={leftItem.title}/></div>
                     )}
                     {leftItem.image.type === 'img' && (
