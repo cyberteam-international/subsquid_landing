@@ -26,6 +26,11 @@
         flex-direction: column;
         gap: 10px;
         text-align: center;
+        h2{
+            @include media-down(sm) {
+                min-height: 80px;
+            }
+        }
         &__subtitle{
             @include media-down(sm) {
                 min-height: 50px;
@@ -391,7 +396,7 @@
                 &_item{
                     display: flex;
                     align-items: center;
-                    max-width: 100px;
+                    width: 100px;
                 }
                 img{
                     width: auto;
