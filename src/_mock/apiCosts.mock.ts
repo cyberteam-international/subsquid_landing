@@ -148,7 +148,7 @@ export const _apiCostsMock: IApiCosts = {
                         value: 0
                     },
                     values: [1, 2, 3, 4],
-                    limit: 10,
+                    // limit: 10,
                     helper: {
                         title: 'How many networks to index',
                         description: 'RPC is used to index fresh blocks in real-time. The number of RPC requests roughly corresponds to the number of blocks produced by the chain within a month.'
