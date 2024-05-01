@@ -31,6 +31,11 @@ body {
   width: 100%;
 }
 
+.body_main{
+  // background: url('/background_water.png') center center/cover no-repeat;
+  background: rgba(93, 203, 245, 1);
+}
+
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   position: relative;
@@ -214,6 +219,47 @@ p, .paragraph {
     padding-bottom: 250px;
   }
 
+  &_main{
+    padding: 0;
+  }
+
+}
+
+.din{
+  font-family: 'DIN Pro', sans-serif;
+  &__button{
+    padding: 12px 24px 12px 24px;
+    border-radius: 200px;
+    border: 2px solid rgba(43, 43, 43, 1);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 2px 2px 0px 0px rgba(43, 43, 43, 1);
+    transition: 0.1s all;
+    p, img, svg{
+      transition: 0.1s all;
+    }
+    p{
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      color: rgb(43, 43, 43);
+    }
+    &:hover{
+      box-shadow: 5px 5px 0px 0px rgba(43, 43, 43, 1);
+      transform: translateY(-4px);
+    }
+    &:active{
+      p, img, svg{
+        opacity: 0.6;
+      }
+      box-shadow: 5px 2px 0px 0px rgba(43, 43, 43, 1) inset;
+    }
+    &_orange{
+      background: rgba(236, 106, 59, 1);
+      p{
+        color: rgb(255, 255, 255);
+      }
+    }
+  }
 }
 
 

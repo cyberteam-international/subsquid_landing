@@ -7,9 +7,13 @@ import { usePathname } from 'next/navigation'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 
+import '@/../public/fonts/fonts.scss'
 import '@/globals.scss'
 import 'swiper/css';
 import 'swiper/css/grid';
+import HeaderNew from '@/components/Header/HeaderNew'
+import classNames from 'classnames'
+import FooterNew from '@/components/Footer/FooterNew'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +24,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	const mainRef = useRef<HTMLElement>(null)
 
 	const currentPath = usePathname()
+
+	const setHeader = () => {
+		if (currentPath === '/') {
+			// return <HeaderNew />
+		}
+		else if (currentPath !== '/worker') {
+			return <Header setHeaderWidth={setHeaderWidth} />
+		}
+	}
+
+	const setFooter = () => {
+		if (currentPath === '/') {
+			return <FooterNew />
+		}
+		else if (currentPath !== '/worker' && headerWidth !== 0) {
+			return <Footer />
+		}
+		{((currentPath === '/worker' || currentPath === '/') || headerWidth !== 0) && <Footer />}
+	}
+
+	useEffect(()=>{
+		if (currentPath === '/') {
+			document.body.classList.add('body_main')
+		}
+		else document.body.classList.remove('body_main')
+	}, [currentPath])
 
 	useEffect(()=>{
 		if (typeof window !== 'undefined') {
@@ -52,11 +82,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 }}></script>
 			</head>
 			<body className={inter.className}>
-				{currentPath !== '/worker' && <Header setHeaderWidth={setHeaderWidth} />}
-				<main ref={mainRef} style={{marginTop: `${headerWidth}px`}} className='main'>
-					{(currentPath === '/worker' || headerWidth !== 0) && children}
+				{/* {currentPath !== '/worker' && <Header setHeaderWidth={setHeaderWidth} />} */}
+				{setHeader()}
+				<main ref={mainRef} style={{marginTop: `${currentPath !== '/'? headerWidth : 0}px`}} className={classNames('main', currentPath === '/' && 'main_main')}>
+					{((currentPath === '/worker' || currentPath === '/') || headerWidth !== 0) && children}
 				</main>
-				{(currentPath !== '/worker' && headerWidth !== 0) && <Footer />}
+				{/* {((currentPath === '/worker' || currentPath === '/') || headerWidth !== 0) && <Footer />} */}
+				{setFooter()}
 			</body>
 		</html>
 	)

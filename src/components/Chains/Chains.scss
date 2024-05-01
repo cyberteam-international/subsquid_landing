@@ -1,0 +1,87 @@
+@import "../../assets/scss/main";
+
+.chains{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 69px;
+    padding-top: 60px;
+    background: url('/chains_background.png') center center/cover no-repeat;
+    min-height: 900px;
+    position: relative;
+    h2{
+        text-align: center;
+        font-size: 64px;
+        font-weight: 900;
+        -webkit-text-stroke: 1px rgb(43, 43, 43);
+        color: rgb(255, 255, 255);
+        text-shadow: rgb(43, 43, 43) 4px 4px;
+        line-height: 72px;
+    }
+    h3{
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 39.71px;
+        color: #ffff;
+        margin-top: 23px;
+    }
+    &__block{
+        padding: 50px 0 40px 0;
+        z-index: 1;
+        &__monkey{
+            position: relative;
+            z-index: 1;
+        }
+        &__Arbitrum, &__Avail, &__Berachain, &__Manta_Network, &__Moonbeam, &__Polkadot, &__Polygon, &__Solana{
+            position: absolute;
+            z-index: 0;
+        }
+        &__Arbitrum{
+            top: 58%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        &__Avail{
+            bottom: 26.22%;
+            right: 21.53%;
+        }
+        &__Berachain{
+            top: 23.89%;
+            left: 24.24%;
+        }
+        &__Manta_Network{
+            top: 57.22%;
+            right: 27.92%;
+            z-index: 2;
+        }
+        &__Moonbeam{
+            bottom: 10.89%;
+            left: 21.53%;
+        }
+        &__Polkadot{
+            top: 23.44%;
+            right: 18%;
+        }
+        &__Polygon{
+            top: 40.67%;
+            left: 13.06%;
+        }
+        &__Solana{
+            top: 38.11%;
+            right: 9.86%;
+        }
+    }
+    h4{
+        color: #ffff;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
+    }
+    &__button{
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
