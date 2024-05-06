@@ -1,14 +1,8 @@
 @import "../../assets/scss/main";
 
 .cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  padding: 40px 16px;
-  border-radius: 20px;
-  background: var(--color-gray-light);
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   @include media-up(md) {
     gap: 40px;
@@ -23,18 +17,32 @@
     padding: 80px 64px;
   }
 
-
   &__title {
-    @include media-up(lg) {
-      max-width: 570px;
-      margin: 0 auto;
-    }
-
-    @include media-up(xxl) {
-      max-width: 725px;
-    }
+    min-width: 611px;
+    font-family: DIN Pro;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 56px;
+    text-align: left;
+    color: rgba(255, 255, 255, 1);
+    -webkit-text-stroke: 2px rgb(43, 43, 43);
+    text-shadow: rgb(43, 43, 43) 4px 4px;
   }
-
+  &__button {
+    display: flex;
+    width: fit-content;
+    padding: 12px 24px;
+    background: rgba(236, 106, 59, 1);
+    border: 1px solid rgba(43, 43, 43, 1);
+    box-shadow: 2px 2px 0px 0px rgba(43, 43, 43, 1);
+    border-radius: 200px;
+    font-family: DIN Pro;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+    color: rgba(255, 255, 255, 1);
+  }
   &__items {
     display: grid;
     grid-template-columns: 1fr;
@@ -69,7 +77,6 @@
       left: auto;
       transform: rotate(-30deg);
     }
-
 
     img {
       mix-blend-mode: multiply;
