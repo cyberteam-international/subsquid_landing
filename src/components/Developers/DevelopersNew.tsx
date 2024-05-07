@@ -2,7 +2,6 @@
 
 import "./Developers.scss";
 import {Swiper, SwiperClass, SwiperSlide} from "swiper/react";
-import {Grid, Pagination, Thumbs} from "swiper/modules";
 import {useEffect, useRef, useState} from "react";
 import {FadeInUp} from "@/components/Animation";
 
@@ -107,8 +106,7 @@ export default function DevelopersNew(props: DevepolerCardsProps) {
             <div className="developers__wrapper">
                 <FadeInUp>
                     <div className="developers__header">
-                        <h2>Built for builders</h2>
-                        <p className='subtitle'>Tens of thousands of real Web3 devs choose Subsquid for their projects</p>
+                        <h2>The best devs build with Subsquid</h2>
                     </div>
                 </FadeInUp>
 
@@ -116,85 +114,7 @@ export default function DevelopersNew(props: DevepolerCardsProps) {
                     <div className="developers__main">
                         <Swiper className="developers__swiper" onSwiper={setMainSwiper} onInit={setHeightSlides}
                                 onUpdate={setHeightSlides} thumbs={swiper ? {swiper: swiper} : {}}
-                                modules={[Grid, Pagination, Thumbs]} breakpoints={{
-                            0: {
-                                pagination: false,
-                                autoHeight: true,
-                                loop: true,
-                                initialSlide: 1,
-                                loopedSlides: 2,
-                                loopPreventsSliding: true,
-                                spaceBetween: 16
-                            },
-                            768: {
-                                slidesPerView: 2,
-                                slidesPerGroup: 2,
-                                spaceBetween: 24,
-                                grid: {
-                                    rows: 2,
-                                    fill: "column"
-                                }
-                            },
-                            1024: {
-                                speed: 800,
-                                slidesPerView: 3,
-                                slidesPerGroup: 3,
-                                spaceBetween: 24,
-                                grid: {
-                                    rows: 2,
-                                    fill: "column"
-                                },
-                            },
-                            1280: {
-                                speed: 800,
-                                slidesPerView: 3,
-                                slidesPerGroup: 3,
-                                grid: {
-                                    rows: 2,
-                                    fill: "column"
-                                },
-                                spaceBetween: 32
-                            }
-                        }} watchSlidesProgress={true} slidesPerView={1} navigation={{
-                            nextEl: nextRef.current as HTMLElement,
-                            prevEl: prevRef.current as HTMLElement
-                        }} pagination={{
-                            clickable: true,
-                            el: paginationRef.current as HTMLElement
-                        }}>{items}</Swiper>
-
-                        <FadeInUp delay={200}>
-                            <div className="Thumbs">
-                                <div ref={paginationRef} className="Thumbs__pagination"></div>
-                                <Swiper className="Thumbs__slider" watchSlidesProgress onSwiper={setSwiper}
-                                        slidesPerView={1}
-                                        width={400 / 8} modules={[Thumbs]} slidesPerGroup={1} loopedSlides={2}
-                                        loopPreventsSliding={true} loop={true}>{itemsBullets}</Swiper>
-
-                                <div className="Thumbs__arrows">
-                                    <button ref={prevRef} className="Thumbs__arrow" onClick={() => {
-                                        if (mainSwiper)
-                                            mainSwiper.slidePrev()
-                                    }}>
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2"
-                                                  strokeLinecap="round"
-                                                  strokeLinejoin="round"/>
-                                        </svg>
-                                    </button>
-                                    <button ref={nextRef} className="Thumbs__arrow" onClick={() => {
-                                        if (mainSwiper)
-                                            mainSwiper.slideNext()
-                                    }}>
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2"
-                                                  strokeLinecap="round"
-                                                  strokeLinejoin="round"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </FadeInUp>
+                                modules={[]} centeredSlides slidesPerView={5}>{items}</Swiper>
                     </div>
                 </FadeInUp>
             </div>

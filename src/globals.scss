@@ -186,23 +186,22 @@ p,
 .sections {
   display: grid;
   grid-template-columns: 100%;
-  gap: 60px;
 
-  @include media-up(md) {
-    gap: 100px;
-  }
-
-  @include media-up(lg) {
-    gap: 140px;
-  }
-
-  @include media-up(xl) {
-    gap: 160px;
-  }
-
-  @include media-up(xxl) {
-    gap: 250px;
-  }
+  //@include media-up(md) {
+  //  gap: 100px;
+  //}
+  //
+  //@include media-up(lg) {
+  //  gap: 140px;
+  //}
+  //
+  //@include media-up(xl) {
+  //  gap: 160px;
+  //}
+  //
+  //@include media-up(xxl) {
+  //  gap: 250px;
+  //}
 }
 
 .main {

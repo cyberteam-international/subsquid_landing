@@ -3,19 +3,21 @@
 .cards {
   display: flex;
   flex-direction: column;
-
-  @include media-up(md) {
-    gap: 40px;
-    padding: 60px 24px;
-  }
-
-  @include media-up(lg) {
-    padding: 60px 36px;
-  }
-
-  @include media-up(xl) {
-    padding: 80px 64px;
-  }
+  background-size: contain;
+  height: 80vh;
+  width: 100vw;
+  //@include media-up(md) {
+  //  gap: 40px;
+  //  padding: 60px 24px;
+  //}
+  //
+  //@include media-up(lg) {
+  //  padding: 60px 36px;
+  //}
+  //
+  //@include media-up(xl) {
+  //  padding: 80px 64px;
+  //}
 
   &__title {
     min-width: 611px;

@@ -1,12 +1,13 @@
 @import "../../assets/scss/main";
 
 .developers {
-  display: grid;
-  grid-template-columns: 100%;
-  gap: 24px;
   position: relative;
   z-index: 0;
-
+  height: 60vh;
+  padding-top: 100px;
+  background: url("/assets/water.png") center no-repeat;
+  background-size: cover;
+  background-position: top;
   &__wrapper {
     overflow: hidden;
     padding: 100px;
@@ -52,7 +53,14 @@
     grid-template-columns: 1fr;
     gap: 12px;
     margin-bottom: 24px;
-
+    h2 {
+      font-family: "DIN Pro", sans-serif;
+      font-weight: 900;
+      color: white;
+      //border: 1px solid #2B2B2B;
+      text-shadow: 4px 4px #2B2B2B;
+      font-size: 64px;
+    }
     @include media-down(xl) {
       margin-bottom: 28px;
     }
@@ -79,6 +87,8 @@
   }
 
   &__swiper {
+    z-index: 500;
+    margin-top: 50px;
     padding: 4px;
 
     .swiper-slide {

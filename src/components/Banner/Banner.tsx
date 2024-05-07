@@ -6,12 +6,21 @@ import {useEffect, useState} from "react";
 
 export default function Banner() {
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
   useEffect(() => {
-    console.log(document.body.offsetWidth);
-  }, [document.body.offsetWidth])
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const threshold = 500; // Порог скролла, после которого элемент скрывается
+      setIsVisible(scrollTop < threshold);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   return (
       <div className={"banner"}>
-        <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', position: 'fixed' }}>
+        {isVisible && <div style={{alignItems: 'center', display: 'flex', flexDirection: 'column', position: 'fixed'}}>
           <h1 className="din">
             Unlock an <br/> Ocean of Data
           </h1>
@@ -37,7 +46,7 @@ export default function Banner() {
               />
             </svg>
           </a>
-        </div>
+        </div>}
         <div className={"banner__bottom"}>
           <p className="din">Let’s dive in!</p>
           <button
